@@ -1,0 +1,21 @@
+.card {
+  margin: auto;
+  max-width: 80%;
+  width: 300px;
+  aspect-ratio: 3/2;
+  background-color: #7a7a7a;
+  border-radius: 10px;
+}
+
+.info {
+  padding: 0 1rem;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+}
+
+.grid {
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  justify-content: space-around;
+}

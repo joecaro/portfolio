@@ -1,0 +1,66 @@
+.container {
+  width: 100vw;
+}
+
+.main {
+  min-height: 100vh;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainDark {
+  background-color: #111;
+}
+.mainLight {
+  background-color: #eee;
+}
+
+.title {
+  margin: 1rem 0 3rem;
+  line-height: 1.15;
+  font-size: 4.5rem;
+  font-weight: 500;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.titleDark {
+  background: radial-gradient(circle at right, #e7ebc7 -20%, #555555 80%);
+  /* Mask the color to the text, and remove the rest  */
+  background-clip: text;
+  -webkit-background-clip: text;
+  /* Make the text fill color value transparent so the masked background color comes through */
+  -webkit-text-fill-color: transparent;
+}
+
+.title {
+  text-align: center;
+}
+
+.code {
+  background: #fafafa;
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.list {
+  width: 90%;
+  max-width: 1200px;
+}
+
+.project {
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 0 200px;
+}
+
+.projectDark {
+  color: white;
+}
