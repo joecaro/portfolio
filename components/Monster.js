@@ -1,15 +1,9 @@
 import React from "react";
+import styled from "styled-components";
 
 export default function Monster() {
   return (
-    <div
-      style={{
-        color: "#111",
-        transform: "rotate(90deg)",
-        position: "absolute",
-        bottom: "0",
-        left: "0",
-      }}>
+    <MonsterStyles>
       <svg
         height='100%'
         xmlns='http://www.w3.org/2000/svg'
@@ -22,6 +16,21 @@ export default function Monster() {
           fill='#111111'
         />
       </svg>
-    </div>
+    </MonsterStyles>
   );
 }
+
+const MonsterStyles = styled.div`
+  color: #111;
+  transform: rotate(90deg);
+  position: fixed;
+  top: -50px;
+  left: -50px;
+  transform: rotate(-135deg);
+  transition: 0.2s;
+  @media (max-width: 1050px) {
+    top: -100px;
+    left: -100px;
+    transform: rotate(-135deg) scale(0.8);
+  }
+`;
