@@ -23,7 +23,7 @@ export default function Monster() {
 const MonsterStyles = styled.div`
   color: #111;
   transform: rotate(90deg);
-  position: fixed;
+  position: absolute;
   top: -50px;
   left: -50px;
   transform: rotate(-135deg);
