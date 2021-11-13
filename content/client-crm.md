@@ -1,13 +1,17 @@
 ---
-    slug: react-app
-    title: "React App"
+    slug: client-crm
+    title: "Client CRM"
     date:  Nov 11 2021 12:00 AM
     author: Joe
-    description:  React is cool. I made this with it.
+    description:  I created this application for my support team to track clients' status as they went through the process of filing reports.
+    stack: MongoDB, Express, NextJS, NodeJS, JWT Token Autorization
+    github: https://github.com/joecaro/pathfinder-react-app
+    demo: https://jsc-crm.netlify.app/
     tags:
       - project 
+      - featured
 ---
 
-**React App**
+**Pathfinder App**
 
 Fugiat pariatur eiusmod irure aute laborum aliquip. Cupidatat veniam deserunt culpa minim. Culpa est elit aliqua eu tempor ullamco minim sunt nostrud voluptate deserunt. Proident labore magna aliqua duis. Reprehenderit tempor velit elit labore ipsum sit aute incididunt tempor. Commodo eu veniam nulla in est tempor occaecat sint eiusmod exercitation nulla. Duis laborum exercitation officia consectetur ullamco et sunt aute quis reprehenderit incididunt consectetur labore qui.

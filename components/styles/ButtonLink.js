@@ -5,6 +5,7 @@ const ButtonLink = styled.button`
   border: none;
   font-size: 2rem;
   font-weight: 400;
+  z-index: 2;
   color: ${({ isDarkMode }) => (isDarkMode ? "#aaa" : "#222")};
 
   :hover {

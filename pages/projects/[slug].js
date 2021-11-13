@@ -43,7 +43,6 @@ export async function getStaticProps(paths) {
     "tags",
   ]);
 
-  console.log(paths.params.slug);
   let content = await markdownToHtml(project.content || "");
 
   content = content !== undefined ? content : "";

@@ -51,6 +51,8 @@
 .list {
   width: 90%;
   max-width: 1200px;
+  display: grid;
+  gap: 90px;
 }
 
 .project {
@@ -58,9 +60,15 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 0 0 200px;
 }
 
 .projectDark {
   color: white;
+}
+
+@media (max-width: 768px) {
+  .project {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
 }

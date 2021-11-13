@@ -6,10 +6,10 @@ import ButtonLink from "./styles/ButtonLink";
 import styled from "styled-components";
 import ProjectCard from "./ProjectCard";
 
-export default function ProjectsList() {
+export default function ProjectsList({ projects }) {
   const { theme, setTheme } = useTheme();
   const router = useRouter();
-  const cardWidth = 300;
+  const cardWidth = 350;
   return (
     <ListContainer>
       <ButtonLink
@@ -18,10 +18,14 @@ export default function ProjectsList() {
         Projects
       </ButtonLink>
       <List>
-        <ProjectCard isDark={theme === themes.dark} width={cardWidth} />
-        <ProjectCard isDark={theme === themes.dark} width={cardWidth} />
-        <ProjectCard isDark={theme === themes.dark} width={cardWidth} />
-        <ProjectCard isDark={theme === themes.dark} width={cardWidth} />
+        {projects.map((project) => (
+          <ProjectCard
+            key={project.slug}
+            project={project}
+            isDark={theme === themes.dark}
+            width={cardWidth}
+          />
+        ))}
       </List>
     </ListContainer>
   );

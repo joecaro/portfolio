@@ -7,10 +7,10 @@ import { useTheme, themes } from "../lib/ThemeContext";
 import ProjectsList from "../components/ProjectsList";
 import styled from "styled-components";
 import Monster from "../components/Monster";
+import getAllProjects from "../lib/getAllProjects";
 
-export default function Home() {
+export default function Home(props) {
   const router = useRouter();
-
   const { theme, setTheme } = useTheme();
 
   return (
@@ -110,8 +110,7 @@ export default function Home() {
           </LogoLink>
         </div>
 
-        <ProjectsList />
-        <Monster />
+        <ProjectsList projects={props.projects} />
       </main>
     </div>
   );
@@ -130,3 +129,24 @@ const LogoLink = styled.a`
     color: #dddd99;
   }
 `;
+
+// This function gets called at build time on server-side.
+export async function getStaticProps() {
+  const projects = getAllProjects([
+    "slug",
+    "title",
+    "description",
+    "stack",
+    "github",
+    "demo",
+    "tags",
+  ]);
+
+  let featuredProjects = projects.filter((project) =>
+    project.tags.includes("featured")
+  );
+
+  return {
+    props: { projects: featuredProjects },
+  };
+}

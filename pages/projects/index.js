@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useEffect } from "react";
 import Light from "../../components/Light";
 import ProjectCard from "../../components/ProjectCard";
 import ProjectInfo from "../../components/ProjectInfo";
@@ -28,7 +27,6 @@ export default function Projects(props) {
         }`}>
         <Cover />
         <Light />
-
         <h1
           className={`${styles.title} ${
             theme === themes.dark && styles.titleDark
@@ -45,7 +43,11 @@ export default function Projects(props) {
                   theme === themes.dark && styles.projectDark
                 }`}>
                 <ProjectInfo project={project} />
-                <ProjectCard isDark={theme === themes.dark} width={400} />
+                <ProjectCard
+                  project={project}
+                  isDark={theme === themes.dark}
+                  width={400}
+                />
               </div>
             );
           })}
@@ -57,7 +59,14 @@ export default function Projects(props) {
 
 // This function gets called at build time on server-side.
 export async function getStaticProps() {
-  const projects = getAllProjects(["slug", "title", "description"]);
+  const projects = getAllProjects([
+    "slug",
+    "title",
+    "description",
+    "stack",
+    "github",
+    "demo",
+  ]);
 
   return {
     props: { projects: projects },
