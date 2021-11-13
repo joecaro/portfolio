@@ -31,7 +31,7 @@ export default function ProjectCard(props) {
           <p style={{ fontWeight: "500" }}>
             <span style={{ color: "#e26b73" }}> Project Details</span> ={" "}
             <span style={{ color: "#73d160" }}>
-              "{props.project.description}"
+              {`"${props.project.description}"`}
             </span>
           </p>
           <p style={{ fontWeight: "500" }}>
