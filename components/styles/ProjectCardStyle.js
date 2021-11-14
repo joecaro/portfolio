@@ -8,9 +8,6 @@ const ProjectCardStyles = styled.div`
   background-color: ${({ isDark }) => (isDark ? "#333" : "#ccc")};
   color: ${({ isDark }) => (isDark ? "#eee" : "#222")};
   border-radius: 3px;
-  @media (max-width: 768px) {
-    max-width: 90%;
-  }
 `;
 export const Header = styled.div`
   width: 100%;

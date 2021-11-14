@@ -6,12 +6,27 @@ import Cover from "../components/Cover";
 import { useTheme, themes } from "../lib/ThemeContext";
 import ProjectsList from "../components/ProjectsList";
 import styled from "styled-components";
-import Monster from "../components/Monster";
 import getAllProjects from "../lib/getAllProjects";
+import { useEffect } from "react";
 
 export default function Home(props) {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    let themeSetting = localStorage.getItem("themeSetting");
+    if (themeSetting) {
+      console.log(JSON.parse(themeSetting));
+      console.log(themes.dark);
+      setTheme(
+        JSON.parse(themeSetting).foreground === themes.light.foreground
+          ? themes.light
+          : themes.dark
+      );
+    } else {
+      localStorage.setItem("themeSetting", JSON.stringify(themes.dark));
+    }
+  }, []);
 
   return (
     <div className={styles.container}>

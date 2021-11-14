@@ -41,8 +41,8 @@ export default function ProjectsList({ projects }) {
 
 const ListContainer = styled.div`
   margin-top: 5rem;
-  width: 100%;
   padding: 5rem 2rem;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

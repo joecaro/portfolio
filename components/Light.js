@@ -7,8 +7,9 @@ export default function Light(props) {
   const { theme, setTheme } = useTheme();
 
   const handleToggleTheme = () => {
-    setTheme(theme === themes.light ? themes.dark : themes.light);
-    console.log(theme);
+    let newTheme = theme === themes.light ? themes.dark : themes.light;
+    setTheme(newTheme);
+    localStorage.setItem("themeSetting", JSON.stringify(newTheme));
   };
 
   return (

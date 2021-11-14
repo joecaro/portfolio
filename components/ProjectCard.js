@@ -28,7 +28,8 @@ export default function ProjectCard(props) {
         background={props.project.image}
         isDark={props.isDark}
         onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}>
+        onMouseLeave={() => setIsHover(false)}
+        onTouchStart={() => setIsHover(!isHover)}>
         <Buttons isHover={isHover} isDark={props.isDark}>
           {props.project.github !== "not available" && (
             <a target='_blank' rel='noreferrer' href={props.project.github}>
