@@ -4,7 +4,7 @@ const ProjectCardStyles = styled.div`
   margin: auto auto 50px;
   max-width: 80%;
   width: ${({ width }) => `${width}px`};
-  aspect-ratio: 3/2;
+  aspect-ratio: 16/9;
   background-color: ${({ isDark }) => (isDark ? "#333" : "#ccc")};
   color: ${({ isDark }) => (isDark ? "#eee" : "#222")};
   border-radius: 3px;
@@ -14,7 +14,7 @@ const ProjectCardStyles = styled.div`
 `;
 export const Header = styled.div`
   width: 100%;
-  height: 15%;
+  height: 10%;
   background-color: ${({ isDark }) => (isDark ? "#222" : "#aaa")};
   border-radius: 3px 3px 0 0;
   display: grid;
@@ -46,21 +46,39 @@ export const Header = styled.div`
   }
 `;
 
+// ${({ isDark }) => (isDark ? "#282c34" : "#fafafa")}
+
 export const Info = styled.div`
+  position: relative;
   margin: 5px;
-  padding: 10px;
   border-radius: 3px;
-  background-color: ${({ isDark }) => (isDark ? "#282c34" : "#fafafa")};
+  background-image: ${({ background }) => `url(${background})`};
+  background-size: contain;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 95%;
   justify-content: space-between;
   p {
     margin: 0;
   }
+  div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 20px 0;
+    opacity: ${({ isHover }) => (isHover ? "1" : "0")};
+    background-color: #444444;
+    border-radius: 3px;
+    transition: 0.2s;
+  }
 `;
 
-export const Buttons = styled.div`
+export const Description = styled.p`
+  font-size: 1.3rem;
+`;
+
+export const Buttons = styled.span`
   display: flex;
   justify-content: space-around;
   color: ${({ isDark }) => (isDark ? "#aaa" : "#444")};

@@ -9,7 +9,7 @@ import ProjectCard from "./ProjectCard";
 export default function ProjectsList({ projects }) {
   const { theme, setTheme } = useTheme();
   const router = useRouter();
-  const cardWidth = 350;
+  const cardWidth = 500;
   return (
     <ListContainer>
       <ButtonLink

@@ -140,6 +140,7 @@ export async function getStaticProps() {
     "github",
     "demo",
     "tags",
+    "image",
   ]);
 
   let featuredProjects = projects.filter((project) =>

@@ -10,6 +10,7 @@
     tags:
       - project 
       - featured
+    image: https://res.cloudinary.com/joecarothers/image/upload/v1636854905/misc/Screenshot_2021-11-13_205459_qtzgid.png
 ---
 
 **Pathfinder App**

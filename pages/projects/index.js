@@ -66,6 +66,7 @@ export async function getStaticProps() {
     "stack",
     "github",
     "demo",
+    "image",
   ]);
 
   return {
