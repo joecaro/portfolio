@@ -5,6 +5,20 @@ import getAllProjects, { getProjectBySlug } from "../../lib/getAllProjects";
 import Light from "../../components/Light";
 import styles from "../../styles/ProjectPage.module.css";
 import styled from "styled-components";
+import { useTheme, themes } from "../../lib/ThemeContext";
+import Cover from "../../components/Cover";
+
+const Main = styled.main`
+  min-height: 100vh;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: ${({ isDark }) => (isDark ? "#111" : "#efefef")};
+  color: ${({ isDark }) => (isDark ? "#fff" : "#111")};
+`;
 
 const Body = styled.div`
   width: 80%;
@@ -17,7 +31,9 @@ const Article = styled.article`
   padding: 20px;
 `;
 
-export default function slug(props) {
+export default function Slug(props) {
+  const { theme, setTheme } = useTheme();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -29,16 +45,16 @@ export default function slug(props) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className={styles.main}>
-        <div className={styles.cover} id='cover'></div>
+      <Main isDark={theme === themes.dark}>
+        <Cover />
 
         <Light />
         <Article>
-          <h1 className={styles.title}>{props.project.title}</h1>
+          <h1>{props.project.title}</h1>
           <Body
             dangerouslySetInnerHTML={{ __html: props.project.content }}></Body>
         </Article>
-      </main>
+      </Main>
     </div>
   );
 }
