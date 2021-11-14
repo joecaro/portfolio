@@ -67,7 +67,7 @@ export const Buttons = styled.span`
   justify-items: center;
   align-items: center;
   height: 100%;
-  color: ${({ isDark }) => (isDark ? "#aaa" : "#444")};
+  color: #ddd;
   opacity: ${({ isHover }) => (isHover ? "1" : "0")};
   background-color: #222222dd;
   border-radius: 3px;
