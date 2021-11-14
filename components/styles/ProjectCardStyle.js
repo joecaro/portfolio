@@ -58,20 +58,6 @@ export const Info = styled.div`
   flex-direction: column;
   height: 95%;
   justify-content: space-between;
-  p {
-    margin: 0;
-  }
-  div {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px 20px 0;
-    opacity: ${({ isHover }) => (isHover ? "1" : "0")};
-    background-color: #444444;
-    border-radius: 3px;
-    transition: 0.2s;
-  }
 `;
 
 export const Description = styled.p`
@@ -79,9 +65,16 @@ export const Description = styled.p`
 `;
 
 export const Buttons = styled.span`
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  height: 100%;
   color: ${({ isDark }) => (isDark ? "#aaa" : "#444")};
+  opacity: ${({ isHover }) => (isHover ? "1" : "0")};
+  background-color: #222222dd;
+  border-radius: 3px;
+  transition: 0.2s;
   a {
     padding: 5px;
     border-radius: 3px;

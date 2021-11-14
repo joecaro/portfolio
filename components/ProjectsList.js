@@ -19,12 +19,20 @@ export default function ProjectsList({ projects }) {
       </ButtonLink>
       <List>
         {projects.map((project) => (
-          <ProjectCard
-            key={project.slug}
-            project={project}
-            isDark={theme === themes.dark}
-            width={cardWidth}
-          />
+          <div key={`${project.slug}-container`}>
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              isDark={theme === themes.dark}
+              width={cardWidth}
+            />
+            <ProjectDetails
+              isDarkMode={theme === themes.dark}
+              width={cardWidth}>
+              <p style={{ fontSize: "1.2rem" }}>{project.description}</p>
+              <p>{project.stack}</p>
+            </ProjectDetails>
+          </div>
         ))}
       </List>
     </ListContainer>
@@ -42,8 +50,15 @@ const ListContainer = styled.div`
 
 const List = styled.div`
   padding: 20px 0;
-  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  width: 100%;
   flex-wrap: wrap;
+`;
+
+const ProjectDetails = styled.div`
+  margin: auto auto 50px;
+  max-width: 80%;
+  width: ${({ width }) => `${width}px`};
+  color: ${({ isDarkMode }) => (isDarkMode ? "#aaa" : "#222")};
 `;
