@@ -6,6 +6,7 @@ import styles from "../../styles/Projects.module.css";
 import getAllProjects from "../../lib/getAllProjects";
 import Cover from "../../components/Cover";
 import { useTheme, themes } from "../../lib/ThemeContext";
+import ButtonLink from "../../components/styles/ButtonLink";
 
 export default function Projects(props) {
   const { theme, setTheme } = useTheme();

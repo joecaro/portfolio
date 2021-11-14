@@ -8,6 +8,8 @@ import ProjectsList from "../components/ProjectsList";
 import styled from "styled-components";
 import getAllProjects from "../lib/getAllProjects";
 import { useEffect } from "react";
+import ButtonLink from "../components/styles/ButtonLink";
+import handledRedirect from "../lib/handleRedirect";
 
 export default function Home(props) {
   const router = useRouter();
@@ -126,6 +128,11 @@ export default function Home(props) {
         </div>
 
         <ProjectsList projects={props.projects} />
+        <ButtonLink
+          isDarkMode={theme === themes.dark}
+          onClick={() => handledRedirect(router, "/projects")}>
+          See More...
+        </ButtonLink>
       </main>
     </div>
   );
