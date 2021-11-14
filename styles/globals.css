@@ -25,16 +25,11 @@ a {
   background-color: #111;
   z-index: 10;
   display: inline;
-  opacity: 0;
   animation: opacityToZero 1s;
 }
 
 .cover-transition {
-  animation: opacityToOne 1s;
-  display: inline;
-  z-index: 10;
-}
-.cover-active {
+  animation: opacityToOne 10s;
   display: inline;
   z-index: 10;
 }
@@ -48,7 +43,7 @@ a {
   0% {
     opacity: 0;
   }
-  50% {
+  5% {
     opacity: 1;
   }
   100% {
