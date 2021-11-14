@@ -29,8 +29,12 @@ a {
   animation: opacityToZero 1s;
 }
 
-.cover-active {
+.cover-transition {
   animation: opacityToOne 1s;
+  display: inline;
+  z-index: 10;
+}
+.cover-active {
   display: inline;
   z-index: 10;
 }
