@@ -4,6 +4,18 @@ import { markdownToHtml } from "../../lib/markdownToHtml";
 import getAllProjects, { getProjectBySlug } from "../../lib/getAllProjects";
 import Light from "../../components/Light";
 import styles from "../../styles/ProjectPage.module.css";
+import styled from "styled-components";
+
+const Body = styled.div`
+  width: 80%;
+  max-width: 900px;
+  margin: auto;
+`;
+
+const Article = styled.article`
+  margin-top: 150px;
+  padding: 20px;
+`;
 
 export default function slug(props) {
   return (
@@ -21,13 +33,11 @@ export default function slug(props) {
         <div className={styles.cover} id='cover'></div>
 
         <Light />
-        <body>
-          <article>
-            <h1 className={styles.title}>{props.project.title}</h1>
-            <div
-              dangerouslySetInnerHTML={{ __html: props.project.content }}></div>
-          </article>
-        </body>
+        <Article>
+          <h1 className={styles.title}>{props.project.title}</h1>
+          <Body
+            dangerouslySetInnerHTML={{ __html: props.project.content }}></Body>
+        </Article>
       </main>
     </div>
   );
