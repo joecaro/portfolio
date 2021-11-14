@@ -6,7 +6,7 @@
     description:  Application visually demonstrating various pathfinding algorithms.
     stack: ReactJS
     github: https://github.com/joecaro
-    demo: https://cmdi.netlify.app
+    demo: https://pathfinder.josephcarothers.com/
     tags:
       - project 
       - featured
