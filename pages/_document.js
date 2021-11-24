@@ -9,7 +9,16 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang='en'>
-        <Head />
+        <Head>
+          {/* <!-- Start of HubSpot Embed Code --> */}
+          <script
+            type='text/javascript'
+            id='hs-script-loader'
+            async
+            defer
+            src='//js.hs-scripts.com/21057690.js'></script>
+          {/* <!-- End of HubSpot Embed Code --> */}
+        </Head>
         <body>
           <Main />
           <NextScript />

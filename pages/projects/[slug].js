@@ -29,6 +29,10 @@ const Body = styled.div`
 const Article = styled.article`
   margin-top: 150px;
   padding: 20px;
+  img {
+    width: 50%;
+    aspect-ratio: 6/5;
+  }
 `;
 
 export default function Slug(props) {
