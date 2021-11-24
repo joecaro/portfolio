@@ -10,6 +10,16 @@ import ButtonLink from "../components/styles/ButtonLink";
 import handledRedirect from "../lib/handleRedirect";
 import Cover from "../components/Cover";
 import Light from "../components/Light";
+import VideoBackground from "../components/VideoBackground";
+
+const setStyles = (wrapperEl, videoEl, playbackRate) => {
+  wrapperEl.style.marginTop = `calc(180% - ${
+    Math.floor(videoEl.duration) * playbackRate + "px"
+  })`;
+  wrapperEl.style.marginBottom = `calc(180% - ${
+    Math.floor(videoEl.duration) * playbackRate + "px"
+  })`;
+};
 
 export default function Home(props) {
   const router = useRouter();
@@ -31,7 +41,7 @@ export default function Home(props) {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div id='main-container' className={styles.container}>
       <Head>
         <title>Joseph Carothers</title>
         <meta
@@ -42,6 +52,7 @@ export default function Home(props) {
       </Head>
       <Cover />
       <Light animate={true} />
+      <VideoBackground />
 
       <main
         className={`${styles.main} ${
