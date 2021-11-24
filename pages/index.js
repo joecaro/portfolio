@@ -11,6 +11,7 @@ import handledRedirect from "../lib/handleRedirect";
 import Cover from "../components/Cover";
 import Light from "../components/Light";
 import VideoBackground from "../components/VideoBackground";
+import ParralaxBackground from "../components/ParralaxBackground";
 
 export default function Home(props) {
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function Home(props) {
   }, []);
 
   return (
-    <div id='main-container' className={styles.container}>
+    <div className={styles.container}>
       <Head>
         <title>Joseph Carothers</title>
         <meta
@@ -43,8 +44,9 @@ export default function Home(props) {
       </Head>
       <Cover />
       <Light animate={true} />
-      {theme === themes.light && <VideoBackground />}
+
       <main
+        id='main-container'
         className={`${styles.main} ${
           theme === themes.light ? styles.mainLight : styles.mainDark
         }`}>
@@ -127,13 +129,8 @@ export default function Home(props) {
           </LogoLink>
         </div>
 
-        <ProjectsList projects={props.projects} />
-        <ButtonLink
-          isDarkMode={theme === themes.dark}
-          onClick={() => handledRedirect(router, "/projects")}>
-          See More...
-        </ButtonLink>
-        <AboutMe
+        {/* <ProjectsList projects={props.projects} /> */}
+        {/* <AboutMe
           theme={theme === themes.dark ? "dark" : "light"}
           className={theme === themes.dark ? styles.dark : styles.light}>
           <h2>About Me</h2>
@@ -188,7 +185,7 @@ export default function Home(props) {
                 }}></div>
             )}
           </div>
-        </AboutMe>
+        </AboutMe> */}
       </main>
     </div>
   );
@@ -209,8 +206,7 @@ const LogoLink = styled.a`
 `;
 
 const AboutMe = styled.section`
-  height: 900px;
-  max-width: 900px;
+  max-width: clamp(100px, 100%, 900px);
   div {
     background-color: #ffffff44;
     backdrop-filter: blur(16px);

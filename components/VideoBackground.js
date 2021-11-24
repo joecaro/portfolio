@@ -11,14 +11,17 @@ export default function VideoBackground({}) {
 
   const handleScroll = () => {
     let video = document.getElementById("video");
+    let main = document.getElementById("main-container");
 
-    let percentScrolled = window.scrollY / window.innerHeight;
+    let percentScrolled =
+      window.scrollY /
+      (main.getBoundingClientRect().height - window.innerHeight);
 
-    let currentTime = 0 + Math.round(30 * percentScrolled);
+    let currentTime = 0 + 2 * percentScrolled;
 
     console.log(currentTime);
 
-    video.currentTime = currentTime / 15;
+    video.currentTime = currentTime;
   };
 
   return (
@@ -29,7 +32,7 @@ export default function VideoBackground({}) {
       autobuffer='autobuffer'>
       <source
         type='video/webm'
-        src='https://res.cloudinary.com/joecarothers/video/upload/v1637734414/misc/0001-0060_bno1fj.webm'></source>
+        src='https://res.cloudinary.com/joecarothers/video/upload/v1637766114/misc/AnyConv.com__0001-0060_yrbuff.webm'></source>
     </video>
   );
 }

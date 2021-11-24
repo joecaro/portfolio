@@ -37,6 +37,11 @@ export default function ProjectsList({ projects }) {
           </Item>
         ))}
       </List>
+      <ButtonLink
+        isDarkMode={theme === themes.dark}
+        onClick={() => handleRedirect(router, "/projects")}>
+        See More Projects...
+      </ButtonLink>
     </ListContainer>
   );
 }
@@ -71,4 +76,5 @@ const Item = styled.div`
   padding: 2rem 0;
   margin: 1rem;
   display: grid;
+  width: 100%;
 `;

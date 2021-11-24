@@ -2,10 +2,6 @@
   width: 100vw;
 }
 
-.container * {
-  z-index: 1;
-}
-
 .video {
   z-index: 0;
   position: fixed;
@@ -69,7 +65,7 @@
 }
 
 .float {
-  animation: float 3s infinite linear;
+  animation: float 10s infinite linear;
 }
 
 @keyframes float {
