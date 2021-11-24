@@ -8,6 +8,8 @@ const ProjectCardStyles = styled.div`
   background-color: ${({ isDark }) => (isDark ? "#333" : "#ccc")};
   color: ${({ isDark }) => (isDark ? "#eee" : "#222")};
   border-radius: 3px;
+  display: flex;
+  flex-direction: column;
 `;
 export const Header = styled.div`
   width: 100%;
@@ -47,14 +49,13 @@ export const Header = styled.div`
 
 export const Info = styled.div`
   position: relative;
-  margin: 5px;
   border-radius: 3px;
   background-image: ${({ background }) => `url(${background})`};
   background-size: cover;
   display: flex;
   flex-direction: column;
-  height: 95%;
   justify-content: space-between;
+  height: 100%;
 `;
 
 export const Description = styled.p`

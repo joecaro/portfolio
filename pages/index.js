@@ -6,14 +6,11 @@ import ProjectsList from "../components/ProjectsList";
 import styled from "styled-components";
 import getAllProjects from "../lib/getAllProjects";
 import { useEffect } from "react";
-import ButtonLink from "../components/styles/ButtonLink";
-import handledRedirect from "../lib/handleRedirect";
 import Cover from "../components/Cover";
 import Light from "../components/Light";
 import AboutMe from "../components/AboutMe";
 
 export default function Home(props) {
-  const router = useRouter();
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
@@ -128,7 +125,7 @@ export default function Home(props) {
         </div>
 
         <ProjectsList projects={props.projects} />
-        <AboutMe />
+        <AboutMe theme={theme} themes={themes} />
       </main>
     </div>
   );
