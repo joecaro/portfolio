@@ -3,7 +3,9 @@ import styled from "styled-components";
 
 export default function AboutMe({ theme, themes }) {
   return (
-    <AboutMeSection darkMode={theme === themes.dark}>
+    <AboutMeSection
+      theme={theme === themes.dark ? themes.dark : themes.light}
+      darkMode={theme === themes.dark}>
       <h2>About Me</h2>
       <p className='pgrph'>
         <div></div>
@@ -26,13 +28,16 @@ export default function AboutMe({ theme, themes }) {
 
 const AboutMeSection = styled.section`
   max-width: 900px;
-  color: ${({ darkMode }) => (darkMode ? "#bbb" : "#111")};
+  color: ${({ theme }) => theme.foreground};
+  padding: 2rem;
 
   .pgrph {
     position: relative;
     border-radius: 3px;
-    padding: 1rem;
-    background-color: ${({ darkMode }) => (darkMode ? "#333" : "#ddd")};
+    padding: 2rem;
+    max-width: 80%;
+    margin: auto;
+    background-color: ${({ theme }) => theme.background};
     div {
       position: absolute;
       top: 0;
@@ -42,6 +47,10 @@ const AboutMeSection = styled.section`
       border-radius: 3px 3px 0 0;
       background-color: ${({ darkMode }) => (darkMode ? "#222" : "#aaa")};
     }
+  }
+
+  h2 {
+    font-weight: 500;
   }
 
   li {

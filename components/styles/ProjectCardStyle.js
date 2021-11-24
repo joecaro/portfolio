@@ -5,8 +5,8 @@ const ProjectCardStyles = styled.div`
   max-width: 80%;
   width: ${({ width }) => `${width}px`};
   aspect-ratio: 16/9;
-  background-color: ${({ isDark }) => (isDark ? "#333" : "#ccc")};
-  color: ${({ isDark }) => (isDark ? "#eee" : "#222")};
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.foreground};
   border-radius: 3px;
   display: flex;
   flex-direction: column;
@@ -14,7 +14,7 @@ const ProjectCardStyles = styled.div`
 export const Header = styled.div`
   width: 100%;
   height: 10%;
-  background-color: ${({ isDark }) => (isDark ? "#222" : "#aaa")};
+  background-color: ${({ theme }) => theme.header};
   border-radius: 3px 3px 0 0;
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
@@ -30,14 +30,13 @@ export const Header = styled.div`
     margin: auto 5px;
   }
   div:nth-child(1) {
-    background-color: ${({ isDark }) => (isDark ? "#111" : "rgb(223, 73, 14)")};
+    background-color: ${({ theme }) => theme.red};
   }
   div:nth-child(2) {
-    background-color: ${({ isDark }) =>
-      isDark ? "#555" : "rgb(223, 186, 25)"};
+    background-color: ${({ theme }) => theme.yellow};
   }
   div:nth-child(3) {
-    background-color: ${({ isDark }) => (isDark ? "#333" : "rgb(30, 184, 16)")};
+    background-color: ${({ theme }) => theme.green};
   }
   h4 {
     margin: auto;

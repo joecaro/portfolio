@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Logos from "../lib/logos";
 import ProjectCardStyles, {
   Buttons,
   Header,
@@ -10,8 +9,8 @@ import Link from "next/link";
 export default function ProjectCard(props) {
   const [isHover, setIsHover] = useState(false);
   return (
-    <ProjectCardStyles isDark={props.isDark} width={props.width}>
-      <Header isDark={props.isDark}>
+    <ProjectCardStyles theme={props.theme} width={props.width}>
+      <Header theme={props.theme}>
         <span>
           <div />
           <div />
@@ -23,11 +22,11 @@ export default function ProjectCard(props) {
         <Info
           isHover={isHover}
           background={props.project.image}
-          isDark={props.isDark}
+          theme={props.theme}
           onMouseEnter={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
           onTouchStart={() => setIsHover(!isHover)}>
-          <Buttons isHover={isHover} isDark={props.isDark}>
+          <Buttons isHover={isHover} theme={props.theme}>
             {props.project.github !== "not available" && (
               <a target='_blank' rel='noreferrer' href={props.project.github}>
                 <svg

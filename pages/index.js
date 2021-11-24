@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
 import { useTheme, themes } from "../lib/ThemeContext";
 import ProjectsList from "../components/ProjectsList";

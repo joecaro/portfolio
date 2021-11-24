@@ -13,30 +13,28 @@ export default function ProjectsList({ projects }) {
   return (
     <ListContainer>
       <ButtonLink
-        isDarkMode={theme === themes.dark}
+        theme={theme}
         onClick={() => handleRedirect(router, "/projects")}>
         Projects
       </ButtonLink>
       <List>
         {projects.map((project) => (
-          <div key={`${project.slug}-container`}>
+          <div className='project' key={`${project.slug}-container`}>
             <ProjectCard
               key={project.slug}
               project={project}
-              isDark={theme === themes.dark}
+              theme={theme}
               width={cardWidth}
             />
-            <ProjectDetails
-              isDarkMode={theme === themes.dark}
-              width={cardWidth}>
-              <p style={{ fontSize: "1.2rem" }}>{project.description}</p>
+            <ProjectDetails theme={theme} width={cardWidth}>
+              <p style={{ fontSize: "1rem" }}>{project.description}</p>
               <p>{project.stack}</p>
             </ProjectDetails>
           </div>
         ))}
       </List>
       <ButtonLink
-        isDarkMode={theme === themes.dark}
+        theme={theme}
         onClick={() => handleRedirect(router, "/projects")}>
         See More Projects...
       </ButtonLink>
@@ -59,11 +57,20 @@ const List = styled.div`
   justify-content: space-around;
   width: 100%;
   flex-wrap: wrap;
+
+  .project {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const ProjectDetails = styled.div`
   margin: auto auto 50px;
   max-width: 80%;
   width: ${({ width }) => `${width}px`};
-  color: ${({ isDarkMode }) => (isDarkMode ? "#aaa" : "#222")};
+  color: ${({ theme }) => theme.foreground};
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
 `;
