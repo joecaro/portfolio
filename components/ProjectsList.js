@@ -35,6 +35,11 @@ export default function ProjectsList({ projects }) {
           </div>
         ))}
       </List>
+      <ButtonLink
+        isDarkMode={theme === themes.dark}
+        onClick={() => handleRedirect(router, "/projects")}>
+        See More Projects...
+      </ButtonLink>
     </ListContainer>
   );
 }

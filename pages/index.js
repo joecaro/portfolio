@@ -40,13 +40,13 @@ export default function Home(props) {
         />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Cover />
-      <Light animate={true} />
 
       <main
         className={`${styles.main} ${
           theme === themes.light ? styles.mainLight : styles.mainDark
         }`}>
+        <Cover />
+        <Light animate={true} />
         <h1
           className={`${styles.title} ${
             theme === themes.dark && styles.titleDark
@@ -127,11 +127,6 @@ export default function Home(props) {
         </div>
 
         <ProjectsList projects={props.projects} />
-        <ButtonLink
-          isDarkMode={theme === themes.dark}
-          onClick={() => handledRedirect(router, "/projects")}>
-          See More...
-        </ButtonLink>
       </main>
     </div>
   );
