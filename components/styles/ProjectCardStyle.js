@@ -50,7 +50,7 @@ export const Info = styled.div`
   margin: 5px;
   border-radius: 3px;
   background-image: ${({ background }) => `url(${background})`};
-  background-size: contain;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   height: 95%;

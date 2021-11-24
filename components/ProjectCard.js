@@ -1,17 +1,13 @@
 import React, { useState } from "react";
-import styles from "../styles/ProjectCard.module.css";
 import Logos from "../lib/logos";
 import ProjectCardStyles, {
   Buttons,
-  Description,
   Header,
   Info,
 } from "./styles/ProjectCardStyle";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function ProjectCard(props) {
-  const logos = Logos();
   const [isHover, setIsHover] = useState(false);
   return (
     <ProjectCardStyles isDark={props.isDark} width={props.width}>

@@ -10,6 +10,7 @@ import ButtonLink from "../components/styles/ButtonLink";
 import handledRedirect from "../lib/handleRedirect";
 import Cover from "../components/Cover";
 import Light from "../components/Light";
+import AboutMe from "../components/AboutMe";
 
 export default function Home(props) {
   const router = useRouter();
@@ -127,6 +128,7 @@ export default function Home(props) {
         </div>
 
         <ProjectsList projects={props.projects} />
+        <AboutMe />
       </main>
     </div>
   );
