@@ -19,7 +19,7 @@ export default function ProjectsList({ projects }) {
       </ButtonLink>
       <List>
         {projects.map((project) => (
-          <div key={`${project.slug}-container`}>
+          <Item key={`${project.slug}-container`}>
             <ProjectCard
               key={project.slug}
               project={project}
@@ -32,14 +32,14 @@ export default function ProjectsList({ projects }) {
               <p style={{ fontSize: "1.2rem" }}>{project.description}</p>
               <p>{project.stack}</p>
             </ProjectDetails>
-          </div>
+          </Item>
         ))}
       </List>
     </ListContainer>
   );
 }
 
-const ListContainer = styled.div`
+const ListContainer = styled.section`
   margin-top: 5rem;
   padding: 5rem 2rem;
   max-width: 100%;
@@ -61,4 +61,11 @@ const ProjectDetails = styled.div`
   max-width: 80%;
   width: ${({ width }) => `${width}px`};
   color: ${({ isDarkMode }) => (isDarkMode ? "#aaa" : "#222")};
+`;
+
+const Item = styled.div`
+  backdrop-filter: blur(16px);
+  background-color: #ffffff33;
+  padding: 2rem 0;
+  margin: 1rem;
 `;

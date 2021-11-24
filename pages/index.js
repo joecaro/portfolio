@@ -142,6 +142,19 @@ export default function Home(props) {
           onClick={() => handledRedirect(router, "/projects")}>
           See More...
         </ButtonLink>
+        <AboutMe
+          theme={theme === themes.dark ? "dark" : "light"}
+          className={theme === themes.dark ? styles.dark : styles.light}>
+          <h2>About Me</h2>
+          <div>
+            Est pariatur est amet ut irure adipisicing nostrud magna consectetur
+            cillum labore magna. Voluptate in eiusmod velit magna proident
+            tempor dolore aliquip duis mollit. Commodo quis dolor proident eu
+            fugiat fugiat cupidatat officia velit sunt exercitation velit enim.
+            Magna commodo id voluptate veniam minim dolor sit incididunt
+            adipisicing sint occaecat.
+          </div>
+        </AboutMe>
       </main>
     </div>
   );
@@ -158,6 +171,18 @@ const LogoLink = styled.a`
   animation: flicker 10s linear 3s infinite;
   :hover {
     color: #dddd99;
+  }
+`;
+
+const AboutMe = styled.section`
+  height: 900px;
+  max-width: 900px;
+  div {
+    background-color: #ffffff44;
+    backdrop-filter: blur(16px);
+
+    padding: 1rem;
+    border-radius: 10px;
   }
 `;
 
