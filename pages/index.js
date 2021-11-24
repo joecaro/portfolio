@@ -52,8 +52,7 @@ export default function Home(props) {
       </Head>
       <Cover />
       <Light animate={true} />
-      <VideoBackground />
-
+      {theme === themes.light && <VideoBackground />}
       <main
         className={`${styles.main} ${
           theme === themes.light ? styles.mainLight : styles.mainDark
