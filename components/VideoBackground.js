@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from "react";
 import styles from "../styles/Home.module.css";
 
 export default function VideoBackground({}) {
@@ -32,7 +31,3 @@ export default function VideoBackground({}) {
     </video>
   );
 }
-
-const VideoContainer = styled.div`
-  height: ${({ height }) => `${height}px`};
-`;
