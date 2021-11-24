@@ -7,9 +7,12 @@ import getAllProjects from "../../lib/getAllProjects";
 import Cover from "../../components/Cover";
 import { useTheme, themes } from "../../lib/ThemeContext";
 import ButtonLink from "../../components/styles/ButtonLink";
+import handledRedirect from "../../lib/handleRedirect";
+import { useRouter } from "next/router";
 
 export default function Projects(props) {
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
 
   return (
     <div className={styles.container}>
@@ -53,6 +56,11 @@ export default function Projects(props) {
             );
           })}
         </div>
+        <ButtonLink
+          isDarkMode={theme === themes.dark}
+          onClick={() => handledRedirect(router, "/contact")}>
+          Contact
+        </ButtonLink>
       </main>
     </div>
   );

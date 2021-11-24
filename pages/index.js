@@ -1,8 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
-import Light from "../components/Light";
-import Cover from "../components/Cover";
 import { useTheme, themes } from "../lib/ThemeContext";
 import ProjectsList from "../components/ProjectsList";
 import styled from "styled-components";
@@ -10,6 +8,7 @@ import getAllProjects from "../lib/getAllProjects";
 import { useEffect } from "react";
 import ButtonLink from "../components/styles/ButtonLink";
 import handledRedirect from "../lib/handleRedirect";
+import Cover from "../components/Cover";
 
 export default function Home(props) {
   const router = useRouter();
@@ -40,14 +39,12 @@ export default function Home(props) {
         />
         <link rel='icon' href='/favicon.ico' />
       </Head>
+      <Cover />
 
       <main
         className={`${styles.main} ${
           theme === themes.light ? styles.mainLight : styles.mainDark
         }`}>
-        <Cover />
-        <Light />
-
         <h1
           className={`${styles.title} ${
             theme === themes.dark && styles.titleDark

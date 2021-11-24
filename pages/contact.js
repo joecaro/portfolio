@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "../styles/Home.module.css";
 import axios from "axios";
+import Cover from "../components/Cover";
 
 const portalId = "21057690";
 const formId = "50c65d39-5e63-47b5-aeef-f84037ec61f2";
@@ -99,6 +100,8 @@ export default function Contact() {
 
   return (
     <main className={`${styles.main} ${styles.mainDark}`}>
+      <Cover />
+
       {!formSent && (
         <form className={styles.dark} style={{ display: "grid" }}>
           <fieldset className={styles.set}>
