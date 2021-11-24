@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import ButtonLink from "../components/styles/ButtonLink";
 import handledRedirect from "../lib/handleRedirect";
 import Cover from "../components/Cover";
+import Light from "../components/Light";
 
 export default function Home(props) {
   const router = useRouter();
@@ -40,6 +41,7 @@ export default function Home(props) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Cover />
+      <Light animate={true} />
 
       <main
         className={`${styles.main} ${

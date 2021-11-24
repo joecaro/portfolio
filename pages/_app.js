@@ -9,7 +9,6 @@ function MyApp({ Component, pageProps }) {
     <ThemeProvider>
       <Header />
       <Component {...pageProps} />
-      <Light />
     </ThemeProvider>
   );
 }

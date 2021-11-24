@@ -55,6 +55,10 @@
   right: 20px;
 }
 
+.flicker {
+  animation: flicker 10s linear 3s infinite;
+}
+
 @keyframes flicker {
   0%,
   2%,
