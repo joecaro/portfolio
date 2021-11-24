@@ -12,15 +12,6 @@ import Cover from "../components/Cover";
 import Light from "../components/Light";
 import VideoBackground from "../components/VideoBackground";
 
-const setStyles = (wrapperEl, videoEl, playbackRate) => {
-  wrapperEl.style.marginTop = `calc(180% - ${
-    Math.floor(videoEl.duration) * playbackRate + "px"
-  })`;
-  wrapperEl.style.marginBottom = `calc(180% - ${
-    Math.floor(videoEl.duration) * playbackRate + "px"
-  })`;
-};
-
 export default function Home(props) {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
@@ -153,6 +144,49 @@ export default function Home(props) {
             fugiat fugiat cupidatat officia velit sunt exercitation velit enim.
             Magna commodo id voluptate veniam minim dolor sit incididunt
             adipisicing sint occaecat.
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "1rem",
+              backgroundColor: "transparent",
+              backdropFilter: "none",
+            }}>
+            <div
+              style={{
+                backgroundColor: "transparent",
+                backdropFilter: "none",
+                margin: "1rem",
+                flex: "0 1 55%",
+                height: "500px",
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                gap: "1rem",
+              }}>
+              <div
+                className={styles.float}
+                style={{ flex: "0 0 200px", animationDelay: "1s" }}></div>
+              <div
+                className={styles.float}
+                style={{ flex: "0 0 200px", animationDelay: "2s" }}></div>
+              <div className={styles.float} style={{ flex: "0 0 200px" }}></div>
+            </div>
+            {theme === themes.dark && (
+              <div
+                style={{
+                  backgroundColor: "transparent",
+                  backdropFilter: "none",
+                  margin: "1rem",
+                  flex: "0 1 50%",
+                  height: "500px",
+                  display: "flex",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                  gap: "1rem",
+                }}></div>
+            )}
           </div>
         </AboutMe>
       </main>

@@ -19,7 +19,9 @@ export default function ProjectsList({ projects }) {
       </ButtonLink>
       <List>
         {projects.map((project) => (
-          <Item key={`${project.slug}-container`}>
+          <Item
+            isDarkMode={theme === themes.dark}
+            key={`${project.slug}-container`}>
             <ProjectCard
               key={project.slug}
               project={project}
@@ -65,7 +67,8 @@ const ProjectDetails = styled.div`
 
 const Item = styled.div`
   backdrop-filter: blur(16px);
-  background-color: #ffffff33;
+  background-color: ${({ isDarkMode }) => (isDarkMode ? "" : "#ffffff44")};
   padding: 2rem 0;
   margin: 1rem;
+  display: grid;
 `;

@@ -4,7 +4,6 @@
 
 .container * {
   z-index: 1;
-  color: #111;
 }
 
 .video {
@@ -67,6 +66,28 @@
 
 .dark {
   color: #ddd;
+}
+
+.float {
+  animation: float 3s infinite linear;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 @keyframes titleFlicker {

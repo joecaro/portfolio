@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../styles/Home.module.css";
 
 export default function VideoBackground({}) {
-  const handleSetUp = () => {
+  useEffect(() => {
     document.addEventListener("scroll", handleScroll);
-  };
+    return () => {
+      document.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleScroll = () => {
     let video = document.getElementById("video");
@@ -20,7 +23,6 @@ export default function VideoBackground({}) {
 
   return (
     <video
-      onLoadedMetadata={handleSetUp}
       className={styles.video}
       id='video'
       preload='preload'
