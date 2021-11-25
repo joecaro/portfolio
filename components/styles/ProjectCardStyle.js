@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 const ProjectCardStyles = styled.div`
-  margin: auto auto 50px;
-  max-width: 80%;
-  width: ${({ width }) => `${width}px`};
+  margin: 0 auto 50px;
+  width: ${({ width }) => `clamp(300px, ${width}px, 80%)`};
   aspect-ratio: 16/9;
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.foreground};

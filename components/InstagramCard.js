@@ -8,7 +8,13 @@ export default function InstagramCard({ url }) {
   const { theme } = useTheme();
 
   return (
-    <InstagramCardStyles theme={theme} url={url} cardHeight={cardHeight}>
+    <InstagramCardStyles
+      target='_blank'
+      rel='noreferrer'
+      href='https://www.instagram.com/threedeedesign/'
+      theme={theme}
+      url={url}
+      cardHeight={cardHeight}>
       <div className='header'>
         <div className='profile'></div>
         <h4 className='profile-name'>
@@ -54,7 +60,7 @@ export default function InstagramCard({ url }) {
   );
 }
 
-const InstagramCardStyles = styled.div`
+const InstagramCardStyles = styled.a`
   color: ${({ theme }) => theme.foreground};
   height: ${({ cardHeight }) => `${cardHeight}px`};
   width: ${({ cardHeight }) => `${cardHeight * (7 / 8)}px`};
@@ -63,6 +69,21 @@ const InstagramCardStyles = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
   box-shadow: 0 0 30px -20px #aaa;
+  transition: 0.2s;
+  :hover {
+    transform: scale(1.1);
+    ::after {
+      content: "📷";
+      font-size: 2rem;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.5rem;
+      display: grid;
+      place-items: center;
+      background-color: #00000044;
+    }
+  }
 
   .header {
     display: flex;

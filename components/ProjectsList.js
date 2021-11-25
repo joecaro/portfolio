@@ -19,7 +19,7 @@ export default function ProjectsList({ projects }) {
       </ButtonLink>
       <List>
         {projects.map((project) => (
-          <div className='project' key={`${project.slug}-container`}>
+          <li className='project' key={`${project.slug}-container`}>
             <ProjectCard
               key={project.slug}
               project={project}
@@ -30,7 +30,7 @@ export default function ProjectsList({ projects }) {
               <p style={{ fontSize: "1rem" }}>{project.description}</p>
               <p>{project.stack}</p>
             </ProjectDetails>
-          </div>
+          </li>
         ))}
       </List>
       <ButtonLink
@@ -51,7 +51,8 @@ const ListContainer = styled.div`
   align-items: flex-start;
 `;
 
-const List = styled.div`
+const List = styled.ul`
+  list-style: none;
   padding: 20px 0;
   display: flex;
   justify-content: space-around;
