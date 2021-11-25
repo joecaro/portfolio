@@ -50,14 +50,13 @@ export default function Contact() {
   const formId = "50c65d39-5e63-47b5-aeef-f84037ec61f2";
 
   const handleDataChange = (e) => {
+    checkIfFieldIsValid(e);
     let newFormData = { ...formData, [e.target.name]: e.target.value };
     setFormData(newFormData);
     checkIfFormIsValid();
   };
 
   const checkIfFieldIsValid = (e) => {
-    console.log("focus out");
-    console.log(e.target.name);
     switch (e.target.name) {
       case "email":
         if (e.target.value === "null" || !emailValidator.test(formData.email))
@@ -181,14 +180,16 @@ export default function Contact() {
           <fieldset className={"set"}>
             <label>
               Message
-              <input
+              <textarea
                 className={formDataValid.message === false ? "invalid" : ""}
                 required
                 onBlur={checkIfFieldIsValid}
                 onChange={handleDataChange}
                 value={formData.message}
+                cols='46'
+                rows='5'
                 name='message'
-                type='textarea'></input>
+                type='text'></textarea>
             </label>
           </fieldset>
           <button disabled={!formValid} onClick={handleSubmit} type='submit'>
@@ -207,10 +208,13 @@ const FormStyles = styled.form`
   border-radius: 0.5rem;
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.foreground};
+  max-width: 90%;
+  box-shadow: 0 0 30px -10px #99999955;
 
   .set {
     display: flex;
-    gap: 4rem;
+    flex-wrap: wrap;
+    gap: 2rem;
     border: none;
     label {
       display: grid;
@@ -224,6 +228,11 @@ const FormStyles = styled.form`
       p {
         margin: 0.5rem;
         color: #ef4737;
+      }
+      textarea {
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 1.5rem;
       }
     }
   }
