@@ -24,9 +24,7 @@ export default function Header() {
   return (
     <div style={headerStyles}>
       {router.pathname !== "/" && (
-        <ButtonLink
-          isDarkMode={theme === themes.dark}
-          onClick={() => handleRedirect(router, "/")}>
+        <ButtonLink theme={theme} onClick={() => handleRedirect(router, "/")}>
           home
         </ButtonLink>
       )}
