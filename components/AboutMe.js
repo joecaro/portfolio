@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import InstagramCard from "./InstagramCard";
 
 export default function AboutMe({ theme, themes }) {
   return (
@@ -16,10 +17,28 @@ export default function AboutMe({ theme, themes }) {
         irure dolor ipsum adipisicing magna ad.
       </p>
       <div>
-        <ul>
-          <li></li>
-          <li></li>
-          <li></li>
+        <ul className={"card-list"}>
+          <li>
+            <InstagramCard
+              url={
+                "https://res.cloudinary.com/joecarothers/image/upload/v1637814520/misc/instacards/Screenshot_2021-11-24_232436_qgaygv.png"
+              }
+            />
+          </li>
+          <li>
+            <InstagramCard
+              url={
+                "https://res.cloudinary.com/joecarothers/image/upload/v1637814523/misc/instacards/Screenshot_2021-11-24_232735_ciov7s.png"
+              }
+            />
+          </li>
+          <li>
+            <InstagramCard
+              url={
+                "https://res.cloudinary.com/joecarothers/image/upload/v1637814521/misc/instacards/Screenshot_2021-11-24_232552_onydr2.png"
+              }
+            />
+          </li>
         </ul>
       </div>
     </AboutMeSection>
@@ -51,6 +70,14 @@ const AboutMeSection = styled.section`
 
   h2 {
     font-weight: 500;
+  }
+
+  .card-list {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
   }
 
   li {
