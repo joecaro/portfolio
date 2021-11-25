@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import InstagramCard from "./InstagramCard";
+import ProjectCard from "./ProjectCard";
 
 export default function AboutMe({ theme, themes }) {
   return (
@@ -17,6 +18,7 @@ export default function AboutMe({ theme, themes }) {
         irure dolor ipsum adipisicing magna ad.
       </p>
       <div>
+        <h3>3D Art</h3>
         <ul className={"card-list"}>
           <li>
             <InstagramCard
@@ -39,6 +41,38 @@ export default function AboutMe({ theme, themes }) {
               }
             />
           </li>
+        </ul>
+      </div>
+      <div>
+        <h3>Game Developement</h3>
+        <ul className={"card-list"}>
+          <ProjectCard
+            project={{
+              image:
+                "https://res.cloudinary.com/joecarothers/image/upload/v1637816867/misc/Projects/Screenshot_2021-11-24_235510_ezrdig.png",
+              title: "3D Flappy Bird",
+              slug: "flappy-bird-3d",
+            }}
+            theme={theme}
+          />
+          <ProjectCard
+            project={{
+              image:
+                "https://res.cloudinary.com/joecarothers/image/upload/v1637816868/misc/Projects/Screenshot_2021-11-24_235619_cjbf0j.png",
+              title: "Unity Boid Simulation",
+              slug: "boid-simulation",
+            }}
+            theme={theme}
+          />
+          <ProjectCard
+            project={{
+              image:
+                "https://res.cloudinary.com/joecarothers/image/upload/v1637816868/misc/Projects/Screenshot_2021-11-24_235619_cjbf0j.png",
+              title: "Unity Boid Simulation",
+              slug: "boid-simulation",
+            }}
+            theme={theme}
+          />
         </ul>
       </div>
     </AboutMeSection>

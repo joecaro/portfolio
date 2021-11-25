@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { useTheme } from "../lib/ThemeContext";
 
 const cardHeight = 300;
 
 export default function InstagramCard({ url }) {
+  const { theme } = useTheme();
+
   return (
-    <InstagramCardStyles url={url} cardHeight={cardHeight}>
+    <InstagramCardStyles theme={theme} url={url} cardHeight={cardHeight}>
       <div className='header'>
         <div className='profile'></div>
         <h4 className='profile-name'>
@@ -52,11 +55,11 @@ export default function InstagramCard({ url }) {
 }
 
 const InstagramCardStyles = styled.div`
-  color: #111;
+  color: ${({ theme }) => theme.foreground};
   height: ${({ cardHeight }) => `${cardHeight}px`};
   width: ${({ cardHeight }) => `${cardHeight * (7 / 8)}px`};
   border-radius: 0.5rem;
-  background-color: #fafafa;
+  background-color: ${({ theme }) => theme.background};
   display: grid;
   grid-template-rows: auto 1fr auto;
   box-shadow: 0 0 30px -20px #aaa;
@@ -75,6 +78,8 @@ const InstagramCardStyles = styled.div`
     width: ${({ cardHeight }) => `${cardHeight / 11}px`};
     border-radius: 50%;
     background-color: #aaa;
+    background-image: url("https://res.cloudinary.com/joecarothers/image/upload/v1637851355/misc/profile_uxp39t.jpg");
+    background-size: cover;
   }
 
   .profile-name {
