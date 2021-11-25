@@ -12,26 +12,26 @@ export default function Light(props) {
     localStorage.setItem("themeSetting", JSON.stringify(newTheme));
   };
 
-  // useEffect(() => {
-  //   if (props.animate) {
-  //     const light = document.getElementById("light");
-  //     const bounce = document.getElementById("bounce");
-  //     light.style.top = "-100%";
-  //     setTimeout(() => {
-  //       light.style.transition = "3s";
-  //       light.style.removeProperty("top");
-  //     }, 10);
-  //     if (bounce) {
-  //       bounce.style.width = "0px";
-  //       bounce.style.right = "90px";
-  //       setTimeout(() => {
-  //         bounce.style.transition = "3s";
-  //         bounce.style.removeProperty("width");
-  //         bounce.style.removeProperty("right");
-  //       }, 1000);
-  //     }
-  //   }
-  // }, [props.animate]);
+  useEffect(() => {
+    if (props.animate) {
+      const light = document.getElementById("light");
+      const bounce = document.getElementById("bounce");
+      light.style.top = "-100%";
+      setTimeout(() => {
+        light.style.transition = "3s";
+        light.style.removeProperty("top");
+      }, 10);
+      if (bounce) {
+        bounce.style.width = "0px";
+        bounce.style.right = "90px";
+        setTimeout(() => {
+          bounce.style.transition = "3s";
+          bounce.style.removeProperty("width");
+          bounce.style.removeProperty("right");
+        }, 1000);
+      }
+    }
+  }, [props.animate]);
 
   return (
     <LightContainer>
@@ -69,9 +69,9 @@ export default function Light(props) {
         />
         <div className={theme === themes.dark ? styles.lightGlow : ""}></div>
       </div>
-      {/* {theme === themes.dark && (
+      {theme === themes.dark && (
         <FloorBounce className={styles.flicker} id='bounce' />
-      )} */}
+      )}
     </LightContainer>
   );
 }
