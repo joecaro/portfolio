@@ -47,17 +47,13 @@ export default function Projects(props) {
                   theme === themes.dark && styles.projectDark
                 }`}>
                 <ProjectInfo project={project} />
-                <ProjectCard
-                  project={project}
-                  isDark={theme === themes.dark}
-                  width={400}
-                />
+                <ProjectCard project={project} theme={theme} width={400} />
               </div>
             );
           })}
         </div>
         <ButtonLink
-          isDarkMode={theme === themes.dark}
+          theme={theme}
           onClick={() => handledRedirect(router, "/contact")}>
           Contact
         </ButtonLink>

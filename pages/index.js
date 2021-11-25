@@ -1,20 +1,15 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
 import { useTheme, themes } from "../lib/ThemeContext";
 import ProjectsList from "../components/ProjectsList";
 import styled from "styled-components";
 import getAllProjects from "../lib/getAllProjects";
 import { useEffect } from "react";
-import ButtonLink from "../components/styles/ButtonLink";
-import handledRedirect from "../lib/handleRedirect";
 import Cover from "../components/Cover";
 import Light from "../components/Light";
-import VideoBackground from "../components/VideoBackground";
-import ParralaxBackground from "../components/ParralaxBackground";
+import AboutMe from "../components/AboutMe";
 
 export default function Home(props) {
-  const router = useRouter();
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
@@ -42,14 +37,14 @@ export default function Home(props) {
         />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Cover />
-      <Light animate={true} />
 
       <main
         id='main-container'
         className={`${styles.main} ${
           theme === themes.light ? styles.mainLight : styles.mainDark
         }`}>
+        <Cover />
+        <Light animate={true} />
         <h1
           className={`${styles.title} ${
             theme === themes.dark && styles.titleDark
@@ -129,63 +124,8 @@ export default function Home(props) {
           </LogoLink>
         </div>
 
-        {/* <ProjectsList projects={props.projects} /> */}
-        {/* <AboutMe
-          theme={theme === themes.dark ? "dark" : "light"}
-          className={theme === themes.dark ? styles.dark : styles.light}>
-          <h2>About Me</h2>
-          <div>
-            Est pariatur est amet ut irure adipisicing nostrud magna consectetur
-            cillum labore magna. Voluptate in eiusmod velit magna proident
-            tempor dolore aliquip duis mollit. Commodo quis dolor proident eu
-            fugiat fugiat cupidatat officia velit sunt exercitation velit enim.
-            Magna commodo id voluptate veniam minim dolor sit incididunt
-            adipisicing sint occaecat.
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "1rem",
-              backgroundColor: "transparent",
-              backdropFilter: "none",
-            }}>
-            <div
-              style={{
-                backgroundColor: "transparent",
-                backdropFilter: "none",
-                margin: "1rem",
-                flex: "0 1 55%",
-                height: "500px",
-                display: "flex",
-                justifyContent: "center",
-                flexWrap: "wrap",
-                gap: "1rem",
-              }}>
-              <div
-                className={styles.float}
-                style={{ flex: "0 0 200px", animationDelay: "1s" }}></div>
-              <div
-                className={styles.float}
-                style={{ flex: "0 0 200px", animationDelay: "2s" }}></div>
-              <div className={styles.float} style={{ flex: "0 0 200px" }}></div>
-            </div>
-            {theme === themes.dark && (
-              <div
-                style={{
-                  backgroundColor: "transparent",
-                  backdropFilter: "none",
-                  margin: "1rem",
-                  flex: "0 1 50%",
-                  height: "500px",
-                  display: "flex",
-                  justifyContent: "center",
-                  flexWrap: "wrap",
-                  gap: "1rem",
-                }}></div>
-            )}
-          </div>
-        </AboutMe> */}
+        <ProjectsList projects={props.projects} />
+        <AboutMe theme={theme} themes={themes} />
       </main>
     </div>
   );
@@ -202,17 +142,6 @@ const LogoLink = styled.a`
   animation: flicker 10s linear 3s infinite;
   :hover {
     color: #dddd99;
-  }
-`;
-
-const AboutMe = styled.section`
-  max-width: clamp(100px, 100%, 900px);
-  div {
-    background-color: #ffffff44;
-    backdrop-filter: blur(16px);
-
-    padding: 1rem;
-    border-radius: 10px;
   }
 `;
 

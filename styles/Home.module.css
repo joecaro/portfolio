@@ -12,8 +12,9 @@
   min-height: 100vh;
   padding: 4rem 0;
   flex: 1;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow-x: hidden;
 }
 
@@ -124,19 +125,4 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
-}
-
-.set {
-  display: flex;
-  flex-direction: column;
-  border: none;
-}
-
-.set label {
-  display: grid;
-}
-
-.invalid {
-  border: 1.5px solid #ef4737;
-  background-color: #ffe1de;
 }
