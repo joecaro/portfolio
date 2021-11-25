@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import styles from "../styles/Home.module.css";
 import axios from "axios";
 import Cover from "../components/Cover";
+import styled from "styled-components";
+import { useTheme, themes } from "../lib/ThemeContext";
+import Light from "../components/Light";
+import Fade from "react-reveal/Fade";
 
 const portalId = "21057690";
 const formId = "50c65d39-5e63-47b5-aeef-f84037ec61f2";
@@ -33,11 +37,14 @@ const convertToUriEncoded = (json) => {
   return str.join("&");
 };
 
+// component
 export default function Contact() {
   const [formData, setFormData] = useState(initialFormData);
   const [formDataValid, setFormDataValid] = useState(initialFormData);
   const [formSent, setFormSet] = useState(false);
   const [formValid, setFormValid] = useState(false);
+
+  const { theme } = useTheme();
 
   const portalId = "21057690";
   const formId = "50c65d39-5e63-47b5-aeef-f84037ec61f2";
@@ -99,68 +106,83 @@ export default function Contact() {
   };
 
   return (
-    <main className={`${styles.main} ${styles.mainDark}`}>
+    <main
+      className={`${styles.main} ${
+        theme === themes.dark ? styles.mainDark : styles.mainLight
+      }`}>
+      <Light />
       <Cover />
 
       {!formSent && (
-        <form className={styles.dark} style={{ display: "grid" }}>
-          <fieldset className={styles.set}>
+        <FormStyles
+          theme={theme}
+          className={styles.dark}
+          style={{ display: "grid" }}>
+          <fieldset className={"set"}>
             <label>
               First Name
               <input
-                className={
-                  formDataValid.firstname !== false ? "" : styles.invalid
-                }
+                className={formDataValid.firstname === false ? "invalid" : ""}
                 required
                 onBlur={checkIfFieldIsValid}
                 onChange={handleDataChange}
                 value={formData.firstname}
                 name='firstname'
                 type='text'></input>
+              <Fade bottom when={formDataValid.firstname === false}>
+                <p>Please fill in First Name field</p>
+              </Fade>
             </label>
             <label>
               Last Name
               <input
-                className={
-                  formDataValid.lastname !== false ? "" : styles.invalid
-                }
+                className={formDataValid.lastname === false ? "invalid" : ""}
                 required
                 onBlur={checkIfFieldIsValid}
                 onChange={handleDataChange}
                 value={formData.lastname}
                 name='lastname'
                 type='text'></input>
+              <Fade bottom when={formDataValid.lastname === false}>
+                <p>Please fill in Last Name field</p>
+              </Fade>
             </label>
+          </fieldset>
+          <fieldset className={"set"}>
             <label>
               Company
               <input
-                className={
-                  formDataValid.company !== false ? "" : styles.invalid
-                }
+                className={formDataValid.company === false ? "invalid" : ""}
                 required
                 onBlur={checkIfFieldIsValid}
                 onChange={handleDataChange}
                 value={formData.company}
                 name='company'
                 type='text'></input>
+              <Fade bottom when={formDataValid.company === false}>
+                <p>Please fill in Company field</p>
+              </Fade>
             </label>
             <label>
               Email
               <input
-                className={formDataValid.email !== false ? "" : styles.invalid}
+                className={formDataValid.email === false ? "invalid" : ""}
                 required
                 onBlur={checkIfFieldIsValid}
                 onChange={handleDataChange}
                 value={formData.email}
                 name='email'
                 type='email'></input>
-            </label>
+              <Fade bottom when={formDataValid.email === false}>
+                <p>Please enter a valid email</p>
+              </Fade>
+            </label>{" "}
+          </fieldset>
+          <fieldset className={"set"}>
             <label>
               Message
               <input
-                className={
-                  formDataValid.message !== false ? "" : styles.invalid
-                }
+                className={formDataValid.message === false ? "invalid" : ""}
                 required
                 onBlur={checkIfFieldIsValid}
                 onChange={handleDataChange}
@@ -169,16 +191,51 @@ export default function Contact() {
                 type='textarea'></input>
             </label>
           </fieldset>
-          <button
-            disabled={!formValid}
-            style={{ width: "50%", justifySelf: "end" }}
-            onClick={handleSubmit}
-            type='submit'>
+          <button disabled={!formValid} onClick={handleSubmit} type='submit'>
             Submit
           </button>
-        </form>
+        </FormStyles>
       )}
       {formSent && <h1>Thanks</h1>}
     </main>
   );
 }
+
+const FormStyles = styled.form`
+  margin: auto;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.foreground};
+
+  .set {
+    display: flex;
+    gap: 4rem;
+    border: none;
+    label {
+      display: grid;
+      font-size: 1.2rem;
+      input {
+        padding: 5px;
+        border-radius: 5px;
+        border: ${({ theme }) => `1px solid ${theme.header}`};
+        font-size: 1.5rem;
+      }
+      p {
+        margin: 0.5rem;
+        color: #ef4737;
+      }
+    }
+  }
+
+  button {
+    width: 30%;
+    justify-self: end;
+    padding: 1rem 0;
+    border-radius: 5px;
+  }
+  .invalid {
+    border: 1.5px solid #ef4737;
+    background-color: #ffe1de;
+  }
+`;

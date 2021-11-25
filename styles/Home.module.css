@@ -98,18 +98,3 @@
     grid-template-columns: 1fr 1fr;
   }
 }
-
-.set {
-  display: flex;
-  flex-direction: column;
-  border: none;
-}
-
-.set label {
-  display: grid;
-}
-
-.invalid {
-  border: 1.5px solid #ef4737;
-  background-color: #ffe1de;
-}
