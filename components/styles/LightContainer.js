@@ -7,6 +7,7 @@ export const LightContainer = styled.div`
   overflow: hidden;
   width: 800px;
   height: 800px;
+  pointer-events: none;
 `;
 
 export const FloorBounce = styled.div`

@@ -14,6 +14,7 @@
   transform: translate(-50%, -5%) rotate(180deg);
   transition: 2s;
   animation: flicker 10s linear 3s infinite;
+  pointer-events: all;
 }
 
 .lightbulbLight {
