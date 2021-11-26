@@ -209,7 +209,7 @@ const FormStyles = styled.form`
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.foreground};
   max-width: 90%;
-  box-shadow: 0 0 30px -10px #99999955;
+  box-shadow: 0 0 30px -10px #99999933;
 
   .set {
     display: flex;

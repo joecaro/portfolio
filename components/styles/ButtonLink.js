@@ -7,6 +7,7 @@ const ButtonLink = styled.button`
   font-weight: 400;
   z-index: 2;
   color: ${({ theme }) => theme.foreground};
+  padding: 0 2rem;
 
   :hover {
     cursor: pointer;

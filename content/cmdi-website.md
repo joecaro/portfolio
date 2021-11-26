@@ -10,6 +10,7 @@
     tags:
       - project 
       - featured
+      - nextjs
     image: https://res.cloudinary.com/joecarothers/image/upload/v1636851615/misc/Screenshot_2021-11-13_195808_qutq8c.png
 ---
 

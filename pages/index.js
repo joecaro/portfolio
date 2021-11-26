@@ -4,19 +4,18 @@ import { useTheme, themes } from "../lib/ThemeContext";
 import ProjectsList from "../components/ProjectsList";
 import styled from "styled-components";
 import getAllProjects from "../lib/getAllProjects";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Cover from "../components/Cover";
 import Light from "../components/Light";
 import AboutMe from "../components/AboutMe";
 
 export default function Home(props) {
   const { theme, setTheme } = useTheme();
+  const [filter, setFilter] = useState("featured");
 
   useEffect(() => {
     let themeSetting = localStorage.getItem("themeSetting");
     if (themeSetting) {
-      console.log(JSON.parse(themeSetting));
-      console.log(themes.dark);
       setTheme(
         JSON.parse(themeSetting).foreground === themes.light.foreground
           ? themes.light
@@ -124,7 +123,11 @@ export default function Home(props) {
           </LogoLink>
         </div>
 
-        <ProjectsList projects={props.projects} />
+        <ProjectsList
+          filter={filter}
+          setFilter={setFilter}
+          projects={props.projects}
+        />
         <AboutMe theme={theme} themes={themes} />
       </main>
     </div>
@@ -163,6 +166,6 @@ export async function getStaticProps() {
   );
 
   return {
-    props: { projects: featuredProjects },
+    props: { projects: projects },
   };
 }

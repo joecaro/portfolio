@@ -5,10 +5,12 @@
     author: Joe
     description:  A Boid Simulation using Unity's game engine
     stack: Unity, C#
-    github: https://github.com/joecaro/blockchain-demo-reactJS
-    demo: https://blockchaindemo.netlify.app/
+    github: https://github.com/joecaro/unity-boid-simulation
+    demo: not available
     tags:
-      - project 
+      - project
+      - unity
+      - c#
     image: https://res.cloudinary.com/joecarothers/image/upload/v1637816868/misc/Projects/Screenshot_2021-11-24_235619_cjbf0j.png
 ---
 

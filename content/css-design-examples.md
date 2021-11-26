@@ -8,7 +8,9 @@
     github: https://github.com/joecaro/HTML-CSS-Patterns
     demo: https://csslayoutexamples.netlify.app/
     tags:
-      - project 
+      - project
+      - reactjs
+      - css
     image: https://res.cloudinary.com/joecarothers/image/upload/v1637734940/misc/Screenshot_2021-11-24_012200_emz6vf.png
 ---
 

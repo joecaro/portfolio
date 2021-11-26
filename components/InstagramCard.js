@@ -4,26 +4,21 @@ import { useTheme } from "../lib/ThemeContext";
 
 const cardHeight = 300;
 
-export default function InstagramCard({ url }) {
+export default function InstagramCard({ pic, url }) {
   const { theme } = useTheme();
 
   return (
     <InstagramCardStyles
       target='_blank'
       rel='noreferrer'
-      href='https://www.instagram.com/threedeedesign/'
+      href={url}
       theme={theme}
-      url={url}
+      url={pic}
       cardHeight={cardHeight}>
       <div className='header'>
         <div className='profile'></div>
         <h4 className='profile-name'>
-          <a
-            target='_blank'
-            rel='noreferrer'
-            href='https://www.instagram.com/threedeedesign/'>
-            threedeedesign
-          </a>
+          <p>threedeedesign</p>
         </h4>
         <p>...</p>
       </div>

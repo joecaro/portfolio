@@ -8,7 +8,8 @@
     github: https://github.com/joecaro
     demo: https://pathfinder.josephcarothers.com/
     tags:
-      - project 
+      - project
+      - reactjs
     image: https://res.cloudinary.com/joecarothers/image/upload/v1636851616/misc/Screenshot_2021-11-13_195729_terxc8.png
 ---
 
