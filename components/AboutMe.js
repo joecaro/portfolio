@@ -14,7 +14,9 @@ export default function AboutMe({ theme, themes }) {
         <p>
           I am a <strong> web developer</strong> creating interactive
           applications, company websites, and company tools. I find fulfillment
-          in taking on topics that expand my skills and knowledge.
+          in taking on topics that expand my skills and knowledge. Beyond web
+          development, you can see the product of some of my other interests
+          below.
         </p>
       </div>
       <section>
