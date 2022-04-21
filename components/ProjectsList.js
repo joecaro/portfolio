@@ -121,6 +121,8 @@ const List = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
+  max-width: ${(props) => props.theme.maxWidth};
+
   flex-wrap: wrap;
 
   .project {

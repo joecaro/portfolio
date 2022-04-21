@@ -1,7 +1,5 @@
 .light {
-  position: absolute;
-  top: 100px;
-  right: 100px;
+  position: relative;
 }
 
 .lightbulb {
@@ -11,15 +9,15 @@
   left: 50%;
   top: 0;
   color: rgb(218, 213, 169);
-  transform: translate(-50%, -5%) rotate(180deg);
+  transform: translate(-50%, -5%);
   transition: 2s;
   animation: flicker 10s linear 3s infinite;
   pointer-events: all;
 }
 
 .lightbulbLight {
-  color: rgb(218, 213, 169);
-  transform: translate(-50%, -5%) rotate(180deg) scale(1.2);
+  color: #333;
+  transform: translate(-50%, -5%) ;
   animation: flicker 10s linear 3s infinite;
 }
 

@@ -5,9 +5,8 @@ import ProjectsList from "../components/ProjectsList";
 import styled from "styled-components";
 import getAllProjects from "../lib/getAllProjects";
 import { useEffect, useState } from "react";
-import Cover from "../components/Cover";
-import Light from "../components/Light";
 import AboutMe from "../components/AboutMe";
+import ProfilePic from "../components/ProfilePic";
 
 export default function Home(props) {
   const { theme, setTheme } = useTheme();
@@ -22,7 +21,7 @@ export default function Home(props) {
           : themes.dark
       );
     } else {
-      localStorage.setItem("themeSetting", JSON.stringify(themes.dark));
+      localStorage.setItem("themeSetting", JSON.stringify(themes.light));
     }
   }, []);
 
@@ -42,8 +41,7 @@ export default function Home(props) {
         className={`${styles.main} ${
           theme === themes.light ? styles.mainLight : styles.mainDark
         }`}>
-        <Cover />
-        <Light animate={true} />
+        <ProfilePic />
         <h1
           className={`${styles.title} ${
             theme === themes.dark && styles.titleDark
@@ -122,13 +120,13 @@ export default function Home(props) {
             </svg>
           </LogoLink>
         </div>
+        <AboutMe theme={theme} themes={themes} />
 
         <ProjectsList
           filter={filter}
           setFilter={setFilter}
           projects={props.projects}
         />
-        <AboutMe theme={theme} themes={themes} />
       </main>
     </div>
   );

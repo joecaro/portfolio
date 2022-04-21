@@ -13,8 +13,16 @@ export default function SelectButton({ theme, filter, setFilter, name }) {
 }
 
 const Select = styled.button`
-  background-color: ${({ theme }) => theme.background};
+  cursor: pointer;
+  background-color: ${(props) =>
+    props.selected ? "#888" : props.theme.background};
   color: ${({ theme }) => theme.foreground};
   padding: 1rem;
-  border-bottom: ${({ selected }) => (selected ? "2px solid #fff" : "")};
+  border: inset;
+
+  transition: 0.2s;
+
+  :hover {
+    background-color: #888;
+  }
 `;

@@ -1,33 +1,47 @@
-import React from "react";
-import { useRouter } from "next/router";
-import handleRedirect from "../lib/handleRedirect";
-import { useTheme, themes } from "../lib/ThemeContext";
-import ButtonLink from "./styles/ButtonLink";
-
-const headerStyles = {
-  position: "absolute",
-  top: "0",
-  width: "100vw",
-  height: "100px",
-  padding: "20px",
-  display: "flex",
-  justifyContent: "flex-start",
-  fontSize: "2rem",
-  color: "white",
-};
+import React, { useEffect } from "react";
+import Nav from "./Nav";
+import Link from "next/link";
+import styled from "styled-components";
+import { themes, useTheme } from "../lib/ThemeContext";
+import { MaxWidthContainer } from "./styles/MaxWidthContainer";
+import MobileNav from "./MobileNav";
 
 export default function Header() {
-  const router = useRouter();
-
-  const { theme, setTheme } = useTheme();
-
+  const { theme } = useTheme();
   return (
-    <div style={headerStyles}>
-      {router.pathname !== "/" && (
-        <ButtonLink theme={theme} onClick={() => handleRedirect(router, "/")}>
-          home
-        </ButtonLink>
-      )}
-    </div>
+    <HeaderStyles lightTheme={theme === themes.light}>
+      <MaxWidthContainer>
+        <Link href='/'>home</Link>
+        <Nav />
+        <MobileNav />
+      </MaxWidthContainer>
+    </HeaderStyles>
   );
 }
+
+const HeaderStyles = styled.header`
+  margin: 0;
+  background-color: ${(props) =>
+    props.lightTheme ? props.theme.light.background : "#000"};
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0.5rem 4rem;
+
+  font-size: 1.5rem;
+
+  color: ${(props) =>
+    props.lightTheme
+      ? props.theme.light.foreground
+      : props.theme.dark.foreground};
+
+  a {
+    color: ${(props) =>
+      props.lightTheme
+        ? props.theme.light.foreground
+        : props.theme.dark.foreground};
+    :hover {
+      text-decoration: underline;
+    }
+  }
+`;

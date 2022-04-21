@@ -1,10 +1,8 @@
 import Head from "next/head";
-import Light from "../../components/Light";
 import ProjectCard from "../../components/ProjectCard";
 import ProjectInfo from "../../components/ProjectInfo";
 import styles from "../../styles/Projects.module.css";
 import getAllProjects from "../../lib/getAllProjects";
-import Cover from "../../components/Cover";
 import { useTheme, themes } from "../../lib/ThemeContext";
 import ButtonLink from "../../components/styles/ButtonLink";
 import handledRedirect from "../../lib/handleRedirect";
@@ -29,8 +27,6 @@ export default function Projects(props) {
         className={`${styles.main} ${
           theme === themes.light ? styles.mainLight : styles.mainDark
         }`}>
-        <Cover />
-        <Light />
         <h1
           className={`${styles.title} ${
             theme === themes.dark && styles.titleDark

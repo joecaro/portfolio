@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import styles from "../styles/Home.module.css";
 import axios from "axios";
-import Cover from "../components/Cover";
 import styled from "styled-components";
 import { useTheme, themes } from "../lib/ThemeContext";
-import Light from "../components/Light";
 import Fade from "react-reveal/Fade";
 
 const portalId = "21057690";
@@ -109,9 +107,6 @@ export default function Contact() {
       className={`${styles.main} ${
         theme === themes.dark ? styles.mainDark : styles.mainLight
       }`}>
-      <Light />
-      <Cover />
-
       {!formSent && (
         <FormStyles
           theme={theme}

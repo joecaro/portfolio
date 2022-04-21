@@ -1,14 +1,6 @@
 import styled, { css, keyframes } from "styled-components";
 
-export const LightContainer = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  overflow: hidden;
-  width: 800px;
-  height: 800px;
-  pointer-events: none;
-`;
+export const LightContainer = styled.div``;
 
 export const FloorBounce = styled.div`
   height: 100px;
