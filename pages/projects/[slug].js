@@ -2,11 +2,9 @@ import React from "react";
 import Head from "next/head";
 import { markdownToHtml } from "../../lib/markdownToHtml";
 import getAllProjects, { getProjectBySlug } from "../../lib/getAllProjects";
-import Light from "../../components/Light";
 import styles from "../../styles/ProjectPage.module.css";
 import styled from "styled-components";
 import { useTheme, themes } from "../../lib/ThemeContext";
-import Cover from "../../components/Cover";
 
 const Main = styled.main`
   min-height: 100vh;
@@ -50,9 +48,6 @@ export default function Slug(props) {
       </Head>
 
       <Main isDark={theme === themes.dark}>
-        <Cover />
-
-        <Light />
         <Article>
           <h1>{props.project.title}</h1>
           <Body
