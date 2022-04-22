@@ -8,13 +8,16 @@ const Nav = () => {
     <NavStyles>
       <ul>
         <li>
-          <Link href='about'>About</Link>
+          <Link href='/'>Home</Link>
         </li>
         <li>
-          <Link href='projects'>Projects</Link>
+          <Link href='/about'>About</Link>
         </li>
         <li>
-          <Link href='contact'>Contact</Link>
+          <Link href='/projects'>Projects</Link>
+        </li>
+        <li>
+          <Link href='/contact'>Contact</Link>
         </li>
       </ul>
       <ThemeToggle />

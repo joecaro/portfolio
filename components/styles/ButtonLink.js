@@ -1,6 +1,7 @@
+import Link from "next/link";
 import styled from "styled-components";
 
-const ButtonLink = styled.button`
+const ButtonLink = styled(Link)`
   background-color: transparent;
   border: none;
   font-size: 1.8rem;

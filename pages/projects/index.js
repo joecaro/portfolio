@@ -48,9 +48,7 @@ export default function Projects(props) {
             );
           })}
         </div>
-        <ButtonLink
-          theme={theme}
-          onClick={() => handledRedirect(router, "/contact")}>
+        <ButtonLink theme={theme} href='/contact'>
           Contact
         </ButtonLink>
       </main>

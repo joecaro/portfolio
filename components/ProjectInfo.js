@@ -22,4 +22,9 @@ const Container = styled.div`
   @media (max-width: 768px) {
     width: 400px;
   }
+  a {
+    :hover {
+      text-decoration: underline;
+    }
+  }
 `;

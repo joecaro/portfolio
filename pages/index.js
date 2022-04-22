@@ -13,17 +13,8 @@ export default function Home(props) {
   const [filter, setFilter] = useState("featured");
 
   useEffect(() => {
-    let themeSetting = localStorage.getItem("themeSetting");
-    if (themeSetting) {
-      setTheme(
-        JSON.parse(themeSetting).foreground === themes.light.foreground
-          ? themes.light
-          : themes.dark
-      );
-    } else {
-      localStorage.setItem("themeSetting", JSON.stringify(themes.light));
-    }
-  }, []);
+    console.log(theme.foreground, themes.light.foreground);
+  }, [theme]);
 
   return (
     <div className={styles.container}>
@@ -39,7 +30,9 @@ export default function Home(props) {
       <main
         id='main-container'
         className={`${styles.main} ${
-          theme === themes.light ? styles.mainLight : styles.mainDark
+          theme.foreground === themes.light.foreground
+            ? styles.mainLight
+            : styles.mainDark
         }`}>
         <ProfilePic />
         <h1

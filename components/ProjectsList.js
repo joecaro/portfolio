@@ -1,6 +1,4 @@
 import React from "react";
-import { useRouter } from "next/router";
-import handleRedirect from "../lib/handleRedirect";
 import { useTheme, themes } from "../lib/ThemeContext";
 import ButtonLink from "./styles/ButtonLink";
 import styled from "styled-components";
@@ -11,14 +9,7 @@ import SelectButton from "./SelectButton";
 
 export default function ProjectsList({ filter, setFilter, projects }) {
   const { theme, setTheme } = useTheme();
-  const router = useRouter();
   const cardWidth = 500;
-
-  const setPosition = (node) => {
-    let rects = node.getClientRects();
-    node.style.top = rects[0].y;
-    node.style.left = rects[0].x;
-  };
 
   return (
     <ListContainer theme={theme}>
@@ -94,7 +85,7 @@ export default function ProjectsList({ filter, setFilter, projects }) {
       <ButtonLink
         style={{ alignSelf: "flex-end" }}
         theme={theme}
-        onClick={() => handleRedirect(router, "/projects")}>
+        href='/projects'>
         See All Projects...
       </ButtonLink>
     </ListContainer>

@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components";
 const theme = {
   light: {
     foreground: "#111",
-    background: "#fffaec",
+    background: "#fbf8f0",
     secondary: "#eee",
     header: "#bbb",
     red: "rgb(223,73,14)",
