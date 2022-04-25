@@ -1,18 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import { themes, useTheme } from "../lib/ThemeContext";
 
-export default function AboutMe({ theme, themes }) {
+export default function AboutMe() {
+  const { theme } = useTheme();
+
   return (
-    <AboutMeSection
-      theme={theme === themes.dark ? themes.dark : themes.light}
-      darkMode={theme === themes.dark}>
+    <AboutMeSection lightTheme={theme.foreground === themes.light.foreground}>
       <div className='pgrph'>
         <p>
           I am a <strong> web developer</strong> creating interactive
-          applications, company websites, and company tools. I find fulfillment
-          in taking on topics that expand my skills and knowledge. Beyond web
-          development, you can see the product of some of my other interests
-          below.
+          applications, company websites, and company tools. I've focused
+          primarily on front-ent applications, but have am comfortable working
+          with back-end technologies. I find fulfillment in taking on topics
+          that expand my skills and knowledge. Beyond web development, you can
+          see the product of some of my other interests below.
         </p>
       </div>
     </AboutMeSection>
@@ -21,14 +23,16 @@ export default function AboutMe({ theme, themes }) {
 
 const AboutMeSection = styled.section`
   max-width: 1300px;
-  color: ${({ theme }) => theme.foreground};
+  color: ${(props) =>
+    props.lightTheme
+      ? props.theme.light.foreground
+      : props.theme.dark.foreground};
   padding: 2rem;
   border-radius: 0.5rem;
 
   .pgrph {
     position: relative;
     border-radius: 3px;
-    padding: 2rem;
     font-size: 1.4rem;
     font-weight: 300;
     width: clamp(20ch, 80%, 50ch);
@@ -42,17 +46,5 @@ const AboutMeSection = styled.section`
 
   section {
     margin: 6rem 0;
-  }
-
-  .card-list {
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 1rem;
-  }
-
-  li {
-    list-style: none;
   }
 `;

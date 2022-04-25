@@ -7,9 +7,10 @@ import getAllProjects from "../lib/getAllProjects";
 import { useEffect, useState } from "react";
 import AboutMe from "../components/AboutMe";
 import ProfilePic from "../components/ProfilePic";
+import JosephCarothers from "../components/JosephCarothers";
 
 export default function Home(props) {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const [filter, setFilter] = useState("featured");
 
   useEffect(() => {
@@ -35,12 +36,7 @@ export default function Home(props) {
             : styles.mainDark
         }`}>
         <ProfilePic />
-        <h1
-          className={`${styles.title} ${
-            theme === themes.dark && styles.titleDark
-          }`}>
-          Joseph Carothers
-        </h1>
+        <JosephCarothers />
 
         <div
           className={`${styles.grid} ${theme === themes.dark && styles.dark}`}>
@@ -113,7 +109,7 @@ export default function Home(props) {
             </svg>
           </LogoLink>
         </div>
-        <AboutMe theme={theme} themes={themes} />
+        <AboutMe />
 
         <ProjectsList
           filter={filter}
@@ -150,13 +146,12 @@ export async function getStaticProps() {
     "demo",
     "tags",
     "image",
+    "position",
   ]);
 
-  let featuredProjects = projects.filter((project) =>
-    project.tags.includes("featured")
-  );
+  const sortedProjects = projects.sort((a, b) => a.position - b.position);
 
   return {
-    props: { projects: projects },
+    props: { projects: sortedProjects },
   };
 }

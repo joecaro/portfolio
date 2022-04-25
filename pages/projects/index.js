@@ -5,12 +5,10 @@ import styles from "../../styles/Projects.module.css";
 import getAllProjects from "../../lib/getAllProjects";
 import { useTheme, themes } from "../../lib/ThemeContext";
 import ButtonLink from "../../components/styles/ButtonLink";
-import handledRedirect from "../../lib/handleRedirect";
 import { useRouter } from "next/router";
 
 export default function Projects(props) {
   const { theme, setTheme } = useTheme();
-  const router = useRouter();
 
   return (
     <div className={styles.container}>
@@ -66,9 +64,12 @@ export async function getStaticProps() {
     "github",
     "demo",
     "image",
+    "position",
   ]);
 
+  const sortedProjects = projects.sort((a, b) => a.position - b.position);
+
   return {
-    props: { projects: projects },
+    props: { projects: sortedProjects },
   };
 }

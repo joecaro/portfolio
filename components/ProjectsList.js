@@ -76,7 +76,10 @@ export default function ProjectsList({ filter, setFilter, projects }) {
               />
               <ProjectDetails theme={theme} width={cardWidth}>
                 <p style={{ fontSize: "1rem" }}>{project.description}</p>
-                <p>{project.stack}</p>
+
+                <p>
+                  <b>STACK</b> | {project.stack}
+                </p>
               </ProjectDetails>
             </div>
           </CSSTransition>
