@@ -4,7 +4,7 @@ import Art from "../components/Art";
 import SurfGame from "../components/SurfGame";
 import JosephCarothers from "../components/JosephCarothers";
 import ProfilePic from "../components/ProfilePic";
-import { useTheme } from "../lib/ThemeContext";
+import { themes, useTheme } from "../lib/ThemeContext";
 import Main from "../components/styles/Main";
 
 const about = () => {
