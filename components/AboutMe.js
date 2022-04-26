@@ -10,7 +10,7 @@ export default function AboutMe() {
       <div className='pgrph'>
         <p>
           I am a <strong> web developer</strong> creating interactive
-          applications, company websites, and company tools. I've focused
+          applications, company websites, and company tools.{"I've "}focused
           primarily on front-ent applications, but have am comfortable working
           with back-end technologies. I find fulfillment in taking on topics
           that expand my skills and knowledge. Beyond web development, you can

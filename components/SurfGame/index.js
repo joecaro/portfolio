@@ -359,6 +359,7 @@ const GameScreen = ({ gameState, setGameState, gameOver, setGameOver }) => {
       window.removeEventListener("keydown", hanldeKeyDown);
       window.removeEventListener("keyup", hanldeKeyUp);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState]);
 
   return (
