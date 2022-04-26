@@ -6,6 +6,9 @@ export default function ProjectInfo({ project }) {
     <Container>
       <h4>{project.title}</h4>
       <p>{project.description}</p>
+      <p>
+        <b>STACK</b> | {project.stack}
+      </p>
       <a target='_blank' rel='noreferrer' href={`/projects/${project.slug}`}>
         Read More...
       </a>

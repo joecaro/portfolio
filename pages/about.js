@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import AboutMe from "../components/AboutMe";
 import Art from "../components/Art";
+import SurfGame from "../components/SurfGame";
 import JosephCarothers from "../components/JosephCarothers";
 import ProfilePic from "../components/ProfilePic";
 import { themes, useTheme } from "../lib/ThemeContext";
@@ -18,14 +19,14 @@ const about = () => {
         <AboutMe />
       </section>
       <Art />
+      <SurfGame />
     </Main>
   );
 };
 
 export default about;
 
-const Main = styled.main`
-  min-height: 100vh;
+export const Main = styled.main`
   background-color: ${(props) =>
     props.lightTheme
       ? props.theme.light.background

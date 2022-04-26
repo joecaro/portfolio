@@ -1,10 +1,9 @@
 import React from "react";
-import { useTheme, themes } from "../lib/ThemeContext";
+import { useTheme } from "../lib/ThemeContext";
 import ButtonLink from "./styles/ButtonLink";
 import styled from "styled-components";
 import ProjectCard from "./ProjectCard";
 import { CSSTransition } from "react-transition-group";
-import Fade from "react-reveal/Fade";
 import SelectButton from "./SelectButton";
 
 export default function ProjectsList({ filter, setFilter, projects }) {
@@ -75,9 +74,9 @@ export default function ProjectsList({ filter, setFilter, projects }) {
                 width={cardWidth}
               />
               <ProjectDetails theme={theme} width={cardWidth}>
-                <p style={{ fontSize: "1rem" }}>{project.description}</p>
+                <p>{project.description}</p>
 
-                <p>
+                <p className='stack'>
                   <b>STACK</b> | {project.stack}
                 </p>
               </ProjectDetails>
@@ -120,8 +119,8 @@ const List = styled.div`
   flex-wrap: wrap;
 
   .project {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    place-items: center;
   }
   .project-enter {
     opacity: 0;
@@ -143,12 +142,12 @@ const List = styled.div`
 `;
 
 const ProjectDetails = styled.div`
-  margin: auto auto 50px;
+  margin: auto;
   max-width: 80%;
   width: ${({ width }) => `${width}px`};
   color: ${({ theme }) => theme.foreground};
-  p {
-    margin: 0;
+
+  .stack {
     font-size: 0.9rem;
   }
 `;

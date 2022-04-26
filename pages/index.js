@@ -6,7 +6,6 @@ import styled from "styled-components";
 import getAllProjects from "../lib/getAllProjects";
 import { useEffect, useState } from "react";
 import AboutMe from "../components/AboutMe";
-import ProfilePic from "../components/ProfilePic";
 import JosephCarothers from "../components/JosephCarothers";
 
 export default function Home(props) {
@@ -35,7 +34,6 @@ export default function Home(props) {
             ? styles.mainLight
             : styles.mainDark
         }`}>
-        <ProfilePic />
         <JosephCarothers />
 
         <div

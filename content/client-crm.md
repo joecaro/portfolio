@@ -17,4 +17,6 @@
 
 **Client CRM**
 
-Fugiat pariatur eiusmod irure aute laborum aliquip. Cupidatat veniam deserunt culpa minim. Culpa est elit aliqua eu tempor ullamco minim sunt nostrud voluptate deserunt. Proident labore magna aliqua duis. Reprehenderit tempor velit elit labore ipsum sit aute incididunt tempor. Commodo eu veniam nulla in est tempor occaecat sint eiusmod exercitation nulla. Duis laborum exercitation officia consectetur ullamco et sunt aute quis reprehenderit incididunt consectetur labore qui.
+This is an internal tool I created using Nextjs and MongoDB to help track clients progress during a reporting period. The main purpose was to speed up our tracking speed and reduce effort. Previously we used excel to track this information, so having a database and tailored UI has sped up the process.
+
+![Before](https://res.cloudinary.com/joecarothers/image/upload/v1650982026/misc/Projects/CRM_Quarterly_iqgzq5.jpg)
