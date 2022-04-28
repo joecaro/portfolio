@@ -4,13 +4,18 @@
     date:  Nov 18 2021 12:00 AM
     author: Joe
     description: Flappy Bird in 3D reimagined in 3D
-    stack: Unity, C#
+    stack: 
+      - Unity
+      - C#
     github: https://github.com/joecaro/3d-flappy-bird-clone
     demo: not available
     tags:
       - project 
       - game
       - c#
+    tech:
+      - c#
+      - unity
     image: https://res.cloudinary.com/joecarothers/image/upload/v1637816867/misc/Projects/Screenshot_2021-11-24_235510_ezrdig.png
     position: 8
 ---

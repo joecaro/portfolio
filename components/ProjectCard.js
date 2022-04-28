@@ -88,11 +88,6 @@ export default function ProjectCard(props) {
           </Buttons>
         </Info>
       </div>
-      {/* <div className={styles.grid}>
-        <div>{logos.html}</div>
-        <div>{logos.css}</div>
-        <div>{logos.react}</div>
-      </div> */}
     </ProjectCardStyles>
   );
 }

@@ -4,13 +4,18 @@
     date:  Nov 18 2021 12:00 AM
     author: Joe
     description:  A Boid Simulation using Unity's game engine
-    stack: Unity, C#
+    stack: 
+      - Unity 
+      - C#
     github: https://github.com/joecaro/unity-boid-simulation
     demo: not available
     tags:
       - project
       - unity
       - c#
+    tech:
+      - c#
+      - unity
     image: https://res.cloudinary.com/joecarothers/image/upload/v1637816868/misc/Projects/Screenshot_2021-11-24_235619_cjbf0j.png
     position: 8
 ---

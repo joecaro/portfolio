@@ -2,13 +2,14 @@ import React from "react";
 import { Zoom } from "react-reveal";
 import ProjectCard from "./ProjectCard";
 import InstagramCard from "./InstagramCard";
-import { useTheme } from "styled-components";
+import { Section } from "../pages/about";
+import { themes, useTheme } from "../lib/ThemeContext";
 
 const Art = () => {
   const { theme } = useTheme();
   return (
     <>
-      <section className='max-width'>
+      <Section lightTheme={theme.foreground === themes.light.foreground}>
         <h3>3D Art</h3>
         <Zoom cascade>
           <ul className={"card-list"}>
@@ -38,8 +39,8 @@ const Art = () => {
             </li>
           </ul>
         </Zoom>
-      </section>
-      <section className='max-width'>
+      </Section>
+      <Section lightTheme={theme.foreground === themes.light.foreground}>
         <h3>Game Developement</h3>
         <Zoom cascade>
           <ul className={"card-list"}>
@@ -87,7 +88,7 @@ const Art = () => {
             </li>
           </ul>
         </Zoom>
-      </section>
+      </Section>
     </>
   );
 };

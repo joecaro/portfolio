@@ -18,8 +18,8 @@ const ProfilePic = () => {
 export default ProfilePic;
 
 const PicContainer = styled.div`
-  width: clamp(100px, 50vw, 400px);
-  height: clamp(100px, 50vw, 400px);
+  width: clamp(100px, 10vw, 400px);
+  height: clamp(100px, 10vw, 400px);
   overflow: hidden;
   position: relative;
   border-radius: 50%;

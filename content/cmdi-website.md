@@ -4,13 +4,22 @@
     date:  Nov 11 2021 12:00 AM
     author: Joe
     description:  Website for SAAS CRM Platform with blog and hubspot integration.
-    stack: Next.js, NetlifyCMS, Cloudinary, Netlify
+    stack: 
+      - Next.js
+      - Contentful
+      - Cloudinary
+      - Netlify
     github: not available
     demo: https://cmdi.netlify.app
     tags:
       - project 
       - featured
       - nextjs
+    tech:
+      - react
+      - next
+      - html
+      - css
     image: https://res.cloudinary.com/joecarothers/image/upload/v1636851615/misc/Screenshot_2021-11-13_195808_qutq8c.png
     position: 1
 ---
@@ -37,4 +46,4 @@ I suggested to migrate the site to a faster and simpler option. I am experienced
 
 Performance before & after:
 
-![Before](https://res.cloudinary.com/joecarothers/image/upload/v1637338306/misc/Screenshot_2021-11-19_110840_ybmolr.png)![After](https://res.cloudinary.com/joecarothers/image/upload/v1637340328/misc/netlify_ryrhcf.png)
+![Before](https://res.cloudinary.com/joecarothers/image/upload/v1637338306/misc/Screenshot_2021-11-19_110840_ybmolr.png)![After](https://res.cloudinary.com/joecarothers/image/upload/v1651167342/misc/Projects/cmdi/Screenshot_2022-04-28_133416_jnnvhq.jpg)

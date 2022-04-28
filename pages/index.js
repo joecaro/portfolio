@@ -12,10 +12,6 @@ export default function Home(props) {
   const { theme } = useTheme();
   const [filter, setFilter] = useState("featured");
 
-  useEffect(() => {
-    console.log(theme.foreground, themes.light.foreground);
-  }, [theme]);
-
   return (
     <div className={styles.container}>
       <Head>
@@ -27,13 +23,9 @@ export default function Home(props) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main
+      <Main
         id='main-container'
-        className={`${styles.main} ${
-          theme.foreground === themes.light.foreground
-            ? styles.mainLight
-            : styles.mainDark
-        }`}>
+        lighTheme={theme.foreground === themes.light.foreground}>
         <JosephCarothers />
 
         <div
@@ -114,11 +106,25 @@ export default function Home(props) {
           setFilter={setFilter}
           projects={props.projects}
         />
-      </main>
+      </Main>
     </div>
   );
 }
 
+const Main = styled.main`
+  min-height: 100vh;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+
+  background-color: ${(props) =>
+    props.lighTheme
+      ? props.theme.light.background
+      : props.theme.dark.background};
+`;
 const LogoLink = styled.a`
   margin: 1rem;
   padding: 1.5rem;
@@ -145,6 +151,7 @@ export async function getStaticProps() {
     "tags",
     "image",
     "position",
+    "tech",
   ]);
 
   const sortedProjects = projects.sort((a, b) => a.position - b.position);

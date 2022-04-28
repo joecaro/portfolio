@@ -4,12 +4,18 @@
     date:  Nov 11 2021 12:00 AM
     author: Joe
     description:  Application visually demonstrating various pathfinding algorithms.
-    stack: ReactJS
+    stack: 
+      - ReactJS
     github: https://github.com/joecaro
     demo: https://pathfinder.josephcarothers.com/
     tags:
       - project
       - reactjs
+    tech:
+      - javasacript
+      - react
+      - html
+      - css
     image: https://res.cloudinary.com/joecarothers/image/upload/v1636851616/misc/Screenshot_2021-11-13_195729_terxc8.png
     position: 6
 ---

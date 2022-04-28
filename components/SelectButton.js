@@ -13,16 +13,33 @@ export default function SelectButton({ theme, filter, setFilter, name }) {
 }
 
 const Select = styled.button`
+  font-family: "Courier New", Courier, monospace;
   cursor: pointer;
-  background-color: ${(props) =>
-    props.selected ? "#888" : props.theme.background};
-  color: ${({ theme }) => theme.foreground};
+  background-color: ${(props) => props.theme.secondary};
   padding: 1rem;
-  border: inset;
+  border: none;
+  border-top: 2px solid #bbb;
+  border-left: 2px solid #bbb;
+  border-reight: 2px solid #bbb;
 
-  transition: 0.2s;
+  color: ${({ theme }) => theme.foreground};
+
+  position: relative;
+
+  flex: 1;
 
   :hover {
-    background-color: #888;
+    background-color: ${({ theme }) => theme.secondary};
+  }
+
+  ::after {
+    content: "";
+    height: ${(props) => (props.selected ? "3px" : "0px")};
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: ${({ theme }) => theme.foreground};
+    transition: 0.2s;
   }
 `;

@@ -7,7 +7,7 @@ export default function ProjectInfo({ project }) {
       <h4>{project.title}</h4>
       <p>{project.description}</p>
       <p>
-        <b>STACK</b> | {project.stack}
+        <b>STACK</b> | {project.stack.join(", ")}
       </p>
       <a target='_blank' rel='noreferrer' href={`/projects/${project.slug}`}>
         Read More...

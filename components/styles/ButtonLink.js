@@ -1,7 +1,6 @@
-import Link from "next/link";
 import styled from "styled-components";
 
-const ButtonLink = styled(Link)`
+const ButtonLink = styled.div`
   background-color: transparent;
   border: none;
   font-size: 1.8rem;
@@ -9,6 +8,7 @@ const ButtonLink = styled(Link)`
   z-index: 2;
   color: ${({ theme }) => theme.foreground};
   padding: 0 2rem;
+  align-self: flex-end;
 
   :hover {
     cursor: pointer;

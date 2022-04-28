@@ -27,15 +27,15 @@ const AboutMeSection = styled.section`
     props.lightTheme
       ? props.theme.light.foreground
       : props.theme.dark.foreground};
-  padding: 2rem;
   border-radius: 0.5rem;
 
   .pgrph {
     position: relative;
     border-radius: 3px;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 300;
-    width: clamp(20ch, 80%, 50ch);
+    line-height: 1.5em;
+    width: clamp(20ch, 80%, 60ch);
     margin: auto;
     font-family: "Courier New", Courier, monospace;
 

@@ -4,12 +4,17 @@
     date:  Nov 18 2021 12:00 AM
     author: Joe
     description:  Useful examples of CSS Layouts using a Codepen-like editor for  interactivity.
-    stack: ReactJS
+    stack: 
+      - ReactJS
     github: https://github.com/joecaro/HTML-CSS-Patterns
     demo: https://csslayoutexamples.netlify.app/
     tags:
       - project
       - reactjs
+      - css
+    tech:
+      - react
+      - html
       - css
     image: https://res.cloudinary.com/joecarothers/image/upload/v1637734940/misc/Screenshot_2021-11-24_012200_emz6vf.png
     position: 4

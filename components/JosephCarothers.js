@@ -15,8 +15,7 @@ const JosephCarothers = () => {
 export default JosephCarothers;
 
 const Name = styled.h1`
-  margin: 3rem;
-  line-height: 1.15;
+  margin: 2.5rem;
   font-size: 4.5rem;
   font-weight: 400;
   font-family: "Courier New", Courier, monospace;
