@@ -243,6 +243,16 @@ const Project = styled.div`
       props.lightTheme
         ? props.theme.light.secondary
         : props.theme.dark.secondary};
+  border-top: 1px solid
+    ${(props) =>
+      props.lightTheme
+        ? props.theme.light.secondary
+        : props.theme.dark.secondary};
+  border-left: 1px solid
+    ${(props) =>
+      props.lightTheme
+        ? props.theme.light.secondary
+        : props.theme.dark.secondary};
 
   padding: 1rem;
 

@@ -22,7 +22,8 @@ const Select = styled.button`
   border-left: 2px solid #bbb;
   border-reight: 2px solid #bbb;
 
-  color: ${({ theme }) => theme.foreground};
+  color: ${(props) => (props.selected ? props.theme.foreground : "#999")};
+  font-weight: 600;
 
   position: relative;
 
@@ -34,7 +35,7 @@ const Select = styled.button`
 
   ::after {
     content: "";
-    height: ${(props) => (props.selected ? "3px" : "0px")};
+    height: ${(props) => (props.selected ? "2px" : "0px")};
     width: 100%;
     position: absolute;
     bottom: 0;

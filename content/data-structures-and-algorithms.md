@@ -1,6 +1,6 @@
 ---
     slug: data-structures-and-algorithms
-    title: "Data Structs and Algos"
+    title: "Data Structures and Algorithms"
     date:  Nov 11 2021 12:00 AM
     author: Joe
     description: My Solutions to problems from Algo Expert with tests.
