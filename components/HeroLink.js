@@ -13,7 +13,7 @@ const HeroLink = ({ children, color, href, label }) => {
       >
         {children}
       </LogoLink>
-      <p>{label}</p>
+      <p className="label">{label}</p>
     </Container>
   );
 };
@@ -60,7 +60,7 @@ const LogoLink = styled.a`
   animation: ${bounce} 5s ease-in-out 3s 1;
 
   height: 3rem;
-  width: 4rem;
+  width: 6rem;
   border-radius: var(--radiusSm);
 
   :hover {
@@ -68,18 +68,26 @@ const LogoLink = styled.a`
     transform: translateY(-8px);
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
   }
+
+
 `;
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 4rem 1fr;
+  /* grid-template-columns: 4rem 1fr; */
   gap: 0.5rem;
-  width: 10rem;
 
   .disabled {
     animation: ${noAnimation} 1s;
     pointer-events: none;
     background-color: var(--gray700);
   border-bottom: var(--gray700);
+  }
+
+  .label {
+    font-size: 1.25rem;
+    font-weight: var(--semi-bold);
+    color: var(--gray500);
+    margin: 0;
   }
 `;

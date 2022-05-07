@@ -28,5 +28,15 @@ const Nav = () => {
 export default Nav;
 
 const NavStyles = styled.nav`
+display: none;
 
+@media(min-width: 768px) {
+  display: flex;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  gap: 1rem;
+}
 `;

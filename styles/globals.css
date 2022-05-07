@@ -56,20 +56,25 @@
     --warning500: #ffd14d;
     --warning600: #ffe599;
     --warning700: #fff8e5;
---radiusSm: .25rem;
-  --radiusMd: .5rem;
-  --radiusLg: .75rem;
+    --radiusSm: .25rem;
+      --radiusMd: .5rem;
+      --radiusLg: .75rem;
+--regular: 400;
+  --semi-bold: 600;
+
+  --side-padding: 1rem;
 }
 
 @media (prefers-color-scheme: light) {
   body {
-    background-color: var(--lightBackground400);
+      color: var(--gray100);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: var(--darkBackground100);
+    background-color: var(--gray100);
+      color: var(--gray900);
   }
 }
 html,

@@ -31,6 +31,10 @@ export default function Header() {
 }
 
 const HeaderStyles = styled.header`
+  svg {
+    margin: auto 0;
+  }
+
   a {
     :hover {
       text-decoration: underline;

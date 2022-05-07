@@ -9,7 +9,6 @@ const MobileNav = () => {
   const { theme } = useTheme();
   return (
     <NavStyles
-      lighTheme={theme.foreground === themes.light.foreground}
       toggled={toggled}>
       <ul>
         <ToggleNav onClick={() => setToggled(!toggled)}>X</ToggleNav>
@@ -32,8 +31,7 @@ const MobileNav = () => {
 export default MobileNav;
 
 const ToggleNav = styled.button`
-  font-size: 2rem;
-
+ font-size: 3.5rem;
   background-color: transparent;
   border: none;
   width: fit-content;
@@ -63,6 +61,8 @@ const NavStyles = styled.nav`
     gap: 1rem;
     list-style-type: none;
     z-index: 9;
+
+    background-color: var(--gray900);
 
 
     position: absolute;
