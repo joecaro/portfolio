@@ -32,7 +32,14 @@
     --green600: #a2eab6;
     --green700: #eafbee;
   
-  
+    
+    --purple100: #1a072c;
+      --purple200: #2b0d48;
+      --purple300: #3d1761;
+      --purple400: #4e2179;
+      --purple500: #6c28ad;
+      --purple600: #8a36da;
+      --purple700: #a764e8;
     --danger100: #330400;
     --danger200: #800c02;
     --danger300: #c5190b;
@@ -49,6 +56,9 @@
     --warning500: #ffd14d;
     --warning600: #ffe599;
     --warning700: #fff8e5;
+--radiusSm: .25rem;
+  --radiusMd: .5rem;
+  --radiusLg: .75rem;
 }
 
 @media (prefers-color-scheme: light) {
