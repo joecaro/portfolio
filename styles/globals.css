@@ -1,7 +1,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
 
 :root {
-  color-scheme: light dark
+  color-scheme: light dark;
+  
+  
+    --gray100: #191919;
+    --gray200: #313131;
+    --gray300: #484848;
+    --gray400: #606060;
+    --gray500: #777777;
+    --gray600: #939393;
+    --gray700: #aeaeae;
+    --gray800: #cacaca;
+    --gray900: #e6e6e6;
+  
+  
+    --blue100: #000a1a;
+    --blue200: #002d78;
+    --blue300: #0252d5;
+    --blue400: #4285f4;
+    --blue500: #73a7fe;
+    --blue600: #abcbff;
+    --blue700: #e5efff;
+  
+  
+    --green100: #041509;
+    --green200: #104a20;
+    --green300: #207b38;
+    --green400: #34a853;
+    --green500: #5fd57f;
+    --green600: #a2eab6;
+    --green700: #eafbee;
+  
+  
+    --danger100: #330400;
+    --danger200: #800c02;
+    --danger300: #c5190b;
+    --danger400: #ea4335;
+    --danger500: #f66d62;
+    --danger600: #fe9c94;
+    --danger700: #ffd0cc;
+  
+  
+    --warning100: #1a1300;
+    --warning200: #664c00;
+    --warning300: #b38500;
+    --warning400: #fbbc05;
+    --warning500: #ffd14d;
+    --warning600: #ffe599;
+    --warning700: #fff8e5;
 }
 
 @media (prefers-color-scheme: light) {
