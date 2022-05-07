@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Header from "../components/Header";
-import StyledThemeProvider from "../components/StyledThemeProvider";
+import StyledThemeProvider from "../lib/StyledThemeProvider";
 import { ThemeProvider, themes, useTheme } from "../lib/ThemeContext";
 import "../styles/globals.css";
 
