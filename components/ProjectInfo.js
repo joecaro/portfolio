@@ -17,14 +17,7 @@ export default function ProjectInfo({ project }) {
 }
 
 const Container = styled.div`
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  z-index: 2;
-  @media (max-width: 768px) {
-    width: 400px;
-  }
+
   a {
     :hover {
       text-decoration: underline;

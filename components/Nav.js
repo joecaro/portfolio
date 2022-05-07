@@ -28,17 +28,5 @@ const Nav = () => {
 export default Nav;
 
 const NavStyles = styled.nav`
-  @media (min-width: 768px) {
-    display: flex;
-  }
-  display: none;
-  align-items: center;
-  gap: 1rem;
-  ul {
-    margin: 0;
-    display: flex;
-    gap: 1rem;
-    list-style-type: none;
-    align-items: center;
-  }
+
 `;

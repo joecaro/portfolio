@@ -43,19 +43,13 @@ const ToggleNav = styled.button`
 const NavStyles = styled.nav`
   align-items: center;
   gap: 1rem;
-  color: ${(props) =>
-    props.lighTheme
-      ? props.theme.light.foreground
-      : props.theme.dark.foreground};
+
   @media (min-width: 768px) {
     display: none;
   }
 
   button {
-    color: ${(props) =>
-      props.lighTheme
-        ? props.theme.light.foreground
-        : props.theme.dark.foreground};
+
   }
 
   ul {
@@ -69,10 +63,7 @@ const NavStyles = styled.nav`
     gap: 1rem;
     list-style-type: none;
     z-index: 9;
-    background-color: ${(props) =>
-      props.lighTheme
-        ? props.theme.light.background
-        : props.theme.dark.background};
+
 
     position: absolute;
     top: 0;

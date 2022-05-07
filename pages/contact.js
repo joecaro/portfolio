@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styles from "../styles/Home.module.css";
 import axios from "axios";
 import styled from "styled-components";
 import { useTheme, themes } from "../lib/ThemeContext";
@@ -104,13 +103,10 @@ export default function Contact() {
 
   return (
     <main
-      className={`${styles.main} ${
-        theme === themes.dark ? styles.mainDark : styles.mainLight
-      }`}>
+     >
       {!formSent && (
         <FormStyles
-          theme={theme}
-          className={styles.dark}
+          
           style={{ display: "grid" }}>
           <fieldset className={"set"}>
             <label>
@@ -201,8 +197,6 @@ const FormStyles = styled.form`
   margin: auto;
   padding: 2rem;
   border-radius: 0.5rem;
-  background-color: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.foreground};
   max-width: 90%;
   box-shadow: 0 0 30px -10px #99999933;
 
@@ -222,7 +216,6 @@ const FormStyles = styled.form`
       }
       p {
         margin: 0.5rem;
-        color: #ef4737;
       }
       textarea {
         padding: 5px;
@@ -240,6 +233,5 @@ const FormStyles = styled.form`
   }
   .invalid {
     border: 1.5px solid #ef4737;
-    background-color: #ffe1de;
   }
 `;

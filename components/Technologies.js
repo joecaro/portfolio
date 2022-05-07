@@ -36,10 +36,7 @@ const Styles = styled.div`
   p {
     padding: 0.5rem;
     margin: 0;
-    background-color: ${(props) =>
-      props.lightTheme
-        ? props.theme.light.background
-        : props.theme.dark.background};
+
     border-bottom: 3px solid
       ${(props) =>
         props.lightTheme

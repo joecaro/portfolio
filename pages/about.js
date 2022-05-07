@@ -2,7 +2,6 @@ import React from "react";
 import AboutMe from "../components/AboutMe";
 import Art from "../components/Art";
 import SurfGame from "../components/SurfGame";
-import JosephCarothers from "../components/JosephCarothers";
 import ProfilePic from "../components/ProfilePic";
 import { themes, useTheme } from "../lib/ThemeContext";
 import Main from "../components/styles/Main";
@@ -38,10 +37,7 @@ export const Section = styled.section`
   margin: 8rem auto;
   padding: 0 1rem;
 
-  color: ${(props) =>
-    props.lightTheme
-      ? props.theme.light.foreground
-      : props.theme.dark.foreground};
+
 `;
 
 const AboutHero = styled.section`

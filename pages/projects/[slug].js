@@ -14,8 +14,6 @@ const Main = styled.main`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: ${({ isDark }) => (isDark ? "#111" : "#efefef")};
-  color: ${({ isDark }) => (isDark ? "#fff" : "#111")};
 `;
 
 const Body = styled.div`

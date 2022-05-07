@@ -1,10 +1,7 @@
 import styled from "styled-components";
 
 const Main = styled.main`
-  background-color: ${(props) =>
-    props.lightTheme
-      ? props.theme.light.background
-      : props.theme.dark.background};
+
 
   .max-width {
     max-width: ${(props) => props.theme.maxWidth};

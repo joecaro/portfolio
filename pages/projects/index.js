@@ -1,52 +1,38 @@
 import Head from "next/head";
 import ProjectCard from "../../components/ProjectCard";
 import ProjectInfo from "../../components/ProjectInfo";
-import styles from "../../styles/Projects.module.css";
 import getAllProjects from "../../lib/getAllProjects";
 import { useTheme, themes } from "../../lib/ThemeContext";
 import ButtonLink from "../../components/styles/ButtonLink";
-import { useRouter } from "next/router";
 
 export default function Projects(props) {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Joseph Carothers</title>
         <meta
-          name='description'
-          content='Web Development Portfolio for Joseph Carothers'
+          name="description"
+          content="Web Development Portfolio for Joseph Carothers"
         />
-        <link rel='icon' href='/favicon.ico' />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main
-        className={`${styles.main} ${
-          theme === themes.light ? styles.mainLight : styles.mainDark
-        }`}>
-        <h1
-          className={`${styles.title} ${
-            theme === themes.dark && styles.titleDark
-          }`}>
-          Projects
-        </h1>
+      <main>
+        <h1>Projects</h1>
 
-        <div className={styles.list}>
+        <div >
           {props.projects.map((project, index) => {
             return (
-              <div
-                key={project.slug}
-                className={`${styles.project} ${
-                  theme === themes.dark && styles.projectDark
-                }`}>
+              <div key={project.slug}>
                 <ProjectInfo project={project} />
                 <ProjectCard project={project} theme={theme} width={400} />
               </div>
             );
           })}
         </div>
-        <ButtonLink theme={theme} href='/contact'>
+        <ButtonLink theme={theme} href="/contact">
           Contact
         </ButtonLink>
       </main>

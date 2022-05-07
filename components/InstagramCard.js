@@ -56,11 +56,9 @@ export default function InstagramCard({ pic, url }) {
 }
 
 const InstagramCardStyles = styled.a`
-  color: ${({ theme }) => theme.foreground};
   height: ${({ cardHeight }) => `${cardHeight}px`};
   width: ${({ cardHeight }) => `${cardHeight * (7 / 8)}px`};
   border-radius: 0.5rem;
-  background-color: ${({ theme }) => theme.background};
   display: grid;
   grid-template-rows: auto 1fr auto;
   box-shadow: 0 0 30px -20px #aaa;
@@ -76,7 +74,6 @@ const InstagramCardStyles = styled.a`
       border-radius: 0.5rem;
       display: grid;
       place-items: center;
-      background-color: #00000044;
     }
   }
 
@@ -93,7 +90,6 @@ const InstagramCardStyles = styled.a`
     height: ${({ cardHeight }) => `${cardHeight / 11}px`};
     width: ${({ cardHeight }) => `${cardHeight / 11}px`};
     border-radius: 50%;
-    background-color: #aaa;
     background-image: url("https://res.cloudinary.com/joecarothers/image/upload/v1637851355/misc/profile_uxp39t.jpg");
     background-size: cover;
   }

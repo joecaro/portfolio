@@ -6,8 +6,8 @@ export default function AboutMe() {
   const { theme } = useTheme();
 
   return (
-    <AboutMeSection lightTheme={theme.foreground === themes.light.foreground}>
-      <div className='pgrph'>
+    <section >
+      <div>
         <p>
           I am a <strong> web developer</strong> creating interactive
           applications, company websites, and company tools.{"I've "}focused
@@ -17,34 +17,6 @@ export default function AboutMe() {
           see the product of some of my other interests below.
         </p>
       </div>
-    </AboutMeSection>
+    </section>
   );
 }
-
-const AboutMeSection = styled.section`
-  max-width: 1300px;
-  color: ${(props) =>
-    props.lightTheme
-      ? props.theme.light.foreground
-      : props.theme.dark.foreground};
-  border-radius: 0.5rem;
-
-  .pgrph {
-    position: relative;
-    border-radius: 3px;
-    font-size: 1.3rem;
-    font-weight: 300;
-    line-height: 1.5em;
-    width: clamp(20ch, 80%, 60ch);
-    margin: auto;
-    font-family: "Courier New", Courier, monospace;
-
-    p {
-      margin: 0;
-    }
-  }
-
-  section {
-    margin: 6rem 0;
-  }
-`;

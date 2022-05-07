@@ -9,8 +9,8 @@ import Link from "next/link";
 export default function ProjectCard(props) {
   const [isHover, setIsHover] = useState(false);
   return (
-    <ProjectCardStyles theme={props.theme} width={props.width}>
-      <Header theme={props.theme}>
+    <ProjectCardStyles >
+      <Header >
         <span>
           <div />
           <div />
@@ -19,14 +19,13 @@ export default function ProjectCard(props) {
         <h4>{props.project.title}</h4>
       </Header>
       <div style={{ flex: "1 1 100%", padding: "5px" }}>
-        <Info
-          isHover={isHover}
+        <div
           background={props.project.image}
-          theme={props.theme}
+          
           onMouseEnter={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
           onTouchStart={() => setIsHover(!isHover)}>
-          <Buttons isHover={isHover} theme={props.theme}>
+          <Buttons isHover={isHover} >
             {props.project.github !== "not available" && (
               <a target='_blank' rel='noreferrer' href={props.project.github}>
                 <svg
@@ -86,7 +85,7 @@ export default function ProjectCard(props) {
               Read More...
             </Link>
           </Buttons>
-        </Info>
+        </div>
       </div>
     </ProjectCardStyles>
   );

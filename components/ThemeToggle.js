@@ -57,10 +57,7 @@ const Toggle = styled.button`
   padding: 0;
 
   span {
-    color: ${(props) =>
-      props.toggled
-        ? props.theme.dark.foreground
-        : props.theme.light.foreground};
+
     position: absolute;
     right: -1.7rem;
     top: 50%;

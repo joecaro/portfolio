@@ -1,8 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
+
+:root {
+  color-scheme: light dark
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: var(--lightBackground400);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--darkBackground100);
+  }
+}
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Courier New", Courier, monospace, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Sora', sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   overflow-x: hidden;
 }
@@ -14,47 +31,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-.cover {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  z-index: 10;
-  display: inline;
-  animation: opacityToZero 1s;
-}
-
-.cover-transition {
-  animation: opacityToOne 10s;
-  display: inline;
-  z-index: 10;
-}
-
-.cover-inactive {
-  z-index: 0;
-  display: none;
-}
-
-@keyframes opacityToOne {
-  0% {
-    opacity: 0;
-  }
-  5% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes opacityToZero {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
 }

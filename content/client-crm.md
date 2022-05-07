@@ -10,7 +10,7 @@
       - NextJS
       - NodeJs
       - JWT Token Autorization
-    github: https://github.com/joecaro/pathfinder-react-app
+    github: https://github.com/joecaro/crm
     demo: https://crm.josephcarothers.com/
     tags:
       - project 

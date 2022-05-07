@@ -5,8 +5,6 @@ const ProjectCardStyles = styled.div`
   width: ${({ width }) => `clamp(300px, ${width}px, 80%)`};
   height: ${({ width }) => `${(width * 9) / 16}px`};
   aspect-ratio: 16/9;
-  background-color: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.foreground};
   border-radius: 3px;
   display: flex;
   flex-direction: column;
@@ -14,7 +12,6 @@ const ProjectCardStyles = styled.div`
 export const Header = styled.div`
   width: 100%;
   height: 10%;
-  background-color: ${({ theme }) => theme.header};
   border-radius: 3px 3px 0 0;
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
@@ -40,7 +37,7 @@ export const Header = styled.div`
   }
   h4 {
     margin: auto;
-    font-weight: 400;
+    font-weight: 600;
   }
 `;
 
@@ -67,9 +64,7 @@ export const Buttons = styled.span`
   justify-items: center;
   align-items: center;
   height: 100%;
-  color: #ddd;
   opacity: ${({ isHover }) => (isHover ? "1" : "0")};
-  background-color: #222222dd;
   border-radius: 3px;
   transition: 0.2s;
   a {
@@ -78,7 +73,6 @@ export const Buttons = styled.span`
     cursor: pointer;
     :hover {
       transition: 0.1s;
-      color: ${({ isDark }) => (isDark ? "#eee" : "#888")};
     }
   }
 `;

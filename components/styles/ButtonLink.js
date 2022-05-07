@@ -6,7 +6,6 @@ const ButtonLink = styled.div`
   font-size: 1.8rem;
   font-weight: 400;
   z-index: 2;
-  color: ${({ theme }) => theme.foreground};
   padding: 0 2rem;
   align-self: flex-end;
 
