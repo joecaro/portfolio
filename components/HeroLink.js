@@ -5,7 +5,8 @@ const HeroLink = ({ children, color, href, label }) => {
   return (
     <Container>
       <LogoLink
-        color={color}
+        className={!href ? "disabled" : ""}
+        color={color || "gray"}
         href={href}
         target="_blank"
         rel="noopener noreferrer"
@@ -56,7 +57,7 @@ const LogoLink = styled.a`
   display: grid;
   place-items: center;
   transition: 0.2s ease;
-  animation: ${bounce} 5s ease-in-out 3s infinite;
+  animation: ${bounce} 5s ease-in-out 3s 1;
 
   height: 3rem;
   width: 4rem;
@@ -74,4 +75,11 @@ const Container = styled.div`
   grid-template-columns: 4rem 1fr;
   gap: 0.5rem;
   width: 10rem;
+
+  .disabled {
+    animation: ${noAnimation} 1s;
+    pointer-events: none;
+    background-color: var(--gray700);
+  border-bottom: var(--gray700);
+  }
 `;
