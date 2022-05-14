@@ -3,13 +3,12 @@ import { useTheme, themes } from "../lib/ThemeContext";
 import ProjectsList from "../components/ProjectsList";
 import styled from "styled-components";
 import getAllProjects from "../lib/getAllProjects";
-import { useEffect, useState } from "react";
+import { useEffect,  } from "react";
 import AboutMe from "../components/AboutMe";
 import Hero from "../components/Hero";
 
 export default function Home(props) {
   const { theme } = useTheme();
-  const [filter, setFilter] = useState("featured");
 
   return (
     <div>
@@ -26,8 +25,6 @@ export default function Home(props) {
         <Hero />
 
         <ProjectsList
-          filter={filter}
-          setFilter={setFilter}
           projects={props.projects}
         />
       </main>

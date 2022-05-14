@@ -2,7 +2,6 @@ import React from "react";
 import Head from "next/head";
 import { markdownToHtml } from "../../lib/markdownToHtml";
 import getAllProjects, { getProjectBySlug } from "../../lib/getAllProjects";
-import styles from "../../styles/ProjectPage.module.css";
 import styled from "styled-components";
 import { useTheme, themes } from "../../lib/ThemeContext";
 
@@ -35,7 +34,7 @@ export default function Slug(props) {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className={styles.container}>
+    <div >
       <Head>
         <title>Joseph Carothers</title>
         <meta
