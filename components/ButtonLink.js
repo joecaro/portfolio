@@ -1,12 +1,15 @@
 import styled from "styled-components";
+import { css } from "styled-components";
 import { keyframes } from "styled-components";
 
-const HeroLink = ({ children, color, href, label }) => {
+const ButtonLink = ({ children, color, href, label, inverted, animated }) => {
   return (
     <Container>
       <LogoLink
-        className={!href ? "disabled" : ""}
+        className={!href && "disabled"}
         color={color || "gray"}
+        inverted={inverted}
+        animated={animated}
         href={href}
         target="_blank"
         rel="noopener noreferrer"
@@ -18,7 +21,7 @@ const HeroLink = ({ children, color, href, label }) => {
   );
 };
 
-export default HeroLink;
+export default ButtonLink;
 
 const bounce = keyframes`
 0% {
@@ -51,17 +54,20 @@ const noAnimation = keyframes`
 `;
 
 const LogoLink = styled.a`
-  background-color: ${(props) => `var(--${props.color}400)`};
+  background-color: ${(props) => props.inverted ? "#ffffff" : `var(--${props.color}400)`};
   border-bottom: 3px solid ${(props) => `var(--${props.color}300)`};
+  border: ${(props) => props.inverted ? `3px solid var(--${props.color}400)` : ""};
   box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
   display: grid;
   place-items: center;
   transition: 0.2s ease;
-  animation: ${bounce} 5s ease-in-out 3s 1;
+  animation: ${(props) => props.animated && css`${bounce} 5s ease-in-out 3s 1`};
 
   height: 3rem;
   width: 6rem;
   border-radius: var(--radiusSm);
+
+  color: ${(props) => props.inverted ? `var(--${props.color}400)` : "#fff" };
 
   :hover {
     animation: ${noAnimation} 1s;
