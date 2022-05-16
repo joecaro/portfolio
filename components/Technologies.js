@@ -37,16 +37,8 @@ const Styles = styled.div`
     padding: 0.5rem;
     margin: 0;
 
-    border-bottom: 3px solid
-      ${(props) =>
-        props.lightTheme
-          ? props.theme.light.secondary
-          : props.theme.dark.secondary};
-    border-right: 3px solid
-      ${(props) =>
-        props.lightTheme
-          ? props.theme.light.secondary
-          : props.theme.dark.secondary};
+    border-bottom: 3px solid black;
+    border-right: 3px solid black;
     border-radius: 0.25rem;
   }
 `;

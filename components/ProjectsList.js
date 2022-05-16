@@ -2,58 +2,68 @@ import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
-import { themes, useTheme } from "../lib/ThemeContext";
 import SelectButton from "./SelectButton";
 import ProjectCard from "./ProjectCard";
+import MaxWidthContainer from "./styles/MaxWidthContainer";
 
 export default function ProjectsList({ projects }) {
   const [filter, setFilter] = useState("featured");
 
   return (
-    <Section>
-      <h2>Projects</h2>
-      <Select onChange={(e) => setFilter(e.target.value)}>
-        <option value="featured">Featured</option>
-        <option value="reactjs">ReactJS</option>
-        <option value="nextjs">NextJS</option>
-        <option value="javascript">Javascript</option>
-        <option value="c#">C#</option>
-        <option value="game">Game Dev</option>
-        <option value="blockchain">Blockchain</option>
-      </Select>
-      <div className="filter-select">
-        <SelectButton filter={filter} setFilter={setFilter} name={"Featured"} />
-        <SelectButton filter={filter} setFilter={setFilter} name={"ReactJS"} />
-        <SelectButton filter={filter} setFilter={setFilter} name={"NextJS"} />
-        <SelectButton
-          filter={filter}
-          setFilter={setFilter}
-          name={"Javascript"}
-        />
-        <SelectButton filter={filter} setFilter={setFilter} name={"C#"} />
-        <SelectButton filter={filter} setFilter={setFilter} name={"Game"} />
-        <button filter={filter} setFilter={setFilter} name={"Blockchain"} />
-      </div>
-      <div className="list">
-        {projects.map((project) => {
-          return (
-            <CSSTransition
-              key={`${project.slug}-transition`}
-              in={project.tags.includes(filter)}
-              timeout={300}
-              classNames="project"
-              unmountOnExit
-              exit={false}
-            >
-              <ProjectCard project={project} />
-            </CSSTransition>
-          );
-        })}
-      </div>
-      <div>
-        <Link href="/projects">See All Projects...</Link>
-      </div>
-    </Section>
+    <MaxWidthContainer>
+      <Section>
+        <h2>Projects</h2>
+        <Select onChange={(e) => setFilter(e.target.value)}>
+          <option value="featured">Featured</option>
+          <option value="reactjs">ReactJS</option>
+          <option value="nextjs">NextJS</option>
+          <option value="javascript">Javascript</option>
+          <option value="c#">C#</option>
+          <option value="game">Game Dev</option>
+          <option value="blockchain">Blockchain</option>
+        </Select>
+        <div className="filter-select">
+          <SelectButton
+            filter={filter}
+            setFilter={setFilter}
+            name={"Featured"}
+          />
+          <SelectButton
+            filter={filter}
+            setFilter={setFilter}
+            name={"ReactJS"}
+          />
+          <SelectButton filter={filter} setFilter={setFilter} name={"NextJS"} />
+          <SelectButton
+            filter={filter}
+            setFilter={setFilter}
+            name={"Javascript"}
+          />
+          <SelectButton filter={filter} setFilter={setFilter} name={"C#"} />
+          <SelectButton filter={filter} setFilter={setFilter} name={"Game"} />
+          <button filter={filter} setFilter={setFilter} name={"Blockchain"} />
+        </div>
+        <div className="list">
+          {projects.map((project) => {
+            return (
+              <CSSTransition
+                key={`${project.slug}-transition`}
+                in={project.tags.includes(filter)}
+                timeout={300}
+                classNames="project"
+                unmountOnExit
+                exit={false}
+              >
+                <ProjectCard project={project} />
+              </CSSTransition>
+            );
+          })}
+        </div>
+        <div>
+          <Link href="/projects">See All Projects...</Link>
+        </div>
+      </Section>
+    </MaxWidthContainer>
   );
 }
 
@@ -88,5 +98,6 @@ const Section = styled.section`
     overflow: scroll;
     display: grid;
     gap: 2rem;
+  overflow-x: hidden;
   }
 `;

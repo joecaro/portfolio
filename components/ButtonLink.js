@@ -54,28 +54,34 @@ const noAnimation = keyframes`
 `;
 
 const LogoLink = styled.a`
-  background-color: ${(props) => props.inverted ? "#ffffff" : `var(--${props.color}400)`};
+  background-color: ${(props) =>
+    props.inverted ? "#ffffff" : `var(--${props.color}400)`};
   border-bottom: 3px solid ${(props) => `var(--${props.color}300)`};
-  border: ${(props) => props.inverted ? `3px solid var(--${props.color}400)` : ""};
+  border: ${(props) =>
+    props.inverted ? `3px solid var(--${props.color}400)` : ""};
   box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
   display: grid;
   place-items: center;
   transition: 0.2s ease;
-  animation: ${(props) => props.animated && css`${bounce} 5s ease-in-out 3s 1`};
+  animation: ${(props) =>
+    props.animated &&
+    css`
+      ${bounce} 5s ease-in-out 3s 1
+    `};
 
   height: 3rem;
   width: 6rem;
   border-radius: var(--radiusSm);
 
-  color: ${(props) => props.inverted ? `var(--${props.color}400)` : "#fff" };
+  color: ${(props) => (props.inverted ? `var(--${props.color}400)` : "#fff")};
+
+
 
   :hover {
     animation: ${noAnimation} 1s;
     transform: translateY(-8px);
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
   }
-
-
 `;
 
 const Container = styled.div`
@@ -83,11 +89,16 @@ const Container = styled.div`
   /* grid-template-columns: 4rem 1fr; */
   gap: 0.5rem;
 
+  @media (min-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+  }
+
   .disabled {
     animation: ${noAnimation} 1s;
     pointer-events: none;
     background-color: var(--gray700);
-  border-bottom: var(--gray700);
+    border-bottom: var(--gray700);
   }
 
   .label {
