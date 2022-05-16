@@ -8,8 +8,7 @@ const MobileNav = () => {
   const [toggled, setToggled] = useState(false);
   const { theme } = useTheme();
   return (
-    <NavStyles
-      toggled={toggled}>
+    <NavStyles toggled={toggled} theme={theme}>
       <ul>
         <ToggleNav onClick={() => setToggled(!toggled)}>X</ToggleNav>
         <li onClick={() => setToggled(!toggled)}>
@@ -31,7 +30,7 @@ const MobileNav = () => {
 export default MobileNav;
 
 const ToggleNav = styled.button`
- font-size: 3.5rem;
+  font-size: 3.5rem;
   background-color: transparent;
   border: none;
   width: fit-content;
@@ -47,7 +46,6 @@ const NavStyles = styled.nav`
   }
 
   button {
-
   }
 
   ul {
@@ -62,8 +60,8 @@ const NavStyles = styled.nav`
     list-style-type: none;
     z-index: 9;
 
-    background-color: var(--gray900);
-
+    background-color: ${(props) =>
+      props.theme === "light" ? "var(--gray900)" : "var(--gray300)"};
 
     position: absolute;
     top: 0;
