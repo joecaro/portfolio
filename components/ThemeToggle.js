@@ -6,16 +6,14 @@ const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
 
   const handleToggleTheme = () => {
-    let newTheme = theme === themes.light ? themes.dark : themes.light;
+    let newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    localStorage.setItem("themeSetting", JSON.stringify(newTheme));
+    localStorage.setItem("theme", newTheme);
   };
 
   return (
-    <Toggle
-      toggled={theme.background === themes.dark.background}
-      onClick={handleToggleTheme}>
-      {theme.background === themes.dark.background && (
+    <Toggle toggled={theme === "dark"} onClick={handleToggleTheme}>
+      {theme === "dark" && (
         <span>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -27,7 +25,7 @@ const ThemeToggle = () => {
           </svg>
         </span>
       )}
-      {theme.background === themes.light.background && (
+      {theme === "light" && (
         <span>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -57,7 +55,6 @@ const Toggle = styled.button`
   padding: 0;
 
   span {
-
     position: absolute;
     right: -1.7rem;
     top: 50%;
