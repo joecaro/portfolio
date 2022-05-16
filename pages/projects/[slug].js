@@ -34,7 +34,7 @@ export default function Slug(props) {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div >
+    <div>
       <Head>
         <title>Joseph Carothers</title>
         <meta
@@ -44,7 +44,7 @@ export default function Slug(props) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <Main isDark={theme === themes.dark}>
+      <Main isDark={theme === "dark"}>
         <Article>
           <h1>{props.project.title}</h1>
           <Body

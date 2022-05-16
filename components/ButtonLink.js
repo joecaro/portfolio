@@ -11,12 +11,11 @@ const ButtonLink = ({ children, color, href, label, inverted, animated }) => {
         inverted={inverted}
         animated={animated}
         href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+        target='_blank'
+        rel='noopener noreferrer'>
         {children}
       </LogoLink>
-      <p className="label">{label}</p>
+      {label && <p className='label'>{label}</p>}
     </Container>
   );
 };
@@ -74,8 +73,6 @@ const LogoLink = styled.a`
   border-radius: var(--radiusSm);
 
   color: ${(props) => (props.inverted ? `var(--${props.color}400)` : "#fff")};
-
-
 
   :hover {
     animation: ${noAnimation} 1s;

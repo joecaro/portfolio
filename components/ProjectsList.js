@@ -14,15 +14,15 @@ export default function ProjectsList({ projects }) {
       <Section>
         <h2>Projects</h2>
         <Select onChange={(e) => setFilter(e.target.value)}>
-          <option value="featured">Featured</option>
-          <option value="reactjs">ReactJS</option>
-          <option value="nextjs">NextJS</option>
-          <option value="javascript">Javascript</option>
-          <option value="c#">C#</option>
-          <option value="game">Game Dev</option>
-          <option value="blockchain">Blockchain</option>
+          <option value='featured'>Featured</option>
+          <option value='reactjs'>ReactJS</option>
+          <option value='nextjs'>NextJS</option>
+          <option value='javascript'>Javascript</option>
+          <option value='c#'>C#</option>
+          <option value='game'>Game Dev</option>
+          <option value='blockchain'>Blockchain</option>
         </Select>
-        <div className="filter-select">
+        <div className='filter-select'>
           <SelectButton
             filter={filter}
             setFilter={setFilter}
@@ -43,24 +43,23 @@ export default function ProjectsList({ projects }) {
           <SelectButton filter={filter} setFilter={setFilter} name={"Game"} />
           <button filter={filter} setFilter={setFilter} name={"Blockchain"} />
         </div>
-        <div className="list">
+        <div className='list'>
           {projects.map((project) => {
             return (
               <CSSTransition
                 key={`${project.slug}-transition`}
                 in={project.tags.includes(filter)}
                 timeout={300}
-                classNames="project"
+                classNames='project'
                 unmountOnExit
-                exit={false}
-              >
+                exit={false}>
                 <ProjectCard project={project} />
               </CSSTransition>
             );
           })}
         </div>
         <div>
-          <Link href="/projects">See All Projects...</Link>
+          <Link href='/projects'>See All Projects...</Link>
         </div>
       </Section>
     </MaxWidthContainer>
@@ -97,7 +96,7 @@ const Section = styled.section`
     height: 600px;
     overflow: scroll;
     display: grid;
-    gap: 2rem;
-  overflow-x: hidden;
+    gap: 5rem;
+    overflow-x: hidden;
   }
 `;

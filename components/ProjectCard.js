@@ -33,7 +33,7 @@ export default function ProjectCard({ project }) {
           inverted
           target='_blank'
           rel='noreferrer'
-          href={project.demo || ""}>
+          href={project.demo || null}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='30'
@@ -82,6 +82,9 @@ const Container = styled.div`
     font-size: 1.5rem;
     font-weight: 600;
     padding: 0.5rem;
+    :hover {
+      cursor: pointer;
+    }
     @media (min-width: 900px) {
       justify-self: start;
     }

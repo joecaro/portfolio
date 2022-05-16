@@ -6,7 +6,7 @@ import { Section } from "../pages/about";
 const Technologies = () => {
   const { theme } = useTheme();
   return (
-    <Styles lightTheme={theme.foreground === themes.light.foreground}>
+    <Styles lightTheme={theme === "light"}>
       <h3>Technologies</h3>
       <div
         style={{

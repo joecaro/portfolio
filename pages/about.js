@@ -12,7 +12,7 @@ const about = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { theme } = useTheme();
   return (
-    <Main lightTheme={theme.foreground === themes.light.foreground}>
+    <Main lightTheme={theme === "light"}>
       <section className='max-width centered'>
         <ProfilePic />
         <AboutMe />
@@ -36,8 +36,6 @@ export const Section = styled.section`
   max-width: ${(props) => props.theme.maxWidth};
   margin: 8rem auto;
   padding: 0 1rem;
-
-
 `;
 
 const AboutHero = styled.section`

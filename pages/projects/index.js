@@ -13,26 +13,28 @@ export default function Projects(props) {
       <Head>
         <title>Joseph Carothers</title>
         <meta
-          name="description"
-          content="Web Development Portfolio for Joseph Carothers"
+          name='description'
+          content='Web Development Portfolio for Joseph Carothers'
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <main>
         <h1>Projects</h1>
 
-        <div >
+        <div style={{ display: "grid", gap: "5rem" }}>
           {props.projects.map((project, index) => {
             return (
-              <div key={project.slug}>
-                <ProjectInfo project={project} />
-                <ProjectCard project={project} theme={theme} width={400} />
-              </div>
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                theme={theme}
+                width={400}
+              />
             );
           })}
         </div>
-        <ButtonLink theme={theme} href="/contact">
+        <ButtonLink theme={theme} href='/contact'>
           Contact
         </ButtonLink>
       </main>
