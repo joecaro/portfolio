@@ -72,4 +72,8 @@ const Toggle = styled.button`
     border-radius: 0.25rem;
     transition: 0.2s;
   }
+
+  :hover {
+    cursor: pointer;
+  }
 `;

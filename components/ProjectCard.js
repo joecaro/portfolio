@@ -68,7 +68,6 @@ const Container = styled.div`
     "image links"
     "desciption desciption"
     "stack stack";
-  gap: 1rem;
   grid-template-rows: 100px 1fr 1fr 1fr;
   grid-template-columns: 2fr 3fr;
   place-items: center;
@@ -137,6 +136,7 @@ const Container = styled.div`
       "image desciption links"
       "image desciption links"
       "stack stack stack";
+    gap: 1rem;
   }
 `;
 
