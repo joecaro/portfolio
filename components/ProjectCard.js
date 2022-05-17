@@ -1,11 +1,18 @@
 import Link from "next/link";
+import Image from "next/image";
 import styled from "styled-components";
 import ButtonLink from "./ButtonLink";
 
 export default function ProjectCard({ project }) {
   return (
     <Container>
-      <ProjectImage></ProjectImage>
+      <ProjectImage>
+        <Image
+          src={project.image}
+          layout='fill'
+          objectFit='cover'
+          alt={`${project.name} - image`}></Image>
+      </ProjectImage>
       <Link
         target='_blank'
         rel='noreferrer'
@@ -148,6 +155,9 @@ const ProjectImage = styled.div`
   width: 100%;
   background-color: var(--gray400);
   border-radius: var(--radiusMd);
+  overflow: hidden;
+  position: relative;
+  border: 2px solid var(--gray300);
 
   grid-area: image;
 `;
