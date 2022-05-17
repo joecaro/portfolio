@@ -4,10 +4,15 @@ import styled from "styled-components";
 const Portrait = () => {
   return (
     <Container>
-      <EyeContainer>
-        <Eye />
-        <Eye className='eye-left' />
-      </EyeContainer>
+      <Head>
+        <Hair />
+        <EyeContainer>
+          <Eye />
+          <Eye className='eye-left' />
+        </EyeContainer>
+        <Nose />
+        <Mouth />
+      </Head>
     </Container>
   );
 };
@@ -17,7 +22,7 @@ const Eye = () => {
   const eyeRef = useRef(null);
 
   useEffect(() => {
-    window.addEventListener("mousemove", (e) => {
+    const rotateEye = (e) => {
       const eye = eyeRef.current;
 
       let mouseX = eye.getBoundingClientRect().right;
@@ -28,7 +33,10 @@ const Eye = () => {
       let radianDegrees = Math.atan2(e.pageX - mouseX, e.pageY - mouseY);
       let rotationDegrees = radianDegrees * (180 / Math.PI) * -1 + 180;
       eye.style.transform = `rotate(${rotationDegrees}deg)`;
-    });
+    };
+    window.addEventListener("mousemove", rotateEye);
+
+    return () => window.removeEventListener("mousemove", rotateEye);
   }, []);
 
   return (
@@ -45,6 +53,22 @@ const Container = styled.div`
   height: 100%;
   border-radius: 1rem;
   background-color: var(--gray500);
+  display: grid;
+  place-items: center;
+`;
+const Head = styled.div`
+  width: 60%;
+  background-color: var(--warning600);
+  border-radius: 2rem;
+  display: grid;
+  justify-items: center;
+`;
+
+const Hair = styled.div`
+  width: 100%;
+  height: 30px;
+  border-radius: 1rem 1rem 0 0;
+  background-color: var(--warning300);
 `;
 const EyeContainer = styled.div`
   width: 100%;
@@ -52,6 +76,7 @@ const EyeContainer = styled.div`
   display: flex;
   gap: 2rem;
   justify-content: center;
+  margin-top: 1rem;
 `;
 
 const EyeStyles = styled.div`
@@ -72,4 +97,19 @@ const EyeStyles = styled.div`
     background-color: var(--blue400);
     border-radius: 50%;
   }
+`;
+const Nose = styled.div`
+  height: 30px;
+  width: 10px;
+  background-color: var(--warning500);
+  margin-top: -25px;
+  border-radius: 0 0 20% 20%;
+`;
+
+const Mouth = styled.div`
+  width: 40%;
+  border-bottom: 2px solid var(--danger200);
+  border-radius: 1rem;
+  height: 0.5rem;
+  margin: 1rem;
 `;

@@ -139,7 +139,7 @@ const Container = styled.div`
       "image desciption links"
       "image desciption links"
       "stack stack stack";
-    gap: 1rem;
+    gap: 2.5rem;
   }
 `;
 
