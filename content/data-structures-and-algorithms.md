@@ -7,7 +7,7 @@
     stack: 
       - Javascript
     github: https://github.com/joecaro/Data-Structures-and-Algorithms
-    demo: https://github.com/joecaro/Data-Structures-and-Algorithms
+    demo: not available
     tags:
       - project 
       - javascript 

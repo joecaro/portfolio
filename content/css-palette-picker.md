@@ -6,10 +6,10 @@
     description:  A tool to create color palettes and their respective css variables.
     stack: 
       - ReactJS
-	  - HTML
-	  - CSS
-    github: https://github.com/joecaro/HTML-CSS-Patterns
-    demo: https://csslayoutexamples.netlify.app/
+      - HTML
+      - CSS
+    github: https://github.com/joecaro/color-palette-tool
+    demo: https://css-palette-picker.netlify.app/
     tags:
       - project
       - reactjs
@@ -18,8 +18,8 @@
       - react
       - html
       - css
-    image: https://res.cloudinary.com/joecarothers/image/upload/v1637734940/misc/Screenshot_2021-11-24_012200_emz6vf.png
-    position: 4
+    image: https://res.cloudinary.com/joecarothers/image/upload/v1652768704/misc/Projects/Screenshot_2022-05-17_022450_jmzjfa.jpg
+    position: 5
 ---
 
 **CSS Design Examples**
