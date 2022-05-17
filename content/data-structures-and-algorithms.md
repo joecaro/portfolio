@@ -14,7 +14,7 @@
     tech:
       - javascript
     image: https://res.cloudinary.com/joecarothers/image/upload/v1636867477/misc/Screenshot_2021-11-14_002430_b4v8vd.png
-    position: 7
+    position: 8
 ---
 
 **Algorithms and Data Structures**

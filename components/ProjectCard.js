@@ -2,10 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
 import ButtonLink from "./ButtonLink";
+import { useTheme } from "../lib/ThemeContext";
 
 export default function ProjectCard({ project }) {
+  const { theme } = useTheme();
   return (
-    <Container>
+    <Container theme={theme}>
       <ProjectImage>
         <Image
           src={project.image}
@@ -104,7 +106,7 @@ const Container = styled.div`
   .description {
     grid-area: desciption;
     @media (min-width: 900px) {
-      justify-self: start;
+      place-self: start;
     }
   }
 
@@ -127,8 +129,10 @@ const Container = styled.div`
     margin: 0;
     flex: 0;
 
-    color: var(--warning200);
-    background-color: var(--warning600);
+    color: ${(props) =>
+      props.theme === "light" ? "var(--warning200)" : "var(--warning700)"};
+    background-color: ${(props) =>
+      props.theme === "light" ? "var(--warning600)" : "var(--warning200)"};
     padding: 0.25rem;
     border-radius: var(--radiusSm);
   }

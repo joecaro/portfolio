@@ -98,5 +98,6 @@ const Section = styled.section`
     display: grid;
     gap: 5rem;
     overflow-x: hidden;
+    padding: 2rem;
   }
 `;

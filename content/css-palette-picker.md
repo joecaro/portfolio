@@ -1,25 +1,27 @@
 ---
-    slug: pathfinder
-    title: "Pathfinder App"
-    date:  Nov 11 2021 12:00 AM
+    slug: css-palette-picker
+    title: "CSS Palette Picker"
+    date:  May 17 2022 12:00 AM
     author: Joe
-    description:  Application visually demonstrating various pathfinding algorithms.
+    description:  A tool to create color palettes and their respective css variables.
     stack: 
       - ReactJS
-    github: https://github.com/joecaro/pathfinder-react-app
-    demo: https://pathfinder.josephcarothers.com/
+	  - HTML
+	  - CSS
+    github: https://github.com/joecaro/HTML-CSS-Patterns
+    demo: https://csslayoutexamples.netlify.app/
     tags:
       - project
       - reactjs
+      - css
     tech:
-      - javasacript
       - react
       - html
       - css
-    image: https://res.cloudinary.com/joecarothers/image/upload/v1636851616/misc/Screenshot_2021-11-13_195729_terxc8.png
-    position: 7
+    image: https://res.cloudinary.com/joecarothers/image/upload/v1637734940/misc/Screenshot_2021-11-24_012200_emz6vf.png
+    position: 4
 ---
 
-**Pathfinder**
+**CSS Design Examples**
 
 Fugiat pariatur eiusmod irure aute laborum aliquip. Cupidatat veniam deserunt culpa minim. Culpa est elit aliqua eu tempor ullamco minim sunt nostrud voluptate deserunt. Proident labore magna aliqua duis. Reprehenderit tempor velit elit labore ipsum sit aute incididunt tempor. Commodo eu veniam nulla in est tempor occaecat sint eiusmod exercitation nulla. Duis laborum exercitation officia consectetur ullamco et sunt aute quis reprehenderit incididunt consectetur labore qui.
