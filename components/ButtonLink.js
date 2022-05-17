@@ -91,11 +91,21 @@ const Container = styled.div`
     align-items: end;
   }
 
+  :hover {
+    .disabled {
+      ::after {
+        content: "Not Available";
+        position: absolute;
+        background-color: var(--gray300);
+      }
+    }
+  }
   .disabled {
     animation: ${noAnimation} 1s;
     pointer-events: none;
     background-color: var(--gray700);
     border-bottom: var(--gray700);
+    position: relative;
   }
 
   .label {

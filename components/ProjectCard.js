@@ -18,7 +18,7 @@ export default function ProjectCard({ project }) {
           color='purple'
           target='_blank'
           rel='noreferrer'
-          href={project.github || a}>
+          href={project.github === "not available" ? null : project.github}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='30'
@@ -33,7 +33,7 @@ export default function ProjectCard({ project }) {
           inverted
           target='_blank'
           rel='noreferrer'
-          href={project.demo || null}>
+          href={project.demo === "not available" ? null : project.demo}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='30'
