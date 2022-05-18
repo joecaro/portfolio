@@ -41,7 +41,11 @@ export default function ProjectsList({ projects }) {
           />
           <SelectButton filter={filter} setFilter={setFilter} name={"C#"} />
           <SelectButton filter={filter} setFilter={setFilter} name={"Game"} />
-          <button filter={filter} setFilter={setFilter} name={"Blockchain"} />
+          <SelectButton
+            filter={filter}
+            setFilter={setFilter}
+            name={"Blockchain"}
+          />
         </div>
         <div className='list'>
           {projects.map((project) => {
@@ -76,10 +80,18 @@ const Select = styled.select`
   option {
     font-size: 0.75rem;
   }
+
+  :hover {
+    cursor: pointer;
+  }
+
+  @media (min-width: 900px) {
+    display: none;
+  }
 `;
 
 const Section = styled.section`
-  padding: 0 var(--side-padding);
+  padding: 0 var(--side-padding) 5rem;
 
   h2 {
     font-size: 1.75rem;
@@ -87,13 +99,17 @@ const Section = styled.section`
 
   .filter-select {
     display: none;
+    @media (min-width: 900px) {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
   }
 
   .mobile-select {
   }
 
   .list {
-    height: 600px;
     overflow: scroll;
     display: grid;
     gap: 5rem;

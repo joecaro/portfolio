@@ -58,7 +58,7 @@ const LogoLink = styled.a`
   border-bottom: 3px solid ${(props) => `var(--${props.color}300)`};
   border: ${(props) =>
     props.inverted ? `3px solid var(--${props.color}400)` : ""};
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
   display: grid;
   place-items: center;
   transition: 0.2s ease;
@@ -77,7 +77,15 @@ const LogoLink = styled.a`
   :hover {
     animation: ${noAnimation} 1s;
     transform: translateY(-8px);
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 8px 8px rgba(0, 0, 0, 0.3);
+    transition: 0.2s ease;
+  }
+
+  :active {
+    animation: ${noAnimation} 1s;
+    transform: translateY(5px);
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.8);
+    transition: 0.2s ease;
   }
 `;
 

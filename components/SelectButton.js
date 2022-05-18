@@ -13,12 +13,32 @@ export default function SelectButton({ theme, filter, setFilter, name }) {
 }
 
 const Select = styled.button`
-
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  border: none;
+  border-bottom: 2px solid
+    ${(props) => (props.selected ? "var(--purple300)" : "var(--gray500)")};
+  border-right: 2px solid
+    ${(props) => (props.selected ? "var(--purple300)" : "var(--gray500)")};
+  background-color: ${(props) => (props.selected ? "var(--purple500)" : "")};
+  color: ${(props) => (props.selected ? "var(--gray1000)" : "")};
+  border-radius: var(--radiusSm);
+  transition: 200ms;
 
   :hover {
+    cursor: pointer;
+    color: white;
+    background-color: var(--purple800);
+    transform: translateY(-5px);
+  }
+
+  :active {
+    background-color: var(--purple600);
+    border-bottom: 2px solid var(--purple800);
+    border-right: 2px solid var(--purple800);
+    transform: translateY(0px);
   }
 
   ::after {
-
   }
 `;

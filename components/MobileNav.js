@@ -8,20 +8,25 @@ const MobileNav = () => {
   const [toggled, setToggled] = useState(false);
   const { theme } = useTheme();
   return (
-    <NavStyles toggled={toggled} theme={theme}>
-      <ul>
-        <ToggleNav onClick={() => setToggled(!toggled)}>X</ToggleNav>
-        <li onClick={() => setToggled(!toggled)}>
-          <Link href='about'>About</Link>
-        </li>
-        <li onClick={() => setToggled(!toggled)}>
-          <Link href='projects'>Projects</Link>
-        </li>
-        <li onClick={() => setToggled(!toggled)}>
-          <Link href='contact'>Contact</Link>
-        </li>
-        <ThemeToggle />
-      </ul>
+    <NavStyles>
+      <ToggledNav toggled={toggled} theme={theme}>
+        <ul>
+          <ToggleNav onClick={() => setToggled(!toggled)}>x</ToggleNav>
+          <li onClick={() => setToggled(!toggled)}>
+            <Link href='/'>Home</Link>
+          </li>
+          <li onClick={() => setToggled(!toggled)}>
+            <Link href='/about'>About</Link>
+          </li>
+          <li onClick={() => setToggled(!toggled)}>
+            <Link href='/projects'>Projects</Link>
+          </li>
+          <li onClick={() => setToggled(!toggled)}>
+            <Link href='/contact'>Contact</Link>
+          </li>
+          <ThemeToggle />
+        </ul>
+      </ToggledNav>
       <ToggleNav onClick={() => setToggled(!toggled)}>+</ToggleNav>
     </NavStyles>
   );
@@ -34,7 +39,7 @@ const ToggleNav = styled.button`
   background-color: transparent;
   border: none;
   width: fit-content;
-  align-self: flex-end;
+  justify-self: end;
 `;
 
 const NavStyles = styled.nav`
@@ -47,26 +52,28 @@ const NavStyles = styled.nav`
 
   button {
   }
+`;
+
+const ToggledNav = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: ${(props) =>
+    props.theme === "light" ? "var(--gray900)" : "var(--gray300)"};
+  display: ${(props) => (props.toggled ? "grid" : "none")};
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9;
 
   ul {
-    display: ${(props) => (props.toggled ? "flex" : "none")};
-    flex-direction: column;
-    justify-items: center;
+    height: 50vh;
+    display: grid;
+    grid-template-rows: 3.5rem 1fr 1fr 1fr 1fr;
 
     margin: 0;
-    padding: 1rem;
+    padding: 1rem 2rem;
 
     gap: 1rem;
     list-style-type: none;
-    z-index: 9;
-
-    background-color: ${(props) =>
-      props.theme === "light" ? "var(--gray900)" : "var(--gray300)"};
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
   }
 `;

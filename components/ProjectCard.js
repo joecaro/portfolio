@@ -3,6 +3,8 @@ import Image from "next/image";
 import styled from "styled-components";
 import ButtonLink from "./ButtonLink";
 import { useTheme } from "../lib/ThemeContext";
+import { keyframes } from "styled-components";
+import { css } from "styled-components";
 
 export default function ProjectCard({ project }) {
   const { theme } = useTheme();
@@ -70,6 +72,18 @@ export default function ProjectCard({ project }) {
   );
 }
 
+const enterKeyframes = keyframes`
+0% {opacity: 0}
+1% {transform: translateX(-50px)}
+99% {opacity: 1}
+100% {transform: translateX(0))}
+`;
+
+const enterAnimation = (props) =>
+  css`
+    ${enterKeyframes} .5s 1
+  `;
+
 const Container = styled.div`
   display: grid;
   grid-template-areas:
@@ -77,13 +91,18 @@ const Container = styled.div`
     "image links"
     "desciption desciption"
     "stack stack";
-  grid-template-rows: 100px 1fr 1fr 1fr;
+  grid-template-rows: 100px 125px 1fr 1fr;
   grid-template-columns: 2fr 3fr;
   place-items: center;
 
   border-radius: var(--radiusMd);
   border-bottom: 4px solid var(--gray700);
-  padding: 0.25rem;
+  border-right: 4px solid var(--gray700);
+  padding: 0.5rem;
+
+  background-color: ${(props) => (props.theme === "light" ? "#fff" : "#444")};
+
+  animation: ${enterAnimation};
 
   .title {
     align-self: start;
@@ -101,6 +120,10 @@ const Container = styled.div`
 
   .links {
     grid-area: links;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
 
   .description {
@@ -112,6 +135,7 @@ const Container = styled.div`
 
   .stack-container {
     grid-area: stack;
+    justify-self: start;
     display: grid;
     grid-template-columns: 5rem 1fr;
   }
@@ -146,10 +170,10 @@ const Container = styled.div`
     grid-template-rows: 50px 1fr 1fr 1fr;
     grid-template-columns: 2fr 3fr 2fr;
     grid-template-areas:
-      "image title blank"
+      "image title links"
       "image desciption links"
       "image desciption links"
-      "stack stack stack";
+      "image stack stack";
     gap: 2.5rem;
   }
 `;

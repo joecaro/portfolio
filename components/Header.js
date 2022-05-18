@@ -24,6 +24,7 @@ const HeaderStyles = styled.header`
   margin: auto;
   padding: 1rem;
   font-size: 1.2rem;
+  height: 5.5rem;
 
   span {
     margin: auto 0;

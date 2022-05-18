@@ -36,6 +36,14 @@ const convertToUriEncoded = (json) => {
 
 // component
 export default function Contact() {
+  return (
+    <main>
+      <Form />
+    </main>
+  );
+}
+
+export const Form = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [formDataValid, setFormDataValid] = useState(initialFormData);
   const [formSent, setFormSet] = useState(false);
@@ -100,14 +108,11 @@ export default function Contact() {
       });
     setFormData(initialFormData);
   };
-
   return (
-    <main
-     >
+    <Container>
+      <h2>Contact Me</h2>
       {!formSent && (
-        <FormStyles
-          
-          style={{ display: "grid" }}>
+        <FormStyles style={{ display: "grid" }}>
           <fieldset className={"set"}>
             <label>
               First Name
@@ -188,10 +193,15 @@ export default function Contact() {
           </button>
         </FormStyles>
       )}
-      {formSent && <h1>Thanks</h1>}
-    </main>
+      {formSent && <p>Thanks</p>}
+    </Container>
   );
-}
+};
+
+const Container = styled.div`
+  max-width: var(--maxWidth);
+  margin: auto;
+`;
 
 const FormStyles = styled.form`
   margin: auto;
