@@ -19,10 +19,20 @@ export default function Projects(props) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
+      <main
+        style={{
+          maxWidth: "1400px",
+          margin: "8rem auto",
+        }}>
         <h1>Projects</h1>
 
-        <div style={{ display: "grid", gap: "5rem" }}>
+        <div
+          style={{
+            display: "grid",
+            gap: "5rem",
+            maxWidth: "1400px",
+            margin: "auto",
+          }}>
           {props.projects.map((project, index) => {
             return (
               <ProjectCard
