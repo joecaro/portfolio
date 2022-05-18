@@ -129,6 +129,7 @@ const Container = styled.div`
   place-items: center;
   padding: 2rem var(--side-padding) 0;
   position: relative;
+  gap: 3rem;
 
   @media (min-width: 900px) {
     grid-template-columns: 1fr 1fr;
@@ -162,16 +163,23 @@ const Container = styled.div`
   }
 
   .links {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
     gap: 2rem;
+
+    direction: rtl;
+    @media (min-width: 900px) {
+      direction: ltr;
+    }
   }
 
   .link-list {
     z-index: 1;
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
     width: 100%;
-    place-items: center;
     gap: 2rem;
   }
 
