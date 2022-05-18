@@ -1,3 +1,4 @@
+import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
@@ -8,16 +9,23 @@ import ThemeToggle from "./ThemeToggle";
 
 const Nav = () => {
   const { theme } = useTheme();
+  const router = useRouter();
   return (
     <NavStyles>
       <ul>
-        <ListItem lightTheme={theme === "light"}>
+        <ListItem
+          current={router.pathname === "/"}
+          lightTheme={theme === "light"}>
           <Link href='/'>Home</Link>
         </ListItem>
-        <ListItem lightTheme={theme === "light"}>
+        <ListItem
+          current={router.pathname === "/about"}
+          lightTheme={theme === "light"}>
           <Link href='/about'>About</Link>
         </ListItem>
-        <ListItem lightTheme={theme === "light"}>
+        <ListItem
+          current={router.pathname === "/projects"}
+          lightTheme={theme === "light"}>
           <Link href='/projects'>Projects</Link>
         </ListItem>
         <ListItem lightTheme={theme === "light"}></ListItem>
@@ -73,7 +81,7 @@ const ListItem = styled.li`
     background-image: ${(props) =>
       props === "light" ? lightGradient : darkGradient};
     background-repeat: no-repeat;
-    background-size: 0% 100%;
+    background-size: ${(props) => (props.current ? "100% 100%" : "0% 100%")};
     background-position-x: right;
 
     transition: background-size 200ms;
