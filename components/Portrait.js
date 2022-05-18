@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import { useTheme } from "../lib/ThemeContext";
 const Portrait = () => {
+  const { theme } = useTheme();
+
   const noseRef = useRef(null);
   const [transformX, setTransformX] = useState(0);
   const [transformY, setTransformY] = useState(0);
@@ -55,13 +58,23 @@ const Portrait = () => {
           transformY / 10
         }px) rotate(${rotationDegrees}deg)`,
         transition: "200ms",
-      }}>
+      }}
+      theme={theme}>
       <svg height='100%' version='1.1' viewBox='1000 0 1500 1900' width='100%'>
         <g
           clipPath='url(#ArtboardFrame)'
           id='Layer-1'
           data-layer-name='Layer 1'></g>
         <g clipPath='url(#ArtboardFrame)' id='Chin' data-layer-name='Chin'>
+          <g className='portraitbackground'>
+            <path
+              d='M1716.97 1703.72C1585.01 1703.72 1508.2 1615.42 1439.07 1511.34C1369.93 1407.26 1359.93 1300.76 1346.4 1285.39C1322.98 1258.8 1302.23 1214.7 1286.26 1138.33C1270.28 1061.95 1267.12 1020.83 1280.1 981.899C1293.07 942.962 1324.02 973.912 1324.02 973.912C1324.02 973.912 1256.22 641.577 1281.46 513.764L1392.7 438.71C1483.49 248.816 1682.58 166.317 1682.58 166.317L1667.76 253.964C1755.42 221 1939.3 223.872 1939.3 223.872L1918.14 260.4C2000.03 269.41 2093.46 330.134 2093.46 330.134L2038.4 364.023C2123.39 387.827 2203.7 510.578 2203.7 510.578L2164.07 551.295C2164.07 551.295 2164.07 831.923 2123.39 974.683C2123.39 974.683 2166.29 949.111 2168.47 1008.22C2170.65 1067.32 2138.93 1153.71 2117.45 1224.97C2095.97 1296.24 2104.33 1235.04 2082.54 1293.29C2060.75 1351.54 2071.38 1377.03 2030.28 1457.97C1989.18 1538.91 1981.27 1550.77 1910.94 1618.64C1840.61 1686.52 1830.04 1703.72 1716.97 1703.72Z'
+              fill='currentColor'
+              opacity='1'
+              stroke='none'
+            />
+          </g>
+
           <g opacity='1'>
             <path
               d='M1368.22 1245C1366.14 1245.02 1364.48 1246.73 1364.5 1248.81C1364.53 1250.72 1364.86 1252.65 1365.16 1254.53C1365.6 1257.34 1366.17 1260.12 1366.75 1262.91C1368.37 1270.68 1370.27 1278.41 1372.28 1286.09C1378.3 1309.1 1385.24 1331.85 1392.38 1354.53C1398.04 1372.54 1403.77 1390.53 1410.66 1408.12C1422.2 1437.61 1436.55 1466.02 1454.19 1492.34C1467.49 1512.19 1482.62 1530.77 1499.03 1548.12C1515.49 1565.53 1533.19 1581.69 1551.22 1597.44C1566.99 1611.21 1582.97 1624.71 1598.72 1638.5C1603.24 1642.46 1607.78 1646.45 1612.25 1650.47C1614.58 1652.56 1616.8 1654.83 1619.28 1656.75C1621.31 1658.33 1623.53 1659.63 1625.84 1660.75C1630.7 1663.1 1635.92 1664.66 1641.16 1665.91C1647.97 1667.53 1654.91 1668.58 1661.88 1669.34C1672.85 1670.55 1683.9 1671.02 1694.94 1671.12C1703.28 1671.2 1711.67 1671.11 1720 1670.62C1722.19 1670.5 1723.85 1668.63 1723.72 1666.44C1723.59 1664.24 1721.73 1662.56 1719.53 1662.69C1712.94 1663.07 1706.32 1663.17 1699.72 1663.19C1689.24 1663.21 1678.76 1662.9 1668.31 1662C1661.07 1661.38 1653.84 1660.49 1646.72 1659.03C1641.74 1658.01 1636.75 1656.73 1632.03 1654.81C1629.48 1653.78 1626.99 1652.55 1624.75 1650.94C1622.16 1649.07 1619.9 1646.73 1617.53 1644.59C1614.37 1641.76 1611.18 1638.94 1608 1636.12C1596.1 1625.61 1584.02 1615.31 1571.97 1604.97C1542.72 1579.87 1513.67 1554.32 1488.59 1524.94C1476.96 1511.3 1466.21 1496.91 1456.5 1481.84C1444.96 1463.94 1434.9 1445.13 1426.22 1425.69C1420.71 1413.35 1415.77 1400.77 1411.28 1388.03C1407.99 1378.7 1404.97 1369.27 1401.97 1359.84C1396.52 1342.74 1391.22 1325.57 1386.25 1308.31C1382.48 1295.22 1378.87 1282.09 1375.78 1268.81C1374.74 1264.33 1373.74 1259.84 1372.94 1255.31C1372.67 1253.81 1372.44 1252.32 1372.25 1250.81C1372.19 1250.37 1372.13 1249.91 1372.09 1249.47C1372.08 1249.29 1372.07 1249.14 1372.06 1248.97C1372.06 1248.89 1372.03 1248.64 1372.03 1248.72C1372.01 1246.64 1370.3 1244.98 1368.22 1245Z'
@@ -286,35 +299,6 @@ const Portrait = () => {
   );
 };
 
-const Eye = () => {
-  const [rotation, setRotation] = useState(0);
-  const eyeRef = useRef(null);
-
-  useEffect(() => {
-    const moveEyes = (e) => {
-      const eye = eyeRef.current;
-
-      let mouseX = eye.getBoundingClientRect().right;
-      if (eye.classList.contains("eye-left")) {
-        mouseX = eye.getBoundingClientRect().left;
-      }
-      let mouseY = eye.getBoundingClientRect().top;
-      let radianDegrees = Math.atan2(e.pageX - mouseX, e.pageY - mouseY);
-      let rotationDegrees = radianDegrees * (180 / Math.PI) * -1 + 180;
-      eye.style.transform = `rotate(${rotationDegrees}deg)`;
-    };
-    window.addEventListener("mousemove", moveEyes);
-
-    return () => window.removeEventListener("mousemove", moveEyes);
-  }, []);
-
-  return (
-    <EyeStyles ref={eyeRef} rotation={rotation}>
-      <div></div>
-    </EyeStyles>
-  );
-};
-
 export default Portrait;
 
 const Container = styled.div`
@@ -323,69 +307,7 @@ const Container = styled.div`
   border-radius: 1rem;
   display: grid;
   place-items: center;
-  canvas {
-    border-radius: 1rem;
+  .portraitbackground {
+    color: ${(props) => (props.theme === "light" ? "#f5f5f5" : "#191919")};
   }
-`;
-
-const Head = styled.div`
-  width: 60%;
-  background-color: var(--warning600);
-  border-radius: 2rem;
-  display: grid;
-  justify-items: center;
-`;
-
-const Hair = styled.div`
-  width: 100%;
-  height: 30px;
-  border-radius: 1rem 1rem 0 0;
-  background-color: var(--warning300);
-`;
-const EyeContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  margin-top: 1rem;
-`;
-
-const EyeStyles = styled.div`
-  width: 40px;
-  height: 40px;
-  position: relative;
-  background: white;
-  border-radius: 50%;
-
-  ::after {
-    content: "";
-    height: 20px;
-    width: 20px;
-    position: absolute;
-    left: 50%;
-    top: 5px;
-    transform: translateX(-50%);
-    background-color: var(--blue400);
-    border-radius: 50%;
-  }
-`;
-const Nose = styled.div`
-  height: 30px;
-  width: 10px;
-  background-color: var(--warning500);
-  margin-top: -25px;
-  border-radius: 0 0 20% 20%;
-`;
-
-const Mouth = styled.div`
-  width: 40%;
-  border-bottom: 2px solid var(--danger200);
-  border-radius: 1rem;
-  height: 0.5rem;
-  margin: 1rem;
-`;
-
-const Shoulders = styled.div`
-  width: 80%;
 `;

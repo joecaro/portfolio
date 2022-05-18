@@ -1,12 +1,61 @@
 import styled from "styled-components";
+import { useTheme } from "../lib/ThemeContext";
 import ButtonLink from "./ButtonLink";
 import Portrait from "./Portrait";
 import MaxWidthContainer from "./styles/MaxWidthContainer";
 
 const Hero = () => {
+  const { theme } = useTheme();
   return (
     <MaxWidthContainer>
-      <Container>
+      <Container theme={theme}>
+        <svg
+          className='background'
+          width='508'
+          height='952'
+          viewBox='0 0 508 952'
+          fill='none'>
+          <line
+            x1='1.65817'
+            y1='345.882'
+            x2='409.658'
+            y2='950.882'
+            stroke='currentColor'
+            strokeWidth='4'
+          />
+          <line
+            x1='25.6582'
+            y1='259.882'
+            x2='433.658'
+            y2='864.882'
+            stroke='currentColor'
+            strokeWidth='4'
+          />
+          <line
+            x1='49.6582'
+            y1='173.882'
+            x2='457.658'
+            y2='778.882'
+            stroke='currentColor'
+            strokeWidth='4'
+          />
+          <line
+            x1='73.6582'
+            y1='87.8818'
+            x2='481.658'
+            y2='692.882'
+            stroke='currentColor'
+            strokeWidth='4'
+          />
+          <line
+            x1='97.6582'
+            y1='1.88176'
+            x2='505.658'
+            y2='606.882'
+            stroke='currentColor'
+            strokeWidth='4'
+          />
+        </svg>
         <div className='hero-text'>
           <p className='flavor-text'>Web Developer</p>
           <h1>Bring your designs to life</h1>
@@ -93,6 +142,7 @@ const Container = styled.div`
   display: grid;
   place-items: center;
   padding: 2rem var(--side-padding) 0;
+  position: relative;
 
   @media (min-width: 900px) {
     grid-template-columns: 1fr 1fr;
@@ -104,6 +154,7 @@ const Container = styled.div`
     margin: 0 0 1rem;
   }
   .hero-text {
+    z-index: 1;
     @media (min-width: 900px) {
       padding: 0 2rem;
     }
@@ -131,6 +182,7 @@ const Container = styled.div`
   }
 
   .link-list {
+    z-index: 1;
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 1fr;
@@ -140,5 +192,12 @@ const Container = styled.div`
     @media (min-width: 900px) {
       grid-template-columns: 1fr;
     }
+  }
+
+  .background {
+    position: absolute;
+    color: ${(props) =>
+      props.theme === "light" ? "var(--blue700)" : "var(--gray500)"};
+    z-index: 0;
   }
 `;
