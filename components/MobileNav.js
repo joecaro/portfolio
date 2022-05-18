@@ -51,6 +51,7 @@ const NavStyles = styled.nav`
   }
 
   button {
+    cursor: pointer;
   }
 `;
 

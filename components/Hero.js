@@ -199,5 +199,6 @@ const Container = styled.div`
     color: ${(props) =>
       props.theme === "light" ? "var(--blue700)" : "var(--gray500)"};
     z-index: 0;
+    pointer-events: none;
   }
 `;

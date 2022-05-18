@@ -33,5 +33,6 @@ const HeaderStyles = styled.header`
       text-decoration: underline;
       cursor: pointer;
     }
+    z-index: 9;
   }
 `;
