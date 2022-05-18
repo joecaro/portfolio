@@ -58,10 +58,10 @@ const Hero = () => {
         </svg>
         <div className='hero-text'>
           <p className='flavor-text'>Web Developer</p>
-          <h1>Bring your designs to life</h1>
+          <h1>Hi, {"I'm"} Joe</h1>
           <h2>
-            Fullstack React developer specializing in NextJS and NodeJS
-            Applicationss
+            I am Frontend React developer specializing in NextJS and NodeJS
+            Applications
           </h2>
           <ButtonLink
             color={"warning"}
