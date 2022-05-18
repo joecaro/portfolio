@@ -3,7 +3,7 @@ import AboutMe from "../components/AboutMe";
 import Art from "../components/Art";
 import SurfGame from "../components/SurfGame";
 import ProfilePic from "../components/ProfilePic";
-import { themes, useTheme } from "../lib/ThemeContext";
+import { useTheme } from "../lib/ThemeContext";
 import Main from "../components/styles/Main";
 import styled from "styled-components";
 import { Form } from "./contact";
@@ -13,7 +13,7 @@ const about = () => {
   const { theme } = useTheme();
   return (
     <Main theme={theme}>
-      <Section>
+      <Section theme={theme}>
         <ProfilePic />
         <AboutMe />
       </Section>
@@ -123,7 +123,8 @@ export const Section = styled.section`
   display: grid;
   justify-items: center;
 
-  background-color: var(--blue600);
+  background-color: ${(props) =>
+    props.theme === "light" ? "var(--blue600)" : "var(--blue100)"};
 
   @media (min-width: 1300px) {
     grid-template-columns: 1fr 3fr;
@@ -200,8 +201,10 @@ const AboutHero = styled.section`
   svg {
     padding: 1rem;
     border-radius: var(--radiusMd);
-    background-color: var(--blue300);
+    background-color: var(--blue400);
     color: white;
+    border-bottom: 3px solid var(--gray500);
+    border-right: 3px solid var(--gray500);
   }
 
   h4 {

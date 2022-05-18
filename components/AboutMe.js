@@ -1,10 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { themes, useTheme } from "../lib/ThemeContext";
 
 export default function AboutMe() {
-  const { theme } = useTheme();
-
   return (
     <section>
       <div>

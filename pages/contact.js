@@ -3,6 +3,8 @@ import axios from "axios";
 import styled from "styled-components";
 import { useTheme, themes } from "../lib/ThemeContext";
 import Fade from "react-reveal/Fade";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const portalId = "21057690";
 const formId = "50c65d39-5e63-47b5-aeef-f84037ec61f2";
@@ -23,6 +25,13 @@ const initialFormData = {
   email: "",
   company: "",
   message: "",
+};
+const initialFormDataValid = {
+  firstname: null,
+  lastname: null,
+  email: null,
+  company: null,
+  message: null,
 };
 
 const convertToUriEncoded = (json) => {
@@ -45,14 +54,13 @@ export default function Contact() {
 
 export const Form = () => {
   const [formData, setFormData] = useState(initialFormData);
-  const [formDataValid, setFormDataValid] = useState(initialFormData);
-  const [formSent, setFormSet] = useState(false);
+  const [formDataValid, setFormDataValid] = useState(initialFormDataValid);
   const [formValid, setFormValid] = useState(false);
 
   const { theme } = useTheme();
 
   const portalId = "21057690";
-  const formId = "50c65d39-5e63-47b5-aeef-f84037ec61f2";
+  const formId = "c532a7e0-7e9c-41cd-9dcc-c6da3846b998";
 
   const handleDataChange = (e) => {
     checkIfFieldIsValid(e);
@@ -101,99 +109,132 @@ export const Form = () => {
     console.log(encodedData);
     ax.post(`/${portalId}/${formId}`, JSON.stringify(data))
       .then((res) => {
-        console.log(res);
+        if (res.status === 200) {
+          console.log(res);
+          toast.success("Thanks! I'll get back to you soon.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setFormData(initialFormData);
+        }
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
+        if (err.response.data.errors[0].errorType === "INVALID_EMAIL") {
+          setFormDataValid({ ...formDataValid, email: false });
+        }
+        toast.error(`oops! Error: ${err.response.data.errors[0].message}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
-    setFormData(initialFormData);
   };
   return (
     <Container>
       <h2>Contact Me</h2>
-      {!formSent && (
-        <FormStyles id='contact' style={{ display: "grid" }}>
-          <fieldset className={"set"}>
-            <label>
-              First Name
-              <input
-                className={formDataValid.firstname === false ? "invalid" : ""}
-                required
-                onBlur={checkIfFieldIsValid}
-                onChange={handleDataChange}
-                value={formData.firstname}
-                name='firstname'
-                type='text'></input>
-              <Fade bottom when={formDataValid.firstname === false}>
-                <p>Please fill in First Name field</p>
-              </Fade>
-            </label>
-            <label>
-              Last Name
-              <input
-                className={formDataValid.lastname === false ? "invalid" : ""}
-                required
-                onBlur={checkIfFieldIsValid}
-                onChange={handleDataChange}
-                value={formData.lastname}
-                name='lastname'
-                type='text'></input>
-              <Fade bottom when={formDataValid.lastname === false}>
-                <p>Please fill in Last Name field</p>
-              </Fade>
-            </label>
-          </fieldset>
-          <fieldset className={"set"}>
-            <label>
-              Company
-              <input
-                className={formDataValid.company === false ? "invalid" : ""}
-                required
-                onBlur={checkIfFieldIsValid}
-                onChange={handleDataChange}
-                value={formData.company}
-                name='company'
-                type='text'></input>
-              <Fade bottom when={formDataValid.company === false}>
-                <p>Please fill in Company field</p>
-              </Fade>
-            </label>
-            <label>
-              Email
-              <input
-                className={formDataValid.email === false ? "invalid" : ""}
-                required
-                onBlur={checkIfFieldIsValid}
-                onChange={handleDataChange}
-                value={formData.email}
-                name='email'
-                type='email'></input>
-              <Fade bottom when={formDataValid.email === false}>
-                <p>Please enter a valid email</p>
-              </Fade>
-            </label>{" "}
-          </fieldset>
-          <fieldset className={"set"}>
-            <label>
-              Message
-              <textarea
-                className={formDataValid.message === false ? "invalid" : ""}
-                required
-                onBlur={checkIfFieldIsValid}
-                onChange={handleDataChange}
-                value={formData.message}
-                cols='46'
-                rows='5'
-                name='message'
-                type='text'></textarea>
-            </label>
-          </fieldset>
-          <button disabled={!formValid} onClick={handleSubmit} type='submit'>
-            Submit
-          </button>
-        </FormStyles>
-      )}
-      {formSent && <p>Thanks</p>}
+      <FormStyles id='contact' style={{ display: "grid" }}>
+        <fieldset className={"set"}>
+          <label>
+            First Name
+            <input
+              className={formDataValid.firstname === false ? "invalid" : ""}
+              required
+              onBlur={checkIfFieldIsValid}
+              onChange={handleDataChange}
+              value={formData.firstname}
+              name='firstname'
+              type='text'></input>
+            <Fade bottom when={formDataValid.firstname === false}>
+              <p>Please fill in First Name field</p>
+            </Fade>
+          </label>
+          <label>
+            Last Name
+            <input
+              className={formDataValid.lastname === false ? "invalid" : ""}
+              required
+              onBlur={checkIfFieldIsValid}
+              onChange={handleDataChange}
+              value={formData.lastname}
+              name='lastname'
+              type='text'></input>
+            <Fade bottom when={formDataValid.lastname === false}>
+              <p>Please fill in Last Name field</p>
+            </Fade>
+          </label>
+        </fieldset>
+        <fieldset className={"set"}>
+          <label>
+            Company
+            <input
+              className={formDataValid.company === false ? "invalid" : ""}
+              required
+              onBlur={checkIfFieldIsValid}
+              onChange={handleDataChange}
+              value={formData.company}
+              name='company'
+              type='text'></input>
+            <Fade bottom when={formDataValid.company === false}>
+              <p>Please fill in Company field</p>
+            </Fade>
+          </label>
+          <label>
+            Email
+            <input
+              className={formDataValid.email === false ? "invalid" : ""}
+              required
+              onBlur={checkIfFieldIsValid}
+              onChange={handleDataChange}
+              value={formData.email}
+              name='email'
+              type='email'></input>
+            <Fade bottom when={formDataValid.email === false}>
+              <p>Please enter a valid email</p>
+            </Fade>
+          </label>{" "}
+        </fieldset>
+        <fieldset className={"set"}>
+          <label>
+            Message
+            <textarea
+              className={formDataValid.message === false ? "invalid" : ""}
+              required
+              onBlur={checkIfFieldIsValid}
+              onChange={handleDataChange}
+              value={formData.message}
+              cols='46'
+              rows='5'
+              name='message'
+              type='text'></textarea>
+          </label>
+        </fieldset>
+        <button disabled={!formValid} onClick={handleSubmit} type='submit'>
+          Submit
+        </button>
+      </FormStyles>
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      {/* Same as */}
+      <ToastContainer />
     </Container>
   );
 };
