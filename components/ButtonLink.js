@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import { css } from "styled-components";
 import { keyframes } from "styled-components";
+import { useTheme } from "../lib/ThemeContext";
 
 const ButtonLink = ({ children, color, href, label, inverted, animated }) => {
+  const { theme } = useTheme();
   return (
     <Container>
       <LogoLink
         passHref
+        theme={theme}
         className={!href && "disabled"}
         color={color || "gray"}
         inverted={inverted}
@@ -54,7 +57,11 @@ const noAnimation = keyframes`
 
 export const LogoLink = styled.a`
   background-color: ${(props) =>
-    props.inverted ? "#ffffff" : `var(--${props.color}400)`};
+    !props.inverted
+      ? `var(--${props.color}400)`
+      : props.theme === "light"
+      ? "#ffffff"
+      : `var(--gray200)`};
   border-bottom: 3px solid ${(props) => `var(--${props.color}300)`};
   border: ${(props) =>
     props.inverted ? `3px solid var(--${props.color}400)` : ""};
@@ -72,7 +79,9 @@ export const LogoLink = styled.a`
   width: 6rem;
   border-radius: var(--radiusSm);
 
-  color: ${(props) => (props.inverted ? `var(--${props.color}400)` : "#fff")};
+  color: ${(props) =>
+    !props.inverted ? "#ffffff" : `var(--${props.color}400)`};
+  border-bottom: 3px solid ${(props) => `var(--${props.color}300)`};
 
   :hover {
     animation: ${noAnimation} 1s;
