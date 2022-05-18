@@ -22,4 +22,4 @@
 
 **CSS Design Examples**
 
-Fugiat pariatur eiusmod irure aute laborum aliquip. Cupidatat veniam deserunt culpa minim. Culpa est elit aliqua eu tempor ullamco minim sunt nostrud voluptate deserunt. Proident labore magna aliqua duis. Reprehenderit tempor velit elit labore ipsum sit aute incididunt tempor. Commodo eu veniam nulla in est tempor occaecat sint eiusmod exercitation nulla. Duis laborum exercitation officia consectetur ullamco et sunt aute quis reprehenderit incididunt consectetur labore qui.
+When learning CSS it is easy to get into a loop of searching the same snippet over and over again. I created this site to store some useful CSS examples as I learned them. Things from simple layouts, flex & grid examples and some specialty CSS designs.

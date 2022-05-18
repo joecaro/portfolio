@@ -22,6 +22,6 @@
     position: 5
 ---
 
-**CSS Design Examples**
+**CSS Color Palette Picker**
 
-Fugiat pariatur eiusmod irure aute laborum aliquip. Cupidatat veniam deserunt culpa minim. Culpa est elit aliqua eu tempor ullamco minim sunt nostrud voluptate deserunt. Proident labore magna aliqua duis. Reprehenderit tempor velit elit labore ipsum sit aute incididunt tempor. Commodo eu veniam nulla in est tempor occaecat sint eiusmod exercitation nulla. Duis laborum exercitation officia consectetur ullamco et sunt aute quis reprehenderit incididunt consectetur labore qui.
+I've come to appreciate the color principals in the Tailwind css library. Having an extensive palette of colors that span the brightness values of each hue you are using helps create a more polished design by allowing effective hierarchy design. This site allows you to create color palettes by hue, set the maximum and minimum lightness values, and copy the CSS variables for each color.

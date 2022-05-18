@@ -22,4 +22,16 @@
 
 **Unity Boid Simulation**
 
-Fugiat pariatur eiusmod irure aute laborum aliquip. Cupidatat veniam deserunt culpa minim. Culpa est elit aliqua eu tempor ullamco minim sunt nostrud voluptate deserunt. Proident labore magna aliqua duis. Reprehenderit tempor velit elit labore ipsum sit aute incididunt tempor. Commodo eu veniam nulla in est tempor occaecat sint eiusmod exercitation nulla. Duis laborum exercitation officia consectetur ullamco et sunt aute quis reprehenderit incididunt consectetur labore qui.
+I've always loved to explore the complex simulations people create in the Unity engine. This was my first dive into creating my own simulation. This takes the basic concept of flocking and implements a standard boid simulation.
+
+### Flocking Behaviors
+
+- Separation
+  Avoid crowding neighbours (short range repulsion)
+- Alignment
+  Steer towards average heading of neighbours
+- Cohesion
+  Steer towards average position of neighbours (long range attraction)
+  With these three simple rules, the flock moves in an extremely realistic way, creating complex motion and interaction that would be extremely hard to create otherwise.
+
+These flocking behaviours drive the "decisions" of each flock agent, or boid. I included weight variables to tune each behavior to alter the behavior of the flock. This simulation also includes a rudimentary predator which steers another avoidance protocol.

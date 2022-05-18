@@ -22,4 +22,11 @@
 
 **Pathfinder**
 
-Fugiat pariatur eiusmod irure aute laborum aliquip. Cupidatat veniam deserunt culpa minim. Culpa est elit aliqua eu tempor ullamco minim sunt nostrud voluptate deserunt. Proident labore magna aliqua duis. Reprehenderit tempor velit elit labore ipsum sit aute incididunt tempor. Commodo eu veniam nulla in est tempor occaecat sint eiusmod exercitation nulla. Duis laborum exercitation officia consectetur ullamco et sunt aute quis reprehenderit incididunt consectetur labore qui.
+This app demonstrates the A\* pathfinding algorithm to find the shortest path from the start to end node. You can click and drag to create walls that the algoritm must work around.
+
+### Concept of A-star algorithm
+
+The A-star algorithm calculates the cost to all its neighboring nodes and chooses the minimum cost node. This process is repeated until no new nodes can be selected and all the paths are traversed. Then, we consider the best path. Let f(n) represents the final cost, which is denoted as: f(n) = g(n) + h(n), where:
+
+- g(n) = cost of traversing from one node to another.
+- h(n) = heuristic approximation of the node’s value.
