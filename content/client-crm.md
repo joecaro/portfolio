@@ -24,7 +24,7 @@
       - mongo
       - node
       - express
-    image: https://res.cloudinary.com/joecarothers/image/upload/v1652902017/misc/Projects/CRM-Mockup_zul9pq.png
+    image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/CRM-Mockup_zul9pq_wedgib.png
     position: 2
 ---
 

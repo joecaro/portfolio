@@ -16,7 +16,7 @@
       - blockchain
     tech:
       - blockchain
-    image: https://res.cloudinary.com/joecarothers/image/upload/v1652902166/misc/Projects/blockchain-mockup_qosdpg.png
+    image: https://res.cloudinary.com/joecarothers/image/upload/v1652918002/misc/Projects/blockchain-mockup_qosdpg_fl4uwz.png
     position: 6
 ---
 

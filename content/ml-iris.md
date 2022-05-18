@@ -13,7 +13,7 @@
       - machine learning
     tech:
       - python
-    image: https://res.cloudinary.com/joecarothers/image/upload/v1652895052/misc/Projects/ML-Iris-mockup_qbca8e.png
+    image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/ML-Iris-mockup_qbca8e_f5oi2j.png
     position: 12
 ---
 

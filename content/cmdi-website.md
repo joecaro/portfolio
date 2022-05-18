@@ -20,7 +20,7 @@
       - next
       - html
       - css
-    image: https://res.cloudinary.com/joecarothers/image/upload/v1652902017/misc/Projects/cmdi-mockup_ojtz71.png
+    image: https://res.cloudinary.com/joecarothers/image/upload/v1652918002/misc/Projects/cmdi-mockup_ojtz71_mwpwg8.png
     position: 1
 ---
 
