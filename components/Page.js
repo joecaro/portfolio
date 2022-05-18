@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import { useEffect } from "react";
 import { useTheme } from "../lib/ThemeContext";
+import Head from "next/head";
 
 const Page = ({ children }) => {
   const { theme } = useTheme();
@@ -10,10 +11,13 @@ const Page = ({ children }) => {
   }, [theme]);
 
   return (
-    <div style={{ minHeight: "100vw" }} data-theme={theme}>
-      <Header />
-      {children}
-    </div>
+    <>
+      <Head></Head>
+      <div style={{ minHeight: "100vw" }} data-theme={theme}>
+        <Header />
+        {children}
+      </div>
+    </>
   );
 };
 

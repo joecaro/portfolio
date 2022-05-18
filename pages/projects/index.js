@@ -16,7 +16,6 @@ export default function Projects(props) {
           name='description'
           content='Web Development Portfolio for Joseph Carothers'
         />
-        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <main

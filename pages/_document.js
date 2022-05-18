@@ -23,7 +23,7 @@ class MyDocument extends Document {
       <Html lang='en'>
         <Head>
           {this.props.styleTags}
-          <link rel='icon' href='/img/favicon-modified.png' />
+          <link rel='icon' href='/favicon.png' />
         </Head>
         <body>
           <Main />
