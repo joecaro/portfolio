@@ -3,7 +3,7 @@ import { css } from "styled-components";
 import { keyframes } from "styled-components";
 import { useTheme } from "../lib/ThemeContext";
 
-const ButtonLink = ({ children, color, href, label, inverted, animated }) => {
+const ButtonLink = ({ children, color, href, inverted }) => {
   const { theme } = useTheme();
   return (
     <Container>
@@ -13,7 +13,6 @@ const ButtonLink = ({ children, color, href, label, inverted, animated }) => {
         className={!href && "disabled"}
         color={color || "gray"}
         inverted={inverted}
-        animated={animated}
         href={href}
         target='_blank'
         rel='noopener noreferrer'>
@@ -25,31 +24,6 @@ const ButtonLink = ({ children, color, href, label, inverted, animated }) => {
 
 export default ButtonLink;
 
-const bounce = keyframes`
-0% {
-  transform: translateY(0);
-}
-5% {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
-}
-10%{
-  transform: translateY(0);
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
-}
-15% {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
-}
-20% {
-  transform: translateY(0);
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
-}
-100% {
-  transform: translateY(0);
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
-}
-`;
 const noAnimation = keyframes`
 0% {
 }
@@ -69,11 +43,6 @@ export const LogoLink = styled.a`
   display: grid;
   place-items: center;
   transition: 0.2s ease;
-  animation: ${(props) =>
-    props.animated &&
-    css`
-      ${bounce} 5s ease-in-out 3s 1
-    `};
 
   height: 3rem;
   width: 6rem;

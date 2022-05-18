@@ -174,7 +174,7 @@ const Container = styled.div`
     direction: rtl;
     @media (min-width: 900px) {
       direction: ltr;
-      width: 50%;
+      width: 70%;
     }
   }
 
@@ -194,5 +194,6 @@ const Container = styled.div`
       props.theme === "light" ? "var(--blue700)" : "var(--gray500)"};
     z-index: 0;
     pointer-events: none;
+    left: 40%;
   }
 `;
