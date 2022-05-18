@@ -112,7 +112,7 @@ export const Form = () => {
     <Container>
       <h2>Contact Me</h2>
       {!formSent && (
-        <FormStyles style={{ display: "grid" }}>
+        <FormStyles id='contact' style={{ display: "grid" }}>
           <fieldset className={"set"}>
             <label>
               First Name

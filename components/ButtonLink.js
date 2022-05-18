@@ -52,7 +52,7 @@ const noAnimation = keyframes`
 }
 `;
 
-const LogoLink = styled.a`
+export const LogoLink = styled.a`
   background-color: ${(props) =>
     props.inverted ? "#ffffff" : `var(--${props.color}400)`};
   border-bottom: 3px solid ${(props) => `var(--${props.color}300)`};

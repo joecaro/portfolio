@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { css } from "styled-components";
 import { useTheme } from "../lib/ThemeContext";
-import ButtonLink from "./ButtonLink";
+import ButtonLink, { LogoLink } from "./ButtonLink";
 import ThemeToggle from "./ThemeToggle";
 
 const Nav = () => {
@@ -20,12 +20,12 @@ const Nav = () => {
         <ListItem lightTheme={theme === "light"}>
           <Link href='/projects'>Projects</Link>
         </ListItem>
-        <ListItem lightTheme={theme === "light"}>
-          <ButtonLink href='/contact' animated={false} color='purple'>
-            Contact
-          </ButtonLink>
-        </ListItem>
+        <ListItem lightTheme={theme === "light"}></ListItem>
       </ul>
+      <LogoLink color={"blue"} inverted={false} animated={true} href='#contact'>
+        Contact
+      </LogoLink>
+
       <ThemeToggle />
     </NavStyles>
   );
