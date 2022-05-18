@@ -125,14 +125,17 @@ export default Hero;
 
 const Container = styled.div`
   min-height: 80vh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 2rem var(--side-padding) 0;
   position: relative;
   gap: 3rem;
 
   @media (min-width: 900px) {
     grid-template-columns: 1fr 1fr;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   h1 {
@@ -166,10 +169,12 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 2rem;
+    width: 100%;
 
     direction: rtl;
     @media (min-width: 900px) {
       direction: ltr;
+      width: 50%;
     }
   }
 

@@ -85,7 +85,7 @@ export const LogoLink = styled.a`
 
   :hover {
     animation: ${noAnimation} 1s;
-    transform: translateY(-8px);
+    transform: translateY(-4px);
     box-shadow: 3px 8px 8px rgba(0, 0, 0, 0.3);
     transition: 0.2s ease;
   }

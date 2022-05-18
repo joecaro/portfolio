@@ -96,7 +96,7 @@ const Select = styled.select`
 `;
 
 const Section = styled.section`
-  padding: 0 var(--side-padding) 5rem;
+  padding: 0 3rem 5rem;
 
   h2 {
     font-size: 1.75rem;
@@ -106,6 +106,7 @@ const Section = styled.section`
     display: none;
     @media (min-width: 900px) {
       display: flex;
+      justify-content: space-between;
       gap: 2rem;
     }
   }
@@ -118,8 +119,6 @@ const Section = styled.section`
     gap: 5rem;
     overflow-x: hidden;
 
-    @media (min-width: 450px) {
-      padding: 2rem;
-    }
+    padding: 2rem 0;
   }
 `;
