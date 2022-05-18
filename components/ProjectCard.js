@@ -14,7 +14,7 @@ export default function ProjectCard({ project }) {
         <Image
           src={project.image}
           layout='fill'
-          objectFit='cover'
+          objectFit='contain'
           alt={`${project.name} - image`}></Image>
       </ProjectImage>
       <Link
@@ -181,11 +181,8 @@ const Container = styled.div`
 const ProjectImage = styled.div`
   height: 100%;
   width: 100%;
-  background-color: var(--gray400);
-  border-radius: var(--radiusMd);
   overflow: hidden;
   position: relative;
-  border: 2px solid var(--gray300);
 
   grid-area: image;
 `;

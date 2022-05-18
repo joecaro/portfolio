@@ -16,7 +16,7 @@
       - react
       - html
       - css
-    image: https://res.cloudinary.com/joecarothers/image/upload/v1636851616/misc/Screenshot_2021-11-13_195729_terxc8.png
+    image: https://res.cloudinary.com/joecarothers/image/upload/v1652902440/misc/Projects/pathfinder-mockup_wnkcxi.png
     position: 7
 ---
 

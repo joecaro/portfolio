@@ -18,7 +18,7 @@
       - react
       - html
       - css
-    image: https://res.cloudinary.com/joecarothers/image/upload/v1652768704/misc/Projects/Screenshot_2022-05-17_022450_jmzjfa.jpg
+    image: https://res.cloudinary.com/joecarothers/image/upload/v1652902016/misc/Projects/palette-mockup_u5fu30.png
     position: 5
 ---
 

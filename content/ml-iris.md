@@ -5,16 +5,15 @@
     author: Joe
     description:  A neural network created in python using the Keras library to learn the common Iris set.
     stack: 
-      - Pythone
+      - Python
     github: https://github.com/joecaro/HTML-CSS-Patterns
     demo: https://csslayoutexamples.netlify.app/
     tags:
       - project
-      - reactjs
-      - css
+      - machine learning
     tech:
       - python
-    image: 
+    image: https://res.cloudinary.com/joecarothers/image/upload/v1652895052/misc/Projects/ML-Iris-mockup_qbca8e.png
     position: 12
 ---
 

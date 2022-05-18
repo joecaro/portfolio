@@ -46,6 +46,11 @@ export default function ProjectsList({ projects }) {
             setFilter={setFilter}
             name={"Blockchain"}
           />
+          <SelectButton
+            filter={filter}
+            setFilter={setFilter}
+            name={"Machine Learning"}
+          />
         </div>
         <div className='list'>
           {projects.map((project) => {

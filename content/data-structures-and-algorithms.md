@@ -13,7 +13,7 @@
       - javascript 
     tech:
       - javascript
-    image: https://res.cloudinary.com/joecarothers/image/upload/v1636867477/misc/Screenshot_2021-11-14_002430_b4v8vd.png
+    image: https://res.cloudinary.com/joecarothers/image/upload/v1652902529/misc/Projects/Untitled-mockup_11_p22bnw.png
     position: 8
 ---
 

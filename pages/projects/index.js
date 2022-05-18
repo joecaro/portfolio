@@ -9,7 +9,7 @@ export default function Projects(props) {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div>
+    <>
       <Head>
         <title>Joseph Carothers</title>
         <meta
@@ -30,8 +30,7 @@ export default function Projects(props) {
           style={{
             display: "grid",
             gap: "5rem",
-            maxWidth: "1400px",
-            margin: "auto",
+            height: "100%",
           }}>
           {props.projects.map((project, index) => {
             return (
@@ -44,11 +43,8 @@ export default function Projects(props) {
             );
           })}
         </div>
-        <ButtonLink theme={theme} href='/contact'>
-          Contact
-        </ButtonLink>
       </main>
-    </div>
+    </>
   );
 }
 
