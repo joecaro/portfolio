@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { css } from "styled-components";
+import { keyframes } from "styled-components";
 import { useTheme } from "../lib/ThemeContext";
 import ButtonLink from "./ButtonLink";
 import Portrait from "./Portrait";
@@ -57,12 +59,18 @@ const Hero = () => {
           />
         </svg>
         <div className='hero-text'>
-          <p className='flavor-text'>Web Developer</p>
-          <h1>Hi, {"I'm"} Joe</h1>
-          <h2>
-            I am Frontend React developer specializing in NextJS and NodeJS
-            Applications
-          </h2>
+          <SlideEnter duration='2500ms'>
+            <p className='flavor-text'>Web Developer</p>
+          </SlideEnter>
+          <SlideEnter duration='1000ms'>
+            <h1>Hi, {"I'm"} Joe</h1>
+          </SlideEnter>
+          <SlideEnter duration='2500ms'>
+            <h2>
+              I am Frontend React developer specializing in NextJS and NodeJS
+              Applications
+            </h2>
+          </SlideEnter>
           <ButtonLink
             color={"warning"}
             href='/files/Resume_Joseph_Carothers_11-21.docx'
@@ -122,6 +130,24 @@ const Hero = () => {
 };
 
 export default Hero;
+
+const enterKeyframes = keyframes`
+0% {opacity: 0}
+49% {opacity: 0}
+50% {transform: translateX(-100px)}
+99% {opacity: 1}
+100% {transform: translateX(0)}
+`;
+
+const enterAnimation = (props) =>
+  css`
+    ${enterKeyframes}
+  `;
+
+const SlideEnter = styled.div`
+  animation: ${enterAnimation};
+  animation-duration: ${(props) => props.duration};
+`;
 
 const Container = styled.div`
   min-height: 80vh;
