@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { css } from "styled-components";
+import { keyframes } from "styled-components";
 import { themes, useTheme } from "../lib/ThemeContext";
 import ThemeToggle from "./ThemeToggle";
 
@@ -34,6 +36,18 @@ const MobileNav = () => {
 
 export default MobileNav;
 
+const enterKeyframes = keyframes`
+0% {opacity: 0}
+1% {transform: translateY(50px)}
+99% {opacity: 1}
+100% {transform: translateY(0))}
+`;
+
+const enterAnimation = (props) =>
+  css`
+    ${enterKeyframes} .5s 1
+  `;
+
 const ToggleNav = styled.button`
   font-size: 3.5rem;
   background-color: transparent;
@@ -65,6 +79,7 @@ const ToggledNav = styled.div`
   top: 0;
   left: 0;
   z-index: 9;
+  animation: ${enterAnimation};
 
   ul {
     height: 50vh;
