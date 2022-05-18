@@ -28,10 +28,10 @@ export default function ProjectCard({ project }) {
         <div className='links'>
           {project.demo && (
             <ButtonLink
-              inverted
               target='_blank'
               rel='noreferrer'
-              href={project.demo === "not available" ? null : project.demo}>
+              href={project.demo === "not available" ? null : project.demo}
+              color='purple'>
               Demo
             </ButtonLink>
           )}
@@ -140,6 +140,7 @@ const Container = styled.div`
 
   .links {
     display: flex;
+    align-items: center;
     gap: 1rem;
   }
   .description {

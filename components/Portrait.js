@@ -14,37 +14,41 @@ const Portrait = () => {
       const nose = noseRef.current;
       const distanceMultiplier = 30;
 
-      let mouseX = nose.getBoundingClientRect().right;
-      let mouseY = nose.getBoundingClientRect().top;
-      let radianDegrees = Math.atan2(e.pageX - mouseX, e.pageY - mouseY);
-      let mouseRotationDegrees = radianDegrees * (180 / Math.PI) * -1 + 180;
-      let newTranformY = Math.cos(radianDegrees) * distanceMultiplier;
-      let newTranformX = Math.sin(radianDegrees) * distanceMultiplier;
+      if (nose) {
+        let mouseX = nose.getBoundingClientRect().right;
+        let mouseY = nose.getBoundingClientRect().top;
+        let radianDegrees = Math.atan2(e.pageX - mouseX, e.pageY - mouseY);
+        let mouseRotationDegrees = radianDegrees * (180 / Math.PI) * -1 + 180;
+        let newTranformY = Math.cos(radianDegrees) * distanceMultiplier;
+        let newTranformX = Math.sin(radianDegrees) * distanceMultiplier;
 
-      const calculateHeadRotation = (angle) => {
-        let maximumRotation = 2.5;
-        let counterClockwiseAdjustment = -1;
+        const calculateHeadRotation = (angle) => {
+          let maximumRotation = 2.5;
+          let counterClockwiseAdjustment = -1;
 
-        let headRotation = 0;
+          let headRotation = 0;
 
-        if (angle <= 90) {
-          headRotation =
-            Math.min(90 - angle, maximumRotation) * counterClockwiseAdjustment;
-        } else if (angle <= 180) {
-          headRotation = Math.min(angle - 90, maximumRotation);
-        } else if (angle <= 270) {
-          headRotation =
-            Math.min(270 - angle, maximumRotation) * counterClockwiseAdjustment;
-        } else if (angle <= 360) {
-          headRotation = Math.min(angle - 270, maximumRotation);
-        }
+          if (angle <= 90) {
+            headRotation =
+              Math.min(90 - angle, maximumRotation) *
+              counterClockwiseAdjustment;
+          } else if (angle <= 180) {
+            headRotation = Math.min(angle - 90, maximumRotation);
+          } else if (angle <= 270) {
+            headRotation =
+              Math.min(270 - angle, maximumRotation) *
+              counterClockwiseAdjustment;
+          } else if (angle <= 360) {
+            headRotation = Math.min(angle - 270, maximumRotation);
+          }
 
-        return headRotation;
-      };
+          return headRotation;
+        };
 
-      setTransformX(newTranformX);
-      setTransformY(newTranformY);
-      setRotationDegrees(calculateHeadRotation(mouseRotationDegrees));
+        setTransformX(newTranformX);
+        setTransformY(newTranformY);
+        setRotationDegrees(calculateHeadRotation(mouseRotationDegrees));
+      }
     };
 
     window.addEventListener("mousemove", moveEyes);

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { css } from "styled-components";
 import { keyframes } from "styled-components";
 import { useTheme } from "../lib/ThemeContext";
 
