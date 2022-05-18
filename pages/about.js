@@ -6,6 +6,7 @@ import ProfilePic from "../components/ProfilePic";
 import { themes, useTheme } from "../lib/ThemeContext";
 import Main from "../components/styles/Main";
 import styled from "styled-components";
+import { Form } from "./contact";
 
 const about = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -104,6 +105,7 @@ const about = () => {
           </TechList>
         </div>
       </AboutHero>
+      <Form />
       {/* <Art /> */}
       {/* <SurfGame /> */}
     </Main>
@@ -157,7 +159,7 @@ const Separator = styled.span`
 
 const AboutHero = styled.section`
   max-width: 1250px;
-  margin: -5rem auto;
+  margin: -5rem auto 5rem;
 
   background-color: ${(props) =>
     props.theme === "light" ? "#fff" : "var(--gray300)"};

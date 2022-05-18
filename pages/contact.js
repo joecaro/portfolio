@@ -208,7 +208,8 @@ const FormStyles = styled.form`
   padding: 2rem;
   border-radius: 0.5rem;
   max-width: 90%;
-  box-shadow: 0 0 30px -10px #99999933;
+  border: 3px solid #99999933;
+  box-shadow: 3px 0 #99999933;
 
   .set {
     display: flex;
