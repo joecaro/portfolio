@@ -3,6 +3,7 @@ import ProjectCard from "../../components/ProjectCard";
 import getAllProjects from "../../lib/getAllProjects";
 import { useTheme, themes } from "../../lib/ThemeContext";
 import styled from "styled-components";
+import { Form } from "../contact";
 
 export default function Projects(props) {
   const { theme, setTheme } = useTheme();
@@ -37,6 +38,7 @@ export default function Projects(props) {
             );
           })}
         </div>
+        <Form />
       </Main>
     </>
   );
