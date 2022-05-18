@@ -242,6 +242,7 @@ export const Form = () => {
 const Container = styled.div`
   max-width: var(--maxWidth);
   margin: auto;
+  padding: 10rem 0;
 `;
 
 const FormStyles = styled.form`
