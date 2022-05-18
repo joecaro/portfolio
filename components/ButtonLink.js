@@ -6,6 +6,7 @@ const ButtonLink = ({ children, color, href, label, inverted, animated }) => {
   return (
     <Container>
       <LogoLink
+        passHref
         className={!href && "disabled"}
         color={color || "gray"}
         inverted={inverted}
@@ -15,7 +16,6 @@ const ButtonLink = ({ children, color, href, label, inverted, animated }) => {
         rel='noopener noreferrer'>
         {children}
       </LogoLink>
-      {label && <p className='label'>{label}</p>}
     </Container>
   );
 };
@@ -90,14 +90,7 @@ export const LogoLink = styled.a`
 `;
 
 const Container = styled.div`
-  display: grid;
-  /* grid-template-columns: 4rem 1fr; */
   gap: 0.5rem;
-
-  @media (min-width: 900px) {
-    grid-template-columns: 1fr 1fr;
-    align-items: end;
-  }
 
   :hover {
     .disabled {

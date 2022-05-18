@@ -106,7 +106,6 @@ const Section = styled.section`
     display: none;
     @media (min-width: 900px) {
       display: flex;
-      justify-content: center;
       gap: 2rem;
     }
   }
@@ -115,7 +114,6 @@ const Section = styled.section`
   }
 
   .list {
-    overflow: scroll;
     display: grid;
     gap: 5rem;
     overflow-x: hidden;
