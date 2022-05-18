@@ -59,9 +59,9 @@ const InstagramCardStyles = styled.a`
   height: ${({ cardHeight }) => `${cardHeight}px`};
   width: ${({ cardHeight }) => `${cardHeight * (7 / 8)}px`};
   border-radius: 0.5rem;
+  border: 2px solid var(--gray500);
   display: grid;
   grid-template-rows: auto 1fr auto;
-  box-shadow: 0 0 30px -20px #aaa;
   transition: 0.2s;
   :hover {
     transform: scale(1.1);

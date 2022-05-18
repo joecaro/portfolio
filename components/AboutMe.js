@@ -6,8 +6,9 @@ export default function AboutMe() {
   const { theme } = useTheme();
 
   return (
-    <section >
+    <section>
       <div>
+        <h1 style={{ textAlign: "left" }}>Joseph Carothers</h1>
         <p>
           I am a <strong> web developer</strong> creating interactive
           applications, company websites, and company tools.{"I've "}focused

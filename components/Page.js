@@ -10,7 +10,7 @@ const Page = ({ children }) => {
   }, [theme]);
 
   return (
-    <div data-theme={theme}>
+    <div style={{ minHeight: "100vw" }} data-theme={theme}>
       <Header />
       {children}
     </div>
