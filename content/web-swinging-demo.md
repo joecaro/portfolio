@@ -8,7 +8,7 @@
       - Unity
       - C#
     github: https://github.com/joecaro/3d-flappy-bird-clone
-    demo: not available
+    demo:
     tags:
       - project 
       - game

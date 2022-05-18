@@ -8,7 +8,7 @@
       - Unity 
       - C#
     github: https://github.com/joecaro/unity-boid-simulation
-    demo: not available
+    demo: 
     tags:
       - project
       - unity

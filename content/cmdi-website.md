@@ -9,7 +9,7 @@
       - Contentful
       - Cloudinary
       - Netlify
-    github: not available
+    github:
     demo: https://cmdi.netlify.app
     tags:
       - project 
