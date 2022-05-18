@@ -1,9 +1,8 @@
 import Head from "next/head";
 import ProjectCard from "../../components/ProjectCard";
-import ProjectInfo from "../../components/ProjectInfo";
 import getAllProjects from "../../lib/getAllProjects";
 import { useTheme, themes } from "../../lib/ThemeContext";
-import ButtonLink from "../../components/styles/ButtonLink";
+import styled from "styled-components";
 
 export default function Projects(props) {
   const { theme, setTheme } = useTheme();
@@ -18,11 +17,7 @@ export default function Projects(props) {
         />
       </Head>
 
-      <main
-        style={{
-          maxWidth: "1400px",
-          margin: "8rem auto",
-        }}>
+      <Main>
         <h1>Projects</h1>
 
         <div
@@ -42,10 +37,19 @@ export default function Projects(props) {
             );
           })}
         </div>
-      </main>
+      </Main>
     </>
   );
 }
+
+const Main = styled.main`
+  max-width: 1400px;
+  margin: auto;
+  padding: 8rem 1rem;
+  @media (min-width: 1100px) {
+    padding: 8rem 8rem;
+  }
+`;
 
 // This function gets called at build time on server-side.
 export async function getStaticProps() {

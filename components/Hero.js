@@ -128,7 +128,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem var(--side-padding) 0;
+  padding: 2rem 3rem 0;
   position: relative;
   gap: 3rem;
 
@@ -145,9 +145,6 @@ const Container = styled.div`
   }
   .hero-text {
     z-index: 1;
-    @media (min-width: 900px) {
-      padding: 0 2rem;
-    }
   }
   h2 {
     font-size: 1.5rem;

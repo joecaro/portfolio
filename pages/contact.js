@@ -6,9 +6,6 @@ import Fade from "react-reveal/Fade";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const portalId = "21057690";
-const formId = "50c65d39-5e63-47b5-aeef-f84037ec61f2";
-
 const ax = axios.create({
   baseURL: "https://api.hsforms.com/submissions/v3/integration/submit",
   timeout: 1000,
