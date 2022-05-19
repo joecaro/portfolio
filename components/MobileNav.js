@@ -13,7 +13,9 @@ const MobileNav = () => {
     <NavStyles>
       <ToggledNav toggled={toggled} theme={theme}>
         <ul>
-          <ToggleNav onClick={() => setToggled(!toggled)}>x</ToggleNav>
+          <ToggleNav theme={theme} onClick={() => setToggled(!toggled)}>
+            x
+          </ToggleNav>
           <li onClick={() => setToggled(!toggled)}>
             <Link href='/'>Home</Link>
           </li>
@@ -29,7 +31,9 @@ const MobileNav = () => {
           <ThemeToggle />
         </ul>
       </ToggledNav>
-      <ToggleNav onClick={() => setToggled(!toggled)}>+</ToggleNav>
+      <ToggleNav theme={theme} onClick={() => setToggled(!toggled)}>
+        +
+      </ToggleNav>
     </NavStyles>
   );
 };
@@ -54,6 +58,8 @@ const ToggleNav = styled.button`
   border: none;
   width: fit-content;
   justify-self: end;
+  color: ${(props) =>
+    props.theme === "light" ? "var(--gray200)" : "var(--gray1000)"};
 `;
 
 const NavStyles = styled.nav`

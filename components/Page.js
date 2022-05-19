@@ -12,7 +12,9 @@ const Page = ({ children }) => {
 
   return (
     <>
-      <Head></Head>
+      <Head>
+        <link rel='icon' href='/favicon.png' />
+      </Head>
       <div style={{ minHeight: "100vw" }} data-theme={theme}>
         <Header />
         {children}
