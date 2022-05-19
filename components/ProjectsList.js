@@ -62,7 +62,11 @@ export default function ProjectsList({ projects }) {
                 classNames='project'
                 unmountOnExit
                 exit={false}>
-                <ProjectCard project={project} />
+                <ProjectCard
+                  filter={filter}
+                  setFilter={setFilter}
+                  project={project}
+                />
               </CSSTransition>
             );
           })}
@@ -121,5 +125,10 @@ const Section = styled.section`
     overflow-x: hidden;
 
     padding: 2rem 0;
+
+    @media (min-width: 1100px) {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(auto-fit, minmax(200px, 350px));
+    }
   }
 `;

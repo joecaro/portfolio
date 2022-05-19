@@ -7,6 +7,7 @@
     stack: 
       - ReactJS 
       - Javascript
+      - Featured
     github: https://github.com/joecaro/blockchain-demo-reactJS
     demo: https://blockchaindemo.netlify.app/
     tags:
@@ -14,6 +15,7 @@
       - featured
       - reactjs
       - blockchain
+      - javascript
     tech:
       - blockchain
     image: https://res.cloudinary.com/joecarothers/image/upload/v1652918002/misc/Projects/blockchain-mockup_qosdpg_fl4uwz.png

@@ -10,18 +10,27 @@
       - NextJS
       - NodeJs
       - JWT Token Autorization
+      - Featured
     github: https://github.com/joecaro/crm
     demo: https://crm.josephcarothers.com/
     tags:
       - project 
       - featured
       - nextjs
+      - react
+      - next
+      - html
+      - css
+      - mongodb
+      - node
+      - express
+      - jwt token authorization
     tech:
       - react
       - next
       - html
       - css
-      - mongo
+      - mongodb
       - node
       - express
     image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/CRM-Mockup_zul9pq_wedgib.png

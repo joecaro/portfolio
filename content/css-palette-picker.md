@@ -14,6 +14,8 @@
       - project
       - reactjs
       - css
+      - html
+      - css
     tech:
       - react
       - html

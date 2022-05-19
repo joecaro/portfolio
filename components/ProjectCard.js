@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
-import ButtonLink from "./ButtonLink";
+import SelectButton from "./SelectButton";
 import { useTheme } from "../lib/ThemeContext";
 import { keyframes } from "styled-components";
 import { css } from "styled-components";
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ filter, setFilter, project }) {
   const { theme } = useTheme();
   return (
     <Container theme={theme}>
@@ -57,15 +57,17 @@ export default function ProjectCard({ project }) {
       </div>
       <p className='description'>{project.description}</p>
 
-      <div className='stack-container'>
-        <b>STACK |</b>
-        <div className='stack'>
-          {project.stack.map((tech) => (
-            <p key={`${project.title} ${tech}`} className='stack-item'>
-              {tech}
-            </p>
-          ))}
-        </div>
+      <div className='stack'>
+        {project.stack.map((tech) => (
+          <SelectButton
+            filter={filter}
+            setFilter={setFilter}
+            name={tech}
+            key={`${project.title} ${tech}`}
+            className='stack-item'>
+            {tech}
+          </SelectButton>
+        ))}
       </div>
     </Container>
   );
@@ -86,12 +88,10 @@ const enterAnimation = (props) =>
 const Container = styled.div`
   display: grid;
   grid-template-areas:
-    " header"
-    " desciption"
-    " stack";
-  grid-template-columns: 1fr;
-  grid-template-rows: 100px 1fr 1fr;
-  place-items: center;
+    "header"
+    "desciption"
+    "stack";
+  grid-template-rows: repeat(auto-fit, minmax(min-content, max-content));
 
   border-radius: var(--radiusMd);
   border-bottom: 4px solid var(--gray700);
@@ -108,9 +108,8 @@ const Container = styled.div`
     grid-template-areas:
       "image header "
       "image desciption "
-      "image stack ";
+      "stack stack ";
     gap: 0.5rem;
-
     min-height: 290px;
   }
 
@@ -166,26 +165,22 @@ const Container = styled.div`
     align-items: center;
     gap: 1rem;
   }
+
   .description {
     justify-self: start;
     grid-area: desciption;
-    margin: 0;
+    margin: 1rem 0 2rem;
     @media (min-width: 900px) {
       place-self: start;
     }
-  }
-
-  .stack-container {
-    grid-area: stack;
-    justify-self: start;
-    display: grid;
-    grid-template-columns: 5rem 1fr;
   }
 
   .stack {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    place-self: start;
+    grid-area: stack;
   }
 
   .stack-item {
@@ -196,11 +191,16 @@ const Container = styled.div`
     flex: 0;
 
     color: ${(props) =>
-      props.theme === "light" ? "var(--warning200)" : "var(--warning700)"};
+      props.theme === "light" ? "var(--gray100)" : "var(--gray800)"};
     background-color: ${(props) =>
-      props.theme === "light" ? "var(--warning600)" : "var(--warning200)"};
+      props.theme === "light" ? "var(--gray800)" : "var(--gray200)"};
     padding: 0.25rem;
     border-radius: var(--radiusSm);
+
+    :hover {
+      cursor: pointer;
+      transform: scale(1.1) translateY(-3px);
+    }
   }
 
   a {
@@ -211,10 +211,15 @@ const Container = styled.div`
 `;
 
 const ProjectImage = styled.div`
+  display: none;
   height: 100%;
   width: 100%;
   overflow: hidden;
   position: relative;
 
   grid-area: image;
+
+  @media (min-width: 900px) {
+    display: block;
+  }
 `;

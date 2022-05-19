@@ -5,16 +5,24 @@
     author: Joe
     description:  Website for SAAS CRM Platform with blog and hubspot integration.
     stack: 
-      - Next.js
+      - NextJS
       - Contentful
       - Cloudinary
       - Netlify
+      - Featured
     github:
     demo: https://cmdi.netlify.app
     tags:
       - project 
       - featured
       - nextjs
+      - react
+      - next
+      - html
+      - css
+      - netlify
+      - contentful
+      - cloudinary
     tech:
       - react
       - next

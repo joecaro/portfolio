@@ -13,14 +13,15 @@ export default function SelectButton({ theme, filter, setFilter, name }) {
 }
 
 const Select = styled.button`
-  padding: 0.5rem;
-  font-size: 1.25rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
   border: none;
-  border-bottom: 2px solid
+  border-bottom: 3px solid
     ${(props) => (props.selected ? "var(--blue300)" : "var(--gray500)")};
-  border-right: 2px solid
+  border-right: 3px solid
     ${(props) => (props.selected ? "var(--blue300)" : "var(--gray500)")};
-  background-color: ${(props) => (props.selected ? "var(--blue400)" : "")};
+  background-color: ${(props) =>
+    props.selected ? "var(--blue400)" : "var(--gray900)"};
   color: ${(props) => (props.selected ? "var(--gray1000)" : "")};
   border-radius: var(--radiusSm);
   transition: 200ms;

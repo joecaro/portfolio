@@ -11,6 +11,9 @@
     tags:
       - project
       - reactjs
+      - javasacript
+      - html
+      - css
     tech:
       - javasacript
       - react

@@ -11,6 +11,7 @@
     tags:
       - project
       - machine learning
+      - python
     tech:
       - python
     image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/ML-Iris-mockup_qbca8e_f5oi2j.png

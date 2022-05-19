@@ -6,12 +6,15 @@
     description:  A template landing page for a service company.
     stack: 
       - ReactJS
+      - Featured
     github: https://github.com/joecaro/service-provider-landing-page
     demo: https://servicelandingpage.netlify.app/
     tags:
       - project 
       - featured 
       - reactjs
+      - html
+      - css
     tech:
       - react
       - html
