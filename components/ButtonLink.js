@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { keyframes } from "styled-components";
 import { useTheme } from "../lib/ThemeContext";
 
-const ButtonLink = ({ children, color, href, inverted }) => {
+const ButtonLink = ({ children, color, href, inverted, textColor }) => {
   const { theme } = useTheme();
   return (
     <Container>
@@ -11,6 +11,7 @@ const ButtonLink = ({ children, color, href, inverted }) => {
         theme={theme}
         className={!href && "disabled"}
         color={color || "gray"}
+        textColor={textColor}
         inverted={inverted}
         href={href}
         target='_blank'
@@ -50,7 +51,11 @@ export const LogoLink = styled.a`
   border-radius: var(--radiusSm);
 
   color: ${(props) =>
-    !props.inverted ? "#ffffff" : `var(--${props.color}400)`};
+    props.textColor
+      ? props.textColor
+      : !props.inverted
+      ? "#ffffff"
+      : `var(--${props.color}400)`};
   border-bottom: 3px solid ${(props) => `var(--${props.color}300)`};
 
   :hover {
