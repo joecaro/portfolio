@@ -43,6 +43,8 @@ export const LogoLink = styled.a`
   place-items: center;
   transition: 0.2s ease;
 
+  font-weight: 600;
+
   height: 3rem;
   width: 6rem;
   border-radius: var(--radiusSm);
