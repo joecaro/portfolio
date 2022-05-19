@@ -72,7 +72,7 @@ const Hero = () => {
             </h2>
           </SlideEnter>
           <ButtonLink
-            color={"warning"}
+            color={"purple"}
             href='/files/Resume_Joseph_Carothers_11-21.docx'
             label='Resume'>
             Resume

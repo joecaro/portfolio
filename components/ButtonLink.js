@@ -30,13 +30,14 @@ const noAnimation = keyframes`
 `;
 
 export const LogoLink = styled.a`
+  box-sizing: content-box;
   background-color: ${(props) =>
     !props.inverted
       ? `var(--${props.color}400)`
       : props.theme === "light"
       ? "#ffffff"
       : `var(--gray200)`};
-  border-bottom: 3px solid ${(props) => `var(--${props.color}300)`};
+
   border: ${(props) =>
     props.inverted ? `3px solid var(--${props.color}400)` : ""};
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
@@ -57,24 +58,26 @@ export const LogoLink = styled.a`
       ? "#ffffff"
       : `var(--${props.color}400)`};
   border-bottom: 3px solid ${(props) => `var(--${props.color}300)`};
+  border-right: 3px solid ${(props) => `var(--${props.color}300)`};
 
   :hover {
     animation: ${noAnimation} 1s;
-    transform: translateY(-4px);
-    box-shadow: 3px 8px 8px rgba(0, 0, 0, 0.3);
-    transition: 0.2s ease;
+    transform: translateY(-3px);
+    border-bottom: 6px solid ${(props) => `var(--${props.color}300)`};
+    transition: 100ms ease;
   }
 
   :active {
     animation: ${noAnimation} 1s;
-    transform: translateY(5px);
-    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.8);
+    border-bottom: 2px solid ${(props) => `var(--${props.color}300)`};
+    transform: translateY(1px);
     transition: 0.2s ease;
   }
 `;
 
 const Container = styled.div`
   gap: 0.5rem;
+  height: 3rem;
 
   :hover {
     .disabled {

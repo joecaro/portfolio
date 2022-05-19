@@ -3,16 +3,19 @@ import styled from "styled-components";
 
 export default function SelectButton({ theme, filter, setFilter, name }) {
   return (
-    <Select
-      theme={theme}
-      selected={filter === name.toLowerCase()}
-      onClick={() => setFilter(name.toLowerCase())}>
-      {name}
-    </Select>
+    <Container>
+      <Select
+        theme={theme}
+        selected={filter === name.toLowerCase()}
+        onClick={() => setFilter(name.toLowerCase())}>
+        {name}
+      </Select>
+    </Container>
   );
 }
 
 const Select = styled.button`
+  box-sizing: content-box;
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
   font-weight: ${(props) => (props.selected ? "550" : "500")};
@@ -35,22 +38,28 @@ const Select = styled.button`
 
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
   border-radius: var(--radiusSm);
-  transition: 200ms;
+  transition: 100ms ease-in-out;
 
   :hover {
     cursor: pointer;
-    color: white;
-    background-color: var(--blue500);
-    transform: translateY(-5px);
+    border-bottom: 5px solid
+      ${(props) => (props.selected ? "var(--blue300)" : "var(--gray600)")};
+    transform: translateY(-3px);
+    box-shadow: 3px 5px 2px rgba(0, 0, 0, 0.3);
   }
 
   :active {
     background-color: var(--blue600);
     border-bottom: 2px solid var(--blue500);
     border-right: 2px solid var(--blue500);
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.4);
     transform: translateY(0px);
   }
 
   ::after {
   }
+`;
+
+const Container = styled.div`
+  height: 2.5rem;
 `;
