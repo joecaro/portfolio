@@ -5,9 +5,11 @@ import { CSSTransition } from "react-transition-group";
 import SelectButton from "./SelectButton";
 import ProjectCard from "./ProjectCard";
 import MaxWidthContainer from "./styles/MaxWidthContainer";
+import { useTheme } from "../lib/ThemeContext";
 
 export default function ProjectsList({ projects }) {
   const [filter, setFilter] = useState("featured");
+  const { theme } = useTheme();
 
   return (
     <MaxWidthContainer>
@@ -24,29 +26,49 @@ export default function ProjectsList({ projects }) {
         </Select>
         <div className='filter-select'>
           <SelectButton
+            theme={theme}
             filter={filter}
             setFilter={setFilter}
             name={"Featured"}
           />
           <SelectButton
+            theme={theme}
             filter={filter}
             setFilter={setFilter}
             name={"ReactJS"}
           />
-          <SelectButton filter={filter} setFilter={setFilter} name={"NextJS"} />
           <SelectButton
+            theme={theme}
+            filter={filter}
+            setFilter={setFilter}
+            name={"NextJS"}
+          />
+          <SelectButton
+            theme={theme}
             filter={filter}
             setFilter={setFilter}
             name={"Javascript"}
           />
-          <SelectButton filter={filter} setFilter={setFilter} name={"C#"} />
-          <SelectButton filter={filter} setFilter={setFilter} name={"Game"} />
           <SelectButton
+            theme={theme}
+            filter={filter}
+            setFilter={setFilter}
+            name={"C#"}
+          />
+          <SelectButton
+            theme={theme}
+            filter={filter}
+            setFilter={setFilter}
+            name={"Game"}
+          />
+          <SelectButton
+            theme={theme}
             filter={filter}
             setFilter={setFilter}
             name={"Blockchain"}
           />
           <SelectButton
+            theme={theme}
             filter={filter}
             setFilter={setFilter}
             name={"Machine Learning"}

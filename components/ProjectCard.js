@@ -60,6 +60,7 @@ export default function ProjectCard({ filter, setFilter, project }) {
       <div className='stack'>
         {project.stack.map((tech) => (
           <SelectButton
+            theme={theme}
             filter={filter}
             setFilter={setFilter}
             name={tech}
