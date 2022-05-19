@@ -22,24 +22,21 @@ export default function Home(props) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main id='main-container'>
+      <Main id='main-container'>
         <Hero />
 
         <ProjectsList projects={props.projects} />
         <Form />
-      </main>
+      </Main>
     </div>
   );
 }
 
 const Main = styled.main`
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow-x: hidden;
+  padding: 0;
+  @media (min-width: 500px) {
+    padding: 0 3rem;
+  }
 `;
 
 // This function gets called at build time on server-side.
