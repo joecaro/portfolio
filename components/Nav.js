@@ -46,7 +46,7 @@ linear-gradient(
       180deg,
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0) 90%,
-      var(--purple300)
+      var(--blue300)
     );
 `;
 const darkGradient = css`
@@ -54,7 +54,7 @@ linear-gradient(
       180deg,
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0) 90%,
-      var(--purple700)
+      var(--blue500)
     );
 `;
 
@@ -79,7 +79,7 @@ const ListItem = styled.li`
   height: fit-content;
   a {
     background-image: ${(props) =>
-      props === "light" ? lightGradient : darkGradient};
+      props.lightTheme ? lightGradient : darkGradient};
     background-repeat: no-repeat;
     background-size: ${(props) => (props.current ? "100% 100%" : "0% 100%")};
     background-position-x: right;

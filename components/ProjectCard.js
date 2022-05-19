@@ -31,7 +31,7 @@ export default function ProjectCard({ project }) {
               target='_blank'
               rel='noreferrer'
               href={project.demo === "not available" ? null : project.demo}
-              color='purple'>
+              color='blue'>
               Demo
             </ButtonLink>
           )}
