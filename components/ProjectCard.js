@@ -104,7 +104,7 @@ const Container = styled.div`
   animation: ${enterAnimation};
 
   @media (min-width: 900px) {
-    grid-template-rows: 40px 2fr 1fr;
+    grid-template-rows: minmax(min-content, max-content) 2fr 1fr;
     grid-template-columns: 1fr 2fr;
     grid-template-areas:
       "image header "

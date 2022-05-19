@@ -5,9 +5,12 @@ export default function SelectButton({ theme, filter, setFilter, name }) {
   return (
     <Container>
       <Select
+        className={!setFilter && "disabled"}
         theme={theme}
         selected={filter === name.toLowerCase()}
-        onClick={() => setFilter(name.toLowerCase())}>
+        onClick={() => {
+          if (setFilter) () => setFilter(name.toLowerCase());
+        }}>
         {name}
       </Select>
     </Container>
@@ -62,4 +65,17 @@ const Select = styled.button`
 
 const Container = styled.div`
   height: 2.5rem;
+
+  .disabled {
+    box-shadow: none;
+    :hover {
+      cursor: default;
+      transform: none;
+      border-bottom: 2px solid
+        ${(props) => (props.selected ? "var(--blue300)" : "var(--gray600)")};
+    }
+    :active {
+      background-color: ${(props) =>
+        props.theme === "light" ? "var(--gray1000)" : "var(--gray400)"}
+  }
 `;

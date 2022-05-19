@@ -124,6 +124,7 @@ const Select = styled.select`
 const Section = styled.section`
   padding-bottom: 5rem;
   width: 100%;
+  z-index: 1;
 
   h2 {
     font-size: 1.75rem;
