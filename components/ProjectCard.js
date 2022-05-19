@@ -27,17 +27,23 @@ export default function ProjectCard({ project }) {
         </Link>
         <div className='links'>
           {project.demo && (
-            <ButtonLink
-              target='_blank'
-              rel='noreferrer'
-              href={project.demo === "not available" ? null : project.demo}
-              color='blue'>
-              Demo
-            </ButtonLink>
+            <Link passHref target='_blank' rel='noreferrer' href={project.demo}>
+              <svg
+                className='demo'
+                xmlns='http://www.w3.org/2000/svg'
+                width='30'
+                height='30'
+                fill='currentColor'
+                viewBox='0 0 16 16'>
+                <path d='M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z' />
+                <path d='M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6H9z' />
+              </svg>
+            </Link>
           )}
           {project.github && (
             <Link passHref href={project.github}>
               <svg
+                className='github'
                 xmlns='http://www.w3.org/2000/svg'
                 width='30'
                 height='30'
@@ -78,7 +84,6 @@ const enterAnimation = (props) =>
   `;
 
 const Container = styled.div`
-  min-height: 300px;
   display: grid;
   grid-template-areas:
     " header"
@@ -98,13 +103,15 @@ const Container = styled.div`
   animation: ${enterAnimation};
 
   @media (min-width: 900px) {
-    grid-template-rows: 60px 1fr 1fr 1fr;
+    grid-template-rows: 40px 2fr 1fr;
     grid-template-columns: 1fr 2fr;
     grid-template-areas:
       "image header "
       "image desciption "
-      "image desciption "
       "image stack ";
+    gap: 0.5rem;
+
+    min-height: 290px;
   }
 
   .header {
@@ -113,14 +120,30 @@ const Container = styled.div`
     grid-area: header;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    gap: 3rem;
+  }
 
-    svg {
-      cursor: pointer;
-      :hover {
-        transform: scale(1.1);
-      }
+  a {
+    font-weight: 550;
+    font-size: 1.3rem;
+    color: var(--blue600);
+
+    :hover {
+      opacity: 0.5;
     }
+  }
+
+  svg {
+    cursor: pointer;
+    :hover {
+      transform: scale(1.1);
+      opacity: 0.5;
+    }
+  }
+
+  .demo {
+    color: ${(props) =>
+      props.theme === "light" ? "var(--blue300)" : "var(--blue600)"};
   }
 
   .title {
@@ -146,6 +169,7 @@ const Container = styled.div`
   .description {
     justify-self: start;
     grid-area: desciption;
+    margin: 0;
     @media (min-width: 900px) {
       place-self: start;
     }
