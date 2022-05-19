@@ -33,7 +33,7 @@ export default function Home(props) {
 }
 
 const Main = styled.main`
-  padding: 0;
+  padding: 0 1rem;
   @media (min-width: 500px) {
     padding: 0 3rem;
   }
