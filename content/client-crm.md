@@ -52,8 +52,9 @@ This is an internal tool I created using Nextjs and MongoDB to help track client
 - Stored database allowed for consistent information on clients and gave the ability to update a single source.
 - Allows for seeing quick totals and exporting list to share with others.
 
-![Desktop](https://res.cloudinary.com/joecarothers/image/upload/v1650982026/misc/Projects/CRM_Quarterly_iqgzq5.jpg)
-![Mobile](https://res.cloudinary.com/joecarothers/image/upload/v1651167756/misc/Projects/crm/Screenshot_2022-04-28_134145_h4t4ba.jpg)
+![Desktop](https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/CRM-Mockup_zul9pq_wedgib.png)![Mobile](https://res.cloudinary.com/joecarothers/image/upload/v1651167756/misc/Projects/crm/Screenshot_2022-04-28_134145_h4t4ba.jpg)
+
+### Features
 
 The key features of this CRUD application are:
 
@@ -64,4 +65,4 @@ The key features of this CRUD application are:
 
 **_stack_**
 
-I created this application on NextJS
+I created the frontend of this application using the NextJS framework. The backend consists of a NodeJS server built with the ExpressJS framework that connects to a MongoDB datase.

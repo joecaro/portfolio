@@ -24,3 +24,7 @@
 **3D Flappy Bird Clone**
 
 This was my first game made in the Unity engine and my first dive into C#. This served as a good introduction to a strongly typed, object-oriented language.
+
+I also 3d modeled everything in the game which is another fun hobby of mine.
+
+![Flappy Bird Clone](https://res.cloudinary.com/joecarothers/image/upload/v1653009936/misc/Projects/Flappy_gif_small_avauxd.gif)

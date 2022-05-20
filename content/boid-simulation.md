@@ -35,3 +35,5 @@ I've always loved to explore the complex simulations people create in the Unity 
   With these three simple rules, the flock moves in an extremely realistic way, creating complex motion and interaction that would be extremely hard to create otherwise.
 
 These flocking behaviours drive the "decisions" of each flock agent, or boid. I included weight variables to tune each behavior to alter the behavior of the flock. This simulation also includes a rudimentary predator which steers another avoidance protocol.
+
+![Boid Sim](https://res.cloudinary.com/joecarothers/image/upload/v1653009299/misc/Projects/Sim_Gif_smal_bxnv5q.gif)

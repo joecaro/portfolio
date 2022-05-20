@@ -5,7 +5,7 @@
     author: Joe
     description:  A template landing page for a service company.
     stack: 
-      - ReactJS
+      - NextJS
       - Featured
     github: https://github.com/joecaro/service-provider-landing-page
     demo: https://servicelandingpage.netlify.app/
@@ -13,6 +13,7 @@
       - project 
       - featured 
       - reactjs
+      - nextjs
       - html
       - css
     tech:
@@ -26,3 +27,12 @@
 **Service Landing Page**
 
 This is a simple single page marketing site for a company that uses a professional, modern design.
+
+### Problems:
+
+- Single Page Website for a Business
+- Must be performant and Easy to Navigate
+
+### Solutions:
+
+This page was built with NextJS, using standard CSS. This keeps the repository simple and easy to maintain, but also allow the project to easily scale to multiple pages, and incorporate various rendering methods that NextJS allows out of the box.
