@@ -3,15 +3,23 @@ import styled from "styled-components";
 export default function SelectButton({ theme, filter, setFilter, name }) {
   return (
     <Container>
-      <Select
-        className={!setFilter && "disabled"}
-        theme={theme}
-        selected={filter === name.toLowerCase()}
-        onClick={() => {
-          if (setFilter) () => setFilter(name.toLowerCase());
-        }}>
-        {name}
-      </Select>
+      {filter && (
+        <Select
+          theme={theme}
+          selected={filter === name.toLowerCase()}
+          onClick={() => setFilter(name.toLowerCase())}>
+          {name}
+        </Select>
+      )}
+      {!filter && (
+        <Select
+          className='disabled'
+          theme={theme}
+          selected={filter === name.toLowerCase()}
+          onClick={() => {}}>
+          {name}
+        </Select>
+      )}
     </Container>
   );
 }
