@@ -173,9 +173,13 @@ const AboutHero = styled.section`
 
   display: grid;
   gap: 2rem;
-  grid-template-columns: 1fr 3px 1fr 3px 1fr;
+  grid-template-rows: 1fr 3px 1fr 3px 1fr;
   justify-items: center;
 
+  @media (min-width: 900px) {
+    grid-template-columns: 1fr 3px 1fr 3px 1fr;
+    grid-template-rows: 1fr;
+  }
   .title {
     display: flex;
     gap: 1rem;
