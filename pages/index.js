@@ -1,10 +1,8 @@
 import Head from "next/head";
-import { useTheme, themes } from "../lib/ThemeContext";
+import { useTheme } from "../lib/ThemeContext";
 import ProjectsList from "../components/ProjectsList";
 import styled from "styled-components";
 import getAllProjects from "../lib/getAllProjects";
-import { useEffect } from "react";
-import AboutMe from "../components/AboutMe";
 import Hero from "../components/Hero";
 import { Form } from "./contact";
 

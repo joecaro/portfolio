@@ -1,9 +1,8 @@
-import React from "react";
 import Head from "next/head";
 import { markdownToHtml } from "../../lib/markdownToHtml";
 import getAllProjects, { getProjectBySlug } from "../../lib/getAllProjects";
 import styled from "styled-components";
-import { useTheme, themes } from "../../lib/ThemeContext";
+import { useTheme } from "../../lib/ThemeContext";
 
 const Main = styled.main`
   min-height: 100vh;

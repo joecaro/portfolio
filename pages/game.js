@@ -1,4 +1,3 @@
-import React from "react";
 import SurfGame from "../components/SurfGame";
 
 const game = () => {

@@ -1,7 +1,4 @@
-import React from "react";
 import AboutMe from "../components/AboutMe";
-import Art from "../components/Art";
-import SurfGame from "../components/SurfGame";
 import ProfilePic from "../components/ProfilePic";
 import { useTheme } from "../lib/ThemeContext";
 import Main from "../components/styles/Main";

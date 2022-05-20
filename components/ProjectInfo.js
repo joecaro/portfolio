@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 export default function ProjectInfo({ project }) {
@@ -17,7 +16,6 @@ export default function ProjectInfo({ project }) {
 }
 
 const Container = styled.div`
-
   a {
     :hover {
       text-decoration: underline;

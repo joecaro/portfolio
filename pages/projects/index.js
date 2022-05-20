@@ -1,7 +1,7 @@
 import Head from "next/head";
 import ProjectCard from "../../components/ProjectCard";
 import getAllProjects from "../../lib/getAllProjects";
-import { useTheme, themes } from "../../lib/ThemeContext";
+import { useTheme } from "../../lib/ThemeContext";
 import styled from "styled-components";
 import { Form } from "../contact";
 
