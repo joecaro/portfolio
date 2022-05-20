@@ -126,6 +126,9 @@ export const Section = styled.section`
   background-color: ${(props) =>
     props.theme === "light" ? "var(--blue600)" : "var(--blue100)"};
 
+  border-bottom: 2px solid var(--gray400);
+  border-right: 2px solid var(--gray400);
+
   @media (min-width: 1300px) {
     grid-template-columns: 1fr 3fr;
     align-items: center;
@@ -165,6 +168,9 @@ const AboutHero = styled.section`
   background-color: ${(props) =>
     props.theme === "light" ? "#fff" : "var(--gray300)"};
   border-radius: var(--radiusLg);
+
+  border-bottom: 3px solid var(--gray700);
+  border-right: 3px solid var(--gray700);
 
   padding: 4rem;
 
