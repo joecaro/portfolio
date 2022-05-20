@@ -140,7 +140,7 @@ export const Form = () => {
     <Container>
       <h2>Contact Me</h2>
       <FormStyles id='contact' style={{ display: "grid" }}>
-        <fieldset className={"set"}>
+        <Fieldset className={"set"}>
           <label>
             First Name
             <input
@@ -169,8 +169,8 @@ export const Form = () => {
               <p>Please fill in Last Name field</p>
             </Fade>
           </label>
-        </fieldset>
-        <fieldset className={"set"}>
+        </Fieldset>
+        <Fieldset className={"set"}>
           <label>
             Company
             <input
@@ -199,8 +199,8 @@ export const Form = () => {
               <p>Please enter a valid email</p>
             </Fade>
           </label>{" "}
-        </fieldset>
-        <fieldset className={"set"}>
+        </Fieldset>
+        <Fieldset className={"set"}>
           <label>
             Message
             <textarea
@@ -214,7 +214,7 @@ export const Form = () => {
               name='message'
               type='text'></textarea>
           </label>
-        </fieldset>
+        </Fieldset>
         <button disabled={!formValid} onClick={handleSubmit} type='submit'>
           Submit
         </button>
@@ -244,35 +244,14 @@ const Container = styled.div`
 
 const FormStyles = styled.form`
   margin: auto;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   max-width: 90%;
   border: 3px solid #99999933;
   box-shadow: 3px 0 #99999933;
 
-  .set {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    border: none;
-    label {
-      display: grid;
-      font-size: 1.2rem;
-      input {
-        padding: 5px;
-        border-radius: 5px;
-        border: ${({ theme }) => `1px solid ${theme.header}`};
-        font-size: 1.5rem;
-      }
-      p {
-        margin: 0.5rem;
-      }
-      textarea {
-        padding: 5px;
-        border-radius: 5px;
-        font-size: 1.5rem;
-      }
-    }
+  .invalid {
+    border: 1px solid var(--danger400);
   }
 
   button {
@@ -281,7 +260,33 @@ const FormStyles = styled.form`
     padding: 1rem 0;
     border-radius: 5px;
   }
-  .invalid {
-    border: 1.5px solid #ef4737;
+`;
+
+const Fieldset = styled.fieldset`
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  padding: 0;
+  border: none;
+  label {
+    display: grid;
+    font-size: 1.2rem;
+    input {
+      width: 100%;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid var(--gray500);
+      font-size: 1.5rem;
+    }
+    p {
+      margin: 0.5rem;
+      color: var(--danger400);
+    }
+    textarea {
+      padding: 5px;
+      border-radius: 5px;
+      font-size: 1.5rem;
+      max-width: 100%;
+    }
   }
 `;
