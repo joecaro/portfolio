@@ -65,7 +65,6 @@ const Section = styled.section`
 
   h3 {
     font-size: 2rem;
-    color: var(--gray200);
     margin: 1rem 0;
   }
 
