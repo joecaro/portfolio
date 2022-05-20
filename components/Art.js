@@ -8,8 +8,13 @@ const Art = () => {
   const { theme } = useTheme();
   return (
     <>
-      <Section>
+      <Section theme={theme}>
         <h3>3D Art</h3>
+        <p>
+          I use the program, Blender to 3d model, simulate, rig, and render 3d
+          art. I started in 2017 and have helped with small projects providing
+          3d illustrations.
+        </p>
         <Zoom cascade>
           <ul>
             <li>
@@ -47,11 +52,32 @@ export default Art;
 
 const Section = styled.section`
   max-width: var(--maxWidth);
-  margin: 8rem auto;
+  margin: auto;
+
+  background-color: ${(props) =>
+    props.theme === "light" ? "#fff" : "var(--gray300)"};
+  border-radius: var(--radiusLg);
+
+  border-bottom: 3px solid var(--gray700);
+  border-right: 3px solid var(--gray700);
+
+  padding: 4rem;
+
+  h3 {
+    font-size: 2rem;
+    color: var(--gray200);
+    margin: 1rem 0;
+  }
 
   ul {
     list-style-type: none;
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    justify-items: center;
+    gap: 2rem;
+
+    @media (min-width: 900px) {
+      display: flex;
+      justify-content: space-around;
+    }
   }
 `;

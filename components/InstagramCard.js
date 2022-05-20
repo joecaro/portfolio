@@ -60,6 +60,7 @@ const InstagramCardStyles = styled.a`
   width: ${({ cardHeight }) => `${cardHeight * (7 / 8)}px`};
   border-radius: 0.5rem;
   border: 2px solid var(--gray500);
+  box-shadow: 3px 3px 0 var(--gray500);
   display: grid;
   grid-template-rows: auto 1fr auto;
   transition: 0.2s;

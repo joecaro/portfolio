@@ -4,6 +4,7 @@ import { useTheme } from "../lib/ThemeContext";
 import Main from "../components/styles/Main";
 import styled from "styled-components";
 import { Form } from "./contact";
+import Art from "../components/Art";
 
 const about = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -102,9 +103,10 @@ const about = () => {
           </TechList>
         </div>
       </AboutHero>
+      <h2 className='max-width'>Other Hobbies</h2>
+
+      <Art />
       <Form />
-      {/* <Art /> */}
-      {/* <SurfGame /> */}
     </Main>
   );
 };

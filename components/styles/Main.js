@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
 const Main = styled.main`
-
-
   .max-width {
-    max-width: ${(props) => props.theme.maxWidth};
+    max-width: var(--maxWidth);
     margin: auto;
   }
 
@@ -31,6 +29,10 @@ const Main = styled.main`
   h1 {
     text-align: center;
     font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2rem;
   }
 `;
 
