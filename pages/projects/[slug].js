@@ -19,14 +19,20 @@ const Body = styled.div`
   width: 80%;
   max-width: 900px;
   margin: auto;
+
+  p {
+    font-size: 1.2rem;
+  }
 `;
 
 const Article = styled.article`
-  margin-top: 150px;
   padding: 20px;
+  h1 {
+    margin-bottom: 5rem;
+  }
   img {
-    width: 50%;
-    aspect-ratio: 6/5;
+    width: 70%;
+    justify-self: center;
   }
 `;
 
