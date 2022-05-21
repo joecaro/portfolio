@@ -21,7 +21,7 @@ export default function Home(props) {
       </Head>
 
       <Main id='main-container'>
-        <Hero />
+        <Hero page='home' />
 
         <ProjectsList projects={props.projects} />
         <Form />

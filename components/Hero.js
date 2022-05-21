@@ -79,7 +79,7 @@ const Hero = () => {
           </ButtonLink>
         </div>
         <div className='links'>
-          <Portrait />
+          <Portrait page='home' />
 
           <div className='link-list'>
             <ButtonLink
