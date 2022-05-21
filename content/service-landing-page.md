@@ -3,7 +3,7 @@
     title: "Service Landing Page"
     date:  Nov 11 2021 12:00 AM
     author: Joe
-    description:  A template landing page for a service company.
+    description:  A template landing page for a service company. Simple design with scalability in mind.
     stack: 
       - NextJS
       - Featured

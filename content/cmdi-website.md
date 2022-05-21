@@ -3,7 +3,7 @@
     title: "CMDI Website"
     date:  Nov 11 2021 12:00 AM
     author: Joe
-    description:  Website for SAAS CRM Platform with blog and hubspot integration.
+    description:  Website for SAAS CRM Platform with blog and hubspot integration. Built with NextJS using SSG to be performant and improve SEO.
     stack: 
       - NextJS
       - Contentful
