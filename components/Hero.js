@@ -176,9 +176,6 @@ const Container = styled.div`
     font-size: 1.5rem;
     font-weight: 400;
     margin: 0 0 2rem;
-    @media (prefers-color-scheme: light) {
-      color: var(--gray300);
-    }
   }
 
   .flavor-text {

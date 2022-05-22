@@ -13,7 +13,10 @@ const MobileNav = () => {
     <NavStyles>
       <ToggledNav toggled={toggled} theme={theme}>
         <ul>
-          <ToggleNav theme={theme} onClick={() => setToggled(!toggled)}>
+          <ToggleNav
+            type='button'
+            theme={theme}
+            onClick={() => setToggled(!toggled)}>
             x
           </ToggleNav>
           <li onClick={() => setToggled(!toggled)}>
@@ -31,7 +34,10 @@ const MobileNav = () => {
           <ThemeToggle />
         </ul>
       </ToggledNav>
-      <ToggleNav theme={theme} onClick={() => setToggled(!toggled)}>
+      <ToggleNav
+        type='button'
+        theme={theme}
+        onClick={() => setToggled(!toggled)}>
         +
       </ToggleNav>
     </NavStyles>
@@ -47,7 +53,7 @@ const enterKeyframes = keyframes`
 
 const enterAnimation = (props) =>
   css`
-    ${enterKeyframes} 200ms 1
+    ${enterKeyframes} 200ms
   `;
 
 const ToggleNav = styled.button`
@@ -74,8 +80,8 @@ const NavStyles = styled.nav`
 `;
 
 const ToggledNav = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: ${(props) =>
     props.theme === "light" ? "var(--gray900)" : "var(--gray300)"};
   display: ${(props) => (props.toggled ? "grid" : "none")};
