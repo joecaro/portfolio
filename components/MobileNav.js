@@ -41,15 +41,13 @@ const MobileNav = () => {
 export default MobileNav;
 
 const enterKeyframes = keyframes`
-0% {opacity: 0}
-1% {transform: translateY(50px)}
-99% {opacity: 1}
-100% {transform: translateY(0))}
+0% {opacity: 0; transform: translateY(20px);}
+100% {opacity: 1; transform: translateY(0)}
 `;
 
 const enterAnimation = (props) =>
   css`
-    ${enterKeyframes} .5s 1
+    ${enterKeyframes} 200ms 1
   `;
 
 const ToggleNav = styled.button`
@@ -84,7 +82,7 @@ const ToggledNav = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 9;
+  z-index: 99;
   animation: ${enterAnimation};
 
   ul {
@@ -93,9 +91,9 @@ const ToggledNav = styled.div`
     grid-template-rows: 3.5rem 1fr 1fr 1fr 1fr;
 
     margin: 0;
-    padding: 1rem 2rem;
+    padding: 1rem;
 
-    gap: 1rem;
+    gap: 2rem;
     list-style-type: none;
   }
 `;
