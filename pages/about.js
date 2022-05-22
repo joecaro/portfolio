@@ -111,7 +111,7 @@ const About = () => {
           </div>
         </Columns>
       </AboutMeSection>
-      <h2 className='max-width'>Other Hobbies</h2>
+      <h2 className='max-width'>What I Do For Fun</h2>
 
       <Art />
       <Form />
