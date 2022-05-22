@@ -28,7 +28,7 @@ export default function ProjectCard({ filter, setFilter, project }) {
         <div className='links'>
           {project.demo && (
             <Link passHref href={project.demo}>
-              <a target='_blank' rel='noreferrer'>
+              <a data-testid='demo-link' target='_blank' rel='noreferrer'>
                 <svg
                   className='demo'
                   xmlns='http://www.w3.org/2000/svg'
@@ -44,7 +44,10 @@ export default function ProjectCard({ filter, setFilter, project }) {
           )}
           {project.github && (
             <Link passHref href={project.github}>
-              <a target='_blank' rel='noopener noreferrer'>
+              <a
+                data-testid='github-link'
+                target='_blank'
+                rel='noopener noreferrer'>
                 <svg
                   className='github'
                   xmlns='http://www.w3.org/2000/svg'
