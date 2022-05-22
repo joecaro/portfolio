@@ -15,7 +15,9 @@ export default function ProjectsList({ projects }) {
     <MaxWidthContainer>
       <Section>
         <h2>Projects</h2>
-        <Select onChange={(e) => setFilter(e.target.value)}>
+        <Select
+          title='Project Category Selector'
+          onChange={(e) => setFilter(e.target.value)}>
           <option value='featured'>Featured</option>
           <option value='reactjs'>ReactJS</option>
           <option value='nextjs'>NextJS</option>

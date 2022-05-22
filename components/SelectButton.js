@@ -7,7 +7,8 @@ export default function SelectButton({ theme, filter, setFilter, name }) {
         <Select
           theme={theme}
           selected={filter === name.toLowerCase()}
-          onClick={() => setFilter(name.toLowerCase())}>
+          onClick={() => setFilter(name.toLowerCase())}
+          type='button'>
           {name}
         </Select>
       )}
@@ -16,7 +17,8 @@ export default function SelectButton({ theme, filter, setFilter, name }) {
           className='disabled'
           theme={theme}
           selected={filter === name.toLowerCase()}
-          onClick={() => {}}>
+          onClick={() => {}}
+          type='button'>
           {name}
         </Select>
       )}
