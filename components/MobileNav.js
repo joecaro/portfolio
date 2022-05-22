@@ -11,29 +11,31 @@ const MobileNav = () => {
   const { theme } = useTheme();
   return (
     <NavStyles>
-      <ToggledNav toggled={toggled} theme={theme}>
-        <ul>
-          <ToggleNav
-            type='button'
-            theme={theme}
-            onClick={() => setToggled(!toggled)}>
-            x
-          </ToggleNav>
-          <li onClick={() => setToggled(!toggled)}>
-            <Link href='/'>Home</Link>
-          </li>
-          <li onClick={() => setToggled(!toggled)}>
-            <Link href='/about'>About</Link>
-          </li>
-          <li onClick={() => setToggled(!toggled)}>
-            <Link href='/projects'>Projects</Link>
-          </li>
-          <li onClick={() => setToggled(!toggled)}>
-            <Link href='/contact'>Contact</Link>
-          </li>
-          <ThemeToggle />
-        </ul>
-      </ToggledNav>
+      {toggled && (
+        <ToggledNav toggled={toggled} theme={theme}>
+          <ul>
+            <ToggleNav
+              type='button'
+              theme={theme}
+              onClick={() => setToggled(!toggled)}>
+              x
+            </ToggleNav>
+            <li onClick={() => setToggled(!toggled)}>
+              <Link href='/'>Home</Link>
+            </li>
+            <li onClick={() => setToggled(!toggled)}>
+              <Link href='/about'>About</Link>
+            </li>
+            <li onClick={() => setToggled(!toggled)}>
+              <Link href='/projects'>Projects</Link>
+            </li>
+            <li onClick={() => setToggled(!toggled)}>
+              <Link href='/contact'>Contact</Link>
+            </li>
+            <ThemeToggle />
+          </ul>
+        </ToggledNav>
+      )}
       <ToggleNav
         type='button'
         theme={theme}
@@ -48,7 +50,7 @@ export default MobileNav;
 
 const enterKeyframes = keyframes`
 0% {opacity: 0; transform: translateY(20px);}
-100% {opacity: 1; transform: translateY(0)}
+100% {opacity: 1; transform: translateY(0);}
 `;
 
 const enterAnimation = (props) =>
