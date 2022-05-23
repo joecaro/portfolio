@@ -96,7 +96,8 @@ const About = () => {
             </div>
             <p className='body'>
               {"I've"} had the chance to design and create multiple company
-              websites, internal web applications, and many personal projects.
+              websites, internal web applications, personal projects, and
+              courses.
             </p>
             <h4>What I Draw From</h4>
             <p className='body'>
@@ -107,6 +108,7 @@ const About = () => {
               <li>CMDI Website</li>
               <li>Internal CRM Application</li>
               <li>Design Tools</li>
+              <li>Wes {"Bos'"} Advanced React Course</li>
             </TechList>
           </div>
         </Columns>

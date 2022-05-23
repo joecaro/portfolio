@@ -6,8 +6,8 @@
     description:  A neural network created in python using the Keras library to learn the common Iris set.
     stack: 
       - Python
-    github: https://github.com/joecaro/HTML-CSS-Patterns
-    demo: https://csslayoutexamples.netlify.app/
+    github: https://github.com/joecaro/ML-Keras-Iris-Test
+    demo:
     tags:
       - project
       - machine learning
