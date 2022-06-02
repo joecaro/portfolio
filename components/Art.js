@@ -1,5 +1,4 @@
 import React from "react";
-import { Zoom } from "react-reveal";
 import InstagramCard from "./InstagramCard";
 import { themes, useTheme } from "../lib/ThemeContext";
 import styled from "styled-components";
@@ -15,7 +14,6 @@ const Art = () => {
           art. I started in 2017 and have helped with small projects providing
           3d illustrations.
         </p>
-        <Zoom cascade>
           <ul>
             <li>
               <InstagramCard
@@ -42,7 +40,6 @@ const Art = () => {
               />
             </li>
           </ul>
-        </Zoom>
       </Section>
     </>
   );

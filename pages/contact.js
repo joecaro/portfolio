@@ -2,7 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useTheme, themes } from "../lib/ThemeContext";
-import Fade from "react-reveal/Fade";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -151,9 +150,9 @@ export const Form = () => {
               value={formData.firstname}
               name='firstname'
               type='text'></input>
-            <Fade bottom when={formDataValid.firstname === false}>
+            { formDataValid.firstname === false &&
               <p>Please fill in First Name field</p>
-            </Fade>
+            }
           </label>
           <label>
             Last Name
@@ -165,9 +164,9 @@ export const Form = () => {
               value={formData.lastname}
               name='lastname'
               type='text'></input>
-            <Fade bottom when={formDataValid.lastname === false}>
+            {formDataValid.lastname === false &&
               <p>Please fill in Last Name field</p>
-            </Fade>
+            }
           </label>
         </Fieldset>
         <Fieldset className={"set"}>
@@ -181,9 +180,9 @@ export const Form = () => {
               value={formData.company}
               name='company'
               type='text'></input>
-            <Fade bottom when={formDataValid.company === false}>
+           {formDataValid.company === false &&
               <p>Please fill in Company field</p>
-            </Fade>
+           }
           </label>
           <label>
             Email
@@ -195,9 +194,9 @@ export const Form = () => {
               value={formData.email}
               name='email'
               type='email'></input>
-            <Fade bottom when={formDataValid.email === false}>
+            {formDataValid.email === false &&
               <p>Please enter a valid email</p>
-            </Fade>
+            }
           </label>{" "}
         </Fieldset>
         <Fieldset className={"set"}>

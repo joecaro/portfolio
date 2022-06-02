@@ -67,7 +67,7 @@ const Hero = () => {
           </SlideEnter>
           <SlideEnter duration='2500ms'>
             <h2>
-              I am Frontend React developer specializing in NextJS and NodeJS
+              I am a Frontend React developer specializing in NextJS and NodeJS
               Applications
             </h2>
           </SlideEnter>
