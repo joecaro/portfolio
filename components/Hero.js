@@ -73,7 +73,7 @@ const Hero = () => {
           </SlideEnter>
           <ButtonLink
             color={"purple"}
-            href='/files/Resume_Joseph_Carothers_11-21.docx'
+            href='/files/Resume_Joseph_Carothers_2022.docx'
             label='Resume'>
             Resume
           </ButtonLink>
