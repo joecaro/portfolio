@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styled from "styled-components";
 import SelectButton from "./SelectButton";
 import { useTheme } from "../lib/ThemeContext";
