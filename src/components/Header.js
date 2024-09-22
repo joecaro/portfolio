@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <HeaderStyles>
       <MaxWidthContainer>
-        <Link passHref href='/'>
+        <Link passHref href='/' legacyBehavior>
           <span>Joseph Carothers</span>
         </Link>
         <Nav />
