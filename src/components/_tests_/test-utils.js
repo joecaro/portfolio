@@ -1,4 +1,3 @@
-import React from 'react'
 import {render} from '@testing-library/react'
 import {ThemeProvider} from 'my-ui-lib' //change imports
 import {TranslationProvider} from 'my-i18n-lib'
