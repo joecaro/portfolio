@@ -10,7 +10,7 @@ const Nav = ({ cookieTheme }: { cookieTheme: string | undefined }) => {
     const pathname = usePathname();
 
     const linkGradient = (current: boolean) =>
-        `bg-no-repeat bg-right transition-[background-size] duration-200 bg-lightGradient dark:bg-darkGradient ${
+        `bg-no-repeat bg-right transition-[background-size] duration-200 bg-gradientBlue ${
             current ? "bg-[length:100%_100%]" : "bg-[length:0%_100%]"
         } hover:bg-[length:100%_100%] hover:bg-left`;
 

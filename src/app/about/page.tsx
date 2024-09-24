@@ -85,7 +85,7 @@ const About = () => {
                             className='flex flex-col gap-5 dark:text-neutral-200'
                         >
                             <div className='flex-1 basis-20'>
-                                <div className='title flex gap-4 text-xl items-center mb-2'>
+                                <div className='flex gap-4 text-xl font-bold items-center mb-2'>
                                     <svg
                                         xmlns='http://www.w3.org/2000/svg'
                                         width='64'
@@ -101,13 +101,13 @@ const About = () => {
                                 <p>{section.description}</p>
                             </div>
                             <div className='flex-1'>
-                                <h4 className='text-lg text-blue-400 mb-2'>
+                                <h4 className='text-sm font-bold text-blue-500 mb-2'>
                                     {section.subTitle}
                                 </h4>
                                 <p>{section.subDescription}</p>
                             </div>
                             <div className='flex-1'>
-                                <h4 className='text-lg text-blue-400 mb-2'>
+                                <h4 className='text-sm font-bold text-blue-500 mb-2'>
                                     <Link
                                         href={
                                             section.list.link

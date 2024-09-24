@@ -54,10 +54,8 @@ const config: Config = {
                 fadeInAbout: "fadeInAbout 0.5s ease-in-out",
             },
             backgroundImage: {
-                lightGradient:
-                    "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 90%, var(--blue300))",
-                darkGradient:
-                    "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 90%, var(--blue500))",
+                gradientBlue:
+                    "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 90%, rgb(37 99 235))",
             },
         },
     },
