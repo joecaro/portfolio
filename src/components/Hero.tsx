@@ -10,7 +10,7 @@ const Hero = () => {
         <MaxWidthContainer>
             <div className='min-h-[80vh] flex flex-col items-center py-8 relative gap-12 lg:grid lg:grid-cols-2 lg:flex-row lg:justify-between'>
                 <svg
-                    className={`absolute text-blue-100 dark:text-gray-600 left-1/2 pointer-events-none`}
+                    className={`absolute text-blue-100 dark:text-neutral-600 left-1/2 pointer-events-none`}
                     width='508'
                     height='952'
                     viewBox='0 0 508 952'
@@ -65,12 +65,12 @@ const Hero = () => {
                         </p>
                     </div>
                     <div className='animate-slideIn duration-[1000ms]'>
-                        <h1 className='text-4xl font-bold dark:text-white'>
+                        <h1 className='text-4xl font-bold dark:text-neutral-300'>
                             Hi, {"I'm"} Joe
                         </h1>
                     </div>
                     <div className='animate-slideIn duration-[2500ms]'>
-                        <h2 className='text-xl font-normal dark:text-white'>
+                        <h2 className='text-xl font-normal dark:text-neutral-300'>
                             I am a Frontend React developer specializing in
                             NextJS and NodeJS Applications
                         </h2>

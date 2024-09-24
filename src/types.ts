@@ -7,7 +7,6 @@ declare type Project = {
     description: string;
     name: string;
     stack: string[];
-    position: number;
     content?: string;
     demo?: string;
     github?: string;

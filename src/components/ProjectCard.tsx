@@ -16,7 +16,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
     return (
         <div
-            className={`grid grid-areas gap-4 rounded-md border-b-4 border-r-4 p-8 bg-gray-50 dark:bg-gray-600 dark:border-gray-800 dark:text-white`}
+            className={`grid grid-areas gap-4 rounded-md border-b-4 border-r-4 p-8 bg-neutral-50 dark:bg-neutral-600 dark:border-neutral-800 dark:text-neutral-300`}
         >
             <div className='grid grid-rows-2 gap-4'>
                 <div className='relative hidden h-full w-full overflow-hidden md:block'>

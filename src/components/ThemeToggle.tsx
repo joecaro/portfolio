@@ -14,7 +14,7 @@ const ThemeToggle = ({ initialValue }: { initialValue?: string }) => {
 
     return (
         <button
-            className='relative w-16 h-7 bg-gray-300 text-gray-700 border-none rounded-md grid grid-cols-2 items-center'
+            className='relative w-16 h-7 bg-neutral-300 text-neutral-700 border-none rounded-md grid grid-cols-2 items-center'
             onClick={handleToggleTheme}
         >
             <span
@@ -50,7 +50,7 @@ const ThemeToggle = ({ initialValue }: { initialValue?: string }) => {
                 </svg>
             </span>
             <div
-                className={`absolute top-0 h-7 w-8 bg-gray-700 rounded-md transition-transform duration-200 ${
+                className={`absolute top-0 h-7 w-8 bg-neutral-700 rounded-md transition-transform duration-200 ${
                     theme === "dark" ? "transform translate-x-8" : ""
                 }`}
             ></div>

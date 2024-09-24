@@ -15,7 +15,7 @@ export default function InstagramCard({
             href={url}
             className={`relative block h-[${cardHeight}px] w-[${
                 cardHeight * (7 / 8)
-            }px] rounded-lg border-2 border-gray-500 shadow-[3px_3px_0_#6b7280] grid grid-rows-[auto_1fr_auto] transition-transform duration-200 hover:scale-110`}
+            }px] rounded-lg border-2 border-neutral-500 shadow-[3px_3px_0_#6b7280] grid grid-rows-[auto_1fr_auto] transition-transform duration-200 hover:scale-110`}
         >
             <div className='flex p-4'>
                 <div

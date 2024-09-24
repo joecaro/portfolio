@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
 import {
     beard,
@@ -11,7 +13,6 @@ import {
 } from "../lib/PortraitSVG";
 
 const Portrait = (props: { page: string }) => {
-
     const noseRef = useRef<SVGGElement | null>(null);
     const [transformX, setTransformX] = useState(0);
     const [transformY, setTransformY] = useState(0);
@@ -70,8 +71,10 @@ const Portrait = (props: { page: string }) => {
 
     return (
         <div
-            className={`relative z-10 w-full h-full grid place-items-center animate-${
-                props.page === "home" ? "fadeInHome" : "fadeInAbout"
+            className={`relative z-10 w-full h-full grid place-items-center ${
+                props.page === "home"
+                    ? "animate-fadeInHome"
+                    : "animate-fadeInAbout"
             }`}
         >
             <div
@@ -81,7 +84,7 @@ const Portrait = (props: { page: string }) => {
                     }px) rotate(${rotationDegrees}deg)`,
                     transition: "200ms",
                 }}
-                className="text-white dark:text-gray-800"
+                className='text-white dark:text-neutral-800'
             >
                 <svg
                     height='100%'

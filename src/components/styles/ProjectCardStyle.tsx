@@ -27,7 +27,7 @@ export const Header = ({
     isDark,
     children,
 }: PropsWithChildren<{ isDark: boolean }>) => {
-    const bgColor = isDark ? "bg-gray-900" : "bg-gray-50";
+    const bgColor = isDark ? "bg-neutral-900" : "bg-neutral-50";
 
     return (
         <div

@@ -1,12 +1,11 @@
 import { cn } from "@/lib/tw";
-import { type ClassValue } from "clsx";
 
 const COLORS = {
-    gray: {
-        bg: "bg-gray-500",
-        text: "text-gray-600",
-        borderDark: "border-r-gray-800 border-b-gray-800",
-        borderLight: "border-l-gray-500 border-t-gray-500",
+    neutral: {
+        bg: "bg-neutral-500",
+        text: "text-neutral-600",
+        borderDark: "border-r-neutral-800 border-b-neutral-800",
+        borderLight: "border-l-neutral-500 border-t-neutral-500",
     },
     blue: {
         bg: "bg-blue-500",
@@ -52,14 +51,16 @@ type BaseButtonProps = {
 
 const BaseButton = ({
     children,
-    color = "gray",
+    color = "neutral",
     textColor,
     inverted = false,
     animated = true,
     className = "",
     onClick,
 }: BaseButtonProps) => {
-    const bgColor = inverted ? "bg-white dark:bg-gray-800" : COLORS[color].bg;
+    const bgColor = inverted
+        ? "bg-white dark:bg-neutral-800"
+        : COLORS[color].bg;
     const textClass = textColor
         ? COLORS[textColor].text
         : inverted
@@ -67,7 +68,7 @@ const BaseButton = ({
         : "text-white";
 
     return (
-        <div className={`relative h-12 ${className}`}>
+        <div className={`relative ${className}`}>
             <button
                 className={cn(
                     `box-content grid place-items-center font-semibold h-10 w-24 rounded-sm transition-all ease-in-out transform`,

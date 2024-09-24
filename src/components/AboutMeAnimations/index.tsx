@@ -6,11 +6,11 @@ const duration = 4000; //duration in ms
 export const Circle = () => {
     return (
         <span
-            className={`absolute h-[200px] w-[200px] rounded-full transform rotate-[-90deg] z-20 border-4 animate-circleAnimation border-blue-600 bg-blue-400 dark:border-blue-500 dark:bg-gray-200`}
+            className={`absolute h-[200px] w-[200px] rounded-full transform rotate-[-90deg] z-20 border-4 animate-circleAnimation border-blue-600 bg-blue-400 dark:border-blue-500 dark:bg-neutral-800`}
             style={{ top: "-60px", left: "-100px" }}
         >
             <span
-                className={`absolute w-[200px] h-[100px] transform translate-x-[-50%] bg-blue-400 dark:bg-gray-200`}
+                className={`absolute w-[200px] h-[100px] transform translate-x-[-50%] bg-blue-400 dark:bg-neutral-200`}
                 style={{ top: "-4px", left: "50%" }}
             />
         </span>
@@ -54,7 +54,7 @@ export const Diagonal = ({
 }) => {
     return (
         <span
-            className={`absolute h-[1000px] w-[1000px] border-r-3 border-blue-500 dark:border-gray-300 transform rotate-[45deg] animate-diagonalAnimation`}
+            className={`absolute h-[1000px] w-[1000px] border-r-3 border-blue-500 dark:border-neutral-300 transform rotate-[45deg] animate-diagonalAnimation`}
             style={{ top: height, right: "10px" }}
         />
     );

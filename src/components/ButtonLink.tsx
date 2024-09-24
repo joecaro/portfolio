@@ -1,11 +1,11 @@
 import { cn } from "@/lib/tw";
 
 const COLORS = {
-    gray: {
-        bg: "bg-gray-500",
-        text: "text-gray-600",
-        borderDark: "border-r-gray-800 border-b-gray-800",
-        borderLight: "border-l-gray-500 border-t-gray-500",
+    neutral: {
+        bg: "bg-neutral-500",
+        text: "text-neutral-600",
+        borderDark: "border-r-neutral-800 border-b-neutral-800",
+        borderLight: "border-l-neutral-500 border-t-neutral-500",
     },
     blue: {
         bg: "bg-blue-500",
@@ -50,13 +50,13 @@ type ButtonLinkProps = {
 
 const ButtonLink = ({
     children,
-    color = "gray",
+    color = "neutral",
     href,
     textColor,
     inverted = false,
     animated = true,
 }: ButtonLinkProps) => {
-    const bgColor = inverted ? "bg-white dark:bg-gray-800" : COLORS[color].bg;
+    const bgColor = inverted ? "bg-white dark:bg-neutral-800" : COLORS[color].bg;
     const textClass = textColor
         ? COLORS[textColor].text
         : inverted

@@ -4,7 +4,7 @@ import InstagramCard from "./InstagramCard";
 const Art = () => {
     return (
         <section
-            className={`max-w-screen-xl mx-auto bg-white dark:bg-gray-300 rounded-lg border-b-3 border-r-3 border-gray-700 p-16`}
+            className={`max-w-screen-xl mx-auto bg-white dark:bg-neutral-300 rounded-lg border-b-3 border-r-3 border-neutral-700 p-16`}
         >
             <h3 className='text-2xl mb-4'>3D Art</h3>
             <p className='mb-4'>

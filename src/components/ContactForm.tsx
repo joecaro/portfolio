@@ -146,7 +146,7 @@ export default function ContactForm() {
             <h2 className='text-3xl font-semibold mb-8'>Contact Me</h2>
             <form
                 id='contact'
-                className='grid gap-8 p-4 rounded-lg border-2 border-gray-300 shadow-lg max-w-full'
+                className='grid gap-8 p-4 rounded-lg border-2 border-neutral-300 shadow-lg max-w-full'
                 onSubmit={handleSubmit}
             >
                 <fieldset className='flex flex-wrap gap-8'>
@@ -261,7 +261,7 @@ export default function ContactForm() {
                 </fieldset>
 
                 <button
-                    className={`w-1/3 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:bg-gray-400 self-end`}
+                    className={`w-1/3 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:bg-neutral-400 self-end`}
                     type='submit'
                     disabled={!formValid}
                 >

@@ -10,12 +10,12 @@ const MobileNav = () => {
         <nav className='flex items-center gap-4 md:hidden'>
             {toggled && (
                 <div
-                    className={`bg-gray-900 dark:bg-gray-300 w-full h-full absolute top-0 left-0 z-50 grid animate-slideIn`}
+                    className={`bg-neutral-900 dark:bg-neutral-300 w-full h-full absolute top-0 left-0 z-50 grid animate-slideIn`}
                 >
                     <ul className='h-1/2 grid grid-rows-[3.5rem,1fr,1fr,1fr,1fr] m-0 p-4 gap-8 list-none'>
                         <button
                             type='button'
-                            className={`text-4xl bg-transparent border-none self-end justify-self-end text-gray-200 dark:text-gray-900`}
+                            className={`text-4xl bg-transparent border-none self-end justify-self-end text-neutral-200 dark:text-neutral-900`}
                             onClick={() => setToggled(!toggled)}
                         >
                             x
@@ -38,7 +38,7 @@ const MobileNav = () => {
             )}
             <button
                 type='button'
-                className={`text-4xl bg-transparent border-none text-gray-200 dark:text-gray-900`}
+                className={`text-4xl bg-transparent border-none text-neutral-200 dark:text-neutral-900`}
                 onClick={() => setToggled(!toggled)}
             >
                 +

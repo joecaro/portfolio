@@ -1,68 +1,89 @@
 ---
-    slug: client-crm
-    title: "Client CRM"
-    date:  Nov 11 2021 12:00 AM
-    author: Joe
-    description:  I created this application for my support team to track clients' status as they went through the process of filing reports.
-    stack: 
-      - MongoDB
-      - Express
-      - NextJS
-      - NodeJs
-      - JWT Token Autorization
-      - Featured
-    github: https://github.com/joecaro/crm
-    demo: https://crm.josephcarothers.com/
-    tags:
-      - project 
-      - featured
-      - nextjs
-      - react
-      - next
-      - html
-      - css
-      - mongodb
-      - node
-      - express
-      - jwt token authorization
-    tech:
-      - react
-      - next
-      - html
-      - css
-      - mongodb
-      - node
-      - express
-    image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/CRM-Mockup_zul9pq_wedgib.png
-    position: 2
+slug: client-crm
+title: "Client CRM"
+date: Nov 11 2021 12:00 AM
+author: Joe
+description: I developed this application for my support team to track client statuses as they progressed through the report filing process.
+stack:
+    - MongoDB
+    - Express
+    - NextJS
+    - NodeJS
+    - JWT Token Authorization
+    - Featured
+github: https://github.com/joecaro/crm
+demo: https://crm.josephcarothers.com/
+tags:
+    - project
+    - featured
+    - nextjs
+    - react
+    - next
+    - html
+    - css
+    - mongodb
+    - node
+    - express
+    - jwt token authorization
+tech:
+    - react
+    - next
+    - html
+    - css
+    - mongodb
+    - node
+    - express
+image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/CRM-Mockup_zul9pq_wedgib.png
 ---
 
-**Client CRM**
+# Client CRM
 
-This is an internal tool I created using Nextjs and MongoDB to help track clients progress during a reporting period. The main purpose was to speed up our tracking speed and reduce effort. Previously we used excel to track this information, so having a database and tailored UI has sped up the process.
+The **Client CRM** application was designed to address inefficiencies in how our support team tracked clients’ statuses during reporting periods. The main objective was to move away from manual Excel tracking, which was time-consuming and prone to error, and develop a tailored CRM (Customer Relationship Management) solution using **Next.js**, **MongoDB**, and **NodeJS**.
 
-### Problems:
+## The Problem
 
-- Traking in excel is tedious and takes up valuable support resources in busy reporting periods
-- Creating new excels and updating organization information was unreliable. Clients would move spreadsheets, change POCs, etc.
+Before building this tool, our team tracked client progress using Excel sheets. While functional, this process had several drawbacks:
 
-### Solutions:
+-   **Tedious and Time-Consuming**: Updating Excel sheets manually was inefficient and slowed down the team during busy reporting periods.
+-   **Inconsistent Information**: Spreadsheets were easily misplaced or modified by different team members, causing issues with version control. Clients would occasionally be lost in the shuffle, or Point of Contact (POC) information would get outdated.
 
-- UI would speed up process by allowing users to quickly scroll through list and update status of client with one click.
-- Stored database allowed for consistent information on clients and gave the ability to update a single source.
-- Allows for seeing quick totals and exporting list to share with others.
+## The Solution
 
-![Desktop](https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/CRM-Mockup_zul9pq_wedgib.png)![Mobile](https://res.cloudinary.com/joecarothers/image/upload/v1651167756/misc/Projects/crm/Screenshot_2022-04-28_134145_h4t4ba.jpg)
+To solve these issues, I created a full-stack CRM application that streamlined our workflow and provided a single source of truth for client data. This resulted in faster tracking, less human error, and greater consistency in client records.
 
-### Features
+### Key Improvements:
 
-The key features of this CRUD application are:
+1. **User-Friendly Interface**: The UI was built with **Next.js** to allow support team members to quickly scroll through clients and update their statuses with a single click. This dramatically reduced the time spent updating client information.
+2. **Centralized Database**: Switching to **MongoDB** provided a reliable, centralized data store. Instead of multiple, error-prone spreadsheets, the team now had one definitive source of client data that was always up-to-date.
 
-- Create new records, assigning them to one of a select number of groups.
-- Within each group, easily track the progress of each record
-- Store simple information on each record like date completed, notes, and point of contact
-- Have quick at a glance totals for each page as well as an spreadsheet export
+3. **Quick Metrics and Exports**: The CRM also allowed users to generate quick totals of client statuses and export these as spreadsheets when needed for reports or sharing with stakeholders.
 
-**_stack_**
+## Core Features
 
-I created the frontend of this application using the NextJS framework. The backend consists of a NodeJS server built with the ExpressJS framework that connects to a MongoDB datase.
+This CRM is a full **CRUD application** (Create, Read, Update, Delete), with several key features that make it effective for day-to-day tracking:
+
+-   **Group Management**: The ability to create new records and assign them to specific groups, making it easy to categorize clients.
+-   **Progress Tracking**: Each client’s progress can be updated in real-time, with quick visibility into who’s completed the process and who hasn’t.
+-   **Record Management**: Each record stores important data, such as the date completed, client notes, and Point of Contact (POC) information.
+-   **At-a-Glance Totals**: Users can easily view total counts for client statuses on each page.
+-   **Spreadsheet Export**: For sharing or further analysis, the CRM supports exporting the current data into a spreadsheet.
+
+![Desktop Version](https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/CRM-Mockup_zul9pq_wedgib.png)  
+![Mobile Version](https://res.cloudinary.com/joecarothers/image/upload/v1651167756/misc/Projects/crm/Screenshot_2022-04-28_134145_h4t4ba.jpg)
+
+## Tech Stack
+
+The stack I used for this project leverages modern web technologies:
+
+-   **Frontend**: Built with **Next.js**, a powerful React framework that allows for both client-side and server-side rendering, making the app fast and responsive.
+-   **Backend**: The backend API was created with **NodeJS** and **ExpressJS**, which provides a lightweight and efficient framework to handle server-side logic and routing.
+-   **Database**: The client data is stored in **MongoDB**, a NoSQL database known for its flexibility and scalability.
+-   **Authentication**: To secure the application, I implemented **JWT Token Authorization**, ensuring that only authenticated users can access the CRM.
+
+## Final Thoughts
+
+The **Client CRM** has proven to be a game-changer for our support team, streamlining their workflow and reducing the inefficiencies that came with manual data entry. It also provided valuable learning experiences for me, particularly in handling user authentication, creating a seamless UI, and managing a NoSQL database.
+
+Feel free to check out the [GitHub repository](https://github.com/joecaro/crm) to dive deeper into the code, or try out the [live demo](https://crm.josephcarothers.com/) to see the CRM in action!
+
+Happy coding!

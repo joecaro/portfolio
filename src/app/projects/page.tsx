@@ -1,21 +1,10 @@
 import Head from "next/head";
-import ProjectCard from "../../components/ProjectCard";
 import getAllProjects from "../../lib/getAllProjects";
 import ContactForm from "@/components/ContactForm";
+import Link from "next/link";
 
 export default function Page() {
-    const projects = getAllProjects([
-        "slug",
-        "title",
-        "description",
-        "stack",
-        "github",
-        "demo",
-        "image",
-        "position",
-    ]);
-
-    const sortedProjects = projects.sort((a, b) => a.position - b.position);
+    const projects = getAllProjects();
 
     return (
         <>
@@ -27,23 +16,27 @@ export default function Page() {
                 />
             </Head>
 
-            <div className="max-w-5xl m-auto py-32 px-4">
-                <h1>Projects</h1>
+            <div className='py-32 px-4 max-w-2xl m-auto'>
+                <h1 className='font-bold text-3xl dark:text-neutral-200 mb-4'>
+                    Projects
+                </h1>
 
-                <div
-                    style={{
-                        display: "grid",
-                        gap: "5rem",
-                        height: "100%",
-                    }}
-                >
-                    {sortedProjects.map((project) => {
+                <div className='grid gap-5 h-full'>
+                    {projects.map(project => {
                         return (
-                            <ProjectCard
+                            <Link
+                                href={`/projects/${project.slug}`}
                                 key={project.slug}
-                                project={project}
-                                filter=''
-                            />
+                                className='border dark:border-neutral-200 bg-neutral-50 dark:bg-neutral-800 p-4 rounded dark:text-neutral-200 hover:border-2'
+                            >
+                                <p className='font-bold text-xl'>
+                                    {project.title}
+                                </p>
+                                <p className='text-neutral-600 dark:text-neutral-400'>
+                                    {project.date}
+                                </p>
+                                <p>{project.description}</p>
+                            </Link>
                         );
                     })}
                 </div>

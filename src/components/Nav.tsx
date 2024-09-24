@@ -10,13 +10,13 @@ const Nav = () => {
     const pathname = usePathname();
 
     const linkGradient = (current: boolean) =>
-        `bg-gradient-to-b from-transparent to-blue-300 dark:to-blue-500  ${
-            current ? "bg-100% 100%" : "bg-0% 100%"
-        } hover:bg-100% 100% transition-all duration-200`;
+        `bg-no-repeat bg-right transition-[background-size] duration-200 bg-lightGradient dark:bg-darkGradient ${
+            current ? "bg-[length:100%_100%]" : "bg-[length:0%_100%]"
+        } hover:bg-[length:100%_100%] hover:bg-left`;
 
     return (
         <nav className='hidden md:flex items-center gap-4'>
-            <ul className='list-none flex items-center gap-4 dark:text-white'>
+            <ul className='list-none flex items-center gap-4 dark:text-neutral-300'>
                 <li>
                     <Link
                         href='/'
