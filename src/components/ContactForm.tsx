@@ -38,16 +38,23 @@ const convertToUriEncoded = (json: Record<string, unknown>) => {
     return str.join("&");
 };
 
-
 export default function ContactForm() {
     const [formData, setFormData] = useState(initialFormData);
-    const [formDataValid, setFormDataValid] = useState(initialFormDataValid);
+    const [formDataValid, setFormDataValid] = useState<{
+        firstname: boolean | null;
+        lastname: boolean | null;
+        email: boolean | null;
+        company: boolean | null;
+        message: boolean | null;
+    }>(initialFormDataValid);
     const [formValid, setFormValid] = useState(false);
 
     const portalId = "21057690";
     const formId = "c532a7e0-7e9c-41cd-9dcc-c6da3846b998";
 
-    const handleDataChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const handleDataChange = (
+        e: React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
         checkIfFieldIsValid(e);
         let newFormData = {
             ...formData,
@@ -57,7 +64,9 @@ export default function ContactForm() {
         checkIfFormIsValid();
     };
 
-    const checkIfFieldIsValid = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const checkIfFieldIsValid = (
+        e: React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
         switch (e.currentTarget.name) {
             case "email":
                 if (
