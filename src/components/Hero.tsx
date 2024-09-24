@@ -98,7 +98,7 @@ const Hero = () => {
                             inverted
                             animated
                             color='blue'
-                            href='https://www.linkedin.com/in/joseph-samuel-carothers-b36218132/'
+                            href='https://www.linkedin.com/in/joseph-carothers-b36218132/'
                         >
                             LinkedIn
                         </ButtonLink>

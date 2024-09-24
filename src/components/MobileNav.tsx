@@ -10,12 +10,12 @@ const MobileNav = ({ cookieTheme }: { cookieTheme: string | undefined }) => {
         <nav className='flex items-center gap-4 md:hidden'>
             {toggled && (
                 <div
-                    className={`bg-neutral-900 dark:bg-neutral-300 w-full h-full absolute top-0 left-0 z-50 grid animate-slideIn`}
+                    className={`bg-neutral-300 dark:bg-neutral-900 w-full h-full absolute top-0 left-0 z-50 grid animate-slideIn dark:text-neutral-300`}
                 >
-                    <ul className='h-1/2 grid grid-rows-[3.5rem,1fr,1fr,1fr,1fr] m-0 p-4 gap-8 list-none'>
+                    <ul className='h-1/2 grid m-0 p-4 pt-0 gap-8 list-none'>
                         <button
                             type='button'
-                            className={`text-4xl bg-transparent border-none self-end justify-self-end text-neutral-200 dark:text-neutral-900`}
+                            className={`text-4xl bg-transparent border-none self-end justify-self-end px-3`}
                             onClick={() => setToggled(!toggled)}
                         >
                             x
@@ -38,7 +38,7 @@ const MobileNav = ({ cookieTheme }: { cookieTheme: string | undefined }) => {
             )}
             <button
                 type='button'
-                className={`text-4xl bg-transparent border-none text-neutral-200 dark:text-neutral-900`}
+                className={`text-4xl bg-transparent border-none dark:text-neutral-200`}
                 onClick={() => setToggled(!toggled)}
             >
                 +
