@@ -22,7 +22,9 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
     return (
         <MaxWidthContainer>
             <section className='pb-20 w-full z-10'>
-                <h2 className='text-2xl dark:text-neutral-200 mb-4'>Projects</h2>
+                <h2 className='text-2xl dark:text-neutral-200 mb-4'>
+                    Projects
+                </h2>
                 <select
                     className='text-xl border border-neutral-200 rounded-md p-2 my-4 dark:bg-neutral-600 dark:text-neutral-300  md:hidden cursor-pointer'
                     title='Project Category Selector'
@@ -35,7 +37,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                         </option>
                     ))}
                 </select>
-                <div className='filter-select hidden md:flex flex-wrap justify-between gap-8'>
+                <div className='hidden md:flex flex-wrap justify-between gap-8'>
                     {[
                         "Featured",
                         "ReactJS",

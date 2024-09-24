@@ -68,7 +68,7 @@ const BaseButton = ({
         : "text-white";
 
     return (
-        <div className={`relative ${className}`}>
+        <div className={`relative h-10 ${className}`}>
             <button
                 className={cn(
                     `box-content grid place-items-center font-semibold h-10 w-24 rounded-sm transition-all ease-in-out transform`,
