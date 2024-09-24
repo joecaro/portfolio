@@ -142,7 +142,7 @@ export const ButtonLink = ({
     animated = true,
 }: ButtonLinkProps) => {
     return (
-        <div className='relative h-12'>
+        <div className='relative h-12 w-fit'>
             <a
                 className='block'
                 href={href}

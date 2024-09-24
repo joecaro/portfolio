@@ -1,6 +1,6 @@
 ---
 slug: tints-and-hints
-title: "Tints and Hints: A SolidJS Party Game "
+title: "A SolidJS Party Game "
 date: Jul 25 2024 12:00 AM
 author: Joe
 description: An exploration of SolidJS and its merits in managing complex state for a game inspired by Hues and Cues, focusing on local state management and WebSocket communication.

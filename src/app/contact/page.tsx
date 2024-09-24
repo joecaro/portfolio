@@ -150,7 +150,7 @@ export const Form = () => {
     };
 
     return (
-        <div className='max-w-screen-lg mx-auto py-40'>
+        <div className='max-w-screen-lg mx-auto py-40 dark:text-neutral-200'>
             <h2 className='text-3xl font-semibold mb-8'>Contact Me</h2>
             <form
                 id='contact'
@@ -161,7 +161,7 @@ export const Form = () => {
                     <label className='block text-lg'>
                         First Name
                         <input
-                            className={`w-full p-2 rounded-md border ${
+                            className={`w-full dark:bg-neutral-800  p-2 rounded-md border ${
                                 formDataValid.firstname === false
                                     ? "border-red-500"
                                     : ""
@@ -183,7 +183,7 @@ export const Form = () => {
                     <label className='block text-lg'>
                         Last Name
                         <input
-                            className={`w-full p-2 rounded-md border ${
+                            className={`w-full dark:bg-neutral-800  p-2 rounded-md border ${
                                 formDataValid.lastname === false
                                     ? "border-red-500"
                                     : ""
@@ -207,7 +207,7 @@ export const Form = () => {
                     <label className='block text-lg'>
                         Company
                         <input
-                            className={`w-full p-2 rounded-md border ${
+                            className={`w-full dark:bg-neutral-800  p-2 rounded-md border ${
                                 formDataValid.company === false
                                     ? "border-red-500"
                                     : ""
@@ -229,7 +229,7 @@ export const Form = () => {
                     <label className='block text-lg'>
                         Email
                         <input
-                            className={`w-full p-2 rounded-md border ${
+                            className={`w-full dark:bg-neutral-800  p-2 rounded-md border ${
                                 formDataValid.email === false
                                     ? "border-red-500"
                                     : ""
@@ -253,7 +253,7 @@ export const Form = () => {
                     <label className='block text-lg'>
                         Message
                         <textarea
-                            className={`w-full p-2 rounded-md border ${
+                            className={`w-full dark:bg-neutral-800  p-2 rounded-md border ${
                                 formDataValid.message === false
                                     ? "border-red-500"
                                     : ""
@@ -269,7 +269,7 @@ export const Form = () => {
                 </fieldset>
 
                 <button
-                    className={`w-1/3 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:bg-neutral-400 self-end`}
+                    className={`w-1/3  dark:bg-neutral-800 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:bg-neutral-400 self-end`}
                     type='submit'
                     disabled={!formValid}
                 >

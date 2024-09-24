@@ -8,35 +8,41 @@ import MaxWidthContainer from "./styles/MaxWidthContainer";
 import { Button } from "./Button";
 
 export default function ProjectsList({ projects }: { projects: Project[] }) {
+    const availableFilters = projects.reduce((acc, project) => {
+        project.tags.forEach(tag => {
+            if (!acc.includes(tag)) {
+                acc.push(tag);
+            }
+        });
+        return acc;
+    }, [] as string[]);
+
     const [filter, setFilter] = useState("featured");
+
     return (
         <MaxWidthContainer>
             <section className='pb-20 w-full z-10'>
-                <h2 className='text-2xl'>Projects</h2>
+                <h2 className='text-2xl dark:text-neutral-200 mb-4'>Projects</h2>
                 <select
                     className='text-xl border border-neutral-200 rounded-md p-2 my-4 dark:bg-neutral-600 dark:text-neutral-300  md:hidden cursor-pointer'
                     title='Project Category Selector'
+                    value={filter}
                     onChange={e => setFilter(e.target.value)}
                 >
-                    <option value='featured'>Featured</option>
-                    <option value='reactjs'>ReactJS</option>
-                    <option value='nextjs'>NextJS</option>
-                    <option value='solidjs'>SolidJS</option>
-                    <option value='javascript'>Javascript</option>
-                    <option value='c#'>C#</option>
-                    <option value='game'>Game Dev</option>
-                    <option value='blockchain'>Blockchain</option>
-                    <option value='ml'>Machine Learning</option>
+                    {availableFilters.map(category => (
+                        <option key={category} value={category}>
+                            {category.toUpperCase()}
+                        </option>
+                    ))}
                 </select>
                 <div className='filter-select hidden md:flex flex-wrap justify-between gap-8'>
                     {[
                         "Featured",
                         "ReactJS",
                         "NextJS",
+                        "SolidJS",
                         "Javascript",
                         "C#",
-                        "Game",
-                        "Blockchain",
                         "ML",
                         "SolidJS",
                     ].map(category => (
@@ -71,7 +77,9 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                     })}
                 </div>
                 <div>
-                    <Link href='/projects'>See All Projects...</Link>
+                    <Link className='dark:text-neutral-300' href='/projects'>
+                        See All Projects...
+                    </Link>
                 </div>
             </section>
         </MaxWidthContainer>
