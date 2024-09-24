@@ -3,6 +3,7 @@ import "./globals.css";
 import { cookies } from "next/headers";
 import Header from "@/components/Header";
 import Head from "next/head";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({
     children,
@@ -25,6 +26,7 @@ export default function RootLayout({
             <body className='dark:bg-neutral-900'>
                 <Header cookieTheme={cookieTheme?.value} />
                 {children}
+                <SpeedInsights />
             </body>
         </html>
     );
