@@ -6,7 +6,11 @@ import Link from "next/link";
 import MaxWidthContainer from "./styles/MaxWidthContainer";
 import MobileNav from "./MobileNav";
 
-export default function Header() {
+export default function Header({
+    cookieTheme,
+}: {
+    cookieTheme: string | undefined;
+}) {
     return (
         <header className='max-w-screen-xl mx-auto p-4 text-lg h-22'>
             <MaxWidthContainer>
@@ -15,8 +19,8 @@ export default function Header() {
                         Joseph Carothers
                     </span>
                 </Link>
-                <Nav />
-                <MobileNav />
+                <Nav cookieTheme={cookieTheme} />
+                <MobileNav cookieTheme={cookieTheme} />
             </MaxWidthContainer>
         </header>
     );

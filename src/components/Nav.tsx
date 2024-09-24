@@ -6,7 +6,7 @@ import { ButtonLink } from "@/components/Button";
 import ThemeToggle from "./ThemeToggle";
 import { usePathname } from "next/navigation";
 
-const Nav = () => {
+const Nav = ({ cookieTheme }: { cookieTheme: string | undefined }) => {
     const pathname = usePathname();
 
     const linkGradient = (current: boolean) =>
@@ -50,7 +50,7 @@ const Nav = () => {
             >
                 Contact
             </ButtonLink>
-            <ThemeToggle />
+            <ThemeToggle cookieTheme={cookieTheme} />
         </nav>
     );
 };

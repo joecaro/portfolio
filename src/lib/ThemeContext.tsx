@@ -1,30 +1,23 @@
 "use client";
 
-import { useEffect, useRef, useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-export const useTheme = (initialValue?: string) => {
-    const [theme, setTheme] = useState(initialValue || "light");
+export const useTheme = (cookieTheme: string | undefined) => {
+    const [theme, setTheme] = useState(cookieTheme || "light");
 
-    const handleThemeChange = useCallback(
-        (newTheme: string) => {
-            document.cookie = `theme=${newTheme};path=/;`;
-            document
-                .querySelector("html")
-                ?.setAttribute("data-theme", newTheme);
-            document.querySelector("html")?.setAttribute("class", newTheme);
-            setTheme(newTheme);
-        },
-        [setTheme]
-    );
-
-    const hydrated = useRef(false);
+    const handleThemeChange = useCallback((newTheme: string) => {
+        setTheme(newTheme);
+        document.cookie = `theme=${newTheme};path=/;`;
+        document.documentElement.setAttribute("class", newTheme);
+    }, []);
 
     useEffect(() => {
-        if (initialValue && !hydrated.current) {
-            handleThemeChange(initialValue);
-            hydrated.current = true;
+        // check html class for theme
+        const currentTheme = document.documentElement.getAttribute("class");
+        if (currentTheme) {
+            setTheme(currentTheme);
         }
-    }, [initialValue, handleThemeChange]);
+    }, []);
 
     return { theme, setTheme: handleThemeChange };
 };

@@ -1,7 +1,5 @@
-import Nav from "@/components/Nav";
 import "./globals.css";
 
-import ThemeToggle from "@/components/ThemeToggle";
 import { cookies } from "next/headers";
 import Header from "@/components/Header";
 import Head from "next/head";
@@ -12,14 +10,10 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     const cookieStore = cookies();
-    const theme = cookieStore.get("theme");
+    const cookieTheme = cookieStore.get("theme");
 
     return (
-        <html
-            lang='en'
-            className={theme?.value || ""}
-            data-theme={theme?.value || ""}
-        >
+        <html lang='en' className={cookieTheme?.value || ""}>
             <Head>
                 <title>Joseph Carothers</title>
                 <meta
@@ -28,8 +22,8 @@ export default function RootLayout({
                 />
                 <link rel='icon' href='/favicon.ico' />
             </Head>
-            <body>
-                <Header />
+            <body className='dark:bg-neutral-900'>
+                <Header cookieTheme={cookieTheme?.value} />
                 {children}
             </body>
         </html>

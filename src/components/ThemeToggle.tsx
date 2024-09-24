@@ -4,8 +4,8 @@ import { cn } from "@/lib/tw";
 import { useTheme } from "@/lib/ThemeContext";
 import { useCallback } from "react";
 
-const ThemeToggle = ({ initialValue }: { initialValue?: string }) => {
-    const { theme, setTheme } = useTheme(initialValue);
+const ThemeToggle = ({ cookieTheme }: { cookieTheme: string | undefined }) => {
+    const { theme, setTheme } = useTheme(cookieTheme);
 
     const handleToggleTheme = useCallback(() => {
         let newTheme = theme === "light" ? "dark" : "light";

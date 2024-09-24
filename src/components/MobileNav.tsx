@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 
-const MobileNav = () => {
+const MobileNav = ({ cookieTheme }: { cookieTheme: string | undefined }) => {
     const [toggled, setToggled] = useState(false);
     return (
         <nav className='flex items-center gap-4 md:hidden'>
@@ -32,7 +32,7 @@ const MobileNav = () => {
                         <li onClick={() => setToggled(!toggled)}>
                             <Link href='/contact'>Contact</Link>
                         </li>
-                        <ThemeToggle />
+                        <ThemeToggle cookieTheme={cookieTheme} />
                     </ul>
                 </div>
             )}
