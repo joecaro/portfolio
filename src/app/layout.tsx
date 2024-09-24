@@ -2,9 +2,20 @@ import "./globals.css";
 
 import { cookies } from "next/headers";
 import Header from "@/components/Header";
-import Head from "next/head";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Joseph Carothers",
+    description: "Web Development Portfolio for Joseph Carothers",
+    icons: [
+        {
+            url: "/favicon.ico",
+            rel: "icon",
+        },
+    ],
+};
 
 export default function RootLayout({
     children,
@@ -16,14 +27,6 @@ export default function RootLayout({
 
     return (
         <html lang='en' className={cookieTheme?.value || ""}>
-            <Head>
-                <title>Joseph Carothers</title>
-                <meta
-                    name='description'
-                    content='Web Development Portfolio for Joseph Carothers'
-                />
-                <link rel='icon' href='/favicon.ico' />
-            </Head>
             <body className='dark:bg-neutral-900'>
                 <Header cookieTheme={cookieTheme?.value} />
                 {children}
