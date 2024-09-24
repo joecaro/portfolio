@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import Header from "@/components/Header";
 import Head from "next/head";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function RootLayout({
     children,
@@ -27,6 +28,7 @@ export default function RootLayout({
                 <Header cookieTheme={cookieTheme?.value} />
                 {children}
                 <SpeedInsights />
+                <Analytics />
             </body>
         </html>
     );
