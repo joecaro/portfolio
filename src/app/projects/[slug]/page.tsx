@@ -6,7 +6,7 @@ export default async function Slug({ params }: { params: { slug: string } }) {
     const project = getProjectBySlug(params.slug);
 
     return (
-        <div className='min-h-screen max-w-2xl mx-auto py-16 flex-1 flex flex-col justify-start items-center dark:text-neutral-300'>
+        <div className='min-h-screen max-w-2xl mx-auto py-16 px-2 flex-1 flex flex-col justify-start items-center dark:text-neutral-300'>
             <div className='relative w-full h-64 md:h-96'>
                 <Image
                     src={project.image}
@@ -32,7 +32,7 @@ export default async function Slug({ params }: { params: { slug: string } }) {
                     </a>
                 )}
             </div>
-            <div className=' p-6 bg-white dark:bg-neutral-800 rounded-lg shadow-lg'>
+            <div className=' p-6 bg-white dark:bg-neutral-800 rounded-lg shadow-lg max-w-full'>
                 <Markdown
                     components={{
                         h1: ({ node, ...props }) => (
