@@ -11,7 +11,7 @@ github: https://github.com/joecaro/service-provider-landing-page
 demo: https://servicelandingpage.netlify.app/
 tags:
     - project
-    - featured
+    - 
     - reactjs
     - nextjs
     - html

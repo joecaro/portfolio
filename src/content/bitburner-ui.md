@@ -12,6 +12,7 @@ demo:
 tags:
     - reactjs
     - javascript
+    - featured
 tech:
     - javascript
 image: https://res.cloudinary.com/joecarothers/image/upload/v1727381020/misc/Projects/Device_Shots_2.0_Mockup_o5exzf.png

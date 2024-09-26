@@ -14,7 +14,6 @@ github:
 demo: https://cmdi.netlify.app
 tags:
   - project
-  - featured
   - nextjs
   - react
   - next
