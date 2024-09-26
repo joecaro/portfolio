@@ -21,7 +21,7 @@ tech:
 image: https://res.cloudinary.com/joecarothers/image/upload/v1652918002/misc/Projects/blockchain-mockup_qosdpg_fl4uwz.png
 ---
 
-# Blockchain Demo
+## Blockchain Demo
 
 Welcome to my **Blockchain Demo** project! This educational tool provides a hands-on way to learn the core concepts behind blockchain technologies. Whether you’re new to the blockchain world or brushing up on your knowledge, this demo walks you through the foundational ideas: **hash functions**, **blocks**, and **distributed ledgers**.
 
@@ -35,11 +35,11 @@ Here’s a quick breakdown of the blockchain class:
 
 ### Key Features of the Blockchain Class
 
--   **Genesis Block Creation**: The first block in the chain, with a predefined hash and data.
--   **Hash Calculation**: The project uses `SHA256` to calculate hashes based on block data, index, and the previous block's hash.
--   **Block Validation**: It ensures the difficulty level is met by checking that the calculated hash has a sufficient number of leading zeros.
--   **Mining Blocks**: This feature involves repeatedly calculating a hash until the desired difficulty is achieved, demonstrating the proof-of-work concept.
--   **Dynamic Block Updates**: Users can interact with blocks, modify their data, and see how this affects the blockchain's integrity.
+- **Genesis Block Creation**: The first block in the chain, with a predefined hash and data.
+- **Hash Calculation**: The project uses `SHA256` to calculate hashes based on block data, index, and the previous block's hash.
+- **Block Validation**: It ensures the difficulty level is met by checking that the calculated hash has a sufficient number of leading zeros.
+- **Mining Blocks**: This feature involves repeatedly calculating a hash until the desired difficulty is achieved, demonstrating the proof-of-work concept.
+- **Dynamic Block Updates**: Users can interact with blocks, modify their data, and see how this affects the blockchain's integrity.
 
 Below is the source code that powers the blockchain functionality:
 
