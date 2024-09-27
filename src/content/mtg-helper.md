@@ -1,5 +1,5 @@
 ---
-slug: mtg-help
+slug: mtg-hel
 title: "MTG Help Me"
 date: Sep 27 2024 12:00 AM
 author: Joe
