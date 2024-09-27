@@ -15,7 +15,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
             }
         });
         return acc;
-    }, [] as string[]);
+    }, [] as string[]).filter(Boolean);
 
     const [filter, setFilter] = useState("featured");
 
