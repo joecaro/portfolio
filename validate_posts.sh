@@ -32,10 +32,16 @@ done
 echo "Matching files: $matching_count"
 echo "Non-matching files: $not_matching_count"
 
-# List invalid files if any exist
+# If there are invalid files, print them and return a non-zero exit status
 if [ $not_matching_count -gt 0 ]; then
   echo "Invalid files (slug doesn't match filename):"
   for invalid in "${invalid_files[@]}"; do
     echo "- $invalid"
   done
+
+  # Exit with a non-zero status to prevent commit
+  exit 1
+else
+  # Exit with zero status (success) if no mismatches are found
+  exit 0
 fi
