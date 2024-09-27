@@ -1,5 +1,5 @@
 ---
-slug: bitburner-custom-ui
+slug: bitburner-ui
 title: "Bitburner Custom UI"
 date: Sep 26 2024 12:00 AM
 author: Joe

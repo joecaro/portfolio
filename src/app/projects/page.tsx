@@ -27,7 +27,7 @@ export default function Page() {
                             <Link
                                 href={`/projects/${project.slug}`}
                                 key={project.slug}
-                                className='border dark:border-neutral-200 bg-neutral-50 dark:bg-neutral-800 p-4 rounded dark:text-neutral-200 hover:border-2'
+                                className='project border dark:border-neutral-200 bg-neutral-50 dark:bg-neutral-800 p-4 rounded dark:text-neutral-200 hover:border-2'
                             >
                                 <p className='font-bold text-xl'>
                                     {project.title}
