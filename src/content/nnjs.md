@@ -19,7 +19,7 @@ tech:
 image: https://res.cloudinary.com/joecarothers/image/upload/v1652918002/misc/Projects/nnjs-mockup_vocglf.png
 ---
 
-# NNJS: A Neural Network Training Library in JavaScript
+## NNJS: A Neural Network Training Library in JavaScript
 
 **NNJS** is a lightweight, easy-to-use JavaScript library for building and training neural networks. Whether you’re looking to get a better understanding of how neural networks work under the hood or want a simple way to experiment with machine learning in the browser, NNJS provides a flexible solution.
 
@@ -55,10 +55,10 @@ NNJS includes the essential features of a neural network, including forward prop
 
 You can easily track the performance of your neural network with visual feedback, making it easier to understand how your network is learning over time. Training results can be logged or displayed in real-time, giving you insight into model performance across iterations.
 
-###  Tech Stack
+### Tech Stack
 
--   JavaScript: NNJS is built entirely in vanilla JavaScript, ensuring that it runs in any modern browser environment or Node.js.
--   Machine Learning: The library implements core concepts of neural networks, including forward propagation, backpropagation, and gradient descent.
+- JavaScript: NNJS is built entirely in vanilla JavaScript, ensuring that it runs in any modern browser environment or Node.js.
+- Machine Learning: The library implements core concepts of neural networks, including forward propagation, backpropagation, and gradient descent.
 
 Example Usage
 
@@ -96,9 +96,9 @@ It also reinforced the importance of simplicity and flexibility in libraries mea
 
 Moving forward, I plan to add more advanced features, including:
 
--   Support for Convolutional Neural Networks (CNNs): Expanding the library to handle image-based data and CNN architectures.
--   Interactive Demos: Creating in-browser demos where users can tweak neural network parameters and see real-time results.
--   Pre-built Models: Providing pre-trained models for common tasks to showcase the power of neural networks right out of the box.
+- Support for Convolutional Neural Networks (CNNs): Expanding the library to handle image-based data and CNN architectures.
+- Interactive Demos: Creating in-browser demos where users can tweak neural network parameters and see real-time results.
+- Pre-built Models: Providing pre-trained models for common tasks to showcase the power of neural networks right out of the box.
 
 ### Final Thoughts
 

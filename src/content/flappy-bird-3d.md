@@ -10,7 +10,6 @@ stack:
 github: https://github.com/joecaro/3d-flappy-bird-clone
 demo:
 tags:
-    - project
     - game
     - c#
     - unity
@@ -20,7 +19,7 @@ tech:
 image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/flappy-mockup_i1yhqo_abf38k.png
 ---
 
-# 3D Flappy Bird Clone
+## 3D Flappy Bird Clone
 
 This project marks my first game built in the **Unity Engine** and my introduction to **C#**, a strongly typed, object-oriented language. Inspired by the simplicity of the original **Flappy Bird**, I reimagined it in 3D, using Unity to handle the physics and gameplay mechanics while creating all the assets and materials in **Blender**.
 
@@ -30,17 +29,17 @@ As someone interested in both game development and 3D modeling, I wanted to crea
 
 ## Features
 
--   **3D Gameplay**: Unlike the original 2D version, this clone brings the game into a 3D environment, giving a fresh perspective to the classic gameplay.
--   **Unity Physics**: I used Unity's built-in physics engine to handle the core mechanics, such as the player’s jump and the obstacle movement, ensuring the game feels smooth and responsive.
--   **Custom 3D Assets**: All of the assets, from the bird to the pipes, were modeled in **Blender**, making this project a complete learning experience in both game design and 3D modeling.
+- **3D Gameplay**: Unlike the original 2D version, this clone brings the game into a 3D environment, giving a fresh perspective to the classic gameplay.
+- **Unity Physics**: I used Unity's built-in physics engine to handle the core mechanics, such as the player’s jump and the obstacle movement, ensuring the game feels smooth and responsive.
+- **Custom 3D Assets**: All of the assets, from the bird to the pipes, were modeled in **Blender**, making this project a complete learning experience in both game design and 3D modeling.
 
 ![Flappy Bird Clone](https://res.cloudinary.com/joecarothers/image/upload/v1653009936/misc/Projects/Flappy_gif_small_avauxd.gif)
 
 ## Tech Stack
 
--   **Unity**: The game is built in Unity, utilizing its physics engine and game development tools to bring the 3D Flappy Bird world to life.
--   **C#**: As my first project in C#, this game was a great introduction to object-oriented programming and Unity's scripting API.
--   **Blender**: I created all the 3D models and textures in Blender, giving me the opportunity to combine my passion for 3D modeling with game development.
+- **Unity**: The game is built in Unity, utilizing its physics engine and game development tools to bring the 3D Flappy Bird world to life.
+- **C#**: As my first project in C#, this game was a great introduction to object-oriented programming and Unity's scripting API.
+- **Blender**: I created all the 3D models and textures in Blender, giving me the opportunity to combine my passion for 3D modeling with game development.
 
 ## What I Learned
 

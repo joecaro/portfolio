@@ -10,8 +10,6 @@ stack:
 github: https://github.com/joecaro/service-provider-landing-page
 demo: https://servicelandingpage.netlify.app/
 tags:
-    - project
-    - 
     - reactjs
     - nextjs
     - html
@@ -20,10 +18,11 @@ tech:
     - react
     - html
     - css
+    - nextjs
 image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/landing-mockup_gymzoz_sfagox.png
 ---
 
-# Service Landing Page
+## Service Landing Page
 
 The **Service Landing Page** is a template designed for a business looking for a modern, clean, and professional web presence. Built with **NextJS**, this single-page application prioritizes performance, scalability, and simplicity, making it an ideal starting point for businesses aiming to attract customers and showcase their services.
 
@@ -44,9 +43,9 @@ This landing page template serves as a marketing tool for service-based companie
 
 ## Tech Stack
 
--   **NextJS**: The core of the site, providing a scalable and performant framework for building both static and dynamic websites.
--   **ReactJS**: Used for the interactive components and modular design structure.
--   **HTML & CSS**: Clean and maintainable HTML/CSS are used to keep the design simple and easy to customize, ensuring flexibility for future growth.
+- **NextJS**: The core of the site, providing a scalable and performant framework for building both static and dynamic websites.
+- **ReactJS**: Used for the interactive components and modular design structure.
+- **HTML & CSS**: Clean and maintainable HTML/CSS are used to keep the design simple and easy to customize, ensuring flexibility for future growth.
 
 ## Final Thoughts
 

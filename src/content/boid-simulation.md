@@ -19,7 +19,7 @@ tech:
 image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/boid-mockup_hy5n68_aahfv7.png
 ---
 
-# Unity Boid Simulation
+## Unity Boid Simulation
 
 Simulations have always fascinated me, particularly the complexity that can emerge from simple rules. In this project, I took the opportunity to dive into Unity and C# to create my own boid simulation—a model of flocking behavior commonly seen in birds or fish.
 
@@ -57,8 +57,6 @@ It was also rewarding to apply my programming knowledge to a real-world system w
 
 ## Project Links
 
--   **Source Code**: [GitHub Repository](https://github.com/joecaro/unity-boid-simulation)
+- **Source Code**: [GitHub Repository](https://github.com/joecaro/unity-boid-simulation)
 
 Feel free to check out the code, tweak the parameters, and experiment with the flocking behavior yourself!
-
-Happy coding!

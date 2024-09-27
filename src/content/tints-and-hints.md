@@ -12,21 +12,20 @@ stack:
 github: https://github.com/joecaro/tints-and-hints
 demo: https://tintsandhints.vercel.app/
 tags:
-    - project
     - solidjs
     - game
-    - websocket
+    - websockets
     - tailwindcss
     - featured
 tech:
     - solidjs
     - node
     - tailwindcss
-    - websocket
+    - websockets
 image: https://res.cloudinary.com/joecarothers/image/upload/v1727159315/misc/Projects/Tints-And-Hints.png
 ---
 
-# Tints and Hints: A Hues and Cues Clone Built with SolidJS
+## Tints and Hints: A Hues and Cues Clone Built with SolidJS
 
 **Tints and Hints** is a web-based clone of the popular color-guessing game **Hues and Cues**. The game challenges players to describe colors using only verbal hints, while other players guess the specific shade on a color board. This project was not only an opportunity to recreate the fun of the game but also an exploration of the **SolidJS** framework and its capabilities in managing complex state.
 
@@ -69,8 +68,8 @@ WebSocket Architecture
 
 The backend was set up using Express and Socket.IO to manage the real-time communication layer. Here’s a quick overview of how it worked:
 
--   Client: Sends guesses to the server and receives updates about other players’ guesses and the current game state.
--   Server: Manages all connected clients, broadcasting updates in real-time.
+- Client: Sends guesses to the server and receives updates about other players’ guesses and the current game state.
+- Server: Manages all connected clients, broadcasting updates in real-time.
 
 Example of server-side socket handling:
 
@@ -97,38 +96,38 @@ The Frontend Stack
 
 The frontend of Tints and Hints was built with SolidJS and a set of complementary tools:
 
--   TailwindCSS: Used for styling, keeping the design consistent and responsive with minimal effort.
--   Socket.IO Client: For real-time WebSocket communication with the backend (currently offline).
--   SolidJS Router: For managing the game’s routing and navigation, ensuring seamless transitions between different game states.
--   Falso and Test-Data-Bot: For generating mock data during testing, allowing me to simulate player interactions without needing a live server.
+- TailwindCSS: Used for styling, keeping the design consistent and responsive with minimal effort.
+- Socket.IO Client: For real-time WebSocket communication with the backend (currently offline).
+- SolidJS Router: For managing the game’s routing and navigation, ensuring seamless transitions between different game states.
+- Falso and Test-Data-Bot: For generating mock data during testing, allowing me to simulate player interactions without needing a live server.
 
 Challenges and Benefits
 
 Benefits of SolidJS
 
--   Efficient Rendering: SolidJS performed exceptionally well in handling UI updates, even with frequent state changes during gameplay.
--   Simple State Management: SolidJS’s reactivity model was easy to work with, and managing complex game state felt natural with its built-in reactive primitives.
+- Efficient Rendering: SolidJS performed exceptionally well in handling UI updates, even with frequent state changes during gameplay.
+- Simple State Management: SolidJS’s reactivity model was easy to work with, and managing complex game state felt natural with its built-in reactive primitives.
 
 Challenges
 
--   WebSocket Costs: Keeping the WebSocket server online became costly, so it’s currently offline, meaning the game operates in a single-player mode locally.
--   Learning Curve: Although SolidJS is relatively simple to pick up, its mental model differs from frameworks like React. There was a learning curve in understanding how fine-grained reactivity impacts the application structure.
+- WebSocket Costs: Keeping the WebSocket server online became costly, so it’s currently offline, meaning the game operates in a single-player mode locally.
+- Learning Curve: Although SolidJS is relatively simple to pick up, its mental model differs from frameworks like React. There was a learning curve in understanding how fine-grained reactivity impacts the application structure.
 
 ### Tech Stack
 
 Frontend:
 
--   SolidJS: The core framework used for handling UI and state management.
--   TailwindCSS: For styling the app with utility-first CSS.
--   Solid Router: For managing navigation between game states.
--   Socket.IO Client: For handling real-time WebSocket communication.
--   Falso and Test-Data-Bot: For generating mock data during development and testing.
+- SolidJS: The core framework used for handling UI and state management.
+- TailwindCSS: For styling the app with utility-first CSS.
+- Solid Router: For managing navigation between game states.
+- Socket.IO Client: For handling real-time WebSocket communication.
+- Falso and Test-Data-Bot: For generating mock data during development and testing.
 
 Backend:
 
--   Node.js: For building the server that managed real-time communication.
--   Socket.IO: For handling WebSocket connections and broadcasting game updates.
--   Express: For setting up the backend server.
+- Node.js: For building the server that managed real-time communication.
+- Socket.IO: For handling WebSocket connections and broadcasting game updates.
+- Express: For setting up the backend server.
 
 ### Final Thoughts
 

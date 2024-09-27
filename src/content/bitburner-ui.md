@@ -42,7 +42,7 @@ Additionally, I built a **custom React rendering engine** from scratch to work w
 
 The `User` component displays the player's hacking stats, including their hacking level, available funds, and money-per-second rate.
 
-CODE_BLOCK
+```javascript
 const User = ({ ns }) => {
   const hackLvl = ns.getHackingLevel();
   const money = ns.getServerMoneyAvailable('home');
@@ -55,13 +55,13 @@ const User = ({ ns }) => {
     Row({ children: ["Run $/s:", formatNumber(calculateMoneyPerSecond())] })
   );
 };
-CODE_BLOCK
+```
 
 ### 2. Target Tracker
 
 The `Target` component monitors attack targets, displaying server money available and security level with visual progress bars.
 
-CODE_BLOCK
+```javascript
 const Target = ({ ns, target }) => {
   const money = ns.getServerMoneyAvailable(target.name);
   const security = ns.getServerSecurityLevel(target.name);
@@ -73,13 +73,13 @@ const Target = ({ ns, target }) => {
     Row({ children: ["Security:", formatNumber(security)] })
   );
 };
-CODE_BLOCK
+```
 
 ### 3. Node Performance
 
 The `Node` component tracks hacking operations on each active node, using `ProgressBar` components to visualize hack/grow/weaken progress.
 
-CODE_BLOCK
+```javascript
 const Node = ({ ns, node, stats }) => {
   const maxRam = ns.getServerMaxRam(node);
 
@@ -92,7 +92,7 @@ const Node = ({ ns, node, stats }) => {
     ProgressBar({ percent: stats.weaken / maxRam, label: "Weaken" })
   );
 };
-CODE_BLOCK
+```
 
 ## Experimenting with a Custom React Renderer
 
@@ -100,7 +100,7 @@ One of the main challenges I faced was working around Bitburner’s limitations,
 
 The custom renderer takes in React components, processes them recursively, and creates HTML elements that are manually appended to the DOM. Here's an example of how the rendering works:
 
-CODE_BLOCK
+```javascript
 export function renderToHTMLElement(element) {
   if (typeof element === 'string' || typeof element === 'number') {
     return document.createTextNode(element);
@@ -131,13 +131,13 @@ export function renderToHTMLElement(element) {
 
   return domNode;
 }
-CODE_BLOCK
+```
 
 ### Diffing Algorithm for Efficient Updates
 
 To optimize performance, I implemented a **diffing algorithm** that compares the old and new virtual DOM trees and selectively applies changes to the real DOM. This keeps the UI responsive while minimizing unnecessary updates.
 
-CODE_BLOCK
+```javascript
 function diffAndUpdate(oldNode, newNode) {
   if (!newNode) {
     oldNode.remove();
@@ -177,13 +177,13 @@ function diffAndUpdate(oldNode, newNode) {
     diffAndUpdate(oldChildren[i], newChildren[i]);
   }
 }
-CODE_BLOCK
+```
 
 ## UI Design and Style
 
 The UI features a minimalist, dark theme to match Bitburner’s aesthetic, with vibrant progress indicators. Styling is centralized in a `theme.js` file:
 
-CODE_BLOCK
+```javascript
 const theme = {
   color: {
     blue: '#4a90e2',
@@ -203,7 +203,7 @@ const theme = {
     lg: '24px',
   },
 };
-CODE_BLOCK
+```
 
 ## Final Thoughts
 

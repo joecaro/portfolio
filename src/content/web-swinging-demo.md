@@ -10,16 +10,19 @@ stack:
 github: https://github.com/joecaro/3d-flappy-bird-clone
 demo:
 tags:
-    - project
-    - game
+    - unity
     - c#
+    - game
+    - physics
+    - oop
 tech:
     - c#
     - unity
+    - object oriented programming
 image: https://res.cloudinary.com/joecarothers/image/upload/v1652918002/misc/Projects/swing-mockup_lwodp8_cl7gqr.png
 ---
 
-# Web Swinging Demo
+## Web Swinging Demo
 
 The **Web Swinging Demo** is a game project where I implemented web swinging mechanics using **C#** in the **Unity Engine**. This project served as a fun and challenging way to experiment with physics-based gameplay, where I aimed to balance realism and engagement to create an enjoyable experience for users.
 
@@ -33,17 +36,17 @@ The web swinging mechanic allows players to simulate the feeling of swinging fro
 
 ### Key Features
 
--   **Physics-Based Swinging**: The web swinging mechanic is driven by Unity's physics system, simulating gravity and momentum. Players can build speed by timing their swings and detaching at the right moment to reach farther distances.
--   **Realism vs. Engagement**: One of the main challenges was finding the right balance between realistic physics and engaging gameplay. Too much realism could make the swinging mechanic feel clunky, while too little could make it feel unrealistic. Through trial and error, I found a sweet spot that feels responsive and fun for the player.
+- **Physics-Based Swinging**: The web swinging mechanic is driven by Unity's physics system, simulating gravity and momentum. Players can build speed by timing their swings and detaching at the right moment to reach farther distances.
+- **Realism vs. Engagement**: One of the main challenges was finding the right balance between realistic physics and engaging gameplay. Too much realism could make the swinging mechanic feel clunky, while too little could make it feel unrealistic. Through trial and error, I found a sweet spot that feels responsive and fun for the player.
 
--   **Dynamic Swing Points**: Players can attach their web to multiple points throughout the environment, allowing them to dynamically navigate the space and adjust their strategy as they move forward.
+- **Dynamic Swing Points**: Players can attach their web to multiple points throughout the environment, allowing them to dynamically navigate the space and adjust their strategy as they move forward.
 
 ![Web Swinging Demo](https://res.cloudinary.com/joecarothers/image/upload/v1653009944/misc/Projects/Swinging_gif_wjdij9.gif)
 
 ## Tech Stack
 
--   **Unity**: The project is built in Unity, leveraging its physics engine to create smooth, realistic web swinging mechanics.
--   **C#**: All the game logic and physics calculations were implemented in **C#**, showcasing my ability to work with object-oriented programming in game development.
+- **Unity**: The project is built in Unity, leveraging its physics engine to create smooth, realistic web swinging mechanics.
+- **C#**: All the game logic and physics calculations were implemented in **C#**, showcasing my ability to work with object-oriented programming in game development.
 
 ## What I Learned
 

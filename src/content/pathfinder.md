@@ -24,7 +24,7 @@ tech:
 image: https://res.cloudinary.com/joecarothers/image/upload/v1652918002/misc/Projects/pathfinder-mockup_wnkcxi_naygcq.png
 ---
 
-# Pathfinder App
+## Pathfinder App
 
 The **Pathfinder App** is an interactive visualization of **Dijkstra’s Algorithm**, demonstrating how it finds the shortest path between two nodes. Built with **ReactJS** and **TypeScript**, this project allows users to create their own grids, place obstacles, and watch the algorithm work around them to find the optimal path from start to finish.
 
@@ -34,9 +34,9 @@ Pathfinding algorithms are foundational to computer science, often used in scena
 
 ## Key Features
 
--   **Interactive Grid**: Users can click and drag to place walls, which the algorithm must navigate around. This adds a dynamic element to the visual demonstration.
--   **Real-Time Visualization**: The app provides a step-by-step visual of the algorithm as it progresses through the grid, updating with each step to show which nodes are visited and how the shortest path is calculated.
--   **Dijkstra's Algorithm**: The core algorithm demonstrated in this app is Dijkstra’s, a well-known algorithm for finding the shortest path between two points in a weighted graph.
+- **Interactive Grid**: Users can click and drag to place walls, which the algorithm must navigate around. This adds a dynamic element to the visual demonstration.
+- **Real-Time Visualization**: The app provides a step-by-step visual of the algorithm as it progresses through the grid, updating with each step to show which nodes are visited and how the shortest path is calculated.
+- **Dijkstra's Algorithm**: The core algorithm demonstrated in this app is Dijkstra’s, a well-known algorithm for finding the shortest path between two points in a weighted graph.
 
 ## How Dijkstra’s Algorithm Works
 
@@ -53,9 +53,9 @@ Dijkstra’s algorithm is designed to find the shortest path between a start and
 
 ## Tech Stack
 
--   **ReactJS**: The app is built using **ReactJS** for its interactive components and real-time updates.
--   **TypeScript**: The project leverages **TypeScript** for type safety, ensuring cleaner and more maintainable code.
--   **HTML & CSS**: The visual grid and interaction elements are styled with vanilla **HTML** and **CSS**, providing a responsive and easy-to-use interface.
+- **ReactJS**: The app is built using **ReactJS** for its interactive components and real-time updates.
+- **TypeScript**: The project leverages **TypeScript** for type safety, ensuring cleaner and more maintainable code.
+- **HTML & CSS**: The visual grid and interaction elements are styled with vanilla **HTML** and **CSS**, providing a responsive and easy-to-use interface.
 
 ## What I Learned
 

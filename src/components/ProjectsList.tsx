@@ -46,7 +46,6 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                         "Javascript",
                         "C#",
                         "ML",
-                        "SolidJS",
                     ].map(category => (
                         <Button
                             key={category}

@@ -9,7 +9,6 @@ stack:
 github: https://github.com/joecaro/HTML-CSS-Patterns
 demo: https://csslayoutexamples.netlify.app/
 tags:
-  - project
   - reactjs
   - css
   - html
@@ -20,7 +19,7 @@ tech:
 image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/css-mockup_nzdcg1_upegex.png
 ---
 
-# CSS Design Examples
+## CSS Design Examples
 
 When you're learning CSS, it’s easy to find yourself repeatedly searching for the same snippets—whether it’s a grid layout, a flexbox trick, or a responsive design pattern. I built the **CSS Design Examples** site to provide a handy, interactive reference for myself and others. This site contains some of the most useful CSS layouts and patterns I've come across, all in one place. Whether you're working on a simple layout or experimenting with more advanced designs, you’ll find real, working examples with interactive code.
 

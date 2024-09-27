@@ -10,7 +10,6 @@ stack:
 github: https://github.com/joecaro/custom-web-component-library
 demo:
 tags:
-    - project
     - web components
     - javascript
 tech:
@@ -20,7 +19,7 @@ image: https://res.cloudinary.com/joecarothers/image/upload/v1727210498/misc/Pro
 position: 7
 ---
 
-# Building a Custom Web Component UI Library: The Power of Native Web Technologies
+## Building a Custom Web Component UI Library: The Power of Native Web Technologies
 
 In my quest to build a versatile, cross-platform UI component library, I stumbled into the world of **Web Components**. While I’ve built many tools using frameworks like React and Vue, this time I wanted something more flexible, something that could easily plug into any environment—from WordPress to a custom React application—without much overhead. Enter **Web Components**.
 

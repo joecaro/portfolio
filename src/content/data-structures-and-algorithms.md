@@ -9,14 +9,13 @@ stack:
 github: https://github.com/joecaro/Data-Structures-and-Algorithms
 demo: not available
 tags:
-    - project
     - javascript
 tech:
     - javascript
 image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Projects/data-structs-mockup_11_p22bnw_hwrhhm.png
 ---
 
-# Data Structures and Algorithms
+## Data Structures and Algorithms
 
 This GitHub repository contains my solutions to a variety of coding problems from **AlgoExpert**. Each problem is solved using **JavaScript**, and every solution is paired with unit tests to ensure its correctness. This project was part of my ongoing effort to deepen my understanding of algorithms and data structures, focusing on real-world coding challenges.
 
@@ -26,13 +25,13 @@ Working through problems related to **data structures** and **algorithms** is ke
 
 ## Key Features
 
--   **Problem Solutions**: Each problem is tackled using efficient algorithms in **JavaScript**. Solutions focus on both correctness and performance.
--   **Unit Tests**: To validate each solution, I’ve written unit tests that ensure the algorithm performs as expected under various conditions. This makes the repository a great resource for anyone looking to practice algorithmic thinking and test-driven development (TDD).
--   **AlgoExpert Problem Set**: The repository covers a range of problems from AlgoExpert, including challenges on arrays, strings, graphs, trees, dynamic programming, and more.
+- **Problem Solutions**: Each problem is tackled using efficient algorithms in **JavaScript**. Solutions focus on both correctness and performance.
+- **Unit Tests**: To validate each solution, I’ve written unit tests that ensure the algorithm performs as expected under various conditions. This makes the repository a great resource for anyone looking to practice algorithmic thinking and test-driven development (TDD).
+- **AlgoExpert Problem Set**: The repository covers a range of problems from AlgoExpert, including challenges on arrays, strings, graphs, trees, dynamic programming, and more.
 
 ## Tech Stack
 
--   **JavaScript**: All algorithms and tests are written in JavaScript, showcasing my proficiency in solving algorithmic problems with one of the most popular programming languages.
+- **JavaScript**: All algorithms and tests are written in JavaScript, showcasing my proficiency in solving algorithmic problems with one of the most popular programming languages.
 
 ## Final Thoughts
 

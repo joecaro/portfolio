@@ -11,7 +11,6 @@ stack:
 github: https://github.com/joecaro/color-palette-tool
 demo: https://css-palette-picker.netlify.app/
 tags:
-    - project
     - reactjs
     - css
     - html
@@ -22,7 +21,7 @@ tech:
 image: https://res.cloudinary.com/joecarothers/image/upload/v1652918002/misc/Projects/palette-mockup_u5fu30_wyu2cc.png
 ---
 
-# CSS Color Palette Picker
+## CSS Color Palette Picker
 
 Color selection and hierarchy are critical aspects of any design, and a well-defined color palette can make all the difference in creating a polished, cohesive look for your project. Inspired by the **Tailwind CSS** color principles, I developed the **CSS Palette Picker**, a tool that allows developers and designers to easily generate color palettes and corresponding CSS variables for use in their projects.
 
@@ -44,14 +43,14 @@ As I started using design systems like Tailwind CSS more frequently, I found the
 
 ## Example Workflow
 
--   **Choose Your Base Hue**: Start by selecting the main hue for your palette (e.g., blue, red, green).
--   **Adjust Lightness**: Define the range of lightness values to generate shades ranging from the lightest tint to the darkest tone.
--   **Export CSS Variables**: Once you're satisfied with your palette, click to copy the CSS variables and integrate them directly into your project’s stylesheet.
+- **Choose Your Base Hue**: Start by selecting the main hue for your palette (e.g., blue, red, green).
+- **Adjust Lightness**: Define the range of lightness values to generate shades ranging from the lightest tint to the darkest tone.
+- **Export CSS Variables**: Once you're satisfied with your palette, click to copy the CSS variables and integrate them directly into your project’s stylesheet.
 
 ## Tech Stack
 
--   **ReactJS**: The interactive elements and live previews are powered by **ReactJS**, ensuring a fast, responsive user experience.
--   **HTML & CSS**: The tool itself is lightweight, using vanilla **HTML** and **CSS** for the core functionality and styles.
+- **ReactJS**: The interactive elements and live previews are powered by **ReactJS**, ensuring a fast, responsive user experience.
+- **HTML & CSS**: The tool itself is lightweight, using vanilla **HTML** and **CSS** for the core functionality and styles.
 
 ## Final Thoughts
 
