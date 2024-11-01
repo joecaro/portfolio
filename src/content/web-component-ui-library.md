@@ -1,6 +1,6 @@
 ---
 slug: web-component-ui-library
-title: "Building a Custom Web Component UI Library: The Power of Native Web Technologies"
+title: "Web Component UI Library"
 date: Sep 25 2024 12:00 AM
 author: Joe
 description: A journey into building a flexible and configurable component library using Web Components for high compatibility across platforms.
