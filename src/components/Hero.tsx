@@ -77,7 +77,7 @@ const Hero = () => {
                     </div>
                     <ButtonLink
                         color='purple'
-                        href='/files/Resume_Joseph_Carothers_2024.docx'
+                        href='/files/Resume_Joseph_Carothers_2024.pdf'
                     >
                         Resume
                     </ButtonLink>
