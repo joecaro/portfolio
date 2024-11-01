@@ -12,7 +12,7 @@ stack:
     - JWT Tokens
     - Featured
 github: https://github.com/joecaro/crm
-demo: https://crm.josephcarothers.com/
+demo:
 tags:
     - featured
     - nextjs
@@ -37,6 +37,7 @@ image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Pro
 ## Client CRM
 
 The **Client CRM** application was designed to address inefficiencies in how our support team tracked clients’ statuses during reporting periods. The main objective was to move away from manual Excel tracking, which was time-consuming and prone to error, and develop a tailored CRM (Customer Relationship Management) solution using **Next.js**, **MongoDB**, and **NodeJS**.
+_demo is currently unavailable due to removal of free tiers_
 
 ## The Problem
 

@@ -27,6 +27,8 @@ Welcome to my **Blockchain Demo** project! This educational tool provides a hand
 
 I've built this site using ReactJS and created a pseudo-blockchain engine to drive the interactive elements. You can see and interact with blockchain mechanics in real-time, such as **mining blocks**, **validating hashes**, and **adding new blocks**.
 
+Inspired by the great work and videos done by [Anders Brownworth](https://andersbrownworth.com/)
+
 ## How it Works
 
 At its core, this project implements a simplified version of a blockchain, demonstrating basic methods you'd find in real-world blockchains: validating hashes, mining blocks, and adding new ones to the chain. The goal is to make complex blockchain ideas more tangible and easy to understand.

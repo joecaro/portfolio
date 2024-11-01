@@ -12,6 +12,7 @@ demo:
 tags:
     - web components
     - javascript
+    - featured
 tech:
     - javascript
     - web components
@@ -125,28 +126,19 @@ class MyComponent extends HTMLElement {
 
 With this setup, the component is fully encapsulated—none of its styles will bleed into the global scope, and it remains completely self-contained.
 
-## Handling Real-Time Data with Web Components
+## Handling External Data with Web Components
 
-One of the key features I needed was the ability to handle **real-time data**. Whether it’s updating live scores or rendering promotional content dynamically, Web Components allowed me to seamlessly integrate WebSocket support. Here’s a simple example:
+One of the key features I needed was the ability to handle **external data**. Whether it’s updating live scores or rendering promotional content dynamically, Web Components allowed me to seamlessly integrate support. Here’s a simple example:
 
 ```javascript
-connectedCallback() {
-  this.socket = new WebSocket('ws://example.com/socket');
+async connectedCallback() {
+  data = await fetchData(this.dataId)
 
-  this.socket.onmessage = (event) => {
-    const data = JSON.parse(event.data);
-    this.setState({ message: data.message });
-  };
-
-  this.render();
-}
-
-disconnectedCallback() {
-  this.socket.close();
+  this.setState({ data })
 }
 ```
 
-This real-time capability lets components stay in sync with live data streams, perfect for scenarios like live content updates or multiplayer games.
+This simple strategy of fetching on connected allows us fetch data before the content is rendered. Alternatively we can move this to a later stage or have a `deferred` attribute to defer the fetch.
 
 ## Key Lessons Learned
 
@@ -158,6 +150,6 @@ This real-time capability lets components stay in sync with live data streams, p
 
 Building this **Web Component UI library** was an eye-opening experience. It reinforced my belief in the power of native browser technologies and the flexibility they offer. While frameworks like React and Vue are fantastic for most use cases, Web Components shine when you need something lightweight, encapsulated, and reusable across many different platforms.
 
-If you’re curious to explore more, check out the [GitHub repository](https://github.com/joecaro/custom-web-component-library), and feel free to fork the project or contribute!
+If you’re curious to explore more, check out the [GitHub repository](https://github.com/joecaro/web-component-ui), and feel free to fork the project or contribute!
 
 Happy coding!

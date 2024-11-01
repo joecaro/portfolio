@@ -1,5 +1,6 @@
 import AboutMe from "@/components/AboutMe";
 import { Circle, Diagonal } from "@/components/AboutMeAnimations";
+import HobbySectionComponent from "@/components/hobby-section";
 import Portrait from "@/components/Portrait";
 import Link from "next/link";
 
@@ -138,7 +139,7 @@ const About = () => {
                 </div>
             </section>
 
-            <h2>What I Do For Fun</h2>
+            <HobbySectionComponent />
         </div>
     );
 };

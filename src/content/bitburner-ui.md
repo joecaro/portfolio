@@ -3,7 +3,7 @@ slug: bitburner-ui
 title: "Bitburner Custom UI"
 date: Sep 26 2024 12:00 AM
 author: Joe
-description: Making custom UI library inside of the game BitBurner
+description: Making custom UI library inside of the game BitBurner using React and a custom renderer.
 stack:
     - ReactJS
     - Javascript
