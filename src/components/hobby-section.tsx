@@ -55,9 +55,9 @@ const hobbies: Hobby[] = [
 
 export default function HobbySection() {
     return (
-        <section className='py-12 bg-gray-50'>
+        <section className='py-12'>
             <div className='container mx-auto px-4 max-w-3xl'>
-                <h2 className='text-3xl font-bold text-center mb-8'>
+                <h2 className='text-3xl font-bold text-center mb-8 dark:text-neutral-50'>
                     Things I Enjoy Outside of Code
                 </h2>
                 <div className='space-y-6'>
