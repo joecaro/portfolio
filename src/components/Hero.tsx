@@ -64,7 +64,7 @@ const Hero = () => {
                             Web Developer
                         </p>
                     </div>
-                    <div className='animate-slideIn duration-[1000ms]'>
+                    <div className='animate-slideIn duration-1000'>
                         <h1 className='text-4xl font-bold dark:text-neutral-300'>
                             Hi, {"I'm"} Joe
                         </h1>

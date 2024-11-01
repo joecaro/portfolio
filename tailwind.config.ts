@@ -79,14 +79,14 @@ const config: Config = {
     			}
     		},
     		animation: {
-    			'spin-scale': 'spinScale 0.5s ease-in-out',
-    			circleAnimation: '`circleAnimation ${10 / 3}ms`',
-    			startLeft: '`startLeft ${10 / 1.2}ms`',
-    			startRight: '`startRight ${10 / 1.2}ms`',
-    			diagonalAnimation: '`diagonalAnimation ${10}ms`',
-    			fadeInHome: 'fadeInHome 0.5s ease-in-out',
-    			fadeInAbout: 'fadeInAbout 0.5s ease-in-out'
-    		},
+				'spin-scale': 'spinScale 0.5s ease-in-out',
+				circleAnimation: 'circleAnimation 3.33ms',
+				startLeft: 'startLeft 8.33ms',
+				startRight: 'startRight 8.33ms',
+				diagonalAnimation: 'diagonalAnimation 10ms',
+				fadeInHome: 'fadeInHome 0.5s ease-in-out',
+				fadeInAbout: 'fadeInAbout 0.5s ease-in-out',
+			  },
     		backgroundImage: {
     			gradientBlue: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 90%, rgb(37 99 235))'
     		},
