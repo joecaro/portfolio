@@ -66,7 +66,9 @@ export default function ProjectCard({
               )}
             </div>
           </div>
-          <p className="description my-4 dark:text-neutral-300 text-sm">{project.description}</p>
+          <p className="description my-4 text-neutral-700 dark:text-neutral-300 text-sm">
+            {project.description}
+          </p>
         </div>
       </div>
       <div className="stack flex flex-wrap">

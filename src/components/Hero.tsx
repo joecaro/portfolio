@@ -59,17 +59,17 @@ const Hero = () => {
                 </svg>
 
                 <div className='z-10 grid gap-2 dark:text-neutral-300'>
-                    <div className='animate-slideIn duration-[2500ms]'>
+                    <div className='animate-slideInLeft duration-1000 delay-500'>
                         <p className='text-xl font-semibold text-blue-600'>
                             Web Developer
                         </p>
                     </div>
-                    <div className='animate-slideIn duration-1000'>
+                    <div className='animate-slideInLeft duration-1000'>
                         <h1 className='text-4xl font-bold dark:text-neutral-300'>
                             Hi, {"I'm"} Joe
                         </h1>
                     </div>
-                    <div className='animate-slideIn duration-[2500ms]'>
+                    <div className='animate-slideInLeft duration-1000 delay-500'>
                         <h2 className='text-xl font-normal dark:text-neutral-300'>
                             I am a Frontend React developer specializing in
                             NextJS and NodeJS Applications

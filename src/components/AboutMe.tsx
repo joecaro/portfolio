@@ -2,7 +2,7 @@ import React from "react";
 
 export default function AboutMe() {
     return (
-        <div className='dark:text-neutral-300 pb-40 sm:pb-40'>
+        <div className='dark:text-neutral-300 pb-40 sm:pb-40 z-10'>
             <h1 className='text-3xl mb-4'>Joseph Carothers</h1>
             <p>
                 I’m a web developer specializing in creating interactive
