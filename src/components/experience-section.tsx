@@ -51,7 +51,7 @@ export function ExperienceSection() {
   ];
 
   return (
-    <section className="w-full pb-16">
+    <section className="w-full mb-48">
       <div className="container px-4 md:px-6 m-auto">
         <div className="flex flex-col items-start gap-4">
           <h2 className="text-4xl dark:text-neutral-300">

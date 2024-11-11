@@ -94,6 +94,23 @@ const config: Config = {
             transform: "translateX(0)",
           },
         },
+        slideInLeftDelay: {
+          "0%": {
+            opacity: "0",
+          },
+          "65%": {
+            opacity: "0",
+          },
+          "66%": {
+            transform: "translateX(-100px)",
+          },
+          "99%": {
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translateX(0)",
+          },
+        },
       },
       animation: {
         "spin-scale": "spinScale 0.5s ease-in-out",
@@ -104,6 +121,7 @@ const config: Config = {
         fadeInHome: "fadeInHome 0.5s ease-in-out",
         fadeInAbout: "fadeInAbout 0.5s ease-in-out",
         slideInLeft: "slideInLeft ease-in-out",
+        slideInLeftDelay: "slideInLeftDelay 1500ms ease-in-out",
       },
       backgroundImage: {
         gradientBlue:
