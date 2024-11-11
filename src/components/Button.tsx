@@ -71,14 +71,14 @@ const BaseButton = ({
         <div className={`relative h-10 ${className}`}>
             <button
                 className={cn(
-                    `box-content grid place-items-center font-semibold h-10 w-24 rounded-sm transition-all ease-in-out transform`,
+                    `box-content grid place-items-center font-medium  h-10 w-24 rounded-sm transition-all transform`,
                     bgColor,
                     textClass,
                     "border-[3px] rounded",
                     COLORS[color].borderLight,
                     COLORS[color].borderDark,
                     animated &&
-                        `hover:border-b-[6px] active:border-b-2 hover:translate-y-[-3px] active:translate-y-[0px]`
+                        `hover:border-b-[6px] hover:translate-y-[-3px] active:border-b-[2px] active:translate-y-[1px]`
                 )}
                 style={{
                     boxShadow: `2px 2px 0 #00000055`,

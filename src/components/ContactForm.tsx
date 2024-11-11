@@ -152,17 +152,17 @@ export default function ContactForm() {
 
     return (
         <div className='max-w-screen-lg mx-auto py-40'>
-            <h2 className='text-3xl font-semibold mb-8'>Contact Me</h2>
+            <h2 className='text-3xl font-semibold mb-8 dark:text-neutral-100'>Contact Me</h2>
             <form
                 id='contact'
-                className='grid gap-8 p-4 rounded-lg border-2 border-neutral-300 shadow-lg max-w-full'
+                className='grid gap-8 p-4 rounded-lg border-2 max-w-full'
                 onSubmit={handleSubmit}
             >
                 <fieldset className='flex flex-wrap gap-8'>
-                    <label className='block text-lg'>
+                    <label className='block text-lg dark:text-neutral-300'>
                         First Name
                         <input
-                            className={`w-full p-2 rounded-md border ${
+                            className={`w-full p-2 rounded-md border dark:bg-neutral-950 ${
                                 formDataValid.firstname === false
                                     ? "border-red-500"
                                     : ""
@@ -181,10 +181,10 @@ export default function ContactForm() {
                         )}
                     </label>
 
-                    <label className='block text-lg'>
+                    <label className='block text-lg dark:text-neutral-300'>
                         Last Name
                         <input
-                            className={`w-full p-2 rounded-md border ${
+                            className={`w-full p-2 rounded-md border dark:bg-neutral-950 ${
                                 formDataValid.lastname === false
                                     ? "border-red-500"
                                     : ""
@@ -205,10 +205,10 @@ export default function ContactForm() {
                 </fieldset>
 
                 <fieldset className='flex flex-wrap gap-8'>
-                    <label className='block text-lg'>
+                    <label className='block text-lg dark:text-neutral-300'>
                         Company
                         <input
-                            className={`w-full p-2 rounded-md border ${
+                            className={`w-full p-2 rounded-md border dark:bg-neutral-950 ${
                                 formDataValid.company === false
                                     ? "border-red-500"
                                     : ""
@@ -227,10 +227,10 @@ export default function ContactForm() {
                         )}
                     </label>
 
-                    <label className='block text-lg'>
+                    <label className='block text-lg dark:text-neutral-300'>
                         Email
                         <input
-                            className={`w-full p-2 rounded-md border ${
+                            className={`w-full p-2 rounded-md border dark:bg-neutral-950 ${
                                 formDataValid.email === false
                                     ? "border-red-500"
                                     : ""
@@ -251,10 +251,10 @@ export default function ContactForm() {
                 </fieldset>
 
                 <fieldset className='flex flex-col gap-4'>
-                    <label className='block text-lg'>
+                    <label className='block text-lg dark:text-neutral-300'>
                         Message
                         <textarea
-                            className={`w-full p-2 rounded-md border ${
+                            className={`w-full p-2 rounded-md border dark:bg-neutral-950 ${
                                 formDataValid.message === false
                                     ? "border-red-500"
                                     : ""

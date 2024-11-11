@@ -58,7 +58,7 @@ const Hero = () => {
                     />
                 </svg>
 
-                <div className='z-10 grid gap-2 dark:text-white'>
+                <div className='z-10 grid gap-2 dark:text-neutral-300'>
                     <div className='animate-slideIn duration-[2500ms]'>
                         <p className='text-xl font-semibold text-blue-600'>
                             Web Developer
