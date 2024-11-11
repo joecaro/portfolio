@@ -65,7 +65,7 @@ export function ExperienceSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="relative overflow-hidden rounded-md p-4 shadow-none">
+              <Card className="relative overflow-hidden rounded-md p-4 shadow-none dark:bg-neutral-800">
                   <div className="p-6">
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                       <div className="space-y-1">

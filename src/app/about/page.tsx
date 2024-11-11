@@ -123,7 +123,7 @@ const About = () => {
                                 <ul className='grid gap-2 list-none p-0 m-0'>
                                     {section.list.items.map(tool => (
                                         <li
-                                            className={`p-4 bg-neutral-300 dark:bg-neutral-400 border-b-3 border-r-3 border-neutral-200 rounded-md`}
+                                            className={`p-4 bg-neutral-300 dark:bg-neutral-500 border-b-3 border-r-3 border-neutral-200 rounded-md`}
                                             style={{
                                                 boxShadow: `2px 2px 0 #00000099`,
                                             }}

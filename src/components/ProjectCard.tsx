@@ -17,7 +17,7 @@ export default function ProjectCard({
   project,
 }: ProjectCardProps) {
   return (
-    <Card className={cn(`grid grid-areas gap-4 rounded-md p-8`)}>
+    <Card className={cn(`grid grid-areas gap-4 rounded-md p-8 dark:bg-neutral-800`)}>
       <div className="grid md:grid-rows-2 gap-4">
         <div className="relative hidden h-full w-full overflow-hidden md:block">
           <Image
