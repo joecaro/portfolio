@@ -69,8 +69,7 @@ const Hero = () => {
           </div>
           <div className="animate-slideInLeftDelay">
             <h2 className="text-xl font-normal dark:text-neutral-300">
-              I am a Frontend React developer specializing in NextJS and NodeJS
-              Applications
+              I&apos;m a full-stack developer building intelligent systems that make complex technology feel simple and powerful
             </h2>
           </div>
           <ButtonLink

@@ -6,6 +6,7 @@ import { CSSTransition } from "react-transition-group";
 import ProjectCard from "./ProjectCard";
 import MaxWidthContainer from "./styles/MaxWidthContainer";
 import { Button } from "./Button";
+import { Project } from "@/types";
 
 export default function ProjectsList({ projects }: { projects: Project[] }) {
   const availableFilters = projects

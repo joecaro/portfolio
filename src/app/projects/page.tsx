@@ -1,10 +1,10 @@
 import Head from "next/head";
-import getAllProjects from "../../lib/getAllProjects";
+import { getAllProjects } from "../../lib/getAllProjects";
 import ContactForm from "@/components/ContactForm";
 import Link from "next/link";
 
-export default function Page() {
-    const projects = getAllProjects();
+export default async function Page() {
+    const projects = await getAllProjects();
 
     return (
         <>

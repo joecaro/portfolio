@@ -1,4 +1,6 @@
-declare type Project = {
+import type { SerializeResult } from 'next-mdx-remote-client/serialize';
+
+export type Project = {
     title: string;
     slug: string;
     date: string;
@@ -10,4 +12,6 @@ declare type Project = {
     content?: string;
     demo?: string;
     github?: string;
+    isMDX?: boolean;
+    mdxSource?: SerializeResult<Record<string, unknown>, Record<string, unknown>> | null;
 };

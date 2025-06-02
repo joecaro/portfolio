@@ -1,6 +1,9 @@
 import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
+import { serialize } from 'next-mdx-remote-client/serialize';
+import type { Project } from '@/types';
+import remarkGfm from 'remark-gfm';
 
 // Define the directory for project files
 const ProjectsDirectory = join(process.cwd(), "src/content");
@@ -9,12 +12,18 @@ const ProjectsDirectory = join(process.cwd(), "src/content");
 export function getProjectslugs(): string[] {
     return fs
         .readdirSync(ProjectsDirectory)
-        .map(file => file.replace(/\.md$/, ""));
+        .filter(file => file.endsWith('.md') || file.endsWith('.mdx'))
+        .map(file => file.replace(/\.mdx?$/, ""));
 }
 
 // Function to get a project by slug
-export function getProjectBySlug(slug: string): Project {
-    const fullPath = join(ProjectsDirectory, `${slug}.md`);
+export async function getProjectBySlug(slug: string): Promise<Project> {
+    // Try .mdx first, then .md
+    let fullPath = join(ProjectsDirectory, `${slug}.mdx`);
+    if (!fs.existsSync(fullPath)) {
+        fullPath = join(ProjectsDirectory, `${slug}.md`);
+    }
+    
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
 
@@ -23,22 +32,45 @@ export function getProjectBySlug(slug: string): Project {
         data.date = new Date(data.date).toDateString();
     }
 
-    const project = { ...data, content } as Project;
+    const isMDX = fullPath.endsWith('.mdx');
+    let mdxSource = null;
+
+    // Serialize MDX content if it's an MDX file
+    if (isMDX) {
+        try {
+            mdxSource = await serialize({ 
+                source: content,
+                options: {
+                    mdxOptions: {
+                        remarkPlugins: [remarkGfm],
+                        rehypePlugins: [],
+                    }
+                }
+            });
+        } catch (error) {
+            console.error(`Error serializing MDX for ${slug}:`, error);
+        }
+    }
+
+    const project = { 
+        ...data, 
+        content, 
+        isMDX,
+        mdxSource
+    } as Project;
 
     return project;
 }
 
 // Function to get all projects
-export default function getAllProjects(): Project[] {
+export async function getAllProjects(): Promise<Project[]> {
     const slugs = getProjectslugs();
-    const projects = slugs
-        .map(slug => getProjectBySlug(slug))
-        .sort((project1, project2) => {
-            const date1 = new Date(project1.date);
-            const date2 = new Date(project2.date);
+    const projects = await Promise.all(slugs.map(slug => getProjectBySlug(slug)));
 
-            return date2.getTime() - date1.getTime(); // Sort in descending order
-        });
-
-    return projects;
+    return projects.sort((a, b) => {
+        if (a.date && b.date) {
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
+        }
+        return 0;
+    });
 }

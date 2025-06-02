@@ -9,6 +9,19 @@ import { CalendarIcon } from "@radix-ui/react-icons";
 export function ExperienceSection() {
   const experiences = [
     {
+      company: "Salient",
+      location: "Los Angeles, CA",
+      role: "Software Engineer",
+      period: "01/2025 - Present",
+      achievements: [
+        "Architecting full-stack solutions for major financial institutions, building AI-powered communication platforms that process millions of customer interactions with sub-second response times",
+        "Developing advanced speech processing systems with intelligent interruption handling and text normalization, significantly improving conversation flow and user experience",
+        "Creating real-time analytics and visualization platforms that transform complex call data into actionable insights for campaign optimization and compliance monitoring",
+        "Building comprehensive user management systems with granular permissions and role-based access controls for enterprise-scale applications",
+        "Implementing ETL pipelines that process hundreds of thousands of calls daily, enabling real-time performance metrics and geographic visualization of customer interactions",
+      ],
+    },
+    {
       company: "Action Network",
       location: "Remote",
       role: "Software Engineer",
