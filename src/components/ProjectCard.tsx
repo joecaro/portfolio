@@ -4,6 +4,7 @@ import Image from "next/legacy/image";
 import { Button } from "./Button";
 import { Card } from "./ui/card";
 import { cn } from "@/lib/tw";
+import { Project } from "@/types";
 
 type ProjectCardProps = {
   filter: string;
