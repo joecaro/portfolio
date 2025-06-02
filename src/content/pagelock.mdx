@@ -1,0 +1,276 @@
+---
+slug: pagelock
+title: "Page Lock - React Ownership Management Library"
+author: Joe
+description: "A React library for elegant page ownership management in modern web applications, preventing concurrent access conflicts with real-time locking."
+image: https://res.cloudinary.com/joecarothers/image/upload/v1748845726/misc/Projects/idim94pulw1yy9khtjjd.png
+date: 2025-01-26
+stack:
+    - ReactJS
+    - Javascript
+    - Typescript
+tags: 
+    - featured
+    - react
+    - typeScript
+    - library
+    - open source
+    - real-time
+tech:
+    - React
+    - typescript
+    - npm
+github: "https://github.com/joecaro/page-lock"
+demo: "https://github.com/joecaro/page-lock/tree/main/example"
+---
+
+# Page Lock - React Ownership Management Library
+
+Page Lock is a React library I built to solve a common problem in collaborative web applications: **preventing multiple users from editing the same content simultaneously**. It provides elegant, real-time page ownership management with built-in UI components and hooks.
+
+## The Problem
+
+In collaborative applications, when multiple users try to edit the same record or page simultaneously, you get:
+- **Data conflicts** - Last save wins, losing other users' work
+- **User confusion** - People don't know someone else is editing
+- **Wasted effort** - Duplicate work that gets overwritten
+
+Traditional solutions are either too complex or don't provide good UX.
+
+## The Solution
+
+Page Lock provides a simple, elegant solution with:
+
+🔐 **Real-time ownership tracking** - Know who's editing what, when  
+🔄 **Automatic ownership transfer** - Seamless handoffs between users  
+🎨 **Beautiful UI components** - Ready-to-use badges and modals  
+📱 **Mobile-friendly design** - Works great on all devices  
+🎯 **TypeScript support** - Full type safety out of the box  
+🚀 **Framework agnostic** - Works with Next.js, Create React App, etc.
+
+## Live Demo
+
+<PageLockDemo />
+## Key Features
+
+### 🔒 Flexible Locking Strategies
+
+```javascript
+// Lock entire pages
+const { lockPage, unlockPage } = usePageOwnership({ 
+  pageId: 'user-profile-123' 
+});
+
+// Lock specific components
+<OwnershipModal pageId="document-editor-456" />
+
+// Just show ownership status
+<OwnerBadge pageId="settings-panel-789" />
+```
+
+### 🌐 Multiple Storage Adapters
+
+```javascript
+// Use localStorage for simple cases
+const adapter = createLocalStorageAdapter({
+  prefix: 'my-app'
+});
+
+// Use your API for production
+const adapter = createApiStorageAdapter({
+  getAllOwners: () => fetch('/api/owners').then(r => r.json()),
+  lockPage: (pageId, userId, userName) => 
+    fetch('/api/lock', { method: 'POST', body: JSON.stringify({pageId, userId, userName}) }),
+  unlockPage: (pageId, userId) => 
+    fetch('/api/unlock', { method: 'POST', body: JSON.stringify({pageId, userId}) }),
+  takePageOwnership: (pageId, userId, userName) => 
+    fetch('/api/take-ownership', { method: 'POST', body: JSON.stringify({pageId, userId, userName}) })
+});
+```
+
+### ⚡ Real-time Updates
+
+The library polls for ownership changes at configurable intervals (default 3 seconds), ensuring all users see locks and releases immediately. No websockets required!
+
+## Technical Architecture
+
+### Core Components
+
+| Component | Purpose | Use Case |
+|-----------|---------|----------|
+| `OwnershipProvider` | Context provider for ownership state | Wrap your app or specific sections |
+| `usePageOwnership` | Hook for programmatic control | Custom implementations |
+| `OwnerBadge` | Simple ownership indicator | Show who owns what |
+| `OwnershipModal` | Full ownership management UI | Complete lock/unlock flow |
+
+### Type Safety
+
+```typescript
+interface PageOwner {
+  user_id: string;
+  user_name: string;
+  page_id: string;
+  timestamp: number;
+}
+
+interface OwnershipConfig {
+  userAdapter: UserAdapter;
+  ownershipAdapter: OwnershipAdapter;
+  options?: {
+    pollingInterval?: number;
+  };
+}
+```
+
+## Real-World Use Cases
+
+### 1. **CRM Record Editing**
+Prevent sales reps from simultaneously editing the same customer record, avoiding data loss and confusion.
+
+### 2. **Document Collaboration**
+Lock document sections while users are editing, similar to Google Docs but for React applications.
+
+### 3. **Configuration Management**
+Ensure only one admin can modify system settings at a time, preventing conflicting changes.
+
+### 4. **Form Workflows**
+Lock multi-step forms to prevent multiple submissions or conflicting edits during long workflows.
+
+## Installation & Quick Start
+
+```bash
+npm install @joecarot/page-lock
+# or
+yarn add @joecarot/page-lock
+```
+
+### Basic Implementation
+
+```jsx
+import {
+  OwnershipProvider,
+  createLocalStorageAdapter,
+  OwnerBadge
+} from '@joecarot/page-lock';
+
+// Setup adapters
+const userAdapter = {
+  getCurrentUser: () => Promise.resolve({
+    id: 'user-123',
+    email: 'user@example.com',
+    name: 'John Doe'
+  })
+};
+
+const ownershipAdapter = createLocalStorageAdapter({
+  prefix: 'my-app'
+});
+
+const config = {
+  userAdapter,
+  ownershipAdapter,
+  options: {
+    pollingInterval: 3000
+  }
+};
+
+// Use in your app
+function App() {
+  return (
+    <OwnershipProvider config={config}>
+      <div>
+        <h1>User Profile</h1>
+        <OwnerBadge pageId="user-profile-123" />
+        {/* Your form content */}
+      </div>
+    </OwnershipProvider>
+  );
+}
+```
+
+## Development Process
+
+### Built with Modern Tools
+
+- **TypeScript** for type safety and better DX
+- **Jest** for comprehensive testing
+- **GitHub Actions** for CI/CD
+- **tsup** for efficient bundling
+- **Tailwind CSS** for styling
+
+### Testing Strategy
+
+```bash
+# Run tests
+npm test
+
+# Coverage report
+npm run coverage
+
+# Run example
+cd example && npm start
+```
+
+The library includes extensive unit tests covering:
+- Ownership state management
+- Real-time polling behavior
+- Error handling scenarios
+- Component rendering states
+
+## Performance Considerations
+
+### Optimized Polling
+
+- **Smart intervals**: Only polls when components are mounted
+- **Efficient updates**: Uses React's built-in state management
+- **Memory cleanup**: Automatic cleanup on unmount
+
+### Bundle Size
+
+The library is designed to be lightweight:
+- Tree-shakeable exports
+- Minimal dependencies
+- Efficient TypeScript compilation
+
+## Future Enhancements
+
+### Planned Features
+
+🔄 **WebSocket Support** - Real-time updates without polling  
+🎭 **Role-based Permissions** - Different lock types for different user roles  
+🔌 **More Adapters** - Redis, PostgreSQL, MongoDB adapters  
+📊 **Analytics** - Usage tracking and ownership metrics  
+🎨 **Theme Customization** - More styling options
+
+### Contributing
+
+The project is open source and welcomes contributions! Check out the [GitHub repository](https://github.com/joecaro/page-lock) for:
+
+- 📋 Issue tracking
+- 🔄 Pull request guidelines  
+- 📖 Development setup
+- 🧪 Testing instructions
+
+## Lessons Learned
+
+Building this library taught me about:
+
+### API Design
+Creating intuitive APIs that are both simple for basic use cases and flexible for complex scenarios.
+
+### State Management
+Handling real-time state synchronization across multiple components and user sessions.
+
+### Library Distribution
+Packaging, versioning, and distributing a TypeScript library with proper type definitions.
+
+### User Experience
+Balancing functionality with simplicity - making complex ownership logic feel natural.
+
+---
+
+**Page Lock** solves a real problem that many collaborative applications face. By providing simple, elegant ownership management, it helps teams build better collaborative experiences without the complexity of traditional solutions.
+
+Try it out in your next project - I'd love to hear how it works for you! 
+
+[📦 npm package](https://www.npmjs.com/package/@joecarot/page-lock) | [📚 GitHub repository](https://github.com/joecaro/page-lock) | [🎯 Live example](https://github.com/joecaro/page-lock/tree/main/example) 

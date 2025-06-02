@@ -14,7 +14,6 @@ stack:
 github: https://github.com/joecaro/crm
 demo:
 tags:
-    - featured
     - nextjs
     - react
     - html
