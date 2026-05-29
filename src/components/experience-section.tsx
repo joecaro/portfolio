@@ -10,15 +10,15 @@ export function ExperienceSection() {
   const experiences = [
     {
       company: "Salient",
-      location: "Los Angeles, CA",
+      location: "San Francisco, CA",
       role: "Founding Engineer",
       period: "01/2025 - Present",
       achievements: [
-        "Architecting full-stack solutions for major financial institutions, building AI-powered communication platforms that process millions of customer interactions with sub-second response times",
-        "Developing advanced speech processing systems with intelligent interruption handling and text normalization, significantly improving conversation flow and user experience",
-        "Creating real-time analytics and visualization platforms that transform complex call data into actionable insights for campaign optimization and compliance monitoring",
-        "Implementing ETL pipelines that process hundreds of thousands of calls daily, enabling real-time performance metrics and geographic visualization of customer interactions",
-        "Building comprehensive user management systems with granular permissions and role-based access controls for enterprise-scale applications",
+        "Build and own customer-facing platform surfaces — user management, reporting, analytics, and human-in-the-loop compliance review — for enterprise customers monitoring ~1M AI-driven phone interactions a month.",
+        "Developed core AI voice-agent infrastructure — conversational memory, interruption handling, speech timing, and text normalization — powering tens of thousands of live calls daily with sub-second response times.",
+        "Led engineering for a Fortune 100 financial institution, adapting the full platform (frontend, APIs, agent orchestration, SIP, databases) to run inside a highly restricted enterprise environment and taking it from pilot to production.",
+        "Now leading self-serve product work: a visual conversation-flow builder for designing and managing AI agents, and an AI-powered reporting builder that generates custom reporting UIs on demand.",
+        "Expanding the platform into new communication channels like SMS to broaden how AI agents reach customers",
       ],
     },
     {
@@ -78,7 +78,7 @@ export function ExperienceSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-              <Card className="relative overflow-hidden rounded-md p-4 shadow-none dark:bg-neutral-800">
+                <Card className="relative overflow-hidden rounded-md p-4 shadow-none dark:bg-neutral-800">
                   <div className="p-6">
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                       <div className="space-y-1">
