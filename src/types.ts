@@ -12,6 +12,9 @@ export type Project = {
     content?: string;
     demo?: string;
     github?: string;
+    role?: string;
+    focus?: string;
+    impact?: string;
     isMDX?: boolean;
     mdxSource?: SerializeResult<Record<string, unknown>, Record<string, unknown>> | null;
 };

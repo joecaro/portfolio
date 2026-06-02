@@ -7,7 +7,7 @@ description: My solutions to problems from AlgoExpert, complete with unit tests 
 stack:
     - Javascript
 github: https://github.com/joecaro/Data-Structures-and-Algorithms
-demo: not available
+demo:
 tags:
     - javascript
 tech:

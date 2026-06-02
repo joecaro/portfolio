@@ -6,7 +6,6 @@ author: Joe
 description: A scalable and performant template landing page for a service company with a modern design.
 stack:
     - NextJS
-    - Featured
 github: https://github.com/joecaro/service-provider-landing-page
 demo: https://servicelandingpage.netlify.app/
 tags:

@@ -16,7 +16,6 @@ tags:
     - game
     - websockets
     - tailwindcss
-    - featured
 tech:
     - solidjs
     - node
@@ -33,7 +32,7 @@ image: https://res.cloudinary.com/joecarothers/image/upload/v1727159315/misc/Pro
 
 The core motivation behind this project was to explore **SolidJS** and its strengths in modern web development. I wanted to see how well it handled complex state management, performance optimization, and rendering in comparison to more established frameworks like React. Given that **Tints and Hints** relies heavily on dynamic updates (players guessing in real-time), this made it the perfect case study.
 
-Additionally, I wanted to experiment with real-time communication using **WebSockets** for a multiplayer experience. While the WebSocket servers are currently offline due to cost constraints, the core game logic and client-side experience remain intact with local state management.
+Additionally, I wanted to experiment with real-time communication using **WebSockets** for a multiplayer experience. The public demo emphasizes the local game loop, while the codebase documents the multiplayer architecture and state-management choices.
 
 ## SolidJS for Complex State Management
 
@@ -60,9 +59,9 @@ function addGuess(guess) {
 
 SolidJS’s reactive primitives like createSignal allowed for minimal re-renders, making the game’s UI feel snappy and responsive, especially in scenarios where multiple players are interacting with the interface simultaneously.
 
-Exploring WebSockets (Server-Offline)
+Exploring WebSockets
 
-The server-side implementation was built with Node.js and Socket.IO for real-time communication between clients. The idea was to allow multiple players to join a game session, guess colors in real-time, and receive instant feedback based on their choices. However, due to costs, the WebSocket server is currently offline.
+The server-side implementation was built with Node.js and Socket.IO for real-time communication between clients. The idea was to allow multiple players to join a game session, guess colors in real-time, and receive instant feedback based on their choices.
 
 WebSocket Architecture
 
@@ -97,7 +96,7 @@ The Frontend Stack
 The frontend of Tints and Hints was built with SolidJS and a set of complementary tools:
 
 - TailwindCSS: Used for styling, keeping the design consistent and responsive with minimal effort.
-- Socket.IO Client: For real-time WebSocket communication with the backend (currently offline).
+- Socket.IO Client: For real-time WebSocket communication with the backend architecture.
 - SolidJS Router: For managing the game’s routing and navigation, ensuring seamless transitions between different game states.
 - Falso and Test-Data-Bot: For generating mock data during testing, allowing me to simulate player interactions without needing a live server.
 
@@ -110,7 +109,7 @@ Benefits of SolidJS
 
 Challenges
 
-- WebSocket Costs: Keeping the WebSocket server online became costly, so it’s currently offline, meaning the game operates in a single-player mode locally.
+- Deployment Scope: I kept the public demo focused on the local game loop while preserving the multiplayer backend code as an architecture reference.
 - Learning Curve: Although SolidJS is relatively simple to pick up, its mental model differs from frameworks like React. There was a learning curve in understanding how fine-grained reactivity impacts the application structure.
 
 ### Tech Stack

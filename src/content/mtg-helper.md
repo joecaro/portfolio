@@ -3,7 +3,7 @@ slug: mtg-helper
 title: "MTG Help Me"
 date: Sep 27 2024 12:00 AM
 author: Joe
-description: "Elevating the Magic: The Gathering Experience with AI. Chat PW: taptap"
+description: "An AI-powered Magic: The Gathering companion app with chat, image generation, and rules lookup workflows."
 stack:
     - NextJS
     - ReactJS
@@ -26,8 +26,6 @@ Magic: The Gathering (MTG) has been a staple in the world of strategy games for 
 In this post, I’ll walk you through the technical development of **MTG Help Me**, from the tech stack to the key features that make it a must-have for every MTG enthusiast.
 
 If you'd like to check the app out -> [MTG Helper](https://mtg-helper-two.vercel.app/)
-
-The chat feature is password protected so you'd have to at least come here to acces it first. The password is: `taptap`
 
 ## Project Overview
 
@@ -143,7 +141,7 @@ Developers interested in contributing to the project can quickly get set up with
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/username/mtg-help-me.git
+   git clone https://github.com/joecaro/mtg-helper.git
    ```
 
 2. **Install Dependencies**:
@@ -174,4 +172,4 @@ As an ongoing project, I’m excited to continue improving **MTG Help Me** and w
 
 Feel free to check out the source code on GitHub and contribute to the project!
 
-**GitHub Repository**: [https://github.com/username/mtg-help-me](https://github.com/username/mtg-help-me)
+**GitHub Repository**: [https://github.com/joecaro/mtg-helper](https://github.com/joecaro/mtg-helper)
