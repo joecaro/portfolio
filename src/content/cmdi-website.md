@@ -7,7 +7,6 @@ description: Website for SAAS CRM platform with blog and HubSpot integration. Bu
 stack:
   - NextJS
   - Contentful
-  - Featured
 github:
 demo: https://cmdi.netlify.app
 tags:

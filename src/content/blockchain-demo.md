@@ -7,11 +7,9 @@ description: A visual walkthrough of blockchain technologies. Learn about key co
 stack:
     - ReactJS
     - Javascript
-    - Featured
 github: https://github.com/joecaro/blockchain-demo-reactJS
 demo: https://blockchaindemo.netlify.app/
 tags:
-    - featured
     - reactjs
     - blockchain
     - javascript

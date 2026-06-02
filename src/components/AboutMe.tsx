@@ -5,26 +5,36 @@ export default function AboutMe() {
     <div className="dark:text-neutral-300 pb-40 sm:pb-40 z-10">
       <h1 className="text-3xl mb-4">Joseph Carothers</h1>
       <p>
-        I&apos;m a full-stack developer passionate about building intelligent systems that solve real-world problems. I specialize in creating seamless integrations between AI technologies, real-time data processing, and intuitive user interfaces that make complex systems accessible and actionable.
+        I&apos;m a full-stack product engineer focused on AI systems that have
+        to work in production. At Salient, I build the platform surfaces and
+        voice-agent infrastructure behind enterprise customer communication
+        workflows, including reporting, analytics, compliance review, and agent
+        orchestration for major financial institutions.
       </p>
       <p className="mt-2">
-        Currently at Salient, I&apos;m helping transform how major financial institutions handle customer communications through AI-powered platforms. My work spans the entire stack—from architecting data pipelines and optimizing speech processing systems to building interactive dashboards that provide actionable insights from millions of customer interactions.
+        My recent work spans the full stack: React product surfaces, APIs,
+        databases, SIP and call infrastructure, conversational memory,
+        interruption handling, speech timing, text normalization, and data
+        pipelines that turn large volumes of customer interactions into useful
+        operational insight.
       </p>
       <p className="mt-2">
-        I believe great software combines technical excellence with thoughtful design. Whether I&apos;m optimizing real-time systems for sub-second response times or creating visualizations that turn complex data into clear insights, I focus on building solutions that are both powerful and user-friendly.
+        I care most about making complex systems usable. Whether I&apos;m shipping
+        a self-serve conversation-flow builder, a custom reporting interface, or
+        infrastructure for live AI calls, I try to keep the user workflow clear
+        while preserving the technical depth needed for reliability and scale.
       </p>
       <p className="mt-2">
-        Previously at Action Network, I developed distributed promotion
-        rendering platforms and SEO tools, demonstrating my ability to create
-        scalable solutions that work across multiple client environments.
-        I&apos;m passionate about building systems that not only solve complex
-        technical challenges but also deliver tangible business value.
+        Previously at Action Network, I built reusable promotion-rendering
+        systems, internal operations tools, and user-facing sports products
+        tied to measurable revenue and workflow outcomes. Before that, at CMDI,
+        I combined client support, product feedback, and front-end development
+        to build tools for teams managing hundreds of accounts.
       </p>
       <p className="mt-2">
-        I&apos;m passionate about continually expanding my skills and knowledge,
-        and I thrive on tackling challenging projects. Beyond web development, I
-        explore a variety of other interests, which you can see reflected in my
-        work below.
+        The common thread is pragmatic product engineering: understand the
+        workflow, build the system, and make the result easy for real teams to
+        trust.
       </p>
     </div>
   );

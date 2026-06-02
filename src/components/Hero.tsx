@@ -60,18 +60,33 @@ const Hero = () => {
 
         <div className="z-10 grid gap-2 dark:text-neutral-300">
           <div className="animate-slideInLeftDelay">
-            <p className="text-xl font-semibold text-blue-600">Web Developer</p>
+            <p className="text-xl font-semibold text-blue-600">
+              Founding Engineer - Enterprise AI Platforms
+            </p>
           </div>
           <div className="animate-slideInLeft duration-1000">
             <h1 className="text-4xl font-bold dark:text-neutral-300">
-              Hi, {"I'm"} Joe
+              I build production AI systems for high-stakes teams
             </h1>
           </div>
           <div className="animate-slideInLeftDelay">
             <h2 className="text-xl font-normal dark:text-neutral-300">
-              I&apos;m a full-stack developer building intelligent systems that make complex technology feel simple and powerful
+              I&apos;m Joe Carothers, a full-stack engineer turning AI voice,
+              analytics, and workflow automation into enterprise products that
+              handle live customer interactions at scale.
             </h2>
           </div>
+          <ul className="grid gap-2 text-sm text-neutral-700 dark:text-neutral-300 sm:grid-cols-3">
+            <li className="rounded-md border border-blue-200 bg-white/80 p-3 dark:border-neutral-600 dark:bg-neutral-800/80">
+              ~1M AI interactions monitored monthly
+            </li>
+            <li className="rounded-md border border-blue-200 bg-white/80 p-3 dark:border-neutral-600 dark:bg-neutral-800/80">
+              Fortune 100 production deployments
+            </li>
+            <li className="rounded-md border border-blue-200 bg-white/80 p-3 dark:border-neutral-600 dark:bg-neutral-800/80">
+              Full-stack product and platform ownership
+            </li>
+          </ul>
           <ButtonLink
             color="purple"
             href="/files/Resume_Joseph_Carothers_05_26.pdf"

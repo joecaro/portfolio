@@ -3,17 +3,20 @@ slug: client-crm
 title: "Client CRM"
 date: Nov 11 2021 12:00 AM
 author: Joe
-description: I developed this application for my support team to track client statuses as they progressed through the report filing process.
+description: A full-stack operations tool that replaced spreadsheet tracking for a support team managing client reporting workflows.
+role: Product-minded full-stack developer
+focus: Client status tracking, authenticated CRUD workflows, reporting exports, and support-team visibility.
+impact: Reduced manual spreadsheet coordination and gave the team a single source of truth for client progress.
 stack:
     - MongoDB
     - Express
     - NextJS
     - NodeJS
     - JWT Tokens
-    - Featured
 github: https://github.com/joecaro/crm
 demo:
 tags:
+    - featured
     - nextjs
     - react
     - html
@@ -36,7 +39,6 @@ image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Pro
 ## Client CRM
 
 The **Client CRM** application was designed to address inefficiencies in how our support team tracked clients’ statuses during reporting periods. The main objective was to move away from manual Excel tracking, which was time-consuming and prone to error, and develop a tailored CRM (Customer Relationship Management) solution using **Next.js**, **MongoDB**, and **NodeJS**.
-_demo is currently unavailable due to removal of free tiers_
 
 ## The Problem
 
@@ -82,6 +84,6 @@ The stack I used for this project leverages modern web technologies:
 
 The **Client CRM** has proven to be a game-changer for our support team, streamlining their workflow and reducing the inefficiencies that came with manual data entry. It also provided valuable learning experiences for me, particularly in handling user authentication, creating a seamless UI, and managing a NoSQL database.
 
-Feel free to check out the [GitHub repository](https://github.com/joecaro/crm) to dive deeper into the code, or try out the [live demo](https://crm.josephcarothers.com/) to see the CRM in action!
+Feel free to check out the [GitHub repository](https://github.com/joecaro/crm) to dive deeper into the code.
 
 Happy coding!

@@ -3,7 +3,10 @@ slug: web-component-ui-library
 title: "Web Component UI Library"
 date: Sep 25 2024 12:00 AM
 author: Joe
-description: A journey into building a flexible and configurable component library using Web Components for high compatibility across platforms.
+description: A framework-agnostic component library for shipping reusable UI across React, CMS, and plain-browser environments.
+role: Component library author
+focus: Native Web Components, encapsulated styles, reusable APIs, and cross-platform UI delivery.
+impact: Shows how I think about reusable front-end systems that can move across teams and stacks.
 stack:
     - Web Components
     - JavaScript
@@ -150,6 +153,6 @@ This simple strategy of fetching on connected allows us fetch data before the co
 
 Building this **Web Component UI library** was an eye-opening experience. It reinforced my belief in the power of native browser technologies and the flexibility they offer. While frameworks like React and Vue are fantastic for most use cases, Web Components shine when you need something lightweight, encapsulated, and reusable across many different platforms.
 
-If you’re curious to explore more, check out the [GitHub repository](https://github.com/joecaro/web-component-ui), and feel free to fork the project or contribute!
+If you are curious to explore more, check out the [GitHub repository](https://github.com/joecaro/custom-web-component-library), and feel free to fork the project or contribute!
 
 Happy coding!
