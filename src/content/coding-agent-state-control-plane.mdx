@@ -1,0 +1,311 @@
+---
+slug: coding-agent-state-control-plane
+title: "Coordinating Coding-Agent State Across Tasks, Worktrees, and Approvals"
+date: Jun 02 2026 12:00 PM
+author: Joe
+description: A local control plane for coding agents that makes long-running AI work inspectable, resumable, and safe to merge.
+role: System designer and full-stack engineer
+focus: Agent memory, task orchestration, Git worktrees, approval flows, and multi-repo review state.
+impact: Turned one-off coding-agent chats into durable engineering workflows with clear context, saved diffs, test evidence, and human-controlled merges.
+stack:
+    - Node.js
+    - Python
+    - Git Worktrees
+    - Markdown
+    - SQLite
+tags:
+    - featured
+    - ai
+    - agents
+    - developer tools
+    - orchestration
+tech:
+    - Node.js
+    - Python
+    - Git
+    - SQLite
+    - Markdown
+image: /img/waterline.png
+position: 1
+---
+
+## The agent was not the hard part
+
+The funny thing about coding agents is that the impressive part is not always the code they write.
+
+The impressive part is getting from "please fix this" to "this exact diff is ready to merge, here is what changed, here is what was tested, here is what still needs a human decision, and no unrelated work got swept in along the way."
+
+That second sentence is where things get interesting.
+
+When I started using coding agents heavily, the failure mode was not that the model could not write a component, debug a test, or trace a bug. It could. The failure mode was that the work had no durable shape once the chat moved on.
+
+Which task was this for? Which repo was dirty before the agent started? Which branch should the final change land on? Was the latest run the one that passed tests, or the one that got interrupted halfway through a refactor? Did the agent change two repos because the feature needed it, or because it got lost?
+
+I did not need a smarter prompt. I needed a local control plane.
+
+So I built one.
+
+## The product idea
+
+The system is a local memory and orchestration layer for coding agents. It treats agent work like real engineering work instead of a disposable chat transcript.
+
+At a high level, it gives every meaningful piece of work:
+
+- A task with a goal, status, priority, and related notes.
+- A context packet that loads the useful past without dumping the whole archive into the prompt.
+- A structured handoff log with what changed, what evidence exists, and what should happen next.
+- An isolated worktree where the agent can edit without touching the user's current checkout.
+- A saved diff snapshot that can be inspected later.
+- An explicit approval merge step that keeps the human in control.
+- Durable branch intent so "merge this to main" means the same thing tomorrow that it meant when the task started.
+
+The short version:
+
+```text
+Task
+  -> context packet
+  -> isolated agent run
+  -> saved multi-repo diff
+  -> review
+  -> approve and merge
+  -> handoff
+```
+
+That loop turned coding-agent sessions from "a helpful conversation" into something closer to a small, local engineering workflow system.
+
+## Context packets: loading the right past
+
+Agent memory can get weird if it is treated like a giant scrapbook. More context is not always better context.
+
+The first useful abstraction was the context packet. Before a run starts, the system assembles a compact brief from the memory repo:
+
+- The current task and its goal.
+- Parent effort context, if the task belongs to a larger workstream.
+- Related tasks, decisions, and notes.
+- Recent handoffs.
+- Repo cues.
+- Link gaps that suggest missing relationships.
+
+The point is not to make the agent remember everything. The point is to make the agent start in the right neighborhood.
+
+A typical task context might say: this is part of the agent-orchestration effort, it targets the memory repo, it is related to worktree approvals, and the last useful handoff said the server needs a regression test for committed worktree diffs.
+
+That is dramatically more useful than a transcript pile.
+
+It also keeps the system honest. If a task has no related decisions, no notes, and no recent handoffs, that absence is visible. The agent has to inspect the repo instead of pretending the memory layer already knows the answer.
+
+## Handoffs: boring by design
+
+The second abstraction was the handoff log.
+
+Every non-trivial run leaves behind a small structured entry:
+
+```yaml
+what: "Implemented worktree-isolated task runs and approval merge APIs."
+evidence:
+  changed:
+    - "server: creates per-repo worktrees and captures grouped diffs"
+    - "ui: exposes Inspect diff and Approve merge controls"
+  validation:
+    - "unit tests passed"
+    - "syntax checks passed"
+blocker: "none"
+next: "Review the saved diff and approve merge when ready."
+```
+
+This is intentionally plain.
+
+I do not want a five-page essay after every run. I want the next engineer, which is often future me, to know:
+
+- What happened?
+- Why should I believe it?
+- Where do I look?
+- What is the next safe action?
+
+That is enough to make a task resumable. It is also enough to make failed runs useful. A failed run that records the exact blocker and evidence is not noise. It is a breadcrumb with a timestamp.
+
+## Worktrees: giving the agent its own workspace
+
+The big unlock was moving agent edits into isolated Git worktrees.
+
+Before that, a coding agent and I were sharing the same checkout. That works until it very much does not. My local repo might already have half-finished work, debug edits, generated files, or a branch in the middle of a merge. Letting an agent write directly into that is asking for mystery meat diffs.
+
+With worktree-based runs, the control plane creates a separate workspace for the task. The agent works there. The source repo stays untouched.
+
+That changed the feel of the whole system.
+
+The agent can make a real change. It can run tests. It can commit inside its worktree. The server can inspect both dirty files and committed worktree changes. Then the UI can show a saved diff snapshot even after the run ends.
+
+This matters even more for multi-repo work. Some features are naturally split across a frontend, an API, and a deployment repo. The system groups diffs by repo so review does not collapse into one giant blob.
+
+The principle is simple:
+
+> Agent autonomy should increase only when inspection gets better too.
+
+Worktrees made autonomy safer because they made the boundaries sharper.
+
+## Approval merges: the human keeps the final switch
+
+I did not want an agent to silently merge its own work into my active branch. That is not a productivity feature. That is a trust leak.
+
+So the system has an explicit approval flow.
+
+When a run finishes, the UI can show:
+
+- Which task produced the diff.
+- Which repos changed.
+- Which worktree branch was used.
+- Which base branch the work targeted.
+- What validation evidence the handoff recorded.
+- Whether the target repo is clean enough to merge safely.
+
+Only then does the user approve the merge.
+
+If the target repo is dirty, the merge blocks. That is not a bug. That is the system protecting unrelated human work from getting mixed into an agent-generated patch.
+
+A good approval system should be a little stubborn. It should say, "I can merge this, but not while the destination has changed underneath me."
+
+That one rule prevented an entire class of subtle workflow failures.
+
+## The tiny field that mattered: base_branch
+
+One of the most useful improvements was almost comically small: task-level `base_branch` metadata.
+
+At first, a run could infer its target branch from the current checkout. That sounds reasonable until you use the system for real work. The current checkout is a moment in time. The task's intended target is durable state.
+
+Those are not the same thing.
+
+So tasks can now store a base branch:
+
+```yaml
+id: T0147
+title: "Add durable base branch for worktree runs"
+status: done
+base_branch: main
+```
+
+The run still captures the exact base commit when it starts. That per-run snapshot is the `baseHead`. But the task keeps the durable intent: this work targets `main`, or this work targets a release branch, or this work targets a long-lived integration branch.
+
+That distinction made approval merges much easier to reason about:
+
+- `base_branch` is what the task means.
+- `baseHead` is what the world looked like when the run began.
+
+Tiny metadata. Big reduction in confusion.
+
+## Subagents: orchestration is a state problem
+
+Once tasks, handoffs, worktrees, and approvals existed, server-managed subagents became much less mysterious.
+
+The question was no longer "Can I spawn several agents?" That part is easy.
+
+The real question was:
+
+- What are they working on?
+- How do their child tasks relate to the parent effort?
+- Which run produced which diff?
+- Which failures should retry?
+- Which result is ready for review?
+- How does a manager agent summarize the batch without inventing state?
+
+The orchestration layer handles a few modes:
+
+- Run a batch of selected tasks.
+- Decompose a larger task into child tasks.
+- Run child tasks in isolated worktrees.
+- Limit concurrency so the machine and repos stay usable.
+- Retry narrow failures once.
+- Record manager planning and review turns.
+- Project derived orchestration state back into the UI.
+
+This made the system feel less like "many agents in a trench coat" and more like a workflow engine with agents inside it.
+
+The manager does not need to be magical. It needs to be accountable. It should produce a plan, create or select tasks, launch work, inspect outcomes, and leave a reviewable handoff.
+
+## What the UI had to make obvious
+
+Most of the product work was not glamorous. It was making state visible.
+
+A task page needed to answer questions quickly:
+
+- Is this task ready, in progress, blocked, in review, or done?
+- Does it belong to a larger effort?
+- Is there a live run?
+- Is there a saved diff?
+- Was this run isolated in a worktree?
+- Can I approve it?
+- If I cannot approve it, why not?
+
+The UI did not need to look like a spaceship. It needed to keep repeated engineering actions calm and inspectable.
+
+That shaped the controls:
+
+- "Run in worktree" for isolated execution.
+- "Inspect diff" for reviewing saved changes.
+- "Approve and merge" for explicit integration.
+- Status chips for task and run state.
+- Handoff entries that scan quickly instead of reading like chat logs.
+
+The best agent UI is not the one with the flashiest animation. It is the one that tells you exactly what is happening when an autonomous system touches your code.
+
+## Design choices that paid off
+
+| Decision | Why it mattered |
+| --- | --- |
+| Markdown tasks as the source of truth | Easy to inspect, diff, repair, and commit. |
+| SQLite as a generated search index | Fast discovery without making a database the canonical memory store. |
+| Context packets before agent runs | The agent starts with relevant history instead of vague vibes. |
+| Structured handoffs | Every run leaves concise evidence and a next step. |
+| Git worktrees | Agent edits are isolated from human work. |
+| Saved multi-repo diffs | Review survives after a run exits. |
+| Explicit approval merges | Humans keep control of integration. |
+| Durable base branch metadata | Task intent does not drift with the current checkout. |
+| Server-managed orchestration | Subagents become coordinated work, not scattered sessions. |
+
+The theme is boring infrastructure around exciting tools.
+
+That is the part I like.
+
+## What I learned
+
+The biggest lesson was that agent quality is not just model quality. It is workflow quality.
+
+A strong coding agent in a weak workflow still creates uncertainty. A decent coding agent in a strong workflow can be surprisingly useful because the system catches, contains, and explains its work.
+
+Some principles I would reuse anywhere:
+
+### 1. Treat agent state as product state
+
+If the agent can change code, its state deserves first-class modeling. Task status, run IDs, branch targets, diffs, validation, blockers, and approvals should not live only in prose.
+
+### 2. Make failure inspectable
+
+An interrupted run should still be useful. A blocked approval should explain whether the issue is stale metadata, a dirty target repo, or a missing worktree snapshot.
+
+### 3. Prefer explicit handoffs over clever summaries
+
+Summaries are nice. Handoffs are operational. They say what changed, where the evidence is, and what happens next.
+
+### 4. Keep merges boring
+
+The merge path should be conservative. If the destination moved, stop and ask for review. Fast automation is not worth hidden state corruption.
+
+### 5. Give agents room, then inspect the room
+
+Worktrees let agents work independently. Saved diffs, tests, and approval checks make that independence reviewable.
+
+## The fun part
+
+The fun part is that once the state model clicked, the whole experience changed.
+
+Instead of treating each coding-agent session like a little adventure, I could treat it like a unit of engineering work. Start from a task. Load the right context. Run in isolation. Capture the result. Review the diff. Approve the merge. Leave the next person a handoff.
+
+It made the agent feel less like a chat box and more like a teammate plugged into a real workflow.
+
+Not because the model became perfect. It did not.
+
+Because the system around it became legible.
+
+That is the punchline: the future of coding agents is not only better generation. It is better coordination.
+
+And sometimes better coordination starts with a Markdown task, a Git worktree, and a very stubborn merge button.
