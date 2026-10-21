@@ -52,9 +52,9 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
           ].map((category) => (
             <Button
               key={category}
-              inverted={filter !== category.toLowerCase()}
+              variant={filter === category.toLowerCase() ? "fill" : "line"}
+              pressed={filter === category.toLowerCase()}
               onClick={() => setFilter(category.toLowerCase())}
-              color="blue"
             >
               {category}
             </Button>

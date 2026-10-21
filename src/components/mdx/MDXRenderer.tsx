@@ -7,6 +7,19 @@ import { CodePlayground } from "./CodePlayground";
 import { ETLPipelineDemo } from "./ETLPipelineDemo";
 import type { SerializeResult } from "next-mdx-remote-client/serialize";
 import { PageLockDemo } from "./PageLockDemo";
+import { Children, isValidElement, type ReactNode } from "react";
+import { slugify } from "@/lib/utils";
+
+const textOf = (node: ReactNode): string =>
+  Children.toArray(node)
+    .map((child) =>
+      typeof child === "string" || typeof child === "number"
+        ? String(child)
+        : isValidElement<{ children?: ReactNode }>(child)
+        ? textOf(child.props.children)
+        : ""
+    )
+    .join("");
 
 // Interactive components that can be used in MDX
 const mdxComponents = {
@@ -16,7 +29,11 @@ const mdxComponents = {
     </h1>
   ),
   h2: ({ children, ...props }: any) => (
-    <h2 className="text-2xl font-bold mt-6 mb-3 text-left" {...props}>
+    <h2
+      id={slugify(textOf(children))}
+      className="scroll-mt-24 text-2xl font-bold mt-10 mb-3 text-left"
+      {...props}
+    >
       {children}
     </h2>
   ),
