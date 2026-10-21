@@ -2,6 +2,7 @@
 slug: data-structures-and-algorithms
 title: "Data Structures and Algorithms"
 date: Nov 11 2021 12:00 AM
+kind: "Experiments"
 author: Joe
 description: My solutions to problems from AlgoExpert, complete with unit tests for each solution.
 stack:

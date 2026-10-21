@@ -2,6 +2,7 @@
 slug: pathfinder
 title: "Pathfinder App"
 date: Nov 11 2021 12:00 AM
+kind: "Experiments"
 author: Joe
 description: An application visually demonstrating various pathfinding algorithms, including Dijkstra's algorithm.
 stack:

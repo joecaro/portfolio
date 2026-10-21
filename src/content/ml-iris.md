@@ -2,6 +2,7 @@
 slug: ml-iris
 title: "Neural Network Iris Test"
 date: May 15 2021 12:00 AM
+kind: "AI & platform"
 author: Joe
 description: A neural network built in Python using the Keras library to classify the Iris dataset.
 stack:

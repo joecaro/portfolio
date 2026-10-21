@@ -72,14 +72,14 @@ export default function ProjectCard({
           </p>
         </div>
       </div>
-      <div className="stack flex flex-wrap">
+      <div className="stack flex flex-wrap gap-3">
         {project.stack.map((tech) => (
           <Button
             key={project.slug + tech}
-            inverted={filter !== tech.toLowerCase()}
+            size="sm"
+            variant={filter === tech.toLowerCase() ? "fill" : "line"}
+            pressed={filter === tech.toLowerCase()}
             onClick={() => setFilter && setFilter(tech.toLowerCase())}
-            color="blue"
-            className={`scale-75`}
           >
             {tech}
           </Button>

@@ -2,6 +2,7 @@
 slug: mtg-helper
 title: "MTG Help Me"
 date: Sep 27 2024 12:00 AM
+kind: "AI & platform"
 author: Joe
 description: "An AI-powered Magic: The Gathering companion app with chat, image generation, and rules lookup workflows."
 stack:

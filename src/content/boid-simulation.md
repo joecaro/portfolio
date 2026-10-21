@@ -2,6 +2,7 @@
 slug: boid-simulation
 title: "Unity Boid Simulation"
 date: Nov 18 2021 12:00 AM
+kind: "Experiments"
 author: Joe
 description: A Boid Simulation using Unity's game engine to model realistic flocking behaviors.
 stack:

@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/Button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { MapPin } from "lucide-react";
@@ -58,10 +60,14 @@ export function ExperienceSection() {
       achievements: [
         "Promoted within 8 months for exceeding employee standards",
         "Led training of new employees",
-        "Monitored all {30+} employees to ensure quality of call performance",
+        "Monitored all 30+ employees to ensure quality of call performance",
       ],
     },
   ];
+
+  const [open, setOpen] = useState<Record<string, boolean>>({
+    [experiences[0].company]: true,
+  });
 
   return (
     <section className="w-full mb-48">
@@ -71,55 +77,65 @@ export function ExperienceSection() {
             Experience
           </h2>
           <div className="w-full space-y-6">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={exp.company}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="relative overflow-hidden rounded-md p-4 shadow-none dark:bg-neutral-800">
-                  <div className="p-6">
-                    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                      <div className="space-y-1">
-                        <h3 className="text-2xl font-semibold">
-                          {exp.company}
-                        </h3>
-                        <p className="text-lg text-muted-foreground">
-                          {exp.role}
-                        </p>
-                      </div>
-                      <div className="flex flex-col gap-2 sm:items-end">
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <MapPin className="h-4 w-4" />
-                          {exp.location}
+            {experiences.map((exp, index) => {
+              const isOpen = !!open[exp.company];
+              const shown = isOpen
+                ? exp.achievements
+                : exp.achievements.slice(0, 1);
+              const hidden = exp.achievements.length - 1;
+
+              return (
+                <motion.div
+                  key={exp.company}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Card className="relative overflow-hidden rounded-md border-2 p-4 shadow-none dark:bg-neutral-800">
+                    <div className="p-2 sm:p-4">
+                      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="space-y-1">
+                          <h3 className="text-2xl font-semibold">
+                            {exp.company}
+                          </h3>
+                          <p className="text-lg text-muted-foreground">
+                            {exp.role}
+                          </p>
                         </div>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <CalendarIcon className="h-4 w-4" />
-                          {exp.period}
+                        <div className="flex flex-col gap-2 sm:items-end">
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <MapPin className="h-4 w-4" />
+                            {exp.location}
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <CalendarIcon className="h-4 w-4" />
+                            {exp.period}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="mt-4 pl-4 border-l">
-                      <ul className="list-disc list-inside space-y-2">
-                        {exp.achievements.map((achievement, i) => (
-                          <motion.li
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            key={i}
-                            transition={{ delay: index * 0.1 + i * 0.05 }}
-                            className="text-sm text-muted-foreground"
-                          >
-                            {achievement}
-                          </motion.li>
+                      <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+                        {shown.map((achievement) => (
+                          <li key={achievement}>{achievement}</li>
                         ))}
                       </ul>
+                      {hidden > 0 && (
+                        <Button
+                          size="sm"
+                          variant="line"
+                          className="mt-4"
+                          pressed={isOpen}
+                          onClick={() =>
+                            setOpen({ ...open, [exp.company]: !isOpen })
+                          }
+                        >
+                          {isOpen ? "Show less" : `Show ${hidden} more`}
+                        </Button>
+                      )}
                     </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>

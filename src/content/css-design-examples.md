@@ -2,6 +2,7 @@
 slug: css-design-examples
 title: "CSS Design Examples"
 date: Nov 18 2021 12:00 AM
+kind: "Experiments"
 author: Joe
 description: A collection of useful CSS layout examples with interactive code for learning and experimentation.
 stack:
