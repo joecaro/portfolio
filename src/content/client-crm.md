@@ -2,6 +2,7 @@
 slug: client-crm
 title: "Client CRM"
 date: Nov 11 2021 12:00 AM
+kind: "Tools"
 author: Joe
 description: A full-stack operations tool that replaced spreadsheet tracking for a support team managing client reporting workflows.
 role: Product-minded full-stack developer

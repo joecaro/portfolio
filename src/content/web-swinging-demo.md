@@ -2,6 +2,7 @@
 slug: web-swinging-demo
 title: "Web Swinging Demo"
 date: Nov 25 2021 12:00 AM
+kind: "Experiments"
 author: Joe
 description: Web swinging mechanics implemented in C# using the Unity Game Engine.
 stack:

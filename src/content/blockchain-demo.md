@@ -2,6 +2,7 @@
 slug: blockchain-demo
 title: "Blockchain Demo"
 date: Nov 18 2021 12:00 AM
+kind: "Experiments"
 author: Joe
 description: A visual walkthrough of blockchain technologies. Learn about key concepts like hash functions, blocks, blockchains, and distributed ledger technologies.
 stack:

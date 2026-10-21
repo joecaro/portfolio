@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin } from "lucide-react";
 
 type Hobby = {
     image: string;
@@ -14,83 +12,83 @@ const hobbies: Hobby[] = [
         image: "/img/scuba.jpg",
         title: "Scuba Diving",
         description:
-            "I love to scuba! I've done diving in North Carolina, Florida, Mexico, and want to go to many more places.",
+            "I've dived in North Carolina, Florida and Mexico, and want to go to many more places.",
         locations: "NC, FL, Mexico",
     },
     {
         image: "/img/sailing.jpeg",
         title: "Sailing",
         description:
-            "In 2022 I bought my first fixer upper sailboat. After spending the summer fixing it up, I've been learning to sail. I love the freedom and challenge of sailing.",
+            "In 2022 I bought my first fixer-upper sailboat. After a summer fixing it up, I've been learning to sail it.",
         locations: "NC",
     },
     {
-      image: "/img/hiking.jpg",
-      title: "Hiking",
-      description: "I love hiking in any location I travel to. Nature is one of the best ways to learn about the world.",
-      locations: "AZ, CO, UT, NM, CA, WA, HI, NC, FL, MX, KOR ...",
+        image: "/img/hiking.jpg",
+        title: "Hiking",
+        description:
+            "I hike wherever I travel. Nature is one of the best ways to learn about a place.",
+        locations: "AZ, CO, UT, NM, CA, WA, HI, NC, FL, MX, KOR",
     },
     {
         image: "/img/3d-printing-1.jpeg",
         title: "3D Printing",
         description:
-            "3d printing is a hobby I've been doing for a few years. The ability to tinker and create things in my own home is amazing and the novelty never wears off.",
+            "Tinkering and making things in my own home. The novelty never wears off.",
         locations: "FL, NC",
     },
     {
         image: "/img/surfing.jpg",
         title: "Surfing",
         description:
-            "I love the beach and the ocean. I've been surfing for a few years and it's a great way to relax and enjoy the water.",
+            "I love the beach and the ocean. Surfing is my favorite way to relax and enjoy the water.",
         locations: "NC, FL, Hawaii",
     },
     {
         image: "/img/rings.jpeg",
         title: "Ring Making",
         description:
-            "Another random hobby I've picked up is ring making. I've made rings out of silver and gold. The ability to make something of value that others can enjoy is a great feeling.",
+            "Rings in silver and gold. Making something of value that others can enjoy is a great feeling.",
         locations: "NC",
     },
 ];
 
 export default function HobbySection() {
     return (
-        <section className='py-12'>
-            <div className='container mx-auto px-4 max-w-3xl'>
-                <h2 className='text-3xl font-bold text-center mb-8 dark:text-neutral-50'>
-                    Things I Enjoy Outside of Code
-                </h2>
-                <div className='space-y-6'>
-                    {hobbies.map((hobby, index) => (
-                        <Card key={index} className='overflow-hidden'>
-                            <div className='flex flex-col md:flex-row'>
-                                <div className='md:w-1/3 relative md:[clip-path:polygon(0_0,70%_0,100%_50%,70%_100%,0_100%)]'>
-                                    <Image
-                                        src={hobby.image}
-                                        alt={hobby.title}
-                                        width={400}
-                                        height={300}
-                                        className='w-full h-48 md:h-64 object-cover'
-                                    />
-                                </div>
-                                <div className='md:w-2/3 space-y-4 p-6 flex flex-col justify-around'>
-                                    <h3 className='text-2xl md:text-xl font-bold tracking-tight'>
-                                        {hobby.title}
-                                    </h3>
-                                    <p className='text-muted-foreground text-lg leading-relaxed'>
-                                        {hobby.description}
-                                    </p>
-                                    <div className='flex items-center gap-1 text-muted-foreground'>
-                                        <MapPin className='w-4 h-4' />
-                                        <span className='text-sm'>
-                                            Explored: NC, FL, Mexico
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </Card>
-                    ))}
-                </div>
+        <section className='mx-auto flex max-w-6xl flex-col gap-7 px-4 pb-24 pt-16 md:px-8 dark:text-neutral-200'>
+            <div className='flex flex-col gap-2'>
+                <h2 className='text-3xl font-semibold'>Outside of code</h2>
+                <p className='text-neutral-600 dark:text-neutral-400'>
+                    Usually near the water, or making something with my hands.
+                </p>
+            </div>
+            <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+                {hobbies.map(hobby => (
+                    <figure
+                        key={hobby.title}
+                        className='group flex flex-col overflow-hidden rounded-lg border-2 border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-900'
+                    >
+                        <div className='relative aspect-[4/3] overflow-hidden'>
+                            <Image
+                                src={hobby.image}
+                                alt={hobby.title}
+                                fill
+                                sizes='(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw'
+                                className='object-cover transition-transform duration-300 group-hover:-rotate-1 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:transform-none'
+                            />
+                        </div>
+                        <figcaption className='flex flex-col gap-1.5 px-[18px] pb-[18px] pt-4'>
+                            <span className='text-[17px] font-semibold'>
+                                {hobby.title}
+                            </span>
+                            <span className='text-sm leading-relaxed text-neutral-700 dark:text-neutral-300'>
+                                {hobby.description}
+                            </span>
+                            <span className='text-xs text-neutral-600 dark:text-neutral-400'>
+                                Explored: {hobby.locations}
+                            </span>
+                        </figcaption>
+                    </figure>
+                ))}
             </div>
         </section>
     );

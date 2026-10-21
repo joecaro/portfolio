@@ -2,6 +2,7 @@
 slug: bitburner-hacking
 title: "Bitburner Hacking Scripts"
 date: Sep 25 2024 12:00 AM
+kind: "Experiments"
 author: Joe
 description: The development journey of a Bitburner hacking script, starting from a basic version (hck-1) to a fully-featured final release.
 stack:

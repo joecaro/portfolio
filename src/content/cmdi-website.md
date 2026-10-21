@@ -2,6 +2,7 @@
 slug: cmdi-website
 title: "CMDI Website"
 date: Nov 11 2021 12:00 AM
+kind: "Tools"
 author: Joe
 description: Website for SAAS CRM platform with blog and HubSpot integration. Built with NextJS using Static Site Generation (SSG) for improved performance and SEO.
 stack:

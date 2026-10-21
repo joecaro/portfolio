@@ -3,12 +3,17 @@ import { cn } from "@/lib/tw";
 type Variant = "fill" | "line";
 type Size = "md" | "sm";
 
+// Content-box on purpose: on hover the bottom border grows by exactly the
+// distance the button moves up, so its bottom edge stays put and it reads as
+// rising out of the page. The negative margin keeps the extra height from
+// shifting the layout around it.
 const BASE =
-    "box-border inline-flex items-center justify-center gap-2 rounded-[5px] font-semibold " +
+    "box-content inline-flex items-center justify-center gap-2 rounded-[5px] font-semibold " +
     "border-[3px] border-l-blue-500 border-t-blue-500 border-r-blue-900 border-b-blue-900 " +
-    "shadow-[2px_2px_0_rgba(0,0,0,0.33)] transition-[transform,border-bottom-width] duration-100 " +
-    "hover:-translate-y-[3px] hover:border-b-[6px] active:translate-y-px active:border-b-2 " +
-    "motion-reduce:transition-none motion-reduce:hover:translate-y-0";
+    "shadow-[2px_2px_0_rgba(0,0,0,0.33)] transition-[transform,border-bottom-width,margin] duration-100 " +
+    "hover:-translate-y-[3px] hover:border-b-[6px] hover:-mb-[3px] " +
+    "active:translate-y-px active:border-b-2 active:mb-px " +
+    "motion-reduce:transition-none";
 
 const VARIANTS: Record<Variant, string> = {
     fill: "bg-blue-600 text-white hover:text-white",
@@ -16,8 +21,8 @@ const VARIANTS: Record<Variant, string> = {
 };
 
 const SIZES: Record<Size, string> = {
-    md: "h-[46px] min-w-28 px-[18px] text-[15px]",
-    sm: "h-9 px-3 text-[13px] border-2 border-b-[3px] hover:border-b-[5px]",
+    md: "h-10 min-w-24 px-[18px] text-[15px]",
+    sm: "h-[31px] px-3 text-[13px] border-2 border-b-[3px] hover:-translate-y-[2px] hover:border-b-[5px] hover:-mb-[2px]",
 };
 
 export const buttonClasses = (
