@@ -2,6 +2,7 @@
 slug: web-component-ui-library
 title: "Web Component UI Library"
 date: Sep 25 2024 12:00 AM
+kind: "Libraries"
 author: Joe
 description: A framework-agnostic component library for shipping reusable UI across React, CMS, and plain-browser environments.
 role: Component library author

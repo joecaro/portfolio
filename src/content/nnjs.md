@@ -2,6 +2,7 @@
 slug: nnjs
 title: "NNJS: A JS Neural Network Library"
 date: Jun 17 2022 12:00 AM
+kind: "AI & platform"
 author: Joe
 description: A lightweight JavaScript library for training neural networks, built from the ground up for flexibility and simplicity.
 stack:

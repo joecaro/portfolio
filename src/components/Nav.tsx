@@ -42,14 +42,7 @@ const Nav = ({ cookieTheme }: { cookieTheme: string | undefined }) => {
                     </Link>
                 </li>
             </ul>
-            <ButtonLink
-                color='blue'
-                inverted={false}
-                animated={true}
-                href='#contact'
-            >
-                Contact
-            </ButtonLink>
+            <ButtonLink href='/#contact'>Contact</ButtonLink>
             <ThemeToggle cookieTheme={cookieTheme} />
         </nav>
     );

@@ -2,6 +2,7 @@
 slug: service-landing-page
 title: "Service Landing Page"
 date: Nov 11 2021 12:00 AM
+kind: "Tools"
 author: Joe
 description: A scalable and performant template landing page for a service company with a modern design.
 stack:

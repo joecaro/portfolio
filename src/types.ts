@@ -15,6 +15,8 @@ export type Project = {
     role?: string;
     focus?: string;
     impact?: string;
+    kind?: string;
+    position?: number;
     isMDX?: boolean;
     mdxSource?: SerializeResult<Record<string, unknown>, Record<string, unknown>> | null;
 };

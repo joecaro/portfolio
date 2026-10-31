@@ -87,38 +87,32 @@ const Hero = () => {
               Full-stack product and platform ownership
             </li>
           </ul>
-          <ButtonLink
-            color="purple"
-            href="/files/Resume_Joseph_Carothers_05_26.pdf"
-          >
-            Resume
-          </ButtonLink>
+          <div className="flex flex-wrap gap-4 pt-2">
+            <ButtonLink href="/projects">See projects</ButtonLink>
+            <ButtonLink
+              variant="line"
+              href="/files/Resume_Joseph_Carothers_05_26.pdf"
+            >
+              Resume
+            </ButtonLink>
+          </div>
         </div>
 
         <div className="flex flex-row-reverse md:flex-row items-start md:items-center gap-8 z-10 lg:flex-row lg:justify-between w-full lg:w-3/4">
           <Portrait page="home" />
           <div className="flex flex-col justify-around items-end gap-8">
-            <ButtonLink
-              inverted
-              animated
-              color="purple"
-              href="https://github.com/joecaro"
-            >
-              Github
+            <ButtonLink variant="line" href="https://github.com/joecaro">
+              GitHub
             </ButtonLink>
             <ButtonLink
-              inverted
-              animated
-              color="blue"
+              variant="line"
               href="https://www.linkedin.com/in/joseph-carothers-b36218132/"
             >
               LinkedIn
             </ButtonLink>
             <ButtonLink
-              inverted
-              animated
-              color="red"
-              href="mailto:joseph.samuel.carothers@gmail.com?subject=I Love Your Portfolio!&body=I really want you on my team."
+              variant="line"
+              href="mailto:joseph.samuel.carothers@gmail.com"
             >
               Email
             </ButtonLink>
