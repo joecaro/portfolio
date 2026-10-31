@@ -2,7 +2,7 @@
   "name": "portfolio",
   "private": true,
   "engines": {
-    "node": ">=22"
+    "node": "22.x || 24.x"
   },
   "packageManager": "yarn@1.22.22",
   "scripts": {
