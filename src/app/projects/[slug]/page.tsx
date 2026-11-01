@@ -6,6 +6,7 @@ import { MDXRenderer } from "@/components/mdx/MDXRenderer";
 import { getAllProjects, getProjectBySlug } from "@/lib/getAllProjects";
 import { slugify } from "@/lib/utils";
 import type { Project } from "@/types";
+import { HeadlinerExperience, HEADLINER_SUMMARIES } from "@/components/HeadlinerExperience";
 
 const IGNORED_TAGS = ["featured"];
 
@@ -66,6 +67,7 @@ export default async function ProjectPage({
     );
     const headings = headingsOf(project.content);
     const kind = kindLabel(project);
+    const summary = project.headliner ? HEADLINER_SUMMARIES[project.slug] : undefined;
 
     const glance = [
         { label: "My role", value: project.role },
@@ -92,6 +94,7 @@ export default async function ProjectPage({
                     {project.description}
                 </p>
                 <div className='flex flex-wrap items-center gap-4'>
+                    {summary && <><ButtonLink href='#product-demo'>Explore the product ↓</ButtonLink><a href='#case-study' className='inline-flex min-h-11 items-center rounded px-2 text-sm font-semibold underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600'>Read the case study</a></>}
                     {project.demo && (
                         <ButtonLink href={project.demo}>Live demo ↗</ButtonLink>
                     )}
@@ -107,7 +110,11 @@ export default async function ProjectPage({
                 </div>
             </section>
 
-            <section
+            {summary && <section aria-label='Project overview' className='mx-auto max-w-6xl px-4 pt-8 md:px-8'><dl className='grid gap-5 border-y border-neutral-200 py-6 md:grid-cols-3 dark:border-neutral-700'>{[{label:'What I built',text:summary.built},{label:'Why it matters',text:summary.value},{label:'Evidence',text:summary.evidence}].map(item=><div key={item.label}><dt className='mb-2 text-xs font-bold uppercase tracking-widest text-blue-700 dark:text-blue-300'>{item.label}</dt><dd className='text-sm leading-relaxed'>{item.text}</dd></div>)}</dl><p className='mt-3 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400'>{project.role} · {project.stack.join(' / ')}</p></section>}
+
+            {summary && <HeadlinerExperience slug={project.slug}/>}
+
+            {!summary && <section
                 aria-label='At a glance'
                 className='mx-auto max-w-6xl px-4 pt-10 md:px-8'
             >
@@ -145,7 +152,7 @@ export default async function ProjectPage({
                     {project.impact && (
                         <div className='flex flex-wrap items-baseline gap-x-4 gap-y-1 bg-blue-600 px-5 py-4 text-white'>
                             <span className='text-xs font-semibold uppercase tracking-widest text-blue-100'>
-                                Impact
+                                {project.headliner ? "Engineering focus" : "Impact"}
                             </span>
                             <span className='text-base font-medium leading-relaxed md:text-[17px]'>
                                 {project.impact}
@@ -153,9 +160,9 @@ export default async function ProjectPage({
                         </div>
                     )}
                 </div>
-            </section>
+            </section>}
 
-            {project.image && (
+            {project.image && !project.headliner && (
                 <section className='mx-auto max-w-6xl px-4 pt-10 md:px-8'>
                     <figure className='overflow-hidden rounded-lg border-2 border-neutral-200 bg-slate-100 dark:border-neutral-700 dark:bg-neutral-800'>
                         <div
@@ -180,7 +187,7 @@ export default async function ProjectPage({
                 </section>
             )}
 
-            <section className='mx-auto flex max-w-6xl flex-col gap-10 px-4 py-14 md:px-8 lg:flex-row lg:items-start lg:gap-14'>
+            <section id='case-study' className='mx-auto flex max-w-6xl scroll-mt-8 flex-col gap-10 px-4 py-14 md:px-8 lg:flex-row lg:items-start lg:gap-14'>
                 {headings.length > 1 && (
                     <nav
                         aria-label='On this page'

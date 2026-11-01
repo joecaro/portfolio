@@ -10,7 +10,9 @@
     "build": "next build",
     "postbuild": "next-sitemap --config next-sitemap-config.js",
     "start": "next start",
-    "test": "jest",
+    "test": "playwright test",
+    "test:e2e": "playwright test",
+    "test:unit": "jest --passWithNoTests",
     "coverall": "jest --coverage && coveralls < coverage/lcov.info",
     "coverage": "jest --coverage --reporter=lcov",
     "lint": "next lint"

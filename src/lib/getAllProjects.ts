@@ -68,6 +68,10 @@ export async function getAllProjects(): Promise<Project[]> {
     const projects = await Promise.all(slugs.map(slug => getProjectBySlug(slug)));
 
     return projects.sort((a, b) => {
+        if (a.headliner || b.headliner) {
+            if (a.headliner !== b.headliner) return a.headliner ? -1 : 1;
+            return (a.position ?? 99) - (b.position ?? 99);
+        }
         if (a.date && b.date) {
             return new Date(b.date).getTime() - new Date(a.date).getTime();
         }

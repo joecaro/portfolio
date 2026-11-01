@@ -17,6 +17,7 @@ export type Project = {
     impact?: string;
     kind?: string;
     position?: number;
+    headliner?: boolean;
     isMDX?: boolean;
     mdxSource?: SerializeResult<Record<string, unknown>, Record<string, unknown>> | null;
 };

@@ -45,3 +45,7 @@ node_modules/
 
 # typescript
 *.tsbuildinfo
+
+# local tooling output
+/output/
+/.playwright-cli/
