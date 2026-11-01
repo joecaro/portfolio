@@ -39,7 +39,13 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 
+# generated at build time by next-sitemap
+/public/robots.txt
+/public/sitemap*.xml
+
+# typescript
+*.tsbuildinfo
+
 # local tooling output
 /output/
 /.playwright-cli/
-tsconfig.tsbuildinfo
