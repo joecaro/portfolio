@@ -101,7 +101,7 @@ export function AgentWorkspaceDemo() {
             <LabPanel title={`Saved patch · ${patchVersion ? `v${patchVersion}` : "not created"}`}>
               {patchVersion === 0 ? <p className="text-sm">Advance the workflow to create an illustrative patch.</p> : <>
                 <pre className="max-w-full overflow-x-auto rounded bg-slate-950 p-3 text-xs leading-5 text-slate-100"><code>{patchText[taskId](patchVersion)}</code></pre>
-                <div className="mt-3 flex flex-wrap items-center gap-2"><LabButton onClick={revisePatch}>Revise patch</LabButton><span className="text-xs">Changing the patch invalidates its validation and review.</span></div>
+                <div className="mt-3 flex flex-wrap items-center gap-2"><LabButton onClick={revisePatch} disabled={integrated}>Revise patch</LabButton><span className="text-xs">Changing the patch invalidates its validation and review.</span></div>
               </>}
             </LabPanel>
             <LabPanel title="Validation receipt">

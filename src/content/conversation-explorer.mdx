@@ -7,7 +7,7 @@ author: Joe
 description: Review tools for AI voice-agent calls that keep what the agent said apart from what it actually did, for one call and across many.
 role: Product design and frontend engineering
 focus: Speech versus recorded action, one selection across views, unknowns shown as unknown
-impact: Shipped a call-flow map with shared selection and explicit coverage; a transcript-first call-details redesign is in draft review.
+impact: Merged a call-flow map with shared selection and explicit coverage; a transcript-first call-details redesign is in draft review.
 stack:
     - TypeScript
     - React
@@ -29,7 +29,7 @@ headliner: true
 
 When an AI voice agent handles a customer's call, the transcript is the easiest record to read and the least reliable one to trust. The agent can say "I've updated your address" whether or not the update went through. I design and build the review surfaces for these calls in our voice-AI operations console. One is a redesign of the call-details screen that puts the conversation and the agent's recorded actions on one timeline. The other is a call-flow map that shows how a whole set of calls moves through an agent's stages. If a review tool blurs speech and action, a failed action can pass as a successful call.
 
-The call-flow map is merged. The call-details redesign is a working draft behind an internal switch. The demo above recreates the single-call workflow with fictional calls.
+The call-flow map is merged. The call-details redesign is an unmerged draft in review. The demo above recreates the single-call workflow with fictional calls.
 
 ## A sentence in a transcript is evidence of speech, not of action
 
@@ -37,11 +37,11 @@ In the redesign, the transcript fills the main column. Each agent reply opens to
 
 A compact timeline sits beside the transcript. It has one waveform seek strip and aligned lanes for speech, model, tool and gate activity. Select a tool marker and the matching transcript turn opens.
 
-In the demo's address-change call, the update is rejected and a follow-up request is accepted. A reviewer who reads only the dialogue could think the address changed. The recorded results show that it did not.
+In the demo's address-change call, the update is rejected, but the assistant tells the caller it went through. A reviewer who reads only the dialogue would think the address changed. The recorded result shows that it did not.
 
 ## The event is how you navigate; the conversation is the context
 
-The same rule applies across many calls. In [Platform Chat](/projects/platform-chat), our internal analysis assistant, a call-flow result shows stages as nodes and transitions as weighted lines. Before my change, the card showed a list, and the graph appeared only in an expanded dialog. Each view kept its own selection, so switching views lost your place.
+The same rule applies across many calls. In [Platform Chat](/projects/platform-chat), a call-flow result shows stages as nodes and transitions as weighted lines. Before my change, the card showed a list, and the graph appeared only in an expanded dialog. Each view kept its own selection, so switching views lost your place.
 
 I made the graph the default and gave the flow component one selection that persists across graph, list and expanded views. A selected stage lists all incoming and outgoing connections, including repeats. If new data replaces the result and the stage is gone, the selection clears. Stages that appear only in a connection stay selectable. Changing the view changes the presentation, not the review.
 
