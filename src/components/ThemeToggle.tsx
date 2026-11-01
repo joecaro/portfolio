@@ -14,6 +14,8 @@ const ThemeToggle = ({ cookieTheme }: { cookieTheme: string | undefined }) => {
 
     return (
         <button
+            type="button"
+            aria-label="Toggle color theme"
             className='relative w-16 h-7 bg-neutral-300 text-neutral-700 border-none rounded-md grid grid-cols-2 items-center'
             onClick={handleToggleTheme}
         >

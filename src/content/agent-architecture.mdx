@@ -1,0 +1,65 @@
+---
+slug: agent-architecture
+title: "Agent Orchestration Workspace"
+date: Oct 31 2026 12:00 PM
+kind: "AI & platform"
+author: Joe
+description: A personal workspace I built to run coding agents as a team, with workers, reviewers, crash recovery and approval of exact patches. It ran 534 durable agent jobs.
+role: Sole designer and engineer (personal project)
+focus: Crash recovery, state reconciliation, approval binding, destination safety, provider adapters
+impact: Ran 160 implementation runs and 136 independent review runs; one job in six lost its worker mid-run and was recovered automatically.
+stack:
+    - Node.js
+    - TypeScript
+    - Git Worktrees
+    - SQLite
+tags:
+    - featured
+    - agents
+    - developer tools
+    - orchestration
+tech:
+    - Node.js
+    - TypeScript
+    - Git
+    - SQLite
+image: /img/headliners/agent-architecture-product.jpg
+position: 3
+headliner: true
+---
+
+## I built my own control room for coding agents
+
+In June 2026 I stopped running coding agents one terminal at a time and built a local workspace that runs them as a team. It is a personal system, and I am its only human contributor. A manager agent splits a goal into tasks. Workers run in isolated Git worktrees on either of two agent CLIs. Separate reviewer agents check the result. Nothing reaches a real branch until I approve one exact saved patch. Its runtime database records 534 durable agent jobs: 160 implementation runs, 136 review runs and 238 conversational turns.
+
+Spawning agents was the easy part. The hard part was keeping the system's beliefs true while runs crashed, retried and finished out of order.
+
+## Recovery is the normal path, so it gets first-class state
+
+83 of those 534 jobs lost their worker's lease mid-run and were requeued. That is one job in six. Another 17 were interrupted, and 15 ended as lost after their last retry. At that rate, crashes are routine.
+
+So every job is a durable row with a lease and a heartbeat. When a lease expires, the job goes back to the queue with its attempt count raised and the recovery recorded, or it ends as "lost" with a reason. It never just disappears. Each finished run also saves its diff as a patch file next to its worktree metadata. If a worker's branch was gone by the time I approved, the merge gate checks whether the saved patch still applies to the destination and recovers from it. One choice goes the other way: an interrupted review is rerun from the start, not resumed. A half-finished review is not evidence.
+
+## Status comes from evidence, not a second optimistic copy
+
+I fixed the same bug twice: finished work kept showing as running. First, effort counters included runs that had already reported a terminal event. I made "running" derive only from live runtime jobs. Two weeks later the bug returned in a new form. A saved effort summary still said "running" after a newer orchestration for that effort had completed, and the reader trusted the summary. Task-backed orchestrations also lacked the effort link they needed to write their final state back, so the stale file was never corrected.
+
+The fix compares recency for the matching effort, lets newer terminal evidence win, and repairs the write-back path so later readers converge. The rule I took from it: a cached summary is a projection, and a projection loses to the evidence it summarizes. The evidence must also match. A completed run from another effort cannot close this one. Manager recovery follows the same rule. Before it computes blockers, it reconciles each child task's latest lifecycle evidence. When a task omits its repository, it infers the project's repository, so a rerun does not start in the wrong repo.
+
+## Approval binds to one exact artifact
+
+Agents revise their work. An approval of yesterday's patch says nothing about today's. The merge gate approves one run's saved snapshot. If a newer unmerged snapshot exists for the same task, it refuses the older one and points to the latest run. In the later plan-driven version, a manager's plan is immutable and versioned, and my approval is bound to the plan version and a hash of its scope. If I steer the effort while a plan waits, or the manager adds nodes after approval, the system creates a new version that needs a new approval.
+
+Approvals can also race. Two of them could both pass the "is a merge already active?" check, pause during preflight, and then change the same target. The gate now reserves the target synchronously, before its first asynchronous step, and holds it until the merge settles.
+
+## A clean worktree says nothing about the destination
+
+Worker isolation protects my checkout from the agent. It does not protect the agent's patch from my checkout. The gate inspects the destination separately. Uncommitted changes there block a direct merge. If I choose to stash them, the stash is refused when the dirty files have changed since I last looked. In managed mode, merges happen in a dedicated integration worktree, which leaves my branch, index and work in progress untouched. If a merge across several repositories fails partway, the repos that already advanced are rolled back.
+
+## Providers sit behind an adapter
+
+Tasks, runs and reviews are the workspace's own records. The agent CLI that does the work is a field on the run, resolved at one seam that launches the CLI and normalizes its events. So orchestration does not depend on one vendor's built-in subagent feature, and a run can switch providers without any change to its task. Usage was uneven: most recorded runs used one provider.
+
+## Limits
+
+Use peaked in June 2026, with 511 of the 534 jobs. The plan-approval layer added in July has tests but little real use. The counts come from the runtime database and do not measure time saved. The demo above uses invented tasks and patches and runs no agents.

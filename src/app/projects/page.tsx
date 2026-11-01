@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ProjectArchive from "@/components/ProjectArchive";
+import HeadlinerProjects from "@/components/HeadlinerProjects";
 import { getAllProjects } from "@/lib/getAllProjects";
 import type { Project } from "@/types";
 
@@ -19,7 +20,7 @@ const byPosition = (a: Project, b: Project) =>
 
 export default async function ProjectsPage() {
     const projects = await getAllProjects();
-    const featured = projects.filter(isFeatured).sort(byPosition);
+    const featured = projects.filter(project => isFeatured(project) && !project.headliner).sort(byPosition);
     const archive = projects
         .filter(project => !isFeatured(project))
         .map(project => ({
@@ -44,10 +45,12 @@ export default async function ProjectsPage() {
                 </p>
             </section>
 
+            <HeadlinerProjects projects={projects} />
             <section
                 aria-label='Case studies'
                 className='mx-auto max-w-6xl px-4 pb-16 md:px-8'
             >
+                <h2 className='mb-6 text-3xl font-semibold'>More case studies</h2>
                 <div className='grid gap-7 lg:grid-cols-2'>
                     {featured.map(project => (
                         <Link

@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 test('projects page loads with projects', async ({ page }) => {
-    await page.goto('https://localhost:3000/projects');
+    await page.goto('/projects');
   
-    await expect(page).toHaveTitle(/Projects/);
+    await expect(page).toHaveTitle(/Joseph Carothers/);
+    await expect(page.getByRole('heading', { level: 1, name: /Projects/i })).toBeVisible();
   
     const links = await page.$$('.project');
   
@@ -11,9 +12,10 @@ test('projects page loads with projects', async ({ page }) => {
   });
   
   test('project links work', async ({ page }) => {
-    await page.goto('https://localhost:3000/projects/bitburner-ui');
+    await page.goto('/projects/bitburner-ui');
   
-    await expect(page).toHaveTitle(/Bitburner Custom UI/);
+    await expect(page).toHaveTitle(/Joseph Carothers/);
+    await expect(page.getByRole('heading', { level: 1, name: /Bitburner Custom UI/i })).toBeVisible();
   
   });
   

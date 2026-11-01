@@ -1,0 +1,65 @@
+---
+slug: platform-chat
+title: "Platform Chat"
+date: Oct 31 2026 12:00 PM
+kind: "AI & platform"
+author: Joe
+description: A conversational analytics workspace where operations teams ask why a metric moved and get a scoped, evidence-backed answer they can turn into a report.
+role: Designed and built the conversational query agent, scope contracts, live progress, and behavioral evals
+focus: Keeping a question's scope intact from first question to follow-up to shared report
+impact: Follow-ups no longer silently widen scope; 101 tests and 12 of 12 live-model eval cases pass.
+stack:
+    - Python
+    - TypeScript
+    - React
+tags:
+    - featured
+    - ai
+    - product design
+    - interaction design
+tech:
+    - Python
+    - TypeScript
+    - React
+image: /img/headliners/platform-chat-product.jpg
+position: 1
+headliner: true
+---
+
+## A follow-up quietly answered a different question
+
+Platform Chat lets operations teams who run automated phone campaigns ask why a metric moved, in plain English. The assistant writes and runs a read-only query scoped to that team's data, returns the rate with its counts and the rows behind it, and turns the result into a report they can share. I built the conversational query agent, the contracts that carry a question's scope from turn to turn, the live progress view, and the behavioral evals that gate releases. The stakes are simple: a wrong number from an analytics assistant looks exactly like a right one, so an assistant that answers a broader question than the one asked is worse than none.
+
+I learned that from one bug. A user asked about one campaign, then asked a follow-up. The answer came back labeled "All Campaigns." The conversation had understood the narrower request. The query had not. Three things failed together: filters were pulled from the latest message by pattern matching, the result's recorded provenance dropped them, and nothing checked that the query and its provenance agreed.
+
+I made scope a typed part of the query. Campaign and model constraints now carry forward from one turn to the next, through the query and into its provenance. An eval gate fails if the query filters and the provenance filters differ by even one value. If a question needs a scope that the query does not carry, the query is blocked instead of run broad. If a campaign name matches more than one campaign, the assistant asks which one.
+
+## Showing an answer another way is not a new question
+
+"Chart that" and "put this in a report" looked like analysis requests, so the system answered them by querying again. A second query can return different rows: new data lands, or a date window resolves a little differently. Then the chart no longer matches the table the user just checked.
+
+I split the two paths. A question that needs new data goes through the governed query. A request to present a result renders the rows already fetched and stored with that result, with no new query. Charts appear when someone asks for one; a definition question gets a direct answer, not a decorative visual. In the workspace above, "Build report from these results" works the same way: the report reuses the comparison you reviewed.
+
+## A rate without its counts invites the wrong conclusion
+
+A repeat-contact rate can rise because repeats rose, because total contacts fell, or because a filter shrank the population. So each answer shows the rate next to its numerator and denominator, and the demo recomputes all three when you filter by reason or team. An empty scope says there are no matching records. It does not show 0%. Conversation excerpts in the evidence panel are labeled as examples: they show what a category looks like, but they do not produce the number.
+
+## Progress that arrives after the work is done is not progress
+
+I deployed the redesigned agent to staging one afternoon. Within hours, a staging session failed, and the trace showed two problems. First, the query referenced the campaigns table under a schema name that did not exist in that tenant's database, so every query that touched campaigns failed. Second, the interface showed only "Thinking…" while this happened, because progress events were sent after the agent finished. The user could not see the agent retry the same broken query again and again.
+
+The fixes:
+
+- Resolve table references against the tenant's actual schema, and include only the relations a query uses.
+- Stream each stage of the work, including retries, as it happens.
+- Save safe, readable failure details for support instead of raw database errors.
+- Stop re-running a query that already failed with the same error.
+- Keep a completed result when the model's final response is malformed.
+
+By the next morning, both prompts that had failed returned evidence-backed answers on staging, and a log sweep after the deploy showed no new failures.
+
+## Limits, and what I would measure next
+
+The evidence is controlled: 101 passing tests in the reporting suite, 12 of 12 cases in a live-model behavioral eval with multi-turn follow-ups, and a staging rerun of the exact prompts that had failed. It does not yet show adoption, analyst time saved, or accuracy across real production traffic. Next, I would measure three things: how often a follow-up is blocked or clarified instead of answered, how often a report disagrees with the table it came from (the target is zero), and time to the first visible progress event.
+
+The workspace above is a reconstruction with fictional data. It shows the interaction, not the production system.

@@ -38,3 +38,8 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# local tooling output
+/output/
+/.playwright-cli/
+tsconfig.tsbuildinfo

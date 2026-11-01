@@ -1,0 +1,64 @@
+---
+slug: conversation-explorer
+title: "Call Review Workspace"
+date: Oct 31 2026 12:00 PM
+kind: "Tools"
+author: Joe
+description: Review tools for AI voice-agent calls that keep what the agent said apart from what it actually did, for one call and across many.
+role: Product design and frontend engineering
+focus: Speech versus recorded action, one selection across views, unknowns shown as unknown
+impact: Shipped a call-flow map with shared selection and explicit coverage; a transcript-first call-details redesign is in draft review.
+stack:
+    - TypeScript
+    - React
+    - SVG
+    - Next.js
+tags:
+    - featured
+    - visualization
+    - interaction design
+    - ai
+tech:
+    - TypeScript
+    - React
+    - SVG
+image: /img/headliners/conversation-explorer-product.jpg
+position: 2
+headliner: true
+---
+
+When an AI voice agent handles a customer's call, the transcript is the easiest record to read and the least reliable one to trust. The agent can say "I've updated your address" whether or not the update went through. I design and build the review surfaces for these calls in our voice-AI operations console. One is a redesign of the call-details screen that puts the conversation and the agent's recorded actions on one timeline. The other is a call-flow map that shows how a whole set of calls moves through an agent's stages. If a review tool blurs speech and action, a failed action can pass as a successful call.
+
+The call-flow map is merged. The call-details redesign is a working draft behind an internal switch. The demo above recreates the single-call workflow with fictional calls.
+
+## A sentence in a transcript is evidence of speech, not of action
+
+In the redesign, the transcript fills the main column. Each agent reply opens to the steps that produced it: the model call, any tool or API request with its input, output and result, and the guardrail checks on that turn. Reply types are separate labels. A scripted line, a model-generated reply and a reply whose type was not recorded each look different.
+
+A compact timeline sits beside the transcript. It has one waveform seek strip and aligned lanes for speech, model, tool and gate activity. Select a tool marker and the matching transcript turn opens.
+
+In the demo's address-change call, the update is rejected and a follow-up request is accepted. A reviewer who reads only the dialogue could think the address changed. The recorded results show that it did not.
+
+## The event is how you navigate; the conversation is the context
+
+The same rule applies across many calls. In [Platform Chat](/projects/platform-chat), our internal analysis assistant, a call-flow result shows stages as nodes and transitions as weighted lines. Before my change, the card showed a list, and the graph appeared only in an expanded dialog. Each view kept its own selection, so switching views lost your place.
+
+I made the graph the default and gave the flow component one selection that persists across graph, list and expanded views. A selected stage lists all incoming and outgoing connections, including repeats. If new data replaces the result and the stage is gone, the selection clears. Stages that appear only in a connection stay selectable. Changing the view changes the presentation, not the review.
+
+## Rearranging the picture must not change what it means
+
+The flow groups stages into ordered columns. A transition into an earlier column is a return, drawn as a dashed line. The original graph also called a same-column transition a return when its target was drawn above its source. The list view did not, so the two views disagreed about the same data.
+
+In my first pass I used column order alone. An automated reviewer then pointed out that an upward same-column line had lost its dashes, and it suggested the old vertical rule. I adopted a version of it: one shared classifier that used each stage's position within its column, so the graph, list, details and summary all agreed.
+
+The next review pass found the flaw. Position within a column comes from the order in which the result lists its stages. That order controls placement, not chronology. Reverse the list and the same transition flips between forward and return, and the return count changes with it. The fix was to let only column order define a return. The legend now says "Return to an earlier stage group", and a regression test renders the data in both orders and checks for identical classifications and totals. I also changed returns from red to neutral gray, because a return shows direction, not an error.
+
+## Unknown must not render as zero
+
+The old flow subtitle used a dash for any missing count. Now each case reads differently: "N of M calls analyzed", with a partial-coverage label when N is less than M; "Analysis coverage unknown"; or "total in scope unknown". The display does not invent a reason for partial coverage, and the footer warns that one call can appear in several stages.
+
+The call-details timeline follows the same rule. A step with no recorded timestamp stays unplaced instead of being drawn at the start of the call. Gate markers are labelled as linked to a turn, not as exact evaluation times. While preparing the draft, I ran one masked real transcript through the view's data mapper. It had no timestamps, and every missing time stayed marked as unknown. The check also exposed a layout bug in the missing-time label, which I fixed.
+
+## Limits
+
+The call-flow change merged after targeted tests, type and lint checks, independent review and CI. I did not validate it against production runtime behavior. The call-details redesign is an unmerged draft. I tested it with synthetic fixtures and one masked real transcript. Real recording playback and real tool and gate alignment are not yet verified. The demo on this page is a fictional reconstruction and has no audio.
