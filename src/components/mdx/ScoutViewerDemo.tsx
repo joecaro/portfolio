@@ -52,7 +52,11 @@ const TURNS: Turn[] = [
   { n: 17, speaker: "Customer", text: "I just told you. Debit card." },
   { n: 18, speaker: "Agent", text: "Sorry about that. Is that a debit card or a bank account?" },
   { n: 19, speaker: "Customer", text: "Debit card. Same one as before.", role: "consequence" },
+  { n: 20, speaker: "Agent", text: "Got it. And will you be paying the full amount?" },
+  { n: 21, speaker: "Customer", text: "Yes. I already said that too.", role: "consequence" },
 ];
+
+const LIMITS = ["Comparable call not established", "Recurrence not verified", "Avoidability not verified", "Negative effect not verified", "Code cause not verified"];
 
 const GATES = [
   { name: "Prior state present", passed: true, detail: "Method recorded before the trigger in all supporting calls." },
@@ -183,10 +187,10 @@ function FindingPanel({ onClose }: { onClose: () => void }) {
             </h4>
             <div className="mt-2.5 flex flex-wrap gap-1.5 text-[11px]">
               {[
-                ["Supported problem", C.accent, C.accentSoft],
+                ["Observation", C.open, C.openSoft],
                 ["Agent-reported confidence: medium", C.open, C.openSoft],
                 ["3 of 4 gates", C.open, C.openSoft],
-                ["Cause unverified", C.warn, C.warnSoft],
+                ["Provisional", C.warn, C.warnSoft],
               ].map(([t, fg, bg]) => (
                 <span key={t} className="rounded-full px-2 py-0.5 font-medium" style={{ color: fg, background: bg }}>{t}</span>
               ))}
@@ -228,7 +232,7 @@ function FindingPanel({ onClose }: { onClose: () => void }) {
                   </li>
                 ))}
               </ol>
-              <p className="mt-1 text-[11.5px]" style={{ color: C.faint }}>15 later turns</p>
+              <p className="mt-1 text-[11.5px]" style={{ color: C.faint }}>13 later turns</p>
             </div>
             <div>
               <Label>Evidence calls</Label>
@@ -245,7 +249,14 @@ function FindingPanel({ onClose }: { onClose: () => void }) {
           <div className="space-y-3 px-1 text-[12px]" style={{ color: C.muted }}>
             <div>
               <Label>Evidence limits</Label>
-              <p className="mt-1" style={{ color: C.warn }}>Recovery after the repeat is not reviewed.</p>
+              <ul className="mt-1 space-y-0.5" style={{ color: C.warn }}>
+                {LIMITS.map(l => <li key={l}>{l}</li>)}
+              </ul>
+              <p className="mt-1.5">Without these, the finding stays an observation. It is saved, not promoted to a supported problem.</p>
+            </div>
+            <div>
+              <Label>Scope</Label>
+              <p className="mt-1">The restart cohort for the collections agent: about one in four calls that reach method selection.</p>
             </div>
             <div>
               <Label>Reach</Label>
@@ -364,7 +375,7 @@ export function ScoutViewerDemo() {
                 </div>
               </div>
               <p className="mt-3 text-[12px] tabular-nums" style={{ color: C.muted }}>
-                {Math.max(0, Math.min(step, STEPS.length) >= 11 ? 9 : step >= 9 ? 8 : step >= 7 ? 7 : step >= 6 ? 6 : 0)} calls read · {Math.min(step, STEPS.length)} steps ·{" "}
+                {step >= 11 ? 7 : step >= 6 ? 6 : 0} full calls read · {step >= 9 ? 2 : step >= 7 ? 1 : 0} repeat reads · {Math.min(step, STEPS.length)} steps ·{" "}
                 <span style={{ color: failed ? C.bad : undefined }}>{failed} failed</span>
               </p>
               <ul className="mt-3 space-y-1.5 border-t pt-3 text-[12.5px]" style={{ borderColor: C.line }}>

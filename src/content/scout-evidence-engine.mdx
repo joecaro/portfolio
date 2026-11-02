@@ -46,17 +46,17 @@ First, how to represent a call. I tried five approaches, from model-written labe
 
 Second, how good are models at spotting problems. In one benchmark, models flagged 74 positives on a first pass. A second, independent model checked them and only 34 held up. Coming up with candidates is easy. Proving them is the hard part, so that's where Scout spends its effort.
 
-Third, I made fake evidence impossible to submit. The harness rejects a finding that cites a call the agent never opened, a turn it never saw, a quote that doesn't match the source word for word, the wrong speaker, or a customer turn that doesn't come before the agent's reply. Made-up findings fail before anyone sees them.
+Third, I made fake evidence impossible to submit. The harness rejects a finding that cites a call the agent never opened, a turn it never saw, a quote that doesn't match the source word for word, the wrong speaker, or a customer turn that doesn't come before the agent's reply. Made-up citations fail before anyone sees them.
 
 ## Counts lie
 
 One result changed how Scout counts everything. A literal search for a repeated prompt matched a huge number of calls and looked like a crisis. A stratified review of a sample found only a handful of real failures. Scaled back up to the whole population, the actual problem was about 75 times rarer than the search count suggested.
 
-So Scout keeps its numbers separate: calls in the population, calls examined, calls matched, calls actually read. It never rolls them into one big number. And if coverage is unknown, a zero shows up as inconclusive.
+So Scout keeps its numbers separate: calls in the population, calls examined, calls matched, calls actually read. It never rolls them into one big number. And if coverage is unknown, a zero is supposed to show up as unknown, not as zero.
 
 ## Making it a service
 
-In mid-October I turned the harness into something other people could use: ingestion that indexes calls with privacy checks and resumes after a crash; a search index with separate embeddings for conversation passages, runtime events and cohorts; an agent API that keeps every investigation inside one customer's data and rechecks the source whenever it reads evidence; and a CLI plus a report viewer that shows the investigation live.
+Around October 10 I started turning the harness into something other people could use. That meant ingestion with privacy checks that resumes after a crash, a search index with separate embeddings for conversation passages, runtime events and cohorts, a CLI, and the report viewer.\n\nThe agent API was where I spent the most care. Every investigation is locked to one customer's data, and the source is rechecked every time the agent reads evidence. That costs extra reads, but it means a finding can't cite a call that changed or one the agent was never allowed to see.
 
 It also had to be fast, because nobody waits two and a half minutes per step. The first server-side cohort build took 149 seconds. Precomputing each call's runtime profile next to its embedding got it down to about 28.
 
@@ -70,7 +70,7 @@ Same approach both times: find the cause before fixing anything, and keep failur
 
 ## Does it work?
 
-Scout is strict about what counts. A finding is a "supported problem" only if it has the prior state, the trigger, the agent's response and the consequence, each tied to a verified turn, plus evidence that the behavior was avoidable and harmful. Anything less gets saved as an observation.
+Scout is strict about what counts, and the demo above shows it: its finding is real, but it stays an observation. A finding is a "supported problem" only if it has the prior state, the trigger, the agent's response and the consequence, each tied to a verified turn, plus evidence that the behavior was avoidable and harmful. Anything less gets saved as an observation.
 
 It's deployed for internal staff, through the CLI and as the investigation engine inside Platform Chat. There are limits. The research checks used a second AI model instead of human reviewers, so I haven't measured accuracy against people. A citation check proves the evidence exists, not that the conclusion is right. And some prevalence counts can still come back as a wrong zero, which I'm still working on.
 
