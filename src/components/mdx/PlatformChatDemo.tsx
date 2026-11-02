@@ -15,6 +15,7 @@ import {
   MessageSquareText,
   Phone,
   Plus,
+  RotateCcw,
   Search,
   Settings,
   ShieldCheck,
@@ -44,13 +45,9 @@ const CAMPAIGN = "Billing reminders";
 
 function CallLink({ id }: { id: string }) {
   return (
-    <button
-      type="button"
-      title="Opens this call in the call viewer"
-      className="rounded px-0.5 font-mono text-[12px] text-[#1d4ed8] underline decoration-[#93c5fd] underline-offset-2 hover:bg-[#eff6ff]"
-    >
+    <span className="rounded px-0.5 font-mono text-[12px] text-[#1d4ed8] underline decoration-[#93c5fd] underline-offset-2">
       {id}
-    </button>
+    </span>
   );
 }
 
@@ -250,11 +247,10 @@ const SCRIPTS: Script[] = [
       <>Should I compare yesterday&apos;s outcomes across all 6 campaigns you can access, or keep it to {CAMPAIGN}?</>,
     ],
     scope: `Scope unchanged · ${CAMPAIGN}`,
-    followUp: "Why did transfers go up this week?",
   },
 ];
 
-type Turn = { script: Script; phase: "working" | "answering" | "done"; stepIndex: number };
+type Turn = { script: Script; phase: "working" | "answering" | "done" | "stopped"; stepIndex: number };
 
 function useTurnRunner(reduce: boolean) {
   const [turns, setTurns] = useState<Turn[]>([]);
@@ -288,14 +284,14 @@ function useTurnRunner(reduce: boolean) {
   };
   const stop = () => {
     clear();
-    setTurns(prev => prev.map(t => (t.phase === "done" ? t : { ...t, phase: "done", stepIndex: t.script.steps.length })));
+    setTurns(prev => prev.map(t => (t.phase === "done" || t.phase === "stopped" ? t : { ...t, phase: "stopped" })));
   };
   const reset = () => {
     clear();
     count.current = 0;
     setTurns([]);
   };
-  return { turns, ask, stop, reset, busy: turns.some(t => t.phase !== "done") };
+  return { turns, ask, stop, reset, busy: turns.some(t => t.phase === "working" || t.phase === "answering") };
 }
 
 function SparkIcon({ className = "" }: { className?: string }) {
@@ -315,10 +311,12 @@ function SparkIcon({ className = "" }: { className?: string }) {
 function WorkLog({ turn }: { turn: Turn }) {
   const [open, setOpen] = useState(false);
   const { script, stepIndex, phase } = turn;
-  const finished = stepIndex >= script.steps.length;
+  const stopped = phase === "stopped";
+  const finished = stopped || stepIndex >= script.steps.length;
   const current = script.steps[Math.max(0, stepIndex)];
-  const label = finished ? script.summary : stepIndex < 0 ? "Understanding your question" : current.running;
-  const visible = finished ? (open ? script.steps : []) : script.steps.slice(Math.max(0, stepIndex - 3), stepIndex + 1);
+  const label = stopped ? "Stopped · partial work" : finished ? script.summary : stepIndex < 0 ? "Understanding your question" : current.running;
+  const shown = stopped ? script.steps.slice(0, Math.max(0, stepIndex)) : script.steps;
+  const visible = finished ? (open ? shown : []) : script.steps.slice(Math.max(0, stepIndex - 3), stepIndex + 1);
 
   return (
     <div>
@@ -328,16 +326,15 @@ function WorkLog({ turn }: { turn: Turn }) {
         className="flex items-center gap-1.5 text-left text-[12.5px] text-[#626973]"
         aria-expanded={finished ? open : undefined}
       >
-        {finished ? (
+        {stopped ? (
+          <Square className="h-3.5 w-3.5 text-[#b45309]" />
+        ) : finished ? (
           <Check className="h-[18px] w-[18px] text-[#626973]" strokeWidth={1.5} />
         ) : (
           <Sparkles className="h-4 w-4 animate-pulse text-[#7c3aed]" />
         )}
         <span className={finished ? "" : "pc-sweep"}>{label}</span>
         {finished && <ChevronRight className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-90" : ""}`} />}
-        {phase === "done" && script.id === "scope" && (
-          <span className="ml-1 rounded-full bg-[#fef3c7] px-1.5 py-px text-[10.5px] font-medium text-[#92400e]">Needs your input</span>
-        )}
       </button>
       <AnimatePresence initial={false}>
         {visible.length > 0 && (
@@ -370,10 +367,22 @@ function WorkLog({ turn }: { turn: Turn }) {
 
 function AssistantTurn({ turn, onAsk, last }: { turn: Turn; onAsk: (q: string) => void; last: boolean }) {
   const { script, phase } = turn;
-  const showAnswer = phase !== "working";
+  const showAnswer = phase === "answering" || phase === "done";
   return (
     <div className="space-y-3">
       <WorkLog turn={turn} />
+      {phase === "stopped" && (
+        <p className="text-[13px] leading-6 text-[#464c54]">Stopped. Partial results do not establish a complete answer.</p>
+      )}
+      {phase === "stopped" && last && (
+        <button
+          type="button"
+          onClick={() => onAsk(script.question)}
+          className="flex items-center gap-1.5 rounded-[10px] border border-[#e5e7ea] px-3 py-1.5 text-left text-[12.5px] text-[#464c54] hover:border-[#93c5fd] hover:text-[#1d4ed8]"
+        >
+          <RotateCcw className="h-3.5 w-3.5" /> Ask again
+        </button>
+      )}
       {showAnswer && (
         <div className="space-y-3">
           <div className="space-y-2 text-[13px] leading-6 text-[#2b3036]">
@@ -383,16 +392,6 @@ function AssistantTurn({ turn, onAsk, last }: { turn: Turn; onAsk: (q: string) =
               </motion.p>
             ))}
           </div>
-          {script.id === "scope" && phase === "done" && (
-            <div className="flex flex-wrap gap-2">
-              <span className="rounded-full border border-[#d1d5db] px-3 py-1 text-[12px] text-[#15181c]">
-                Keep {CAMPAIGN}
-              </span>
-              <span className="rounded-full border border-[#d1d5db] px-3 py-1 text-[12px] text-[#15181c]">
-                Compare all 6 campaigns
-              </span>
-            </div>
-          )}
           {script.visual && (
             <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: script.answer.length * 0.35 }}>
               {script.visual}
@@ -493,7 +492,7 @@ export function PlatformChatDemo() {
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    if (busy) return stop();
+    if (busy) return;
     const text = draft.trim().toLowerCase();
     if (!text) return;
     const match = SCRIPTS.find(s => s.question.toLowerCase() === text) ??
@@ -594,7 +593,8 @@ export function PlatformChatDemo() {
                     <span className="flex h-7 items-center gap-1 rounded-md px-1.5"><CalendarDays className="h-3.5 w-3.5" /> Dates</span>
                   </span>
                   <button
-                    type="submit"
+                    type={busy ? "button" : "submit"}
+                    onClick={busy ? stop : undefined}
                     aria-label={busy ? "Stop" : "Send"}
                     className="grid h-[30px] w-[30px] place-items-center rounded-full bg-[#15181c] text-white disabled:opacity-40"
                     disabled={!busy && !draft.trim()}

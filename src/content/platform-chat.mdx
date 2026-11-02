@@ -7,7 +7,7 @@ author: Joe
 description: An AI analyst built into a voice-AI platform. Ask about your calls in plain English; it counts, searches and reads the calls, then answers with the evidence attached.
 role: Product and architecture lead; designed, directed and shipped it, with coding agents doing much of the implementation
 focus: Answers that stay inside the scope you asked about, and say plainly when they are partial
-impact: Running as an internal staff preview, gated by 329 eval cases and about 1,250 automated tests.
+impact: Running as an internal staff preview, checked by about 1,250 automated tests and live-model evals.
 stack:
     - Python
     - TypeScript
@@ -33,7 +33,7 @@ Teams that run automated phone agents make tens of thousands of calls. When a nu
 
 Platform Chat is a side panel that opens beside whatever page you are on. You ask a question in plain English: "Why did transfers go up this week?" or "Find calls where the customer disputed the balance." The assistant works out the scope (which campaign, which dates, which calls), counts the population, searches the transcripts, reads the calls that matter, and answers. The answer links to every call it relied on, and a short line underneath says exactly what it looked at. You watch it work the whole time, step by step.
 
-It is read-only. It cannot change anything without asking.
+It is read-only by default, and it asks before it changes anything.
 
 I led it from the first prototype to the version running today: the product shape, the architecture, the safety model, the evals, and the UI. I worked the way I now build most things: I set the design and the contracts, directed coding agents to implement in parallel, had separate agents review their work, and verified the result myself before anything merged.
 
@@ -55,32 +55,28 @@ By October the goal was bigger: one conversation that could answer metric questi
 - **The host holds the power, not the model.** Tenant scope, budgets, cancellation and deadlines are enforced by the service. The user's access token stays in server memory and never reaches the model or the logs.
 - **Everything else was deleted.** The warm engines, alternate routers and extra chart paths went away. Fewer paths meant fewer places for scope to leak.
 
-A few days later I replaced separate specialist processes with one main prompt, a small set of domain skills the model can discover, and a narrow capability API the host enforces. The model decides what to look at; the host decides what it is allowed to touch.
+A few days later I added a skills-based runtime: one main prompt, a small set of domain skills the model can discover, and a narrow capability API the host enforces. The model decides what to look at; the host decides what it is allowed to touch.
 
-## Shipping a large change so people could actually review it
+## Making a big change safe to review
 
-The consolidated system was too big to review as one change. I split it into 19 stacked pull requests, each sized to one dependency: scoped request authority, the tool layer, the durable service and API, the eval harness. Each layer was reviewable on its own, and the assembled stack passed 214 tests on day one. The suite has since grown to about 1,250.
+The new system was too big for anyone to review in one sitting, and a change nobody can really review is a change nobody can really trust. I split it into 19 layers that each did one thing and could be checked on its own. The assembled system passed 214 tests on day one. The suite has since grown to about 1,250.
 
 ## Teaching it what words mean
 
 The same metric name can mean different things on different kinds of campaigns. A generic definition gives a confident, wrong answer. I built an ontology of 85 business concepts, each traced to a source and resolved by customer, campaign type, reporting surface and date. If the scope is unknown, the concept stays unresolved and the assistant asks, instead of falling back to a default.
 
-Review of that work found three real defects, all reproduced before the fix and passing after:
-
-- A rate lookup with no campaign type resolved to one specific definition anyway.
-- A locally stored definition could come back before the access checks ran, so it could still be served after a user's access was revoked.
-- Discovery silently stopped at 20 concepts. It now says when a list is truncated.
+Review of that work caught a real security bug: in one path, a definition could still be served to a user after their access had been revoked. I reproduced it first, then fixed it, and the test that failed before now passes.
 
 ## Saying "partial" out loud
 
-A response can arrive successfully and still be incomplete: the model ran out of time, or one source failed. Every turn now ends with an explicit outcome: completed, partial, needs clarification, interrupted, deadline reached, or fallback. The UI shows it. "Deadline reached" only appears when the real deadline actually expired. A stopped turn says "Partial results do not establish a complete answer." Tracing follows the same rule: it records IDs, names and token counts, and withholds call content unless it matches complete, in-scope evidence.
+A response can arrive successfully and still be incomplete: the model ran out of time, or one source failed. An assistant that hides that is more dangerous than one that is slow. So every turn ends with an explicit outcome, such as completed, partial or needs clarification, and the panel shows it. Stop a turn in the demo above and it tells you the partial results are not a complete answer. Monitoring follows the same rule: it records what happened without storing what customers said.
 
 ## How I know it works, and what I don't claim
 
-The evals run the real coordinator, runtime and tool permissions against synthetic call data, with expected answers kept out of the model's context and every answer graded by an independent reviewer. There are 329 cases across 12 catalogs, including 60 adversarial cases that try to break scope and pull data the user should not see. All 60 passed after the last round of fixes.
+The evals run the real coordinator, runtime and tool permissions against synthetic call data, with expected answers kept out of the model's context and every answer graded by an independent reviewer. There are hundreds of cases. Sixty of them are adversarial: they try to break scope or pull data the user should not see. The latest run found no unsafe behavior in any of them.
 
 The harder gates are not all green, and I report them that way. The latest focused 68-case run graded 39 pass, 24 partial and 5 fail. Partial answers are the work in front of me, and I haven't claimed an overall improvement I can't show.
 
 Today Platform Chat runs as a staff preview behind sign-in and an internal-user gate. It has not had customer production traffic yet, so I have no adoption or time-saved numbers to report.
 
-The panel above is a faithful reconstruction of the real interface with fictional data.
+The panel above is a reconstruction of the real interface with fictional data.
