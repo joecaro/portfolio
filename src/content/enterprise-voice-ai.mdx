@@ -7,7 +7,7 @@ author: Joe
 description: "Testing tools for enterprise phone agents that verify accounts, take payments and transfer callers. An evaluation console, comparison APIs, tool-result capture and a few hard call-state fixes."
 role: "Full-stack engineer on the evaluation console, comparison APIs, tool-result capture, case catalog and call-state fixes; much of it written with coding agents"
 focus: "Behavioral evaluation, honest pass rates, tool evidence, case history, per-call state"
-impact: "Release comparisons now count only cases both runs actually tested and graded, with tool results attached as evidence."
+impact: "Release comparisons count only cases both runs actually tested and graded, with tool results attached as evidence."
 stack:
     - Python
     - TypeScript
@@ -49,7 +49,7 @@ The first version had bugs that all made results look better or worse than they 
 
 ## Scratch runs
 
-Engineers wanted to rerun one case quickly while debugging. The first time someone did, it added a whole new column to the grid that was about 99% empty, out of 889 cases, and it sat in the record next to the real runs.
+Engineers wanted to rerun one case quickly while debugging. But a quick run showed up as a full run: one rerun added a new column to an 889-case grid that was about 99% empty.
 
 I split quick runs from tracked runs. The data already had a run type field that scoped the grid, the metrics and the verdicts, so I used that instead of adding a new flag and a migration. A scratch result never changes a case's verdict, and rerunning a batch reads that batch's own case IDs, so retrying three cases can't accidentally turn into 889.
 
@@ -65,15 +65,15 @@ A test that checks the agent "called the payment tool" isn't worth much if you c
 
 ## The case catalog
 
-Test cases come from a shared catalog file. The loader collapses exact duplicates, fails if two variants share a name without explicit IDs, fails on duplicate IDs, and blocks the service from reporting ready if the sync fails. Later I split inbound and outbound cases that had ended up sharing one identity.
+Test cases come from a shared catalog file, and a case's identity is what ties its history together across runs. If two cases quietly share an ID, their results blur. So the loader collapses exact duplicates, fails if two variants share a name without explicit IDs, fails on duplicate IDs, and blocks the service from reporting ready if the sync fails. Later I split inbound and outbound cases that had ended up sharing one identity.
 
 ## Call-state bugs
 
 A few fixes on the live call side, all about events showing up at the wrong time:
 
-- A caller disconnecting after cleanup had already run used to trigger a second cleanup. We saw duplicate cleanup in a staging test. Now the late event keeps its telemetry but doesn't clean up again.
+- A caller disconnecting after cleanup had already run used to trigger a second cleanup. Now the late event keeps its telemetry but doesn't clean up again.
 - Tracing in the long-running worker process is now isolated per call, so one call's trace can't bleed into the next.
-- Delayed events from a finished transfer could change state on a later one. The adapter now remembers retired transfer IDs and ignores late events for them. Three regression tests fail against the old code and pass against the new; the full suite was 123 passed, 1 skipped. That fix was pushed to the merge branch, but I didn't confirm the deploy to the test environment.
+- Delayed events from a finished transfer could change state on a later one. The adapter now remembers retired transfer IDs and ignores late events for them. I wrote three regression tests that fail on the old code and pass on the new. It's pushed, but I didn't confirm it deployed.
 
 ## Where it stands
 

@@ -29,7 +29,7 @@ headliner: true
 
 ## What it is
 
-When an AI voice agent handles a call, the transcript is the easiest thing to read and the least trustworthy. The agent can say "your payment went through" whether or not it did. If a review tool blurs what the agent said with what it actually did, a broken call looks like a good one.
+When an AI voice agent handles a call, the transcript is the easiest thing to read and the least trustworthy. The agent can say "you're all set" whether or not anything actually happened. If a review tool blurs what the agent said with what it actually did, a broken call looks like a good one.
 
 I built two tools for this in the platform's operations console:
 
@@ -65,11 +65,9 @@ An independent review found four bugs, all fixed:
 - The "Playing" cue stayed on after you paused.
 - The call ID was hidden behind a disclosure.
 
-The rule behind all four: if the data doesn't say, the UI shouldn't guess. Untimed events now go in a separate "Activity not placed on the timeline" list, and missing times show a dash labeled "Time not recorded."
+All four were the UI guessing when the data didn't say. Untimed events now go in a separate "Activity not placed on the timeline" list, and missing times show a dash labeled "Time not recorded."
 
-I also checked it against one masked real call, which caught a text-wrapping bug the fixtures missed. A couple of design calls went my way against the reviewer's advice: no chat bubbles, and keep the colored reply-type pills, because people scanning dozens of calls need to spot scripted or sensitive replies fast.
-
-The test count went from 111 to 138 over two days.
+I also checked it against one masked real call, which caught a text-wrapping bug the fixtures missed. I also kept the colored reply-type pills against the design reviewer's advice, because people scanning dozens of calls need to spot scripted or sensitive replies fast.
 
 ## Where it stands
 

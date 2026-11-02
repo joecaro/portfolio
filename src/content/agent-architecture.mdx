@@ -36,11 +36,11 @@ The browser is the main interface on purpose. I considered a terminal UI and dec
 
 It's a personal project and I'm the only person using it. Much of the code was written by the agents it runs, from tasks I wrote and reviewed.
 
-Starting agents turned out to be the easy part. The hard part was keeping the app's picture of the world true while runs crashed, retried and finished out of order.
+Starting agents was easy. Most of the work went into keeping the app's picture of what was going on accurate while runs crashed, retried and finished out of order.
 
 ## Crashes are normal
 
-Over its life the app ran 534 agent jobs: 160 implementation runs, 136 reviews, and the rest chat runs. 83 of them lost their worker and got picked back up automatically. Most of those (60) were from me restarting the server mid-run; the other 23 had their lease expire while running. Another 15 ended as lost after retrying.
+Over its life the app ran 534 agent jobs: 160 implementation runs, 136 reviews, and the rest chat runs. 83 of them lost their worker and got picked back up automatically. Most of those (60) were from me restarting the server mid-run; the other 23 had their lease expire while running. Another 15 ended as lost: 11 after their retry, and 4 reviews, which never get one.
 
 So every job is a row in a database with a lease and a heartbeat (45 seconds and 5 seconds). If the lease runs out, the job goes back in the queue with its attempt count bumped, or it ends as "lost" with a reason. It never just vanishes. Each finished run also saves its diff as a patch file, so if a worktree gets deleted the work can still be recovered.
 
@@ -48,7 +48,7 @@ One gap: only implementation and chat runs resume automatically. A review that d
 
 ## The bug I fixed twice
 
-Finished work kept showing as "running." The first time, the counters were including runs that had already finished, so I made "running" come only from live jobs. Then it came back in a different form: a saved summary still said "running" after the orchestration underneath it had completed. That fix took longer, about six weeks after the first.
+Finished work kept showing as "running." The first time, the counters were including runs that had already finished, so I made "running" come only from live jobs. Then it came back in a different form: a saved summary still said "running" after the orchestration underneath it had completed. That fix landed about six weeks after the first.
 
 The rule I ended up with: a saved summary is just a copy, and when it disagrees with newer evidence, the evidence wins. In July I made SQLite the one source of truth for runtime state and turned the old Markdown files into import and export only. Fewer copies, fewer chances to disagree.
 

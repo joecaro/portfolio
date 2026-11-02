@@ -32,13 +32,13 @@ const CATEGORIES: Category[] = [
   {
     name: "Payments / Make payment",
     cases: [
-      { id: "pay-011", name: "Pays full balance with card on file", expected: "Confirms amount and date, then calls the payment tool once.", grader: "Calls a tool", cells: [[P, P, P], null, [P, P, P], [P, P, F], [P, P, P]], tool: { call: "process_payment(amount=911.00, date=\"today\", method=\"card_on_file\")", returned: "{ \"status\": \"approved\", \"confirmation\": \"PMT-2291\" }" } },
+      { id: "pay-011", name: "Pays full balance with card on file", expected: "Confirms amount and date, then calls the payment tool once.", grader: "Calls a tool", cells: [[P, P, P], null, [P, P, P], [P, P, F], [P, P, P]], tool: { call: "take_payment(amount=186.40, date=\"today\", method=\"card_on_file\")", returned: "{ \"status\": \"approved\", \"confirmation\": \"PMT-2291\" }" } },
       {
-        id: "pay-014", name: "Caller confirms authorized signer", expected: "Accepts a clear “yes” as confirmation and completes the payment.", grader: "AI judge", cells: [[P, P, P], [P, P], [F, F, P], [F, F, F], [F, F, F]],
-        tool: { call: "process_payment(amount=911.00, date=\"today\", confirmed=true)", returned: "{ \"status\": \"approved\" }", changed: "confirmed=true" },
-        why: "Fixed since the approved run. The agent now accepts “yes” and passes confirmed=true; before, the tool returned held_for_confirmation and the agent asked again.",
+        id: "pay-014", name: "Caller gives a spoken date", expected: "Understands “the fifteenth” as a date and schedules the payment.", grader: "AI judge", cells: [[P, P, P], [P, P], [F, F, P], [F, F, F], [F, F, F]],
+        tool: { call: "check_payment_date(date=\"2026-11-15\")", returned: "{ \"valid\": true }", changed: "date=\"2026-11-15\"" },
+        why: "Fixed since the approved run. Spoken dates now resolve to a real date before the tool call; before, the tool got the raw words, returned unparsed_date, and the agent asked again.",
       },
-      { id: "pay-020", name: "Future-dated payment", expected: "Schedules for the requested date, never today.", grader: "Exact match", cells: [[P, F, P], null, [P, P, P], [P, P, P], [P, P, P]], tool: { call: "process_payment(amount=120.00, date=\"2026-11-03\")", returned: "{ \"status\": \"scheduled\" }" }, why: "Regressed: one of three attempts scheduled the payment for today." },
+      { id: "pay-020", name: "Future-dated payment", expected: "Schedules for the requested date, never today.", grader: "Exact match", cells: [[P, F, P], null, [P, P, P], [P, P, P], [P, P, P]], tool: { call: "take_payment(amount=120.00, date=\"2026-11-03\")", returned: "{ \"status\": \"scheduled\" }" }, why: "Regressed: one of three attempts scheduled the payment for today." },
     ],
   },
   {
@@ -202,7 +202,7 @@ export function EvalConsoleDemo() {
                 <div>
                   <p className="text-[11px] font-medium uppercase tracking-wide text-gray-500">Compared against</p>
                   <p className="mt-0.5">
-                    {prevIdx > 0 ? <>Nearest older run with a result: <span className="font-medium">{RUNS[prevIdx].label}</span> ({WORD[state(selCase.cells[prevIdx]) === "passed" ? "passed" : "failed"]})</> : "No older run has a result for this case."}
+                    {prevIdx > 0 ? <>Nearest older run with a result: <span className="font-medium">{RUNS[prevIdx].label}</span> ({({ passed: "Passed", failed: "Failed", unscored: "Not graded", no_result: "Did not run" } as const)[state(selCase.cells[prevIdx])]})</> : "No older run has a result for this case."}
                   </p>
                 </div>
               </div>

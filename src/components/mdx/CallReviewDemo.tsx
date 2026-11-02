@@ -14,72 +14,70 @@ type Msg = { turn: number; speaker: "Agent" | "Customer"; at: number; text: stri
 const DURATION = 112;
 
 const MESSAGES: Msg[] = [
-  { turn: 1, speaker: "Agent", at: 1, pill: "Scripted", text: "Hi, this is the automated assistant calling about your card account. Am I speaking with Jordan?" },
-  { turn: 1, speaker: "Customer", at: 8, text: "Yes, that's me." },
-  { turn: 2, speaker: "Agent", at: 10, pill: "Sensitive action", text: "Thanks, Jordan. To verify your identity, what are the last four digits of your Social Security number?" },
-  { turn: 2, speaker: "Customer", at: 17, text: "Four four one seven." },
+  { turn: 1, speaker: "Agent", at: 1, pill: "Scripted", text: "Hi, this is the automated billing assistant for your electric account. Am I speaking with Riley?" },
+  { turn: 1, speaker: "Customer", at: 8, text: "Yes, this is Riley." },
+  { turn: 2, speaker: "Agent", at: 10, pill: "Sensitive action", text: "Thanks, Riley. To verify the account, can you tell me your ZIP code and date of birth?" },
+  { turn: 2, speaker: "Customer", at: 18, text: "Nine eight one oh two, and March third, 1988." },
   {
-    turn: 3, speaker: "Agent", at: 24, text: "You're verified. Your past-due balance is $911.00. Would you like to take care of that today?",
+    turn: 3, speaker: "Agent", at: 25, text: "You're verified. Your balance of $186.40 is due on the 9th. Would you like to pay it now or schedule a payment?",
     steps: [
       { kind: "Hear", title: "Heard the customer" },
-      { kind: "Tool", title: "verify_identity", returned: '{ "verified": true }' },
-      { kind: "Model", title: "Collections step ran the model", detail: "1.2 s" },
+      { kind: "Tool", title: "verify_account", returned: '{ "verified": true }' },
+      { kind: "Model", title: "Billing step ran the model", detail: "1.1 s" },
       { kind: "Speak", title: "Speech synthesis" },
     ],
   },
-  { turn: 3, speaker: "Customer", at: 31, text: "Yeah, let's pay it today with the card on file." },
+  { turn: 3, speaker: "Customer", at: 32, text: "Can I schedule it for the fifteenth? That's when I get paid." },
   {
-    turn: 4, speaker: "Agent", at: 39, pill: "Uninterruptible", text: "I'll charge $911.00 to the card ending 8812 today. Are you the authorized signer on this account? Please say yes to confirm.",
+    turn: 4, speaker: "Agent", at: 39, pill: "Uninterruptible", text: "Sure. What date would you like the payment to go out?",
     steps: [
-      { kind: "Hear", title: "Heard the customer" },
+      { kind: "Hear", title: "Heard the customer", detail: "“the fifteenth”" },
       { kind: "Guard", title: "Input checks", detail: "Passed" },
-      { kind: "Tool", title: "validate_payment_amount_date", returned: '{ "valid": true, "amount": 911.00, "date": "today" }' },
-      { kind: "Tool", title: "process_payment_with_card_on_file", returned: '{ "status": "held_for_confirmation" }' },
+      { kind: "Tool", title: "check_payment_date", returned: '{ "valid": false, "reason": "unparsed_date", "input": "the fifteenth" }' },
       { kind: "Speak", title: "Speech synthesis" },
     ],
   },
-  { turn: 4, speaker: "Customer", at: 52, text: "Yes." },
+  { turn: 4, speaker: "Customer", at: 46, text: "The fifteenth. This month." },
   {
-    turn: 5, speaker: "Agent", at: 69, flag: { level: "Warning", text: "8.6 s to first audio · fallback model" }, text: "Sorry, I need to confirm. Are you the authorized signer on this account?",
+    turn: 5, speaker: "Agent", at: 63, flag: { level: "Warning", text: "8.6 s to first audio · fallback model" }, text: "Sorry, I didn't catch that. What date should I schedule the payment for?",
     steps: [
-      { kind: "Hear", title: "Heard the customer", detail: "“Yes.”" },
-      { kind: "Guard", title: "Confirmation check", detail: "“Yes” was not accepted", tone: "warn" },
+      { kind: "Hear", title: "Heard the customer", detail: "“The fifteenth. This month.”" },
+      { kind: "Tool", title: "check_payment_date", returned: '{ "valid": false, "reason": "unparsed_date" }' },
       { kind: "Error", title: "Model timed out", detail: "6.0 s", tone: "bad" },
       { kind: "Speak", title: "Wait phrase played" },
       { kind: "Model", title: "Fallback model ran", detail: "1.9 s" },
-      { kind: "Tool", title: "process_payment_with_card_on_file", returned: '{ "status": "held_for_confirmation" }' },
     ],
   },
-  { turn: 5, speaker: "Customer", at: 75, text: "Yes. I said yes." },
+  { turn: 5, speaker: "Customer", at: 72, text: "November fifteenth." },
   {
-    turn: 6, speaker: "Agent", at: 81, flag: { level: "Monitor", text: "Same question 3 times · T4–T6" }, text: "To complete the payment, please confirm that you are the authorized signer.",
+    turn: 6, speaker: "Agent", at: 79, flag: { level: "Monitor", text: "Same question 3 times · T4–T6" }, text: "I'm sorry, can you give me the date you'd like to pay?",
     steps: [
-      { kind: "Guard", title: "Confirmation check", detail: "“Yes. I said yes.” was not accepted", tone: "warn" },
-      { kind: "Tool", title: "process_payment_with_card_on_file", returned: '{ "status": "held_for_confirmation" }' },
+      { kind: "Tool", title: "check_payment_date", returned: '{ "valid": false, "reason": "after_due_date_window" }' },
       { kind: "Guard", title: "Loop detector", detail: "Monitor: same question three turns in a row", tone: "warn" },
     ],
   },
-  { turn: 6, speaker: "Customer", at: 89, text: "Yes! Can I just talk to a person?" },
+  { turn: 6, speaker: "Customer", at: 87, text: "I've told you three times. Can I talk to someone?" },
   {
-    turn: 7, speaker: "Agent", at: 98, text: "I'm sorry for the trouble. I'm transferring you to a specialist now.",
+    turn: 7, speaker: "Agent", at: 96, text: "I'm sorry for the trouble. Let me connect you with someone who can help.",
     steps: [
       { kind: "Guard", title: "Frustration check", detail: "Fired", tone: "bad" },
-      { kind: "Tool", title: "transfer_to_live_agent", returned: '{ "transferred": true, "queue": "payments" }' },
+      { kind: "Tool", title: "transfer_to_person", returned: '{ "transferred": true, "queue": "billing" }' },
     ],
   },
 ];
 
 const MOMENTS = [
-  { turn: 3, title: "Payment validated", detail: "$911.00 for today" },
-  { turn: 4, title: "Confirmation loop", detail: "Same question 3 times, T4–T6" },
+  { turn: 3, title: "Balance read back", detail: "$186.40 due on the 9th" },
+  { turn: 4, title: "Date loop", detail: "Same question 3 times, T4–T6" },
   { turn: 5, title: "Slow turn", detail: "8.6 s to first audio · fallback model" },
   { turn: 7, title: "Transfer", detail: "Frustration check fired" },
 ];
 
-const MARKERS: { lane: "Tools" | "Checks"; at: number; turn: number; tone?: "warn" | "bad" }[] = [
-  { lane: "Tools", at: 21, turn: 3 }, { lane: "Tools", at: 36, turn: 4 }, { lane: "Tools", at: 46, turn: 4 },
-  { lane: "Tools", at: 66, turn: 5 }, { lane: "Tools", at: 79, turn: 6 }, { lane: "Tools", at: 96, turn: 7 },
-  { lane: "Checks", at: 57, turn: 5, tone: "warn" }, { lane: "Checks", at: 78, turn: 6, tone: "warn" }, { lane: "Checks", at: 94, turn: 7, tone: "bad" },
+type Lane = "Model" | "Tools" | "Guardrails";
+const MARKERS: { lane: Lane; at: number; turn: number; tone?: "warn" | "bad" }[] = [
+  { lane: "Model", at: 23, turn: 3 }, { lane: "Model", at: 37, turn: 4 }, { lane: "Model", at: 58, turn: 5, tone: "bad" }, { lane: "Model", at: 61, turn: 5 }, { lane: "Model", at: 77, turn: 6 }, { lane: "Model", at: 94, turn: 7 },
+  { lane: "Tools", at: 21, turn: 3 }, { lane: "Tools", at: 35, turn: 4 }, { lane: "Tools", at: 50, turn: 5 }, { lane: "Tools", at: 75, turn: 6 }, { lane: "Tools", at: 95, turn: 7 },
+  { lane: "Guardrails", at: 78, turn: 6, tone: "warn" }, { lane: "Guardrails", at: 93, turn: 7, tone: "bad" },
 ];
 
 const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
@@ -155,7 +153,7 @@ function CallDetails() {
   useEffect(() => {
     const el = listRef.current?.querySelector<HTMLElement>(`[data-turn="${selected}"]`);
     const list = listRef.current;
-    if (el && list) list.scrollTo({ top: el.offsetTop - list.offsetTop - 8, behavior: "smooth" });
+    if (el && list) list.scrollTo({ top: el.offsetTop - 8, behavior: "smooth" });
   }, [selected]);
 
   const jump = (turn: number, at?: number) => {
@@ -224,7 +222,7 @@ function CallDetails() {
         <div>
           <p className="text-[11px] font-medium uppercase tracking-wide text-gray-500">Summary</p>
           <p className="mt-1 text-[12.5px] leading-5 text-gray-800">
-            Jordan wanted to pay the $911.00 past-due balance. Identity and the payment checked out, but the confirmation step didn&apos;t accept &ldquo;yes&rdquo; three times. Jordan asked for a person and was transferred. No payment was processed.
+            Riley wanted to schedule the $186.40 bill for the 15th. Identity checked out, but the date tool rejected &ldquo;the fifteenth&rdquo; and the agent asked for the date three times without saying why. Riley asked for a person and was transferred. No payment was scheduled.
           </p>
         </div>
         <div>
@@ -278,7 +276,7 @@ function CallDetails() {
                   </div>
                 </div>
               ))}
-              {(["Tools", "Checks"] as const).map(lane => (
+              {(["Model", "Tools", "Guardrails"] as const).map(lane => (
                 <div key={lane} className="flex items-center gap-2">
                   <span className="w-14 text-[10.5px] text-gray-500">{lane}</span>
                   <div className="relative h-3 flex-1">
@@ -297,7 +295,7 @@ function CallDetails() {
                 </div>
               ))}
               <div className="relative h-0">
-                <span className="absolute -top-[68px] h-[68px] w-px bg-violet-600/70" style={{ left: `calc(3.5rem + 0.5rem + (100% - 4rem) * ${time / DURATION})` }} />
+                <span className="absolute -top-[86px] h-[86px] w-px bg-violet-600/70" style={{ left: `calc(3.5rem + 0.5rem + (100% - 4rem) * ${time / DURATION})` }} />
               </div>
             </div>
           </div>
@@ -310,18 +308,18 @@ function CallDetails() {
 
 type Node = { id: string; label: string; calls: number; col: number; row: number };
 const NODES: Node[] = [
-  { id: "start", label: "Start", calls: 300, col: 0, row: 1 },
-  { id: "identity", label: "Identity", calls: 300, col: 1, row: 1 },
-  { id: "details", label: "Payment details", calls: 292, col: 2, row: 1 },
+  { id: "start", label: "Start", calls: 287, col: 0, row: 1 },
+  { id: "identity", label: "Identity", calls: 287, col: 1, row: 1 },
+  { id: "details", label: "Payment details", calls: 279, col: 2, row: 1 },
   { id: "schedule", label: "Payment schedule", calls: 58, col: 3, row: 0 },
   { id: "transfer", label: "Transfer", calls: 27, col: 3, row: 2 },
   { id: "method", label: "Payment method", calls: 259, col: 4, row: 1 },
   { id: "consent", label: "Consent", calls: 213, col: 5, row: 1 },
   { id: "attempt", label: "Payment attempt", calls: 163, col: 6, row: 0 },
-  { id: "end", label: "End", calls: 300, col: 7, row: 1 },
+  { id: "end", label: "End", calls: 266, col: 7, row: 1 },
 ];
 const EDGES: [string, string, number][] = [
-  ["start", "identity", 300], ["identity", "details", 292], ["identity", "transfer", 8], ["details", "method", 201], ["details", "schedule", 58],
+  ["start", "identity", 287], ["identity", "details", 279], ["identity", "transfer", 8], ["details", "method", 201], ["details", "schedule", 58],
   ["schedule", "method", 49], ["method", "consent", 213], ["method", "details", 71], ["consent", "attempt", 163], ["consent", "end", 50],
   ["details", "transfer", 19], ["attempt", "end", 163], ["transfer", "end", 27], ["schedule", "end", 9], ["method", "end", 17],
 ];
@@ -344,7 +342,7 @@ function CallFlow() {
         <div className="flex flex-wrap items-start justify-between gap-2 px-3 pt-2.5">
           <div>
             <p className="text-[12.5px] font-semibold text-gray-900">Call flow</p>
-            <p className="text-[11px] text-gray-500">287 of 300 calls analyzed · Partial coverage · {NODES.length} stages</p>
+            <p className="text-[11px] text-gray-500">287 of 300 calls analyzed · Partial coverage · {NODES.length} stages · 21 calls ended without a recorded end stage</p>
           </div>
           <div className="flex items-center gap-3">
             {sel && <button type="button" onClick={() => setSel(null)} className="text-[11.5px] text-violet-700 underline">Clear selection</button>}
@@ -387,9 +385,9 @@ function CallFlow() {
                 const p = pos(n);
                 const active = sel === n.id;
                 return (
-                  <g key={n.id} onClick={() => setSel(active ? null : n.id)} className="cursor-pointer" role="button" aria-label={`${n.label}, ${n.calls} calls`}>
+                  <g key={n.id} onClick={() => setSel(active ? null : n.id)} onKeyDown={e => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), setSel(active ? null : n.id))} tabIndex={0} className="cursor-pointer outline-none focus-visible:[&>rect:first-child]:stroke-violet-600" role="button" aria-label={`${n.label}, ${n.calls} calls`}>
                     <rect x={p.x} y={p.y} width={NW} height={NH} rx={10} fill={active ? "#f5f3ff" : "white"} stroke={active ? "#8b5cf6" : "#d1d5db"} />
-                    <rect x={p.x + 8} y={p.y + NH - 6} width={(NW - 16) * (n.calls / 300)} height={3} rx={1.5} fill="#ddd6fe" />
+                    <rect x={p.x + 8} y={p.y + NH - 6} width={(NW - 16) * (n.calls / 287)} height={3} rx={1.5} fill="#ddd6fe" />
                     <text x={p.x + 10} y={p.y + 19} className="fill-gray-900 text-[12px] font-semibold">{n.label}</text>
                     <text x={p.x + 10} y={p.y + 33} className="fill-gray-500 text-[11px]">{n.calls} calls</text>
                   </g>
@@ -403,7 +401,7 @@ function CallFlow() {
               <li key={n.id}>
                 <button type="button" onClick={() => setSel(sel === n.id ? null : n.id)} className={`grid w-full grid-cols-[7.5rem_1fr_auto] items-center gap-2 rounded px-1.5 py-1 text-left text-[12px] ${sel === n.id ? "bg-violet-50" : "hover:bg-gray-50"}`}>
                   <span className="truncate text-gray-900">{n.label}</span>
-                  <span className="h-1.5 rounded-full bg-violet-500" style={{ width: `${(n.calls / 300) * 100}%` }} />
+                  <span className="h-1.5 rounded-full bg-violet-500" style={{ width: `${(n.calls / 287) * 100}%` }} />
                   <span className="tabular-nums text-gray-600">{n.calls}</span>
                 </button>
               </li>
@@ -457,7 +455,7 @@ export function CallReviewDemo() {
             </button>
           ))}
           <span className="ml-auto hidden text-[11.5px] text-gray-500 sm:inline">
-            {tab === "details" ? "Card collections · Outbound · 1:52 · Transferred" : "Collections agent · Oct 1–8"}
+            {tab === "details" ? "Utility billing · Outbound · 1:52 · Transferred" : "Collections agent · Oct 1–8"}
           </span>
         </div>
         <div className="h-[600px]">{tab === "details" ? <CallDetails /> : <CallFlow />}</div>

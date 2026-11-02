@@ -48,10 +48,10 @@ const PHASE1: Frame[] = [
   { nodes: { approve_scope: "done" }, agents: { manager: "running" }, message: { from: "manager", to: "room", text: "Plan approved. Starting three worker lanes: endpoint, button, and tests. Review starts when all three are accepted." } },
   { nodes: { api: "running", ui: "running" }, agents: { w1: "running", w2: "running" }, worktrees: 2 },
   { nodes: { tests: "running" }, agents: { w3: "running" }, worktrees: 3 },
-  { nodes: { ui: "requeued" }, agents: { w2: "requeued · attempt 2" }, message: { from: "runtime", to: "manager", tone: "danger", text: "Worker 2 lease expired after 45 s with no heartbeat. Job requeued as attempt 2; saved patch kept." } },
+  { nodes: { ui: "requeued" }, agents: { w2: "requeued · attempt 2" }, message: { from: "runtime", to: "manager", tone: "danger", text: "Worker 2 lease expired after 45 s with no heartbeat. Job requeued as attempt 2." } },
   { nodes: { ui: "running" }, agents: { w2: "running" }, deliveries: { api: 1 }, message: { from: "worker 1", to: "manager", text: "Submitted export endpoint. Streams rows, respects the current filters, 6 tests passing." } },
   { nodes: { api: "done" }, agents: { w1: "done" }, deliveries: { api: 2, tests: 1 } },
-  { nodes: { tests: "done" }, agents: { w3: "done" }, deliveries: { tests: 2, ui: 1 }, message: { from: "worker 2", to: "manager", text: "Attempt 2 picked up from the saved patch. Button wired to the endpoint, disabled while exporting." } },
+  { nodes: { tests: "done" }, agents: { w3: "done" }, deliveries: { tests: 2, ui: 1 }, message: { from: "worker 2", to: "manager", text: "Attempt 2 resumed its session and finished. Button wired to the endpoint, disabled while exporting." } },
   { nodes: { ui: "done", review: "running" }, agents: { w2: "done", rev: "running" }, deliveries: { ui: 2 } },
   { nodes: { review: "done", approve_patch: "waiting" }, agents: { rev: "done", manager: "waiting approval" }, worktrees: 4, message: { from: "reviewer", to: "manager", text: "Two notes, both fixed: the filename wasn't escaped, and an empty export returned 500 instead of a header-only CSV. Patch a3f9c1 is ready." } },
 ];
