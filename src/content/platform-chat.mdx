@@ -52,7 +52,7 @@ The first version, in August, was a narrower analytics chat that answered metric
 By October the goal was bigger: one conversation that could answer metric questions and investigate individual calls. There were already several half-built engines, routing layers and chart pipelines to choose from. I had three independent analyses written, had them argue against each other, and chose the simplest shape that could be made safe:
 
 - **One durable request path.** Every turn is saved as it runs, and only the current owner of a request can write to it. A crash or a duplicate delivery cannot corrupt a conversation.
-- **The host holds the power, not the model.** Tenant scope, budgets, cancellation and deadlines are enforced by the service. The user's access token stays in server memory and never reaches the model or the logs.
+- **The host holds the power, not the model.** Which customer's data a turn can see, budgets, cancellation and deadlines are enforced by the service. The user's access token stays in server memory and never reaches the model or the logs.
 - **Everything else was deleted.** The warm engines, alternate routers and extra chart paths went away. Fewer paths meant fewer places for scope to leak.
 
 A few days later I added a skills-based runtime: one main prompt, a small set of domain skills the model can discover, and a narrow capability API the host enforces. The model decides what to look at; the host decides what it is allowed to touch.
@@ -69,7 +69,7 @@ Review of that work caught a real security bug: in one path, a definition could 
 
 ## Saying "partial" out loud
 
-A response can arrive successfully and still be incomplete: the model ran out of time, or one source failed. An assistant that hides that is more dangerous than one that is slow. So every turn ends with an explicit outcome, such as completed, partial or needs clarification, and the panel shows it. Stop a turn in the demo above and it tells you the partial results are not a complete answer. Monitoring follows the same rule: it records what happened without storing what customers said.
+A response can arrive successfully and still be incomplete: the model ran out of time, or one source failed. An assistant that hides that is more dangerous than one that is slow. So every turn ends with an explicit outcome, such as completed, partial or needs clarification, and the panel shows it. Stop a turn in the demo above and it tells you the partial results are not a complete answer. Monitoring follows the same rule: it records what happened without storing call content unless it is verified, in-scope evidence.
 
 ## How I know it works, and what I don't claim
 
