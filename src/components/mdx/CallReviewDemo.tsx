@@ -52,7 +52,7 @@ const MESSAGES: Msg[] = [
   {
     turn: 6, speaker: "Agent", at: 79, flag: { level: "Monitor", text: "Same question 3 times · T4–T6" }, text: "I'm sorry, can you give me the date you'd like to pay?",
     steps: [
-      { kind: "Tool", title: "check_payment_date", returned: '{ "valid": false, "reason": "after_due_date_window" }' },
+      { kind: "Tool", title: "check_payment_date", returned: '{ "valid": false, "reason": "unparsed_date" }' },
       { kind: "Guard", title: "Loop detector", detail: "Monitor: same question three turns in a row", tone: "warn" },
     ],
   },
@@ -455,7 +455,7 @@ export function CallReviewDemo() {
             </button>
           ))}
           <span className="ml-auto hidden text-[11.5px] text-gray-500 sm:inline">
-            {tab === "details" ? "Utility billing · Outbound · 1:52 · Transferred" : "Collections agent · Oct 1–8"}
+            {tab === "details" ? "Utility billing · Outbound · 1:52 · Transferred" : "Billing agent · Oct 1–8"}
           </span>
         </div>
         <div className="h-[600px]">{tab === "details" ? <CallDetails /> : <CallFlow />}</div>
