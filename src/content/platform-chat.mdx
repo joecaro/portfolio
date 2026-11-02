@@ -4,10 +4,10 @@ title: "Platform Chat"
 date: Oct 31 2026 12:00 PM
 kind: "AI & platform"
 author: Joe
-description: A conversational analytics workspace where operations teams ask why a metric moved and get a scoped, evidence-backed answer they can turn into a report.
-role: Designed and built the conversational query agent, scope contracts, live progress, and behavioral evals
-focus: Keeping a question's scope intact from first question to follow-up to shared report
-impact: Follow-ups no longer silently widen scope; 101 tests and 12 of 12 live-model eval cases pass.
+description: An AI analyst built into a voice-AI platform. Ask about your calls in plain English; it counts, searches and reads the calls, then answers with the evidence attached.
+role: Product and architecture lead; designed, directed and shipped it, with coding agents doing much of the implementation
+focus: Answers that stay inside the scope you asked about, and say plainly when they are partial
+impact: Running as an internal staff preview, checked by about 1,250 automated tests and live-model evals.
 stack:
     - Python
     - TypeScript
@@ -21,45 +21,62 @@ tech:
     - Python
     - TypeScript
     - React
+    - LLM agents
 image: /img/headliners/platform-chat-product.jpg
 position: 1
 headliner: true
 ---
 
-## A follow-up quietly answered a different question
+## What it is
 
-Platform Chat lets operations teams who run automated phone campaigns ask why a metric moved, in plain English. The assistant writes and runs a read-only query scoped to that team's data, returns the rate with its counts and the rows behind it, and turns the result into a report they can share. I built the conversational query agent, the contracts that carry a question's scope from turn to turn, the live progress view, and the behavioral evals that gate releases. The stakes are simple: a wrong number from an analytics assistant looks exactly like a right one, so an assistant that answers a broader question than the one asked is worse than none.
+Teams that run automated phone agents make tens of thousands of calls. When a number moves, someone has to find out why, and that used to mean a dashboard, a SQL query and an afternoon of listening to recordings.
 
-I learned that from one bug. A user asked about one campaign, then asked a follow-up. The answer came back labeled "All Campaigns." The conversation had understood the narrower request. The query had not. Three things failed together: filters were pulled from the latest message by pattern matching, the result's recorded provenance dropped them, and nothing checked that the query and its provenance agreed.
+Platform Chat is a side panel that opens beside whatever page you are on. You ask a question in plain English: "Why did transfers go up this week?" or "Find calls where the customer disputed the balance." The assistant works out the scope (which campaign, which dates, which calls), counts the population, searches the transcripts, reads the calls that matter, and answers. The answer links to every call it relied on, and a short line underneath says exactly what it looked at. You watch it work the whole time, step by step.
 
-I made scope a typed part of the query. Campaign and model constraints now carry forward from one turn to the next, through the query and into its provenance. An eval gate fails if the query filters and the provenance filters differ by even one value. If a question needs a scope that the query does not carry, the query is blocked instead of run broad. If a campaign name matches more than one campaign, the assistant asks which one.
+It is read-only by default, and it asks before it changes anything.
 
-## Showing an answer another way is not a new question
+I led it from the first prototype to the version running today: the product shape, the architecture, the safety model, the evals, and the UI. I worked the way I now build most things: I set the design and the contracts, directed coding agents to implement in parallel, had separate agents review their work, and verified the result myself before anything merged.
 
-"Chart that" and "put this in a report" looked like analysis requests, so the system answered them by querying again. A second query can return different rows: new data lands, or a date window resolves a little differently. Then the chart no longer matches the table the user just checked.
+## Version one taught me what could go wrong
 
-I split the two paths. A question that needs new data goes through the governed query. A request to present a result renders the rows already fetched and stored with that result, with no new query. Charts appear when someone asks for one; a definition question gets a direct answer, not a decorative visual. In the workspace above, "Build report from these results" works the same way: the report reuses the comparison you reviewed.
+The first version, in August, was a narrower analytics chat that answered metric questions. I had it running on a staging environment within two days. The bugs it exposed shaped everything after.
 
-## A rate without its counts invites the wrong conclusion
+**A follow-up silently answered a bigger question.** A user asked about one campaign, then asked a follow-up. The answer came back labeled "All Campaigns." The conversation knew the scope; the query did not. Filters were being pulled out of the latest message with pattern matching, and the answer's provenance dropped them. A wrong number from an analytics assistant looks exactly like a right one, so I made this a hard rule: scope travels with the query, and a check fails if the query's filters and the answer's stated filters differ by a single value.
 
-A repeat-contact rate can rise because repeats rose, because total contacts fell, or because a filter shrank the population. So each answer shows the rate next to its numerator and denominator, and the demo recomputes all three when you filter by reason or team. An empty scope says there are no matching records. It does not show 0%. Conversation excerpts in the evidence panel are labeled as examples: they show what a category looks like, but they do not produce the number.
+**Progress arrived after the work was done.** On staging, a query referenced a table under the wrong schema and failed over and over. The interface showed only "Thinking…" the whole time, because progress events were sent after the agent finished. I streamed every step as it happened, saved readable failure details, stopped the agent from retrying an identical failed query, and kept a completed result when the model's final message came back malformed. Both prompts that had failed returned correct, evidence-backed answers the same night.
 
-## Progress that arrives after the work is done is not progress
+**Unit tests passed while the real model failed.** Mocked tests were green while the deployed model misbehaved. So I added a live-model behavioral eval that needs no production data. That idea became the backbone of the next version.
 
-I deployed the redesigned agent to staging one afternoon. Within hours, a staging session failed, and the trace showed two problems. First, the query referenced the campaigns table under a schema name that did not exist in that tenant's database, so every query that touched campaigns failed. Second, the interface showed only "Thinking…" while this happened, because progress events were sent after the agent finished. The user could not see the agent retry the same broken query again and again.
+## One path, not five
 
-The fixes:
+By October the goal was bigger: one conversation that could answer metric questions and investigate individual calls. There were already several half-built engines, routing layers and chart pipelines to choose from. I had three independent analyses written, had them argue against each other, and chose the simplest shape that could be made safe:
 
-- Resolve table references against the tenant's actual schema, and include only the relations a query uses.
-- Stream each stage of the work, including retries, as it happens.
-- Save safe, readable failure details for support instead of raw database errors.
-- Stop re-running a query that already failed with the same error.
-- Keep a completed result when the model's final response is malformed.
+- **One durable request path.** Every turn is saved as it runs, and only the current owner of a request can write to it. A crash or a duplicate delivery cannot corrupt a conversation.
+- **The host holds the power, not the model.** Tenant scope, budgets, cancellation and deadlines are enforced by the service. The user's access token stays in server memory and never reaches the model or the logs.
+- **Everything else was deleted.** The warm engines, alternate routers and extra chart paths went away. Fewer paths meant fewer places for scope to leak.
 
-By the next morning, both prompts that had failed returned evidence-backed answers on staging, and a log sweep after the deploy showed no new failures.
+A few days later I added a skills-based runtime: one main prompt, a small set of domain skills the model can discover, and a narrow capability API the host enforces. The model decides what to look at; the host decides what it is allowed to touch.
 
-## Limits, and what I would measure next
+## Making a big change safe to review
 
-The evidence is controlled: 101 passing tests in the reporting suite, 12 of 12 cases in a live-model behavioral eval with multi-turn follow-ups, and a staging rerun of the exact prompts that had failed. It does not yet show adoption, analyst time saved, or accuracy across real production traffic. Next, I would measure three things: how often a follow-up is blocked or clarified instead of answered, how often a report disagrees with the table it came from (the target is zero), and time to the first visible progress event.
+The new system was too big for anyone to review in one sitting, and a change nobody can really review is a change nobody can really trust. I split it into 19 layers that each did one thing and could be checked on its own. The assembled system passed 214 tests on day one. The suite has since grown to about 1,250.
 
-The workspace above is a reconstruction with fictional data. It shows the interaction, not the production system.
+## Teaching it what words mean
+
+The same metric name can mean different things on different kinds of campaigns. A generic definition gives a confident, wrong answer. I built an ontology of 85 business concepts, each traced to a source and resolved by customer, campaign type, reporting surface and date. If the scope is unknown, the concept stays unresolved and the assistant asks, instead of falling back to a default.
+
+Review of that work caught a real security bug: in one path, a definition could still be served to a user after their access had been revoked. I reproduced it first, then fixed it, and the test that failed before now passes.
+
+## Saying "partial" out loud
+
+A response can arrive successfully and still be incomplete: the model ran out of time, or one source failed. An assistant that hides that is more dangerous than one that is slow. So every turn ends with an explicit outcome, such as completed, partial or needs clarification, and the panel shows it. Stop a turn in the demo above and it tells you the partial results are not a complete answer. Monitoring follows the same rule: it records what happened without storing what customers said.
+
+## How I know it works, and what I don't claim
+
+The evals run the real coordinator, runtime and tool permissions against synthetic call data, with expected answers kept out of the model's context and every answer graded by an independent reviewer. There are hundreds of cases. Sixty of them are adversarial: they try to break scope or pull data the user should not see. The latest run found no unsafe behavior in any of them.
+
+The harder gates are not all green, and I report them that way. The latest focused 68-case run graded 39 pass, 24 partial and 5 fail. Partial answers are the work in front of me, and I haven't claimed an overall improvement I can't show.
+
+Today Platform Chat runs as a staff preview behind sign-in and an internal-user gate. It has not had customer production traffic yet, so I have no adoption or time-saved numbers to report.
+
+The panel above is a reconstruction of the real interface with fictional data.
