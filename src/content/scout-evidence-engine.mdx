@@ -56,7 +56,9 @@ So Scout keeps its numbers separate: calls in the population, calls examined, ca
 
 ## Making it a service
 
-Around October 10 I started turning the harness into something other people could use. That meant ingestion with privacy checks that resumes after a crash, a search index with separate embeddings for conversation passages, runtime events and cohorts, a CLI, and the report viewer.\n\nThe agent API was where I spent the most care. Every investigation is locked to one customer's data, and the source is rechecked every time the agent reads evidence. That costs extra reads, but it means a finding can't cite a call that changed or one the agent was never allowed to see.
+Around October 10 I started turning the harness into something other people could use. That meant ingestion with privacy checks that resumes after a crash, a search index with separate embeddings for conversation passages, runtime events and cohorts, a CLI, and the report viewer.
+
+The agent API was where I spent the most care. Every investigation is locked to one customer's data, and the source is rechecked every time the agent reads evidence. That costs extra reads, but it means a finding can't cite a call that changed or one the agent was never allowed to see.
 
 It also had to be fast, because nobody waits two and a half minutes per step. The first server-side cohort build took 149 seconds. Precomputing each call's runtime profile next to its embedding got it down to about 28.
 
@@ -70,7 +72,7 @@ Same approach both times: find the cause before fixing anything, and keep failur
 
 ## Does it work?
 
-Scout is strict about what counts, and the demo above shows it: its finding is real, but it stays an observation. A finding is a "supported problem" only if it has the prior state, the trigger, the agent's response and the consequence, each tied to a verified turn, plus evidence that the behavior was avoidable and harmful. Anything less gets saved as an observation.
+Scout is strict about what counts, and the demo above shows it: the finding holds up on the evidence it has, but stays an observation. A finding is a "supported problem" only if it has the prior state, the trigger, the agent's response and the consequence, each tied to a verified turn, plus evidence that the behavior was avoidable and harmful. Anything less gets saved as an observation.
 
 It's deployed for internal staff, through the CLI and as the investigation engine inside Platform Chat. There are limits. The research checks used a second AI model instead of human reviewers, so I haven't measured accuracy against people. A citation check proves the evidence exists, not that the conclusion is right. And some prevalence counts can still come back as a wrong zero, which I'm still working on.
 
