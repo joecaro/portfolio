@@ -592,15 +592,15 @@ export function PlatformChatDemo() {
                     <span className="grid h-7 w-7 place-items-center rounded-md"><AtSign className="h-3.5 w-3.5" /></span>
                     <span className="flex h-7 items-center gap-1 rounded-md px-1.5"><CalendarDays className="h-3.5 w-3.5" /> Dates</span>
                   </span>
-                  <button
-                    type={busy ? "button" : "submit"}
-                    onClick={busy ? stop : undefined}
-                    aria-label={busy ? "Stop" : "Send"}
-                    className="grid h-[30px] w-[30px] place-items-center rounded-full bg-[#15181c] text-white disabled:opacity-40"
-                    disabled={!busy && !draft.trim()}
-                  >
-                    {busy ? <Square className="h-3 w-3 fill-white" /> : <ArrowUp className="h-4 w-4" />}
-                  </button>
+                  {busy ? (
+                    <button key="stop" type="button" onClick={stop} aria-label="Stop" className="grid h-[30px] w-[30px] place-items-center rounded-full bg-[#15181c] text-white">
+                      <Square className="h-3 w-3 fill-white" />
+                    </button>
+                  ) : (
+                    <button key="send" type="submit" aria-label="Send" disabled={!draft.trim()} className="grid h-[30px] w-[30px] place-items-center rounded-full bg-[#15181c] text-white disabled:opacity-40">
+                      <ArrowUp className="h-4 w-4" />
+                    </button>
+                  )}
                 </div>
               </div>
               <p className="mt-1.5 flex items-center justify-center gap-1 text-[11px] text-[#9aa0a8]">
