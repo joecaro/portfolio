@@ -5,16 +5,14 @@ date: Oct 31 2026 12:00 PM
 kind: "AI & platform"
 author: Joe
 description: An investigation engine I built so AI agents can find recurring behavior across voice-agent calls, where every finding must cite source turns the agent actually read.
-role: "Sole creator: research harness, ingestion, embeddings, MCP service, CLI, viewer and deployment"
+role: "Sole creator: research harness, ingestion, embeddings, agent service, CLI, viewer and deployment"
 focus: Agent-driven investigation, cohort discovery, citation checks and honest denominators
 impact: Findings arrive with checked citations and explicit coverage, or as an honest "nothing supported."
 stack:
     - Python
-    - MCP
-    - Bedrock Titan embeddings
-    - OpenSearch
-    - ClickHouse
-    - AWS ECS
+    - Embeddings
+    - Vector search
+    - AI agents
 tags:
     - featured
     - ai
@@ -22,11 +20,9 @@ tags:
     - interaction design
 tech:
     - Python
-    - MCP
-    - Bedrock Titan embeddings
-    - OpenSearch
-    - ClickHouse
-    - AWS ECS
+    - Embeddings
+    - Vector search
+    - AI agents
 image: /img/headliners/scout-evidence-engine-product.jpg
 position: 4
 headliner: true
@@ -42,9 +38,9 @@ The workspace above reconstructs that loop. Pick a cohort, compare its routes, d
 
 ## I built every layer, research harness first
 
-The first version was Call Behavior Lab. It had a bounded, read-only exporter, frozen call sets with whole-day splits, cached Titan embeddings over dialogue windows, deterministic action features, cohorts and route graphs at several resolutions, and a budgeted agent loop. The model chooses what to search and read. Code enforces the scope, budgets, source access and evidence rules.
+The first version was a research harness. It had a bounded, read-only exporter, frozen call sets with whole-day splits, cached embeddings over dialogue windows, deterministic action features, cohorts and route graphs at several resolutions, and a budgeted agent loop. The model chooses what to search and read. Code enforces the scope, budgets, source access and evidence rules.
 
-Scout turns that into a service. An ingestion worker indexes calls with privacy checks and resumable checkpoints. OpenSearch holds separate, versioned vectors for passages, runtime events and hybrid cohorts. An authenticated MCP API lets coding agents investigate one tenant at a time, and it revalidates source hashes when it reads evidence. A CLI journals each investigation and renders a report and a local viewer. The services run on AWS ECS.
+Scout turns that into a service. An ingestion worker indexes calls with privacy checks and resumable checkpoints. A vector index holds separate, versioned embeddings for passages, runtime events and cohorts. An authenticated agent API keeps each investigation inside one customer's data, and it rechecks the source whenever it reads evidence. A CLI journals each investigation and renders a report and a local viewer.
 
 Scout grades findings by their evidence. A finding is a supported problem only when it has prior-state, trigger, response and consequence turns with verified source hashes, plus evidence that the behavior was avoidable and harmful. Anything less is saved as an observation. It is not discarded, and it is not promoted.
 
@@ -56,13 +52,13 @@ So an empty result is a valid result. An agent can submit no findings with a sta
 
 ## Similarity, order and source review are three different signals
 
-Semantic search finds calls that sound alike. In one 20,000-call pilot, the neighbors of an unusual call mostly shared its payment topic, and a source screen found no other exact copy of its behavior. Event-sequence search shows what happened before and after an action, but two phrases in the same call do not prove their order or meaning. Only a full-call read confirms the behavior. Scout keeps these signals separate in its tools and in its reports.
+Semantic search finds calls that sound alike. In one pilot over tens of thousands of calls, the neighbors of an unusual call mostly shared its payment topic, and a source screen found no other exact copy of its behavior. Event-sequence search shows what happened before and after an action, but two phrases in the same call do not prove their order or meaning. Only a full-call read confirms the behavior. Scout keeps these signals separate in its tools and in its reports.
 
 The same rule decided representation choices. I tested detailed model-generated turn labels against cheap deterministic action features. The labels cost more and did not produce more independently supported discoveries, so deterministic actions stayed the default.
 
 ## A count is not a rate without a denominator
 
-A literal search found 54,090 calls that contained one repeated prompt. A stratified review of 200 of those calls found 12 strong examples of the actual failure: the agent asked again about paying today after the customer had already given a future date. The weighted estimate was about 720 affected calls (interval 244 to 1,585), roughly 75 times fewer than the search count.
+A literal search for one repeated prompt matched tens of thousands of calls. A stratified review of a sample found only a handful of strong examples of the actual failure: the agent asked again about paying today after the customer had already given a future date. Weighted back to the population, the real failure was roughly 75 times rarer than the search count suggested, with a wide interval.
 
 Scout's reports therefore keep stored population, calls actually read, candidates returned and confirmed support as separate numbers. When source coverage is unknown, a zero is reported as inconclusive, not as zero calls.
 
