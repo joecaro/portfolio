@@ -4,10 +4,10 @@ title: "Call Review Workspace"
 date: Oct 31 2026 12:00 PM
 kind: "Tools"
 author: Joe
-description: Review tools for AI voice-agent calls that keep what the agent said apart from what it actually did, for one call and across many.
-role: Product design and frontend engineering
+description: Tools for reviewing AI voice-agent calls. One call at a time, see what the agent said next to what it actually did. Across many calls, see where they go.
+role: Product design and frontend engineering; directed coding agents for much of the implementation
 focus: Speech versus recorded action, one selection across views, unknowns shown as unknown
-impact: Merged a call-flow map with shared selection and explicit coverage; a transcript-first call-details redesign is in draft review.
+impact: Call-flow map merged; transcript-first call-details redesign is in review behind an internal opt-in.
 stack:
     - TypeScript
     - React
@@ -27,38 +27,50 @@ position: 2
 headliner: true
 ---
 
-When an AI voice agent handles a customer's call, the transcript is the easiest record to read and the least reliable one to trust. The agent can say "I've updated your address" whether or not the update went through. I design and build the review surfaces for these calls in our voice-AI operations console. One is a redesign of the call-details screen that puts the conversation and the agent's recorded actions on one timeline. The other is a call-flow map that shows how a whole set of calls moves through an agent's stages. If a review tool blurs speech and action, a failed action can pass as a successful call.
+## What it is
 
-The call-flow map is merged. The call-details redesign is an unmerged draft in review. The demo above recreates the single-call workflow with fictional calls.
+When an AI voice agent handles a call, the transcript is the easiest thing to read and the least trustworthy. The agent can say "you're all set" whether or not anything actually happened. If a review tool blurs what the agent said with what it actually did, a broken call looks like a good one.
 
-## A sentence in a transcript is evidence of speech, not of action
+I built two tools for this in the platform's operations console:
 
-In the redesign, the transcript fills the main column. Each agent reply opens to the steps that produced it: the model call, any tool or API request with its input, output and result, and the guardrail checks on that turn. Reply types are separate labels. A scripted line, a model-generated reply and a reply whose type was not recorded each look different.
+- A **call-details redesign** that puts the transcript front and center, with the recording, the agent's tool calls, and its safety checks on one synced timeline. Click a tool call and you jump to the turn and the moment in the audio where it happened.
+- A **call-flow map** that shows how a whole set of calls moves through the agent's stages, including where calls loop back.
 
-A compact timeline sits beside the transcript. It has one waveform seek strip and aligned lanes for speech, model, tool and gate activity. Select a tool marker and the matching transcript turn opens.
+I set the goals and made the design calls. Coding agents wrote much of the code, and separate agents reviewed it before I signed off.
 
-In the demo's address-change call, the update is rejected, but the assistant tells the caller it went through. A reviewer who reads only the dialogue would think the address changed. The recorded result shows that it did not.
+## The call-flow map
 
-## The event is how you navigate; the conversation is the context
+This one is merged. The ask was simple: the graph is the default view, there's a list view for people who'd rather scan, both views share one selection, and the card always says how much of the data it actually covers.
 
-The same rule applies across many calls. In [Platform Chat](/projects/platform-chat), a call-flow result shows stages as nodes and transitions as weighted lines. Before my change, the card showed a list, and the graph appeared only in an expanded dialog. Each view kept its own selection, so switching views lost your place.
+Coverage sounds boring but it's the important part. The old subtitle said something like "287 of 300 calls" and left you to work out whether that was the whole picture. Now it says things like "287 of 300 calls analyzed · Partial coverage," or "coverage unknown" when we don't know. Line width is call count, and the footer says outright that calls can show up in several stages.
 
-I made the graph the default and gave the flow component one selection that persists across graph, list and expanded views. A selected stage lists all incoming and outgoing connections, including repeats. If new data replaces the result and the stage is gone, the selection clears. Stages that appear only in a connection stay selectable. Changing the view changes the presentation, not the review.
+The interesting bug was about loops. A "return" edge (a call going back to an earlier stage) is drawn dashed. The graph decided what counted as a return using column plus vertical position. The list used column only. So the same edge could be a return in one view and not in the other. Review caught it in two rounds: first that upward edges in the same column lost their dashes, then that just reordering nodes could flip the answer. The fix was one rule, column order only, used by both views, with a regression test. I also changed returns from rose to neutral gray. Red made a normal retry look like an error.
 
-## Rearranging the picture must not change what it means
+It merged with targeted tests, typecheck, lint, an independent review of the exact commit and CI. I haven't validated it at narrow phone widths or on touch yet.
 
-The flow groups stages into ordered columns. A transition into an earlier column is a return, drawn as a dashed line. The original graph also called a same-column transition a return when its target was drawn above its source. The list view did not, so the two views disagreed about the same data.
+## Call details, take one
 
-In my first pass I used column order alone. An automated reviewer then pointed out that an upward same-column line had lost its dashes, and it suggested the old vertical rule. I adopted a version of it: one shared classifier that used each stage's position within its column, so the graph, list, details and summary all agreed.
+My first pass at the call-details view was an opt-in turn view. Looking at it with real data, I threw most of it out. It made up timing when the logs didn't have any, it guessed which turn an event belonged to, and it showed empty inspector panels for steps that never happened. The only part I kept was the code that maps raw turn logs into a clean structure.
 
-The next review pass found the flaw. Position within a column comes from the order in which the result lists its stages. That order controls placement, not chronology. Reverse the list and the same transition flips between forward and return, and the return count changes with it. The fix was to let only column order define a return. The legend now says "Return to an earlier stage group", and a regression test renders the data in both orders and checks for identical classifications and totals. I also changed returns from red to neutral gray, because a return shows direction, not an error.
+## Call details, take two
 
-## Unknown must not render as zero
+The second version starts from the transcript. The recording and timeline live in a resizable rail on the right. The timeline has lanes for the customer, the agent, the model, tools, and safety checks, all on the same clock as the audio. Each turn has a "Turn details" dialog with timing (speech-to-text, model wait, text-to-speech, and so on), the model run, the tools it had, and the prompt.
 
-The old flow subtitle used a dash for any missing count. Now each case reads differently: "N of M calls analyzed", with a partial-coverage label when N is less than M; "Analysis coverage unknown"; or "total in scope unknown". The display does not invent a reason for partial coverage, and the footer warns that one call can appear in several stages.
+The waveform has limits on purpose. It's capped at 2,000 peaks, decodes at a low sample rate, and skips recordings over 20 minutes or 20 MB, so a long call can't freeze the page.
 
-The call-details timeline follows the same rule. A step with no recorded timestamp stays unplaced instead of being drawn at the start of the call. Gate markers are labelled as linked to a turn, not as exact evaluation times. While preparing the draft, I ran one masked real transcript through the view's data mapper. It had no timestamps, and every missing time stayed marked as unknown. The check also exposed a layout bug in the missing-time label, which I fixed.
+An independent review found four bugs, all fixed:
 
-## Limits
+- Events with no timestamp were drawn at 0:00, which made them look like they happened at the start.
+- If a turn had no time, it borrowed the earliest tool event's time instead.
+- The "Playing" cue stayed on after you paused.
+- The call ID was hidden behind a disclosure.
 
-The call-flow change merged after targeted tests, type and lint checks, independent review and CI. I did not validate it against production runtime behavior. The call-details redesign is an unmerged draft. I tested it with synthetic fixtures and one masked real transcript. Real recording playback and real tool and gate alignment are not yet verified. The demo on this page is a fictional reconstruction and has no audio.
+All four were the UI guessing when the data didn't say. Untimed events now go in a separate "Activity not placed on the timeline" list, and missing times show a dash labeled "Time not recorded."
+
+I also checked it against one masked real call, which caught a text-wrapping bug the fixtures missed. I also kept the colored reply-type pills against the design reviewer's advice, because people scanning dozens of calls need to spot scripted or sensitive replies fast.
+
+## Where it stands
+
+The call-flow map is merged. The call-details redesign is unmerged and in review. It's behind an opt-in switch for internal users, on calls that have turn logs, and it hasn't been released. I don't have usage numbers for either.
+
+The demo above rebuilds both screens with a made-up call.

@@ -4,10 +4,10 @@ title: "Enterprise Voice AI"
 date: Oct 31 2026 12:00 PM
 kind: "AI & platform"
 author: Joe
-description: "Test and debugging infrastructure for phone agents that verify accounts, record payments and transfer callers: it scores what the agent did, not what it said."
-role: "Full-stack engineer: evaluation console, run-comparison APIs, tool-result capture, case identity, call-state fixes"
+description: "Testing tools for enterprise phone agents that verify accounts, take payments and transfer callers. An evaluation console, comparison APIs, tool-result capture and a few hard call-state fixes."
+role: "Full-stack engineer on the evaluation console, comparison APIs, tool-result capture, case catalog and call-state fixes; much of it written with coding agents"
 focus: "Behavioral evaluation, honest pass rates, tool evidence, case history, per-call state"
-impact: "Tool return values, unjudged errors and case history became part of every release comparison, so a pass rate counts only behavior that was actually tested."
+impact: "Release comparisons count only cases both runs actually tested and graded, with tool results attached as evidence."
 stack:
     - Python
     - TypeScript
@@ -27,46 +27,56 @@ position: 5
 headliner: true
 ---
 
-## A voice agent's transcript is a claim, not evidence
+## What it is
 
-Enterprise voice agents answer phones for regulated businesses, and they do real work during the call: they verify identity, record payments, look up accounts, and transfer callers to human specialists. A mistake costs money or a customer, and the transcript can hide it. The agent can say "your payment is recorded" when the tool failed, returned nothing, or never ran.
+Enterprise phone agents do real things: verify a caller's identity, take a payment, transfer to a person. Before a new version ships, someone has to answer "is this version better or worse than the last one?" across hundreds of test cases. Getting that number right is harder than it sounds.
 
-I built the parts of the evaluation and debugging path described below: the console engineers use to compare an agent change against an approved baseline, the APIs behind it, tool-result capture during simulated calls, and the case catalog that decides what counts as "the same test." I also fixed call-state defects in the live runtime. The rule throughout: score what the agent did, keep what was never judged out of the score, and never let new evidence overwrite old evidence.
+I worked on the testing side: an evaluation console where engineers run test suites and compare results, the APIs that decide which results are comparable, the code that captures what each tool call actually returned, the catalog of test cases, and a few bugs in how the live call system handles state.
 
-## Store the tool's return value, not only its arguments
+Much of the code was written with coding agents. I designed the pieces, reviewed the work, and chased the bugs.
 
-In an evaluation run, a model plays the caller, the agent runs its normal logic, and a grader judges the result against written expectations. The record kept which tools the agent called, with which arguments, but not what came back.
+## The console
 
-I added completed tool results to each turn. The runner pairs every tool invocation with a runtime execution from the same turn: by tool name, and by arguments when the name repeats. If the match is still ambiguous, it attaches nothing instead of guessing. Only completed executions qualify, and each output is redacted before it is stored. The console shows arguments and return value next to the agent's words. New runs get this evidence; old verdicts are not regraded.
+The main screen is a grid. Rows are categories that expand into test cases. Columns are runs, newest on the left. Each cell shows every attempt as a tick, so you can see at a glance whether a case passed three times or passed once and failed twice. Click a cell and a drawer opens with the expected behavior, the grader's reasoning, the tool calls, and the transcript, compared against the nearest older run that has a result.
 
-## An execution error is not a failed behavior
+A few rules shaped it:
 
-If a backend times out, the agent's behavior was never tested. Counting that as a failure makes a change look worse and sends the engineer to the prompt instead of the infrastructure.
+- "Didn't run," "not graded," "didn't finish" and "failed" are four different things, and each gets its own label. An infrastructure error is not the agent failing.
+- Each state gets exactly one color. Pass rates stay plain black on purpose. There's no real threshold to color them against, and a green 82% invites a conclusion nobody earned.
+- A cell that changed since the previous run gets a mark that doesn't rely on color.
 
-The comparison APIs I wrote compute the pass rate from scored attempts only. Conversations that did not finish appear as their own count, not as passes or failures. When a candidate is compared with an approved baseline, a case is excluded if either run has unscored attempts or if the two runs executed it a different number of times, and the comparison states how many cases it excluded for each reason.
+The first version had bugs that all made results look better or worse than they were. The detail panel said "Baseline passed" no matter what the baseline did. A row where nothing had been graded was labeled "always fails." And "changed since baseline" was comparing against the wrong column. All fixed, and they're why the console is so fussy about labels now.
 
-## An experiment must not move the record
+## Scratch runs
 
-Originally, a quick rerun of one case was recorded like a full nightly run: it added an almost empty column to the results matrix and moved the suite's pass rate. One person's experiment changed everyone's view.
+Engineers wanted to rerun one case quickly while debugging. But a quick run showed up as a full run: one rerun added a new column to an 889-case grid that was about 99% empty.
 
-I separated scratch runs from the tracked record. Scratch runs stay out of the matrix, suite metrics, and case verdicts, so a quick pass does not turn a failing case green. A finished, fully scored batch can be promoted on purpose. A rerun reads its batch's own case IDs, so a three-case retry cannot silently widen into the whole suite. Selected reruns resolve to the suite's current cases, so a rerun tests today's definition. It adds evidence; it does not reproduce the original attempt.
+I split quick runs from tracked runs. The data already had a run type field that scoped the grid, the metrics and the verdicts, so I used that instead of adding a new flag and a migration. A scratch result never changes a case's verdict, and rerunning a batch reads that batch's own case IDs, so retrying three cases can't accidentally turn into 889.
 
-## A display name is not an identity
+## What counts as comparable
 
-The case catalog derived each case's identity from its suite, category, and goal. Two cases with the same goal but different assertions received the same identity, and the surviving assertion depended on row order in the source file. One test silently replaced another.
+When comparing two runs, the API only counts a case if both runs used the same version of it, neither had errors, neither had ungraded attempts, and both scored the same number of attempts. Everything else is left out and reported as excluded, by reason. So "4 fixed, 1 regressed" comes with "and 7 we couldn't compare, here's why."
 
-I rebuilt the loader. Exact duplicates collapse. Distinct assertions under one name get content-derived variant IDs, and authors can pin an explicit ID that survives any edit. Duplicate identities fail validation, and a failed sync blocks the service from becoming ready. A regression test confirms that reordering the source rows produces identical cases. Edited cases get new versions; historical definitions and their runs stay intact.
+Cases where the agent never reached the behavior being tested got their own outcome too, and they don't count toward the score.
 
-## A late event from one call must not change the next
+## Capturing what tools returned
 
-The runtime holds a long-lived connection to the contact-center system that outlives each call. Events arrive late: a disconnect after cleanup has finished, a consult-leg success after a transfer was cleared, an event from the previous customer's transfer. When state belongs to the connection instead of the call, those events corrupt the current call.
+A test that checks the agent "called the payment tool" isn't worth much if you can't see what the tool said back. So I made the test runner record each tool's return value. Before each turn it takes a snapshot of tool executions, then matches new ones by tool name, and by arguments when the same tool runs twice. If it still can't tell which execution belongs to which call, it attaches nothing rather than guess. It only attaches finished executions, and it redacts sensitive data from the output.
 
-Transfers make this concrete: a classifier hearing a live person is not that person accepting the caller. I fixed the transfer and disconnect paths so that a late disconnect keeps its telemetry but cannot restart cleanup, a new call drops the previous call's transfer-cleanup state, a late consult success cannot revive a cleared call, and a stale consult event cannot replace the current one. Tracing in the persistent worker is also isolated per call. Each fix has a regression test.
+## The case catalog
 
-## A release is four facts, not one
+Test cases come from a shared catalog file, and a case's identity is what ties its history together across runs. If two cases quietly share an ID, their results blur. So the loader collapses exact duplicates, fails if two variants share a name without explicit IDs, fails on duplicate IDs, and blocks the service from reporting ready if the sync fails. Later I split inbound and outbound cases that had ended up sharing one identity.
 
-A source fix, a built artifact, a deployed environment, and a retest are separate claims. A passing unit test proves only the first, so I report each one on its own evidence.
+## Call-state bugs
 
-## Limits
+A few fixes on the live call side, all about events showing up at the wrong time:
 
-I did not build the whole evaluation platform. The changes above are implemented with regression tests; I make no support-cost or production-quality claims. The demo is a generic reconstruction with fictional scenarios, responses, and scores.
+- A caller disconnecting after cleanup had already run used to trigger a second cleanup. Now the late event keeps its telemetry but doesn't clean up again.
+- Tracing in the long-running worker process is now isolated per call, so one call's trace can't bleed into the next.
+- Delayed events from a finished transfer could change state on a later one. The adapter now remembers retired transfer IDs and ignores late events for them. I wrote three regression tests that fail on the old code and pass on the new. It's pushed, but I didn't confirm it deployed.
+
+## Where it stands
+
+The console is used by engineers running the agent test suites. I don't have usage numbers. Most of this work landed on release and feature branches; I haven't confirmed which parts are on main.
+
+The demo above rebuilds the console with made-up cases and runs.
