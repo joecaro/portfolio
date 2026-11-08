@@ -24,11 +24,11 @@ export const HEADLINER_SUMMARIES: Record<string, ProjectSummary> = {
     standing: [{"label": "Status", "value": "In production since September 2025"}, {"label": "Scope", "value": "Two lines of business at one Fortune 100 bank"}, {"label": "Workflows", "value": "Card and auto-loan workflows. Business-performance results are private."}],
   },
   "voice-runtime": {
-    built: "Fixes to the live call path: model-step setup, the speech stream and audio across consecutive calls.",
+    built: "Fixes to the live call path: model-step setup and the speech stream, plus an investigation of lost audio on second calls.",
     value: "A slow or failed step sounds like a dropped call, so each fix targets a silence the caller would hear.",
-    evidence: "One turn spent 1.413 s of 2.726 s in our own setup. A two-call harness reproduced lost audio on the second call.",
+    evidence: "One turn spent 1.413 s of 2.726 s in our own setup. Two speech bugs that silenced calls are fixed in staging.",
     instruction: "Pick a turn, then apply the fix to see what changed. Conversation text is made up; slow-turn timings are real.",
-    standing: [{"label": "Status", "value": "Merged and running in staging"}, {"label": "Checked by", "value": "Real test calls, a scripted test caller and targeted tests"}, {"label": "Limits", "value": "Not confirmed in production; no numbers across many calls"}],
+    standing: [{"label": "Status", "value": "Latency and speech fixes merged and running in staging"}, {"label": "Checked by", "value": "Real test calls, a scripted test caller and targeted tests"}, {"label": "Limits", "value": "Second-call audio bug not fixed yet; nothing confirmed in production"}],
   },
   "voice-ai-platform": {
     built: "An evaluation console, call-review workspace, Scout investigation engine and conversational analyst.",

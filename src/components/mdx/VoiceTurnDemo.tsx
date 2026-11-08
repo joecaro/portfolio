@@ -13,12 +13,12 @@ type Case = { caller: string; agent: string; flag?: string; before: Step[]; afte
 
 const CASES: Record<"slow" | "silent", Case> = {
   slow: {
-    caller: "Do I have to pay the whole balance today?",
-    agent: "No, you don't. I can set up a payment for part of it today, or schedule the full amount for later.",
+    caller: "Can I pay part of it now and the rest later?",
+    agent: "Yes. I can take a partial payment today and schedule the rest for a date you choose.",
     flag: "2.7 s in the model step",
     before: [
       { kind: "Hear", title: "Final transcript received" },
-      { kind: "Setup", title: "Model policy looked up 4 times", detail: "uncached", tone: "bad", secs: 1.413 },
+      { kind: "Setup", title: "Setup before the request", detail: "includes 4 uncached policy lookups", tone: "bad", secs: 1.413 },
       { kind: "Model", title: "Request to first streamed event", detail: "42,788-token prompt", secs: 1.168 },
       { kind: "Model", title: "First sentence ready", secs: 0.145 },
       { kind: "Speak", title: "Speech synthesis" },
@@ -86,12 +86,12 @@ export function VoiceTurnDemo() {
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-200 bg-gray-50 px-4 py-2.5">
         <div role="group" aria-label="Choose a turn" className="inline-flex rounded-md border border-gray-300 bg-white p-0.5 text-[12.5px]">
           {(["slow", "silent"] as const).map(k => (
-            <button key={k} type="button" aria-pressed={which === k} onClick={() => { setWhich(k); setFixed(false); }} className={`min-h-9 rounded px-3 font-medium ${which === k ? "bg-violet-600 text-white" : "text-gray-700 hover:bg-gray-100"}`}>
+            <button key={k} type="button" aria-pressed={which === k} onClick={() => { setShown(0); setWhich(k); setFixed(false); }} className={`min-h-9 rounded px-3 font-medium ${which === k ? "bg-violet-600 text-white" : "text-gray-700 hover:bg-gray-100"}`}>
               {k === "slow" ? "Slow turn" : "Silent turn"}
             </button>
           ))}
         </div>
-        <button type="button" onClick={() => setFixed(f => !f)} className="min-h-9 rounded-md border border-violet-300 bg-white px-3 text-[12.5px] font-semibold text-violet-700 hover:bg-violet-50">
+        <button type="button" onClick={() => { setShown(0); setFixed(f => !f); }} className="min-h-9 rounded-md border border-violet-300 bg-white px-3 text-[12.5px] font-semibold text-violet-700 hover:bg-violet-50">
           {fixed ? "Show before the fix" : "Apply the fix"}
         </button>
       </div>

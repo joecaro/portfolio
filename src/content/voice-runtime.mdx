@@ -7,7 +7,7 @@ author: Joe
 description: "Debugging the real-time path of our phone agents: where a slow reply's seconds went, and why an agent went silent mid-call."
 role: "Led the investigations and decided the fixes; coding agents wrote most of the code"
 focus: "Response latency, streaming speech and turn-taking on live phone calls"
-impact: "Fixes merged and running in staging, checked on real test calls. Not yet confirmed in production."
+impact: "Latency and speech fixes merged and running in staging, checked on real test calls. Not yet confirmed in production."
 stack:
     - Python
     - LiveKit Agents
@@ -33,9 +33,9 @@ These are bugs from that path on our bank deployment. I chose what to chase, rea
 
 ## Where the 2.7 seconds went
 
-One turn spent 2.726 s in the model step. A rebuild of the call log showed that 1.413 s of it was our own setup, before the provider saw the request. Every turn looked up the model policy four times, uncached.
+One turn spent 2.726 s in the model step. A rebuild of the call log showed that 1.413 s of it was our own setup, before the provider saw the request. That setup included four uncached lookups of the model policy.
 
-Now the policy is resolved once when the call arrives and pinned for the call. We also added a warmup to prime the provider's prompt cache. It turned out to be failing: it asked for 1 token, and the provider's minimum is 16.
+Now the policy is resolved once when the call arrives and pinned for the call. We also added a warmup to prime the provider's prompt cache. It turned out to be failing: it asked for 1 token, and the provider's minimum is 16. That's fixed too.
 
 Setup is off the reply path. A clear end-to-end speedup isn't proven yet, so I'm not claiming one.
 
@@ -43,14 +43,14 @@ Setup is off the reply path. A clear end-to-end speedup isn't proven yet, so I'm
 
 An agent went quiet on a staging call. When a reply chunk was only whitespace, we still sent the speech provider an empty "end of text". It answered 400, and our retry reused a closed tokenizer.
 
-The fix skips empty chunks and retries only before the first audio plays, never mid-sentence. 59 tests cover it. The next call played its greeting in 0.237 s.
+The fix skips empty chunks and retries only before the first audio plays, never mid-sentence. 59 tests cover it. On the next call, first speech audio came in 0.237 s.
 
 It then went silent after the introduction, for a second reason: an old model client had streaming switched off, so speech got no text. After that fix, a scripted test caller and my own phone call both heard the agent answer.
 
 ## The second call that heard nothing
 
-Agents there keep one phone line open across calls. Call one worked, and call two got near-silent audio. A harness that runs two calls through the real audio component reproduced the failure. The cause was a cleanup change merged from main that closed the session after every call. That fix isn't confirmed in a deployed build yet.
+Agents there keep one phone line open across calls. Call one worked, and call two got near-silent audio. A harness that runs two calls through the real audio component reproduced an earlier form of the failure. Narrowing down merges then pointed to a likely cause: a cleanup change from main that closes the session after every call. That cause is still being confirmed, and there's no fix yet.
 
 ## Does it work?
 
-For what we tested, yes. The fixes run in staging and pass real test calls. What I don't have is production confirmation or numbers across many calls.
+For the latency and speech fixes, yes: they run in staging and pass real test calls. The second-call bug isn't fixed yet, and I don't have production confirmation or numbers across many calls.
