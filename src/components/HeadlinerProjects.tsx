@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/types";
 
-const disciplines = ["Product & AI", "Design engineering", "Agent systems", "Research & retrieval", "Enterprise engineering"];
+const disciplines = ["Production delivery", "Product & AI", "Design engineering", "Agent systems", "Research & retrieval", "Enterprise engineering"];
 
 export default function HeadlinerProjects({ projects }: { projects: Project[] }) {
   const headliners = projects.filter(p => p.headliner).sort((a, b) => (a.position ?? 99) - (b.position ?? 99));
   if (!headliners.length) return null;
   return <section aria-labelledby="selected-work-title" className="mx-auto max-w-6xl px-4 pb-16 pt-12 md:px-8">
     <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b border-neutral-200 pb-6 dark:border-neutral-700">
-      <div><p className="mb-3 text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">Selected work / 01—05</p><h2 id="selected-work-title" className="text-3xl font-bold tracking-tight md:text-5xl">Systems you can explore.</h2></div>
+      <div><p className="mb-3 text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">Selected work / 01—{String(headliners.length).padStart(2, "0")}</p><h2 id="selected-work-title" className="text-3xl font-bold tracking-tight md:text-5xl">Systems you can explore.</h2></div>
       <p className="max-w-sm text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">AI products, investigation tools, and enterprise systems. See what I built, why it matters, and how the experience works.</p>
     </div>
     <div className="flex flex-col gap-10">
