@@ -15,10 +15,10 @@ const pillars = [
         icon: "</>",
         title: "Developer",
         description:
-            "Full-stack AI products that connect real-time infrastructure, data pipelines and practical user workflows.",
+            "Python services and TypeScript interfaces for running and investigating AI calls.",
         items: [
             "AI voice infrastructure",
-            "Enterprise product surfaces",
+            "Operator interfaces",
             "Real-time analytics",
             "API and data architecture",
         ],
@@ -27,7 +27,7 @@ const pillars = [
         icon: "✎",
         title: "Designer",
         description:
-            "Interfaces for dense operational work, where people scan fast, trust the data and act without fighting the tool.",
+            "Call timelines, flow maps and evaluation screens that put the information an operator needs together.",
         items: [
             "Conversation-flow builders",
             "Dashboards",
@@ -39,48 +39,29 @@ const pillars = [
         icon: "↗",
         title: "Owner",
         description:
-            "Founding-engineer scope: ambiguous, cross-functional work taken from pilot to production.",
+            "Integration, release planning and ongoing engineering for a bank deployment.",
         items: [
             "Fortune 100 rollout",
-            "Self-serve agent builder",
-            "AI reporting builder",
-            "Promotion platform",
+            "Contact-center integration",
+            "Release validation",
+            "Model-review collaboration",
         ],
     },
 ];
 
 const teamwork = [
     {
-        title: "Standards I set",
+        title: "Working across the system",
         points: [
-            "Customer releases ship as one exact version from main, and what gets deployed has to match the published build by digest.",
-            "Evaluation runs are frozen once they run, and only get compared when the model and test cases match.",
-            "Strict grading over lenient grading, even when lenient made the numbers look better.",
-            "The agent that wrote a change never reviews it.",
+            "At the bank, integration work means coordinating with the engineers who own telephony, infrastructure and model review. I turn those constraints into implementation and release plans for our team.",
+            "I write down service boundaries and failure paths so a teammate can pick up an investigation without reconstructing the system from scratch.",
         ],
     },
     {
-        title: "Writing it down",
+        title: "Designing around the work",
         points: [
-            "An 8,000-word map of our product's entities, service owners and naming traps, with a learning path for new joiners.",
-            "A handover for the teammate who originally wrote a system I was porting, with the open questions spelled out.",
-            "A step-by-step failure guide for a teammate working on the bank's contact-center integration, with diagrams for each failure case.",
-        ],
-    },
-    {
-        title: "Pushing back",
-        points: [
-            "Four rounds of review on a teammate's model-risk document, pushing back in the last two where it described after-call evaluation as live gating.",
-            "Turning down a change too big to review, and a deploy pointed at the wrong cluster.",
-        ],
-    },
-    {
-        title: "What I chose not to build",
-        points: [
-            "A per-call model classifier, when cached scoring and plain counting code was faster and simpler.",
-            "One-off simulator fixes for single test cases, in favor of general fixes.",
-            "A new secret for one job, when existing machine auth already covered it.",
-            "An admin screen for license rotation, deferred so a working utility could ship first.",
+            "For call review, I started with screenshots and real review workflows. The resulting layout keeps the transcript, recording and runtime actions together.",
+            "I use coding agents extensively. I own the design decisions, review the result and check behavior against the system it has to work in.",
         ],
     },
 ];
@@ -102,13 +83,13 @@ const path = [
         years: "2022 to 2024",
         role: "Software engineer",
         company: "Action Network",
-        note: "A promotion component library used across products, plus ops tools.",
+        note: "A shared UI component library, plus tools for promotional workflows.",
     },
     {
         years: "2025 to now",
         role: "Founding engineer",
         company: "Salient",
-        note: "AI voice agents and the platform around them, in production at enterprise scale.",
+        note: "Voice AI agents and the platform around them; I led a Fortune 100 bank deployment.",
     },
 ];
 
@@ -164,9 +145,8 @@ const About = () => {
                 <div className='flex flex-col gap-2'>
                     <h2 id='teamwork-title' className='text-3xl font-semibold'>Working with a team</h2>
                     <p className='max-w-[60ch] text-neutral-600 dark:text-neutral-400'>
-                        A big part of my job is making the people and agents around
-                        me faster without letting quality slip. Some real
-                        examples from the last year.
+                        I work across product, engineering and customer teams. Two
+                        parts of that work show up throughout the projects here.
                     </p>
                 </div>
                 <div className='grid gap-5 md:grid-cols-2'>

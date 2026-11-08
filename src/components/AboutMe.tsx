@@ -8,15 +8,16 @@ export default function AboutMe() {
         Hi, I&apos;m Joe.
       </h1>
       <p className="max-w-[58ch] text-lg leading-relaxed">
-        I&apos;m a full-stack product engineer focused on AI systems that have
-        to work in production. At Salient I build the platform surfaces and
-        voice-agent infrastructure behind customer communication for major
-        financial institutions.
+        I started in customer support, answering questions and tracking work
+        in spreadsheets. I began building tools for our team, then moved into
+        software engineering. I still like working close to the people using
+        what I build.
       </p>
       <p className="max-w-[58ch] text-base leading-relaxed">
-        I care most about making complex systems usable: understand the
-        workflow, build the system, and make the result easy for real teams to
-        trust.
+        Today I&apos;m a founding engineer at Salient. My work spans the voice
+        systems handling a call, the services behind them, and the interfaces
+        people use to operate them. I also lead engineering for a Fortune 100
+        bank deployment.
       </p>
       <div className="flex flex-wrap gap-4 pt-1">
         <ButtonLink

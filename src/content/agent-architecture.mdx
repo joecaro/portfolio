@@ -4,10 +4,10 @@ title: "Agent Orchestration Workspace"
 date: Oct 31 2026 12:00 PM
 kind: "AI & platform"
 author: Joe
-description: "A local control room I built for running coding agents as a team: a manager plans, workers build in their own worktrees, reviewers check, and nothing merges until I approve the exact patch."
-role: Sole designer and engineer (personal project), built largely with the coding agents it runs
-focus: Crash recovery, state reconciliation, approval binding, destination safety, provider adapters
-impact: Ran 534 agent jobs, including 160 implementation runs and 136 independent reviews; 83 were picked back up automatically after their worker died.
+description: "A personal local control room for planning coding-agent work, isolating workers in Git worktrees, reviewing results and approving an exact saved patch."
+role: "Sole product designer and owner of this personal project, implemented largely with the coding agents it runs"
+focus: "Durable job state, restart recovery, isolated worktrees and approvals bound to a specific patch"
+impact: "534 jobs recorded; 83 implementation or chat runs were recovered after worker loss. Single-user, with limited use of the later plan-approval layer."
 stack:
     - Node.js
     - TypeScript
@@ -28,50 +28,28 @@ position: 2
 headliner: true
 ---
 
-## What it is
+## A local control room
 
-In June 2026 I got tired of running coding agents one terminal at a time, so I built a control room for them. It's a local web app. I give it a goal, a manager agent turns that into a plan, and once I approve the plan it starts workers, each in its own Git worktree. Separate reviewer agents check the work. When something is ready, I approve one exact saved patch and the app merges it.
+I built this personal tool to coordinate coding-agent runs across separate Git worktrees. A manager turns a goal into a plan; workers implement tasks; reviewers inspect deliveries; and I approve a saved patch before it is merged. The browser interface shows the dependency graph, workers, worktrees and delivery state together.
 
-The browser is the main interface on purpose. I considered a terminal UI and decided against it, because the whole point is seeing a lot of moving parts at once: the plan as a dependency graph, which workers are active, which worktrees exist, and where each delivery is (submitted, accepted, integrated, validated).
+It remains a single-user project, not a shared product.
 
-It's a personal project and I'm the only person using it. Much of the code was written by the agents it runs, from tasks I wrote and reviewed.
+## Recovering from worker loss
 
-Starting agents was easy. Most of the work went into keeping the app's picture of what was going on accurate while runs crashed, retried and finished out of order.
+The app recorded 534 jobs: 160 implementation runs, 136 reviews and the remainder chat. Eighty-three implementation or chat runs were recovered after their workers were lost. Reviews do not resume automatically; a lost review must be rerun. The counts describe this app's job history, not time saved or team adoption.
 
-## Crashes are normal
+Each job is persisted with a lease and heartbeat. When the lease expires, a recoverable run returns to the queue with its attempt count updated, or ends as lost with a reason. Finished runs save their diff as a patch file so work can survive worktree deletion.
 
-Over its life the app ran 534 agent jobs: 160 implementation runs, 136 reviews, and the rest chat runs. 83 of them lost their worker and got picked back up automatically. Most of those (60) were from me restarting the server mid-run; the other 23 had their lease expire while running. Another 15 ended as lost: 11 after their retry, and 4 reviews, which never get one.
+## One source for runtime state
 
-So every job is a row in a database with a lease and a heartbeat (45 seconds and 5 seconds). If the lease runs out, the job goes back in the queue with its attempt count bumped, or it ends as "lost" with a reason. It never just vanishes. Each finished run also saves its diff as a patch file, so if a worktree gets deleted the work can still be recovered.
+Completed work twice continued to appear as “running”: first because live counters included finished jobs, then because a saved summary lagged behind orchestration state. I moved runtime state into SQLite as the authority and made Markdown an import/export format. The interface now derives status from current job records rather than relying on an older summary copy.
 
-One gap: only implementation and chat runs resume automatically. A review that dies ends as lost and has to be rerun from scratch.
+## Approve the patch that was reviewed
 
-## The bug I fixed twice
+An approval is bound to one run's saved patch. If a newer run exists for the same task, the old snapshot cannot be merged. The merge gate also reserves its target before asynchronous work begins, preventing two approvals from racing on the same branch.
 
-Finished work kept showing as "running." The first time, the counters were including runs that had already finished, so I made "running" come only from live jobs. Then it came back in a different form: a saved summary still said "running" after the orchestration underneath it had completed. That fix landed about six weeks after the first.
+The destination checkout is checked separately from the worker worktree. Uncommitted changes block a direct merge; a requested stash is refused if files changed since review. A multi-repository integration failure rolls back the integration worktree.
 
-The rule I ended up with: a saved summary is just a copy, and when it disagrees with newer evidence, the evidence wins. In July I made SQLite the one source of truth for runtime state and turned the old Markdown files into import and export only. Fewer copies, fewer chances to disagree.
+## Status and limits
 
-## Approving the right thing
-
-Agents revise their work, so approving yesterday's patch says nothing about today's. The merge gate approves one run's saved snapshot. If there's a newer one for the same task, it refuses and tells me to approve the latest run instead.
-
-Approvals can also race. Two of them could both check "is a merge already running on this branch?", both see no, and then both change the same target. Now the gate reserves the target before it does anything asynchronous and holds it until the merge finishes. A second approval gets a clear "target branch already has active merge."
-
-## My checkout matters too
-
-Worktrees protect my checkout from the agents. They don't protect the agent's patch from my checkout. So the gate checks the destination separately. Uncommitted changes block a direct merge. If I choose to stash them, it refuses when the dirty files have changed since I last looked, so it never stashes something I haven't seen. If a merge across several repos fails halfway, it rolls the integration worktree back.
-
-## My part, and the agents' part
-
-This one is my own tool, and agents built most of it. My calls:
-
-- The first pilot was an honest dogfood project, not a "the orchestrator built itself" demo.
-- I cut views that weren't earning their place, like an old flow view, and verified with type checks and a browser preview instead of adding a test framework for its own sake.
-- My standing rule: the agent that wrote a change never reviews it. Merges need independent approval of the exact commit, and a new commit needs a new review.
-
-## Where it stands
-
-Use peaked in June (511 of the 534 jobs). The plan-approval layer I added in July has tests but has only run one real plan. These numbers come straight from the app's database and don't measure time saved.
-
-The demo above is a rebuild of the control room with a made-up effort. It doesn't run any agents.
+Use peaked in June, when 511 of the 534 jobs ran. The plan-approval layer added in July has tests but has only been used for one real plan. This remains my personal, single-user tool; later usage is limited. The demo reconstructs its control room with fictional work and does not run agents.

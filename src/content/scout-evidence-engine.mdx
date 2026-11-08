@@ -4,10 +4,10 @@ title: "Scout"
 date: Oct 31 2026 12:00 PM
 kind: "AI & platform"
 author: Joe
-description: An AI investigator for voice-agent calls. Ask why something keeps going wrong; it searches tens of thousands of calls, reads the ones that matter, and only reports what it can back up.
-role: "Creator: designed and built it end to end, from research harness to deployed service, directing coding agents for much of the implementation"
-focus: Findings that cite the exact turns the agent read, or an honest "nothing supported"
-impact: Deployed for internal staff, and used as the investigation engine behind Platform Chat.
+description: An investigation engine for voice-agent calls that searches, groups and reads conversations before presenting evidence-backed candidate findings.
+role: "Product and systems lead across research, service and viewer; built it with substantial coding-agent assistance"
+focus: Findings tied to verified turns, with candidate observations separated from supported conclusions
+impact: "Deployed for internal staff and used by Platform Chat; prevalence measurement and human-validated accuracy remain incomplete."
 stack:
     - Python
     - Embeddings
@@ -27,63 +27,28 @@ image: /img/headliners/scout-evidence-engine-product.jpg
 position: 4
 ---
 
-*Part of [Knowing What the Agents Did](/projects/voice-ai-platform), step "Investigate patterns".*
+*Part of [Tools for Operating Voice Agents](/projects/voice-ai-platform), for investigating patterns across calls.*
 
-## What it is
+## From search to an investigation
 
-Automated phone agents fail in ways dashboards don't show. A customer asks a reasonable question and the agent restarts the payment. Someone says they already paid and gets transferred. These bugs hide inside tens of thousands of calls, and finding one used to mean listening to recordings until you got lucky.
+A dashboard can reveal that transfers increased without showing the repeated interaction behind the change. Scout takes a question, searches calls by wording and meaning, groups related cases, maps conversation paths and reads selected calls turn by turn. It produces candidate explanations with links to the exact evidence it inspected.
 
-Scout hands that job to an AI agent. You ask something like "why do some customers get asked for their payment method twice?" The agent searches calls by keyword and by meaning, groups them into cohorts that behave alike, maps where calls go in the conversation flow, then reads the important ones turn by turn. It writes down hypotheses as it goes, confirms or rejects each one, and ends with a report.
+## Spend effort on verification
 
-Each finding in the report points to the exact turns behind it: what the agent was doing, what the customer said, what the agent got wrong, and what that cost. It also shows how many calls the finding covers, which checks passed and failed, and what the agent didn't get to. If the evidence isn't there, the answer is "nothing supported," and that counts as a result.
+I first compared representations for finding similar calls. Simple features derived from what the agent did clustered calls about twice as consistently as model-written labels, and the labels did not reveal additional patterns in that experiment. That result led me to favor measured runtime behavior over extra generated descriptions.
 
-I built Scout myself, from the first experiment to the deployed service: research harness, ingestion, embeddings, search index, agent tools, API, CLI and report viewer. I made the design calls. Coding agents wrote a lot of the code.
+In a separate benchmark, a first pass produced 74 candidate positives; an independent model review retained 34. That was a useful warning about candidate generation, not a human-validated accuracy score. Scout therefore checks each proposed citation against the call and turn data it actually read. It rejects inaccessible calls, unseen turns, mismatched quotes, wrong speakers and invalid turn order before presenting the report.
 
-## Can a model even do this?
+The report keeps population, examined, matched and read counts separate. A literal search can find many similar phrases without showing that the behavior is prevalent. Scout's prevalence measurement still has known gaps, including cases where an incomplete measurement can produce a misleading zero.
 
-Before building anything I ran experiments on a frozen set of calls.
+## Making investigations usable
 
-First, how to represent a call. I tried five approaches, from model-written labels on every turn to simple features computed from what the agent actually did. The simple features clustered calls about twice as consistently from run to run, and the model labels didn't find anything extra. Cheap won.
+The first server-side cohort build took 149 seconds. Precomputing a runtime profile with each call's embedding reduced it to about 28 seconds in two checks on the same 9,824-call selection. Hosted search later stalled on cold caches and loaded calls sequentially; warming the index and batching reads brought three failing searches down to 3–4.5 seconds.
 
-Second, how good are models at spotting problems. In one benchmark, models flagged 74 positives on a first pass. A second, independent model checked them and only 34 held up. Coming up with candidates is easy. Proving them is the hard part, so that's where Scout spends its effort.
+I also fixed a failure-isolation bug: one call rejected by a privacy check could escape its handler and terminate the rest of a batch. A synthetic three-call reproduction showed the behavior; isolating each call kept one rejection from cancelling its neighbors.
 
-Third, I made fake evidence impossible to submit. The harness rejects a finding that cites a call the agent never opened, a turn it never saw, a quote that doesn't match the source word for word, the wrong speaker, or a customer turn that doesn't come before the agent's reply. Made-up citations fail before anyone sees them.
+## Status and limits
 
-## Counts lie
+Scout is deployed for internal staff through its CLI and powers investigations inside Platform Chat. The viewer above replays a fictional investigation in the report interface. It does not connect to the service.
 
-One result changed how Scout counts everything. A literal search for a repeated prompt matched a huge number of calls and looked like a crisis. A stratified review of a sample found only a handful of real failures. Scaled back up to the whole population, the actual problem was about 75 times rarer than the search count suggested.
-
-So Scout keeps its numbers separate: calls in the population, calls examined, calls matched, calls actually read. It never rolls them into one big number. And if coverage is unknown, a zero is supposed to show up as unknown, not as zero.
-
-## Making it a service
-
-Around October 10 I started turning the harness into something other people could use. That meant ingestion with privacy checks that resumes after a crash, a search index with separate embeddings for conversation passages, runtime events and cohorts, a CLI, and the report viewer.
-
-The agent API was where I spent the most care. Every investigation is locked to one customer's data, and the source is rechecked every time the agent reads evidence. That costs extra reads, but it means a finding can't cite a call that changed or one the agent was never allowed to see.
-
-It also had to be fast, because nobody waits two and a half minutes per step. The first server-side cohort build took 149 seconds. Precomputing each call's runtime profile next to its embedding got it down to about 28.
-
-## Two production bugs
-
-Hosted search started erroring out. The cause was cold caches stalling for over 50 seconds, plus calls loading one at a time. Warming the index and loading calls in parallel batches got the three failing searches down to 3 to 4.5 seconds.
-
-Later, a privacy check that rejected one call escaped its handler and killed every other call in the batch. I reproduced it with three synthetic calls, then isolated each call so one rejection only affects that call.
-
-Same approach both times: find the cause before fixing anything, and keep failures small and visible.
-
-## My part, and the agents' part
-
-Agents wrote a lot of Scout's code. A few of the calls I made:
-
-- After an incident fix, the agent also wanted to roll out a broad settings change. I said no and shipped only the targeted fix, plus an eval for the exact request that failed.
-- I retired a research experiment when its best result moved top-1 matches from 2 of 8 to only 3 of 8, and had the code removed so it couldn't linger.
-- The agent built custom release machinery for Scout. I had it removed in favor of the deployment setup the team already uses.
-- I set the boundaries: source data through one read path only, team chat messages never count as evidence, and the rollout stays staff-only until it's ready.
-
-## Does it work?
-
-Scout is strict about what counts, and the demo above shows it: the finding holds up on the evidence it has, but stays an observation. A finding is a "supported problem" only if it has the prior state, the trigger, the agent's response and the consequence, each tied to a verified turn, plus evidence that the behavior was avoidable and harmful. Anything less gets saved as an observation.
-
-It's deployed for internal staff, through the CLI and as the investigation engine inside Platform Chat. There are limits. The research checks used a second AI model instead of human reviewers, so I haven't measured accuracy against people. A citation check proves the evidence exists, not that the conclusion is right. And some prevalence counts can still come back as a wrong zero, which I'm still working on.
-
-The viewer above replays a made-up investigation in the real report UI. The calls, turns and counts are all fictional.
+Citation checks establish that evidence exists and was available to the investigator; they do not establish that an interpretation is correct. The research comparison used a second model rather than human reviewers, so accuracy against people is unmeasured. Prevalence measurement is still being improved, and a citation-backed observation should not be read as a confirmed cause or supported problem unless the required checks are present.

@@ -12,7 +12,7 @@ import { PlatformChatDemo } from "./PlatformChatDemo";
 const STAGES = [
   { id: "eval", label: "Test before release", caption: "Compare a candidate run with the approved one, and click any cell to see the attempts and the tool call behind it.", href: "/projects/enterprise-voice-ai", Demo: EvalConsoleDemo },
   { id: "call", label: "Review one call", caption: "See what the agent heard, did and said on one timeline. Click a turn or a marker to jump.", href: "/projects/conversation-explorer", Demo: CallReviewDemo },
-  { id: "scout", label: "Investigate patterns", caption: "Run an investigation across many calls, then open a finding to see the turns behind it.", href: "/projects/scout-evidence-engine", Demo: ScoutViewerDemo },
+  { id: "scout", label: "Investigate patterns", caption: "Play an investigation replay, then inspect the candidate finding and its source turns.", href: "/projects/scout-evidence-engine", Demo: ScoutViewerDemo },
   { id: "chat", label: "Ask in plain English", caption: "Pick a question and watch it scope, count, search, read and answer, with links to each call.", href: "/projects/platform-chat", Demo: PlatformChatDemo },
 ] as const;
 

@@ -16,12 +16,10 @@ export function ExperienceSection() {
       role: "Founding Engineer",
       period: "01/2025 - Present",
       achievements: [
-        "Build and own customer-facing platform surfaces — user management, reporting, analytics, and human-in-the-loop compliance review — for 20+ enterprise clients. The platform handles millions of AI phone calls a month.",
-        "Developed core AI voice-agent infrastructure — conversational memory, interruption handling, speech timing, and text normalization — running live calls at that scale.",
-        "Led engineering for a Fortune 100 bank: adapted the full platform (frontend, APIs, agent orchestration, SIP, databases) to run inside its locked-down environment and took it from pilot to production in September 2025. It now handles over a million calls a month.",
-        "Set the release and evaluation standards for the enterprise deployment: exact versioned releases with digest-matched deploys, frozen evaluation campaigns, and independent review of agent-written changes.",
-        "Now leading self-serve product work: a visual conversation-flow builder for designing and managing AI agents, and an AI-powered reporting builder that generates custom reporting UIs on demand.",
-        "Expanding the platform into new communication channels like SMS to broaden how AI agents reach customers",
+        "Lead engineering for a Fortune 100 bank deployment: contact-center integration, infrastructure, release coordination and model-review work. Live since September 2025, with a second line of business added in July 2026.",
+        "Build the platform's call-review, evaluation and investigation tools, spanning React interfaces, Python services and AI-agent workflows.",
+        "Work on voice-agent infrastructure, including conversational memory, interruption handling, speech timing and text normalization.",
+        "Develop self-serve agent design and reporting tools; this is ongoing product work.",
       ],
     },
     {
@@ -30,11 +28,9 @@ export function ExperienceSection() {
       role: "Software Engineer",
       period: "07/2022 - 10/2024",
       achievements: [
-        "Built the shared UI component library for promotions, adopted across multiple products and properties",
-        "Built multiple internal tools for the operations team, streamlining promotional content planning & management",
-        "Developed user-facing products focused on bet-tracking and user engagement enhancement",
-        "Led cross-functional teams on projects from ideation to deployment, ensuring alignment with business goals",
-        "Worked closely with stakeholders to optimize user experience and feature functionality across multiple products",
+        "Built a shared UI component library adopted across multiple products",
+        "Built internal tools for planning and managing promotional content",
+        "Developed user-facing bet-tracking features",
       ],
     },
     {
@@ -43,14 +39,8 @@ export function ExperienceSection() {
       role: "Client Representative & Front End Developer",
       period: "04/2020 - 07/2022",
       achievements: [
-        "Created and Managed marketing/blog website using a headless CMS & NextJS",
-        "Mock up designs for new features using Adobe XD and HTML/CSS",
-        "Develop tools for the support team including web applications to manage 150+ clients",
-        "Communicate bugs to development team through an agile project management tool",
-        "Assist in development of new features through product meetings",
-        "Provide support for three online products through emails, chats, calls, and scheduled trainings",
-        "Manage 200+ client accounts to ensure satisfaction with products and services",
-        "Created and curated helpdesk content on the Zendesk platform",
+        "Built a Next.js marketing site with a headless CMS and internal tools for tracking client reporting work.",
+        "Supported more than 200 client accounts through product questions, training and reporting periods.",
       ],
     },
     {
@@ -59,9 +49,7 @@ export function ExperienceSection() {
       role: "Supervisor",
       period: "05/2019 - 04/2020",
       achievements: [
-        "Promoted within 8 months for exceeding employee standards",
-        "Led training of new employees",
-        "Monitored all 30+ employees to ensure quality of call performance",
+        "Promoted to supervisor within eight months; trained new hires and monitored call quality for a team of more than 30.",
       ],
     },
   ];
@@ -71,7 +59,7 @@ export function ExperienceSection() {
   });
 
   return (
-    <section className="w-full mb-48">
+    <section className="w-full mb-20">
       <div className="container px-4 md:px-6 m-auto">
         <div className="flex flex-col items-start gap-4">
           <h2 className="text-4xl dark:text-neutral-300">

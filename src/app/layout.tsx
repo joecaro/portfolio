@@ -16,7 +16,7 @@ const sora = Sora({
 
 export const metadata: Metadata = {
     title: "Joseph Carothers",
-    description: "Web Development Portfolio for Joseph Carothers",
+    description: "Joe Carothers, founding engineer at Salient. Voice-AI systems, enterprise deployments, and tools for the people operating them.",
     icons: [
         {
             url: "/favicon.ico",
