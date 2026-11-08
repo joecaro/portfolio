@@ -49,6 +49,43 @@ const pillars = [
     },
 ];
 
+const teamwork = [
+    {
+        title: "Standards I set",
+        points: [
+            "Customer releases ship as one exact version from main, and what gets deployed has to match, by digest, what was tested.",
+            "Evaluation runs are frozen once they run, and only get compared when the model and test cases match.",
+            "Strict grading over lenient grading, even when lenient made the numbers look better.",
+            "The agent that wrote a change never reviews it.",
+        ],
+    },
+    {
+        title: "Writing it down",
+        points: [
+            "A 5,500-word map of our product's entities, service owners and naming traps, with a learning path for new joiners.",
+            "A handover for the teammate who originally wrote a system I was porting, with the open questions spelled out.",
+            "A step-by-step failure guide for a teammate working on the bank's contact-center integration, with diagrams for each failure case.",
+        ],
+    },
+    {
+        title: "Pushing back",
+        points: [
+            "Four rounds of review on our model-risk document, pushing back each round where it described after-call evaluation as live gating.",
+            "Holding a merge for a teammate's changes-requested review, even with every check green.",
+            "Turning down a change too big to review, and a deploy pointed at the wrong cluster.",
+        ],
+    },
+    {
+        title: "What I chose not to build",
+        points: [
+            "A per-call model classifier, when cached scoring and plain counting code answered the question faster and cheaper.",
+            "One-off simulator fixes for single test cases, in favor of general fixes.",
+            "A new secret for one job, when existing machine auth already covered it.",
+            "An admin screen for license rotation, deferred so a working utility could ship first.",
+        ],
+    },
+];
+
 const path = [
     {
         years: "2019 to 2020",
@@ -118,6 +155,27 @@ const About = () => {
                                         {item}
                                     </li>
                                 ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            <section aria-labelledby='teamwork-title' className='mx-auto flex max-w-6xl flex-col gap-7 px-4 pt-24 md:px-8 dark:text-neutral-200'>
+                <div className='flex flex-col gap-2'>
+                    <h2 id='teamwork-title' className='text-3xl font-semibold'>Working with a team</h2>
+                    <p className='max-w-[60ch] text-neutral-600 dark:text-neutral-400'>
+                        A big part of my job is making the people and agents around
+                        me faster without letting quality slip. Some real
+                        examples from the last year.
+                    </p>
+                </div>
+                <div className='grid gap-5 md:grid-cols-2'>
+                    {teamwork.map(group => (
+                        <div key={group.title} className='rounded-lg border-2 border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900'>
+                            <h3 className='mb-3 text-lg font-semibold'>{group.title}</h3>
+                            <ul className='flex list-disc flex-col gap-2 pl-5 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300'>
+                                {group.points.map(point => <li key={point}>{point}</li>)}
                             </ul>
                         </div>
                     ))}
