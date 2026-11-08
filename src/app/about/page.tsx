@@ -53,7 +53,7 @@ const teamwork = [
     {
         title: "Standards I set",
         points: [
-            "Customer releases ship as one exact version from main, and what gets deployed has to match, by digest, what was tested.",
+            "Customer releases ship as one exact version from main, and what gets deployed has to match the published build by digest.",
             "Evaluation runs are frozen once they run, and only get compared when the model and test cases match.",
             "Strict grading over lenient grading, even when lenient made the numbers look better.",
             "The agent that wrote a change never reviews it.",
@@ -62,7 +62,7 @@ const teamwork = [
     {
         title: "Writing it down",
         points: [
-            "A 5,500-word map of our product's entities, service owners and naming traps, with a learning path for new joiners.",
+            "An 8,000-word map of our product's entities, service owners and naming traps, with a learning path for new joiners.",
             "A handover for the teammate who originally wrote a system I was porting, with the open questions spelled out.",
             "A step-by-step failure guide for a teammate working on the bank's contact-center integration, with diagrams for each failure case.",
         ],
@@ -70,7 +70,7 @@ const teamwork = [
     {
         title: "Pushing back",
         points: [
-            "Four rounds of review on our model-risk document, pushing back each round where it described after-call evaluation as live gating.",
+            "Four rounds of review on a teammate's model-risk document, pushing back in the last two where it described after-call evaluation as live gating.",
             "Holding a merge for a teammate's changes-requested review, even with every check green.",
             "Turning down a change too big to review, and a deploy pointed at the wrong cluster.",
         ],
@@ -78,7 +78,7 @@ const teamwork = [
     {
         title: "What I chose not to build",
         points: [
-            "A per-call model classifier, when cached scoring and plain counting code answered the question faster and cheaper.",
+            "A per-call model classifier, when cached scoring and plain counting code was faster and simpler.",
             "One-off simulator fixes for single test cases, in favor of general fixes.",
             "A new secret for one job, when existing machine auth already covered it.",
             "An admin screen for license rotation, deferred so a working utility could ship first.",
