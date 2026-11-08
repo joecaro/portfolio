@@ -5,9 +5,9 @@ date: Nov 08 2026 12:00 PM
 kind: "AI & platform"
 author: Joe
 description: "Four tools I built around a voice-AI platform that handles millions of calls a month: test agents before release, review one call, investigate patterns across many, and ask questions in plain English."
-role: "Designed and built all four, directing coding agents for much of the implementation"
+role: "Designed all four and built most of them, directing coding agents for much of the implementation"
 focus: "Every answer points at evidence, counts stay honest, and partial results say they're partial"
-impact: "One connected set of tools, from release testing to plain-English questions, each in production, on main or deployed for staff."
+impact: "Connected tools from release testing to plain-English questions: in a client's test environments, merged to main, or deployed for staff."
 stack:
     - TypeScript
     - React
@@ -62,7 +62,7 @@ Both views are merged to main. [Full write-up →](/projects/conversation-explor
 
 Scout is an AI investigator. You ask why something keeps happening, and it searches tens of thousands of calls, groups them, reads the important ones turn by turn, and reports only what it can back up with the exact turns it read.
 
-The research shaped all of it. In one benchmark, only 34 of 74 first-pass findings survived an independent check, so Scout spends its effort on proving findings, not generating them. A finding that cites a call it never opened, or a quote that doesn't match the source, gets rejected before anyone sees it.
+The research shaped all of it. In one benchmark, only 34 of 74 first-pass findings survived a check by a second, independent model, so Scout spends its effort on proving findings, not generating them. A finding that cites a call it never opened, or a quote that doesn't match the source, gets rejected before anyone sees it.
 
 It's deployed for internal staff and is the investigation engine behind Platform Chat. [Full write-up →](/projects/scout-evidence-engine)
 
@@ -74,8 +74,6 @@ It's checked by about 1,250 automated tests and live-model evaluations. Sixty ad
 
 ## How they fit together
 
-They're one system, not four projects. Platform Chat uses Scout to investigate. The evaluation console uses the same idea of evidence as everything else: a claim isn't done until it points at something you can check.
-
-Building them as one system also meant choosing what to leave out. Platform Chat hands investigations to Scout instead of growing its own. And none of them reports a number it can't trace back to calls.
+They're connected tools that share one set of rules. Platform Chat uses Scout to investigate. And all four hold to the same idea of evidence: an answer isn't done until it points at something you can check. Each full write-up is also clear about where it falls short, like Scout's prevalence counts that can still come back as a wrong zero.
 
 The demo above has all four. Each tab is a rebuild of the real UI with made-up data.

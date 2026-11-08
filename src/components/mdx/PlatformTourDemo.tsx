@@ -44,7 +44,7 @@ export function PlatformTourDemo() {
             tabIndex={i === active ? 0 : -1}
             onClick={() => setActive(i)}
             onKeyDown={e => onKey(e, i)}
-            className={`rounded-lg border px-3 py-2.5 text-left text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 motion-reduce:transition-none ${i === active ? "border-blue-600 bg-blue-50 text-blue-900 dark:border-blue-400 dark:bg-blue-950 dark:text-blue-100" : "border-neutral-200 bg-white text-neutral-700 hover:border-neutral-400 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"}`}
+            className={`flex flex-col items-start justify-start rounded-lg border px-3 py-2.5 text-left text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 motion-reduce:transition-none ${i === active ? "border-blue-600 bg-blue-50 text-blue-900 dark:border-blue-400 dark:bg-blue-950 dark:text-blue-100" : "border-neutral-200 bg-white text-neutral-700 hover:border-neutral-400 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"}`}
           >
             <span className="block text-xs font-semibold tabular-nums text-blue-700 dark:text-blue-300">0{i + 1}</span>
             <span className="font-semibold">{s.label}</span>
