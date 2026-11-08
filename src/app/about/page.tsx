@@ -66,7 +66,7 @@ const path = [
         years: "2022 to 2024",
         role: "Software engineer",
         company: "Action Network",
-        note: "A promotion component library and ops tools tied to real revenue.",
+        note: "A promotion component library used across products, plus ops tools.",
     },
     {
         years: "2025 to now",

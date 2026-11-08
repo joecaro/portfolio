@@ -78,10 +78,10 @@ const Hero = () => {
           </div>
           <ul className="grid gap-2 text-sm text-neutral-700 dark:text-neutral-300 sm:grid-cols-3">
             <li className="rounded-md border border-blue-200 bg-white/80 p-3 dark:border-neutral-600 dark:bg-neutral-800/80">
-              ~1M AI interactions monitored monthly
+              Millions of AI phone calls a month in production
             </li>
             <li className="rounded-md border border-blue-200 bg-white/80 p-3 dark:border-neutral-600 dark:bg-neutral-800/80">
-              Fortune 100 production deployments
+              Led a Fortune 100 bank rollout, live since Sept 2025
             </li>
             <li className="rounded-md border border-blue-200 bg-white/80 p-3 dark:border-neutral-600 dark:bg-neutral-800/80">
               Full-stack product and platform ownership

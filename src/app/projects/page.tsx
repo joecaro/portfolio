@@ -95,6 +95,7 @@ export default async function ProjectsPage() {
             </section>
 
             <section
+                id='archive'
                 aria-label='Archive'
                 className='border-t border-neutral-200 bg-slate-50 dark:border-neutral-700 dark:bg-neutral-800/50'
             >

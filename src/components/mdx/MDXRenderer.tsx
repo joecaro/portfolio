@@ -4,7 +4,6 @@ import Markdown from "react-markdown";
 import { MDXClient } from "next-mdx-remote-client";
 import { InteractiveDemo } from "./InteractiveDemo";
 import { CodePlayground } from "./CodePlayground";
-import { ETLPipelineDemo } from "./ETLPipelineDemo";
 import type { SerializeResult } from "next-mdx-remote-client/serialize";
 import { PageLockDemo } from "./PageLockDemo";
 import { Children, isValidElement, type ReactNode } from "react";
@@ -140,7 +139,6 @@ const mdxComponents = {
   // Interactive components
   InteractiveDemo,
   CodePlayground,
-  ETLPipelineDemo,
   PageLockDemo,
 };
 
