@@ -62,6 +62,15 @@ Approvals can also race. Two of them could both check "is a merge already runnin
 
 Worktrees protect my checkout from the agents. They don't protect the agent's patch from my checkout. So the gate checks the destination separately. Uncommitted changes block a direct merge. If I choose to stash them, it refuses when the dirty files have changed since I last looked, so it never stashes something I haven't seen. If a merge across several repos fails halfway, it rolls the integration worktree back.
 
+## My part, and the agents' part
+
+This one is my own tool, and agents built most of it. These calls were mine:
+
+- The browser is the only interface, backed by a local daemon. No terminal UI and no second copy of the orchestration logic.
+- The first pilot was an honest dogfood project, not a "the orchestrator built itself" demo.
+- I cut views that weren't earning their place, like an old flow view, and verified with type checks and a browser preview instead of adding a test framework for its own sake.
+- My standing rule: the agent that wrote a change never reviews it. Merges need independent approval of the exact commit, and a new commit needs a new review.
+
 ## Where it stands
 
 Use peaked in June (511 of the 534 jobs). The plan-approval layer I added in July has tests but has only run one real plan. These numbers come straight from the app's database and don't measure time saved.
