@@ -18,7 +18,7 @@ export function ExperienceSection() {
       achievements: [
         "Lead engineering for a Fortune 100 bank deployment: contact-center integration, infrastructure, release coordination and model-review work. Live since September 2025, with a second line of business added in July 2026.",
         "Build the platform's call-review, evaluation and investigation tools, spanning React interfaces, Python services and AI-agent workflows.",
-        "Work on voice-agent infrastructure, including conversational memory, interruption handling, speech timing and text normalization.",
+        "Debug the real-time voice path: response latency, streaming speech failures and multi-call audio bugs, with call test harnesses to catch them.",
         "Develop self-serve agent design and reporting tools; this is ongoing product work.",
       ],
     },
