@@ -90,13 +90,10 @@ Releases go through the bank's scan and approval queue, so a sloppy release is e
 
 Coding agents wrote a lot of the 2026 code. I decided what got built, where each fix belonged and what was allowed to ship. Some examples:
 
-- When staging agents kept dropping, the agent blamed a four-hour call. I pointed out the agents had only just started, which sent it back to the evidence: stale callbacks from old sessions. The fix brought all ten staging agents back.
+- When staging agents kept dropping, the agent blamed a four-hour call. I pointed out the agents had only just started, which sent it back to the evidence: stale callbacks from old sessions. That, plus one more fix, brought all ten staging agents back.
 - When a memory problem showed up only at the bank, I kept the fix scoped to the bank's call cleanup instead of letting it spread into shared code. After a few rounds of narrowing, it turned out no local patch was needed at all.
-- I pulled the bank's gating evaluation back to the exact seven gates we'd already shared with them, instead of claiming more from a broader routing test.
-- I turned down a 28-file, roughly 2,000-line change as too big to review, and cancelled a deploy when I noticed it would also move us to a different cluster.
-- Before production logging fixes shipped, I reviewed them myself with synthetic values and found stack traces leaking and a field missing from the scrub list.
-
-Every change gets reviewed by an agent that didn't write it, against the exact commit, before it merges.
+- I turned down a 28-file, roughly 2,000-line change as too big to review, and cancelled a deploy when I noticed it was still pointed at the old cluster after a migration.
+Every agent change I ship gets reviewed by a different agent against the exact commit before it merges. On a production logging fix, that review, run with synthetic values, caught stack traces leaking and a field missing from the scrub list before it came back to me for sign-off.
 
 ## Does it work?
 

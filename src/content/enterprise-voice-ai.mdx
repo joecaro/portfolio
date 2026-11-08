@@ -78,13 +78,12 @@ A few fixes on the live call side, all about events showing up at the wrong time
 
 ## My part, and the agents' part
 
-Agents wrote much of the code. These calls were mine:
+Agents wrote much of the code. What I decided:
 
 - I picked the console's shape, a master-detail view, over restyling the old screen or building a run feed, and approved a full rewrite.
 - To repair bad runs, the agent proposed new database structure for attempt slots and revision chains. I ruled out schema changes and chose a fresh full-suite rerun instead, so old runs stay untouched in history.
-- I defined the rule for scratch runs: they can never change a case's tracked verdict. With that settled, the agent caught that a three-case retry would have widened to 889 attempts.
-- For model comparisons, every model runs with the same settings. A run with different settings counts as diagnostic only.
-- Every repair needs a short written root cause with an accepted or rejected verdict before it lands.
+- I made scratch-versus-tracked runs the priority and confirmed the rule that a scratch run can never change a tracked verdict. With that settled, the agent caught that a three-case retry would have widened to 889 attempts.
+- For the model comparison, I had reasoning turned off for every model so the runs were actually comparable.
 
 ## Where it stands
 

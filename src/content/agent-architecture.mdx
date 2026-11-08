@@ -64,9 +64,8 @@ Worktrees protect my checkout from the agents. They don't protect the agent's pa
 
 ## My part, and the agents' part
 
-This one is my own tool, and agents built most of it. These calls were mine:
+This one is my own tool, and agents built most of it. My calls:
 
-- The browser is the only interface, backed by a local daemon. No terminal UI and no second copy of the orchestration logic.
 - The first pilot was an honest dogfood project, not a "the orchestrator built itself" demo.
 - I cut views that weren't earning their place, like an old flow view, and verified with type checks and a browser preview instead of adding a test framework for its own sake.
 - My standing rule: the agent that wrote a change never reviews it. Merges need independent approval of the exact commit, and a new commit needs a new review.

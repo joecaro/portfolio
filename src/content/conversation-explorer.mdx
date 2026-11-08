@@ -72,12 +72,11 @@ I also checked it against one masked real call, which caught a text-wrapping bug
 
 ## My part, and the agents' part
 
-Agents wrote much of the code. These calls were mine:
+Agents wrote much of the code. Where I stepped in:
 
-- When the port into one customer's build broke, I ordered the revert first, then tests that capture the old screen's behavior, then the re-port. I'm holding the fixed version until I've reviewed it.
+- When the port into one customer's build broke, the order was my call: revert first, then tests for the old screen, then the re-port. I'm holding the fixed version until I've reviewed it.
 - I drove the redesign from screenshots of real use. That's how the transcript-first layout came about, and how I caught a bug after merge where hidden tool data was labeled "missing".
 - I merged the call-flow map only after reviewing it in the design lab and getting the review comments fixed.
-- Each write-up lists what wasn't verified, like phone widths and touch, so nobody assumes it was.
 
 ## Where it stands
 
