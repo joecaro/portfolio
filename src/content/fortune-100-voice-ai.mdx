@@ -59,7 +59,7 @@ The hardest integration was the bank's contact-center platform. It's what logs e
 
 We couldn't test against their real system whenever we wanted, so we built our own. Staging runs a high-fidelity mock of the contact-center platform that follows the same event contract: logins, ready and not-ready, calls arriving, transfers, disconnects. It has conformance tests that check it against the real contract. Our agents run full calls against it before a change goes anywhere near the bank.
 
-The Live Agents screen in the demo is where all of this shows up. It's the screen for watching every virtual agent's state in real time. When a production problem made that screen time out, the fix was to stop sending each agent's full event history on every poll. The demo replays it.
+The Live Agents screen in the demo is where all of this shows up. It's the screen for watching every virtual agent's state in real time. When a production problem made that screen time out in September 2026, a year after launch, the fix was to stop sending each agent's full event history on every poll. The demo replays it.
 
 ## One codebase, not a fork
 

@@ -116,7 +116,7 @@ export function LiveAgentsDemo() {
   const status = useMemo(() => {
     if (phase === "normal") return "Each poll returns every agent's row, full event history included. Fine while only a few people watch.";
     if (phase === "replay") return "More people open the page. Every poll carries each agent's full event history.";
-    if (phase === "down") return "In production, polls piled up and requests timed out (503s and 504s). The table couldn't load.";
+    if (phase === "down") return "A year into production, polls piled up and requests timed out (503s and 504s). The table couldn't load.";
     if (phase === "fixing") return "Same load, but the poll no longer sends event history.";
     return "Fixed. Event history stays out of the poll; it's still there on each agent's detail page.";
   }, [phase]);
@@ -206,7 +206,7 @@ export function LiveAgentsDemo() {
               )}
             </div>
 
-            <section aria-label="September 1 incident replay" className="mt-4 rounded-lg border border-gray-200 bg-white p-3 shadow-sm">
+            <section aria-label="September 1, 2026 incident replay" className="mt-4 rounded-lg border border-gray-200 bg-white p-3 shadow-sm">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div>
                   <p className="text-xs font-semibold text-gray-900">Each poll: <span className="font-mono">{payload}</span></p>
@@ -214,7 +214,7 @@ export function LiveAgentsDemo() {
                 </div>
                 <div className="flex gap-2">
                   {(phase === "normal") && (
-                    <button type="button" onClick={() => run("before")} className="rounded-md bg-gray-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Replay Sept 1</button>
+                    <button type="button" onClick={() => run("before")} className="rounded-md bg-gray-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Replay Sept 1, 2026</button>
                   )}
                   {phase === "down" && (
                     <button type="button" onClick={() => run("after")} className="rounded-md bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Ship the fix</button>

@@ -107,7 +107,7 @@ export default async function ProjectPage({
                         </ButtonLink>
                     )}
                     <span className='text-sm text-neutral-600 dark:text-neutral-400'>
-                        {project.date} · {readMinutes(project.content)} min
+                        {new Date(project.date).toLocaleDateString("en-US", { month: "long", year: "numeric" })} · {readMinutes(project.content)} min
                         read
                     </span>
                 </div>

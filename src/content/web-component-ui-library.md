@@ -7,7 +7,6 @@ author: Joe
 description: A framework-agnostic component library for shipping reusable UI across React, CMS, and plain-browser environments.
 role: Component library author
 focus: Native Web Components, encapsulated styles, reusable APIs, and cross-platform UI delivery.
-impact: Shows how I think about reusable front-end systems that can move across teams and stacks.
 stack:
     - Web Components
     - JavaScript
