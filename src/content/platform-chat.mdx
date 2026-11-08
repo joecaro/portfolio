@@ -71,7 +71,7 @@ A response can come back fine and still be incomplete, because the model ran out
 Agents wrote much of the code. These calls were mine:
 
 - Lenient model reviewers passed 23 of 26 baseline cases. I threw that scoring out. Strict review failed 20 of 26, and those failures are what drove the real fixes.
-- The agent was building a per-call model classifier to answer counting questions. I replaced it with cached scoring and plain counting code. It's faster and cheaper, and the counts check out.
+- The agent was building a per-call model classifier to answer counting questions. I replaced it with cached scoring and plain counting code. It's faster and simpler, and the counts it was checked against came out right.
 - The scripted checks on the staff preview all passed. Using it myself, I still found stale search progress and shallow investigations, and those got fixed before rollout was called done.
 - For release, I cut the work into a smaller stack, pulled an unrelated CI change out of it, and asked for a separate code-owner fix instead of going around the review gate.
 

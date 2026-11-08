@@ -84,7 +84,7 @@ What we built:
 
 ## Shipping into a bank
 
-Releases go through the bank's scan and approval queue, so a sloppy release is expensive. I set some rules. Every customer image is tagged with one exact version from main. What gets deployed has to match, by digest, what was tested and approved. And we keep our own release ledger, because the bank's status pages weren't reliable enough to tell what was actually running.
+Releases go through the bank's scan and approval queue, so a sloppy release is expensive. I set some rules. Every customer image is tagged with one exact version from main. What gets deployed has to match the published build by digest. And we keep our own release ledger, because the bank's status pages weren't reliable enough to tell what was actually running.
 
 ## My part, and the agents' part
 
