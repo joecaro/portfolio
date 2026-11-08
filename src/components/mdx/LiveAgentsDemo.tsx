@@ -125,7 +125,7 @@ export function LiveAgentsDemo() {
     <div className="font-sans text-gray-900">
       <div className="relative overflow-hidden rounded-xl border border-gray-300 bg-gray-100 shadow-xl">
         <div className="flex min-h-[520px]">
-          <aside className="hidden w-44 shrink-0 border-r border-gray-200 bg-white p-3 text-xs text-gray-600 md:block">
+          <aside className="hidden w-40 shrink-0 border-r border-gray-200 bg-white p-3 text-xs text-gray-600 md:block">
             <div className="mb-4 h-6 w-20 rounded bg-gray-200" aria-hidden />
             <p className="mb-1 px-2 text-[10px] font-semibold uppercase tracking-wide text-gray-400">AI Agent</p>
             <div className="flex items-center gap-2 rounded-md bg-blue-50 px-2 py-1.5 font-medium text-blue-700">
@@ -169,7 +169,7 @@ export function LiveAgentsDemo() {
                   <thead className="border-b border-gray-200 bg-gray-50 text-gray-700">
                     <tr>
                       {["Agent ID", "Vanity Name", "Campaign ID", "Telephony Event", "CTI Agent State", "Time Since Event", "Agent Startup"].map(h => (
-                        <th key={h} className="whitespace-nowrap px-3 py-2 font-medium">
+                        <th key={h} className="whitespace-nowrap px-2 py-2 font-medium">
                           <span className="inline-flex items-center gap-1">{h}<Info className="h-3 w-3 text-gray-400" aria-hidden /></span>
                         </th>
                       ))}
@@ -178,17 +178,17 @@ export function LiveAgentsDemo() {
                   <tbody>
                     {agents.map(a => (
                       <tr key={a.id} className="border-b border-gray-100 last:border-0">
-                        <td className="px-3 py-2">
+                        <td className="px-2 py-2">
                           <span className={`inline-flex rounded-full border px-2 py-0.5 font-mono font-semibold ${a.health === "healthy" ? "border-green-300 bg-green-50 text-green-700" : "border-amber-300 bg-amber-50 text-amber-700"}`}>{a.id}</span>
                         </td>
-                        <td className="px-3 py-2">{a.name}</td>
-                        <td className="whitespace-nowrap px-3 py-2 font-mono text-blue-600">{a.campaign}</td>
-                        <td className="px-3 py-2 font-mono text-[11px] text-gray-600">{EVENT_FOR[a.cti]}</td>
-                        <td className={`px-3 py-2 font-mono font-semibold ${CTI_TONE[a.cti]}`}>{a.cti}</td>
-                        <td className="px-3 py-2"><span className="rounded bg-gray-100 px-1.5 py-0.5 font-mono tabular-nums text-gray-700">{fmt(a.since)}</span></td>
-                        <td className="px-3 py-2">
+                        <td className="px-2 py-2">{a.name}</td>
+                        <td className="whitespace-nowrap px-2 py-2 font-mono text-blue-600">{a.campaign}</td>
+                        <td className="px-2 py-2 font-mono text-[11px] text-gray-600">{EVENT_FOR[a.cti]}</td>
+                        <td className={`px-2 py-2 font-mono font-semibold ${CTI_TONE[a.cti]}`}>{a.cti}</td>
+                        <td className="px-2 py-2"><span className="rounded bg-gray-100 px-1.5 py-0.5 font-mono tabular-nums text-gray-700">{fmt(a.since)}</span></td>
+                        <td className="px-2 py-2">
                           {a.startup === "done" ? (
-                            <span className="inline-flex gap-1" aria-label="Phone system and dialer login complete">
+                            <span className="inline-flex gap-1 whitespace-nowrap" aria-label="Phone system and dialer login complete">
                               <span className="rounded bg-green-100 px-1.5 py-0.5 text-[10px] text-green-700">Phone/SIP</span>
                               <span className="rounded bg-green-100 px-1.5 py-0.5 text-[10px] text-green-700">Dialer Login</span>
                             </span>
