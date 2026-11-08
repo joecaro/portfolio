@@ -4,10 +4,10 @@ title: "Platform Chat"
 date: Oct 31 2026 12:00 PM
 kind: "AI & platform"
 author: Joe
-description: An AI analyst inside a voice-AI platform. Ask about your calls in plain English and it counts, searches and reads them, then answers with links to the calls it used.
-role: Product and architecture lead; designed, directed and shipped it, with coding agents doing much of the implementation
-focus: Answers that stay inside the scope you asked about, and say plainly when they are partial
-impact: "Evals caught three bugs before release. No adoption numbers yet."
+description: An AI analyst for voice-agent data that combines scoped metrics, transcript search and call evidence in one conversation.
+role: Product and architecture lead; designed the system and delivered it with substantial coding-agent assistance
+focus: Scope preservation from the user's question through data access, investigation and cited answer
+impact: "Evaluation found three defects before release. The v2 runtime is merged to main; live acceptance is still pending."
 stack:
     - Python
     - TypeScript
@@ -26,63 +26,32 @@ image: /img/headliners/platform-chat-product.jpg
 position: 1
 ---
 
-*Part of [Knowing What the Agents Did](/projects/voice-ai-platform), step "Ask in plain English".*
+*Part of [Tools for Operating Voice Agents](/projects/voice-ai-platform), for exploring metrics and calls in one conversation.*
 
-## What it is
+## What it does
 
-Teams running automated phone agents make tens of thousands of calls. When a number moves, somebody has to figure out why. Usually that means a dashboard, a SQL query, and an afternoon of listening to recordings.
+Platform Chat lets staff ask questions about voice-agent activity, from a metric change to the calls behind it. It scopes the request, queries metrics, searches transcripts, reads relevant calls and returns links to the evidence. Users can follow the steps as they run. The default path is read-only; changes require confirmation.
 
-Platform Chat is a side panel you can open on any page. Ask "why did transfers go up this week?" and it figures out the scope (campaign, dates, which calls), counts them, searches transcripts, reads the calls that matter, and answers. Every call it used is linked, and a line under the answer says exactly what it looked at. You can watch each step while it works. It's read-only by default and asks before changing anything.
+## Carrying scope through the system
 
-I led it from first prototype to what's running now: product, architecture, safety model, evals and UI. Coding agents wrote much of the code. My job was the design, the contracts between pieces, splitting up the work, and checking everything before it merged.
+The first staging version exposed a basic failure: a follow-up asked about one campaign, but the answer was labeled “All Campaigns.” The conversation had retained the filter while the analytics query had not. I replaced message-level filter extraction with scope carried alongside the query, then added a check that compares query filters with the scope reported in the answer.
 
-## v1: what broke
+Another staging failure repeated the same invalid query while the panel stayed on “Thinking…” because progress was emitted only after the agent finished. I changed the runtime to stream each step, return readable errors, avoid retrying an identical failed query and preserve completed results if the final model response is malformed. Both prompts then worked in staging.
 
-The first version, back in August, was a smaller analytics chat for metric questions. It was on staging within two days, and it broke in useful ways.
+## One runtime for metrics and calls
 
-A user asked about one campaign, then asked a follow-up, and the answer came back labeled "All Campaigns." The chat knew the scope. The query didn't. Filters were being regex'd out of the latest message, and the answer's provenance dropped them. A wrong number from an analytics tool looks exactly like a right one, so this became a hard rule: scope travels with the query, and a check fails if the query's filters and the answer's stated filters differ at all.
+The v2 runtime puts conversation state in durable storage and grants writes only to the current request owner. The service enforces customer scope, budgets, cancellation and deadlines; access tokens stay in server memory and are not sent to the model or logs. A skills-based runtime lets the model choose which domain capability to use while the server controls what that capability can access.
 
-Then a staging query pointed at a table under the wrong schema and failed over and over, while the UI just said "Thinking…" because progress events only went out after the agent finished. I made every step stream as it happens, saved readable error details, stopped it from retrying the exact same failed query, and kept completed results when the model's final message came back malformed. Both failing prompts worked that same night.
+Metric names also need customer and campaign context. I built a catalog of 85 business concepts tied to their source and resolved by customer, campaign type, report and date. When the system cannot choose a definition, it asks for clarification. Review found an access-revocation path that could still serve a definition; I reproduced the issue, fixed it and added a regression check.
 
-Also, the mocked unit tests were green while the real model misbehaved. So I added a live-model eval that doesn't need production data. That turned into the backbone of v2.
+## Partial answers stay partial
 
-## v2: one path
+A response can be incomplete when a source fails or a deadline expires. Each turn therefore ends with an explicit outcome such as completed, partial or needs clarification. The panel shows that outcome instead of implying success. Monitoring records execution details without retaining call content unless it is verified and in scope.
 
-By October the goal was bigger: one chat that could answer metric questions and dig into individual calls. There were already a few half-built engines, routers and chart pipelines lying around. I had three separate analyses written up, had them poke holes in each other, and picked the simplest design I could make safe.
+## Evaluation and status
 
-Every turn is saved as it runs, and only the current owner of a request can write to it, so a crash or a duplicate message can't corrupt a conversation. The service, not the model, decides which customer's data a turn can see, and enforces budgets, cancellation and deadlines. The user's access token stays in server memory and never reaches the model or the logs. Everything else got deleted. Fewer paths, fewer places for scope to leak.
+The evaluation suite runs the real system against synthetic call data. Expected answers are hidden from the model and a separate reviewer grades each response. Sixty adversarial cases probe scope boundaries and access to unauthorized data; the latest run found no unsafe answers. Evaluations also found three defects before release, including a schema mismatch and citation-contract bugs.
 
-A few days later I added a skills-based runtime: one main prompt, a handful of domain skills the model can look up, and a small set of capabilities the server enforces. The model picks what to look at. The server decides what it's allowed to touch.
+Scores vary with rubric and fixture changes, so I do not present them as a trend. One 68-case run had 39 pass, 24 partial and 5 fail. The v2 runtime is merged to main and has run as a staff preview behind sign-in. Live acceptance testing is not passing yet, so it is not released. There are no customer adoption or time-saved measurements.
 
-The whole thing was too big to review in one go, so I split it into 19 pieces that could each be checked on their own. It passed 214 tests on day one. The suite is around 1,250 now.
-
-## Metrics mean different things
-
-The same metric name can mean different things on different kinds of campaigns, and a generic definition gives you a confident wrong answer. So I built a catalog of 85 business concepts, each tied to a source and resolved by customer, campaign type, report and date. If it can't tell which definition applies, it asks.
-
-Review caught a security bug here: in one code path, a definition could still be served after someone's access was revoked. I reproduced it, fixed it, and the test that failed before passes now.
-
-## Saying when it's partial
-
-A response can come back fine and still be incomplete, because the model ran out of time or a source failed. Hiding that is worse than being slow. So every turn ends with an outcome like completed, partial or needs clarification, and the panel shows it. Hit Stop in the demo and you'll see it. Monitoring works the same way: it logs what happened, but doesn't store call content unless it's verified, in-scope evidence.
-
-## My part, and the agents' part
-
-Agents wrote much of the code. These calls were mine:
-
-- Lenient model reviewers passed 23 of 26 baseline cases. I threw that scoring out. Strict review failed 20 of 26, and those failures are what drove the real fixes.
-- The agent was building a per-call model classifier to answer counting questions. I replaced it with cached scoring and plain counting code. It's faster and simpler, and the counts it was checked against came out right.
-- The scripted checks on the staff preview all passed. Using it myself, I still found stale search progress and shallow investigations, and those got fixed before rollout was called done.
-- For release, I cut the work into a smaller stack, pulled an unrelated CI change out of it, and asked for a separate code-owner fix instead of going around the review gate.
-
-Evals were also rerun on unchanged code, to check a good result was stable and not luck.
-
-## Does it work?
-
-The evals run the real system against synthetic call data. The expected answers are hidden from the model, and a separate reviewer grades every answer. There are a few hundred cases. Sixty are adversarial, trying to break scope or get at data the user shouldn't see, and the latest run found nothing unsafe.
-
-Not everything passes. One focused run of 68 cases came out 39 pass, 24 partial, 5 fail. Scores moved around as I tightened the rubric and changed fixtures, so I don't read them as a trend. What the evals did do was catch real bugs before anyone else saw them: a schema-name mismatch in the serving path and two citation-contract bugs.
-
-It ran as a staff preview behind sign-in. In early November the v2 runtime merged to main. It isn't released yet, because live acceptance testing still fails, and it doesn't ship until that passes. No customers yet, so no adoption or time-saved numbers.
-
-The panel above is a rebuild of the real UI with made-up data.
+The demo above reconstructs the interface with fictional call data; it does not run the service.

@@ -60,14 +60,14 @@ const LIMITS = ["Comparable call not established", "Recurrence not verified", "A
 
 const GATES = [
   { name: "Prior state present", passed: true, detail: "Method recorded before the trigger in all supporting calls." },
-  { name: "Same-trigger contrast", passed: true, detail: "A clarification before the method is chosen does not repeat." },
+  { name: "Contrast example read", passed: true, detail: "One comparison call was read; comparability still needs review." },
   { name: "Runtime confirms re-entry", passed: true, detail: "The trace shows payment method → payment details." },
   { name: "Recovery checked", passed: false, detail: "Later recovery after the repeat was not reviewed." },
 ];
 
-type Finding = { id: string; title: string; hypothesis: string; status: "supported" | "rejected"; confidence: string; reach: string; gates: string };
+type Finding = { id: string; title: string; hypothesis: string; status: "observation" | "rejected"; confidence: string; reach: string; gates: string };
 const FINDINGS: Finding[] = [
-  { id: "F1", title: "Amount clarification restarts method capture", hypothesis: "A question about the amount, asked after a method is chosen, sends the agent back to method selection.", status: "supported", confidence: "Medium", reach: "71 / 287 calls", gates: "3 of 4 gates" },
+  { id: "F1", title: "Amount clarification restarts method capture", hypothesis: "A question about the amount, asked after a method is chosen, sends the agent back to method selection.", status: "observation", confidence: "Medium", reach: "71 / 287 calls", gates: "3 of 4 gates" },
   { id: "F2", title: "Date changes do not explain the repeat", hypothesis: "The repeat happens only when the customer changes the payment date.", status: "rejected", confidence: "Low", reach: "0 / 61 calls", gates: "1 of 2 gates" },
 ];
 
@@ -141,7 +141,7 @@ function Card({ children, className = "" }: { children: ReactNode; className?: s
 }
 
 function StatusChip({ status }: { status: Finding["status"] }) {
-  const s = status === "supported" ? { fg: C.ok, bg: C.okSoft, t: "Supported" } : { fg: C.bad, bg: C.badSoft, t: "Rejected" };
+  const s = status === "observation" ? { fg: C.ok, bg: C.okSoft, t: "Observation" } : { fg: C.bad, bg: C.badSoft, t: "Rejected" };
   return <span className="rounded-full px-2 py-0.5 text-[11px] font-medium" style={{ color: s.fg, background: s.bg }}>{s.t}</span>;
 }
 
@@ -179,7 +179,7 @@ function FindingPanel({ onClose }: { onClose: () => void }) {
         <div className="space-y-4 p-5">
           <div>
             <p className="text-[12px] leading-5" style={{ color: C.muted }}>
-              <StatusChip status="supported" /> <span className="ml-1">{FINDINGS[0].hypothesis}</span>
+              <StatusChip status="observation" /> <span className="ml-1">{FINDINGS[0].hypothesis}</span>
             </p>
             <h4 className="mt-3 text-[19px] font-[650] leading-snug tracking-[-.01em]">
               <span className="mr-2 font-mono text-[13px]" style={{ color: C.faint }}>F1</span>
@@ -203,8 +203,8 @@ function FindingPanel({ onClose }: { onClose: () => void }) {
               <p className="mt-1 text-[13.5px] leading-6">After the customer picks a payment method, a question about the amount sends the agent back to the method question.</p>
             </div>
             <div>
-              <Label>Why</Label>
-              <p className="mt-1 text-[13.5px] leading-6">The clarification returns the flow to payment details. Method state is cleared on re-entry, so the agent asks again.</p>
+              <Label>Candidate explanation</Label>
+              <p className="mt-1 text-[13.5px] leading-6">The trace suggests re-entry into payment details. Whether method state is cleared requires a code-level check.</p>
             </div>
             <div>
               <div className="flex items-center justify-between">
@@ -343,7 +343,7 @@ export function ScoutViewerDemo() {
             style={{ background: C.accent }}
           >
             {step === 0 ? <Play className="h-3.5 w-3.5" /> : <RotateCcw className="h-3.5 w-3.5" />}
-            {step === 0 ? "Run investigation" : "Replay"}
+            {step === 0 ? "Play investigation replay" : "Replay"}
           </button>
         </header>
 
@@ -351,7 +351,7 @@ export function ScoutViewerDemo() {
           <div>
             <h3 className="max-w-[34ch] text-[22px] font-[650] leading-tight tracking-[-.015em] md:text-[26px]">{QUESTION}</h3>
             <p className="mt-2 text-[14px]" style={{ color: finished ? C.ink : C.faint }}>
-              {finished ? "Amount clarifications reset payment method state." : step > 0 ? "The agent is investigating…" : "No verdict yet. Run the investigation to watch the agent work."}
+              {finished ? "Candidate explanation: amount clarification may restart method capture." : step > 0 ? "Playing the investigation replay…" : "No observation yet. Play the scripted investigation to inspect its steps."}
             </p>
             <p className="mt-1 text-[12px]" style={{ color: C.muted }}>
               {finished ? "Completed · 2 min 16 s" : step > 0 ? `Running · step ${Math.min(step, STEPS.length)} of ${STEPS.length}` : "Not started"} · collections agent · Oct 1–8
@@ -383,7 +383,7 @@ export function ScoutViewerDemo() {
                 {findings.map(f => (
                   <li key={f.id} className="flex items-center gap-2">
                     <span className="font-mono text-[11px]" style={{ color: C.faint }}>{f.id}</span>
-                    <StatusDot color={f.status === "supported" ? C.ok : C.bad} />
+                    <StatusDot color={f.status === "observation" ? C.ok : C.bad} />
                     <span className="truncate">{f.title}</span>
                   </li>
                 ))}

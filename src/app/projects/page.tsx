@@ -5,6 +5,7 @@ import ProjectArchive from "@/components/ProjectArchive";
 import HeadlinerProjects from "@/components/HeadlinerProjects";
 import { getAllProjects } from "@/lib/getAllProjects";
 import type { Project } from "@/types";
+import { isOperationsProject } from "@/lib/projectGroups";
 
 export const metadata: Metadata = {
     title: "Projects | Joseph Carothers",
@@ -20,7 +21,7 @@ const byPosition = (a: Project, b: Project) =>
 
 export default async function ProjectsPage() {
     const projects = await getAllProjects();
-    const featured = projects.filter(project => isFeatured(project) && !project.headliner).sort(byPosition);
+    const featured = projects.filter(project => isFeatured(project) && !project.headliner && !isOperationsProject(project.slug)).sort(byPosition);
     const archive = projects
         .filter(project => !isFeatured(project))
         .map(project => ({
@@ -39,18 +40,18 @@ export default async function ProjectsPage() {
                     Projects
                 </h1>
                 <p className='max-w-[60ch] text-lg leading-relaxed text-neutral-700 dark:text-neutral-300'>
-                    Case studies first. Then everything else I&apos;ve built,
-                    newest first, from production platforms to weekend
-                    experiments.
+                    Enterprise voice AI, tools for operating it, and selected
+                    personal projects. Each case study names my contribution
+                    and where the work stands.
                 </p>
             </section>
 
             <HeadlinerProjects projects={projects} />
             <section
-                aria-label='Case studies'
+                aria-label='Earlier work and libraries'
                 className='mx-auto max-w-6xl px-4 pb-16 md:px-8'
             >
-                <h2 className='mb-6 text-3xl font-semibold'>More case studies</h2>
+                <h2 className='mb-6 text-3xl font-semibold'>Earlier work and libraries</h2>
                 <div className='grid gap-7 lg:grid-cols-2'>
                     {featured.map(project => (
                         <Link
@@ -83,7 +84,7 @@ export default async function ProjectsPage() {
                                 {project.impact && (
                                     <p className='text-[13px] leading-relaxed'>
                                         <b className='text-blue-600 dark:text-blue-400'>
-                                            Impact
+                                            Scope
                                         </b>{" "}
                                         {project.impact}
                                     </p>

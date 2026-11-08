@@ -60,5 +60,3 @@ Here are a few types of examples you'll find on the site:
 **CSS Design Examples** is a resource for anyone looking to improve their CSS skills. Whether you’re just starting out or you’re an experienced developer, this site offers a place to explore different patterns and layouts, all with live, editable code.
 
 Feel free to check out the [GitHub repository](https://github.com/joecaro/HTML-CSS-Patterns) to see the source code, or try out the [live demo](https://csslayoutexamples.netlify.app/) to explore the interactive examples!
-
-Happy coding!

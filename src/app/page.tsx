@@ -11,8 +11,8 @@ export default async function Page() {
   return (
     <div className="p-1 sm:p-3" id="main-container">
       <Hero />
-      <ExperienceSection />
       <HeadlinerProjects projects={projects} />
+      <ExperienceSection />
       <ProjectsList projects={projects.filter(project => !project.headliner)} />
       <ContactForm />
     </div>

@@ -25,7 +25,7 @@ export default function ProjectCard({
             src={project.image}
             layout="fill"
             objectFit="contain"
-            alt={`${project.name} - image`}
+            alt={`${project.title} preview`}
           />
         </div>
         <div className="grid p-2">

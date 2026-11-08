@@ -6,17 +6,76 @@ import { EvalConsoleDemo } from "./mdx/EvalConsoleDemo";
 import { LiveAgentsDemo } from "./mdx/LiveAgentsDemo";
 import { PlatformTourDemo } from "./mdx/PlatformTourDemo";
 
-export const HEADLINER_SUMMARIES: Record<string, { built: string; value: string; evidence: string; instruction: string; standing?: { label: string; value: string }[] }> = {
-  "fortune-100-voice-ai": { built:"A cloud voice-AI platform adapted to run entirely inside a Fortune 100 bank: telephony, contact-center integration, models, dashboards and releases.", value:"The bank runs AI collections calls on its own infrastructure, and we keep it running without ever seeing production.", evidence:"About three months from kickoff to production, running inside the bank's network with no production access for us.", instruction:"Watch the fleet change state, then replay the September 2026 incident and ship the fix. Made-up agents, real UI.", standing:[{ label:"Status", value:"In production since September 2025" }, { label:"Used by", value:"A Fortune 100 bank, across two lines of business" }, { label:"Outcome", value:"Over a million calls a month. The business results are the bank's and stay private." }] },
-  "voice-ai-platform": { built:"Four connected tools around a voice-AI platform: an evaluation console, a call-details view, an AI investigator and an AI analyst.", value:"Built so teams can tell whether a release is better, what happened on a call and why a pattern keeps happening, with every answer tied to evidence.", evidence:"Scout rejects findings it can't tie to the exact turns it read; eval comparisons drop cases that didn't finish or weren't graded; Platform Chat's evals caught three bugs before release.", instruction:"Pick a tool. Each tab is the same reconstruction its full write-up uses. Made-up data, real UIs.", standing:[{ label:"Status", value:"Scout live for staff; Call Review merged; eval console in a client's test environments; Platform Chat merged, waiting on release" }, { label:"Used by", value:"Internal staff and one client's test environments" }, { label:"Outcome", value:"No adoption numbers yet for any of the four." }] },
-  "platform-chat": { built:"An AI analyst inside a voice-AI platform: it scopes the question, counts and searches the calls, reads the ones that matter, and answers with links to each.", value:"Built so a team can find out why a number moved without an afternoon of queries and recordings, and without the assistant quietly answering a broader question.", evidence:"About 1,250 automated tests, a 68-case focused eval gate, nothing unsafe across 60 adversarial cases, and three bugs caught before release.", instruction:"Pick a question and watch it work: scope, count, search, read, answer. Fictional data, real interface.", standing:[{ label:"Status", value:"v2 merged to main; release waits on live acceptance testing" }, { label:"Used by", value:"Staff preview only. No customers yet." }, { label:"Outcome", value:"No adoption or time-saved numbers yet." }] },
-  "conversation-explorer": { built:"A transcript-first call-details view with the recording, tool calls and safety checks on one synced timeline, plus a call-flow map across many calls.", value:"Reviewers see what the agent actually did next to what it said, so a broken call can't pass as a good one.", evidence:"Call-flow map and call-details redesign both merged to main after tests, review and CI; tests grew from 111 to 138. A fixed port to one customer build is in review.", instruction:"Click a turn or a timeline marker to jump through the call, open a tool result, or switch to the call-flow map. Made-up call, real UI.", standing:[{ label:"Status", value:"Call-flow map and call-details redesign merged to main" }, { label:"Used by", value:"Not tracked yet" }, { label:"Outcome", value:"Not measured yet" }] },
-  "agent-architecture": { built:"A local control room that runs coding agents as a team: a manager plans, workers build in isolated worktrees, reviewers check, and I approve exact patches.", value:"Agent work survives crashes and out-of-order finishes, and nothing merges without approval of one specific saved patch.", evidence:"534 agent jobs run; 83 picked back up automatically after their worker died; approval races and stale status fixed in code.", instruction:"Approve the plan, watch the workers run (one crashes and recovers), then approve the exact patch. Scripted replay, no agents running.", standing:[{ label:"Status", value:"Personal tool, running locally" }, { label:"Used by", value:"One user: me" }, { label:"Outcome", value:"Runs my own agent work. Not built for other users." }] },
-  "scout-evidence-engine": { built:"An AI investigator that searches, groups and reads tens of thousands of calls, then reports findings tied to the exact turns it read.", value:"Built so teams can find the real cause of a recurring call failure, with the evidence attached and the limits stated, instead of guessing from a keyword count.", evidence:"Deployed for internal staff and inside Platform Chat. In research, only 34 of 74 first-pass positives survived an independent check, so Scout is built around verification.", instruction:"Run the investigation and watch it work live, then open the finding to see the turns behind it. Synthetic data, real report interface.", standing:[{ label:"Status", value:"In production for internal staff, and the engine inside Platform Chat" }, { label:"Used by", value:"5 users and 103 recorded findings as of October 2026" }, { label:"Outcome", value:"Client investigations surfaced real patterns. None is tied to a customer-facing fix yet." }] },
-  "enterprise-voice-ai": { built:"An evaluation console, comparison APIs, tool-result capture and a test-case catalog for enterprise phone agents, plus fixes for late call events.", value:"Release comparisons are built to count only cases both runs actually tested and graded, with tool results attached as evidence.", evidence:"Comparison API excludes errors, ungraded and edited cases by reason; late-transfer fix covered by three regression tests that fail on the old code.", instruction:"Click any cell to see its attempts, tool call and what it returned, compared with the nearest older run. Made-up suite, real UI.", standing:[{ label:"Status", value:"Parts deployed in a client's test environments; I haven't confirmed which parts are on main" }, { label:"Used by", value:"Engineers running agent test suites; no usage numbers yet" }, { label:"Outcome", value:"Not measured yet" }] },
+type ProjectSummary = {
+  built: string;
+  value: string;
+  evidence: string;
+  instruction: string;
+  standing?: { label: string; value: string }[];
+};
+
+export const HEADLINER_SUMMARIES: Record<string, ProjectSummary> = {
+  "fortune-100-voice-ai": {
+    built: "Integration and release work to run a voice-AI platform inside a Fortune 100 bank.",
+    value: "Connects virtual agents to the bank’s call handling, infrastructure and model-review process.",
+    evidence: "Production launch in September 2025; a second line of business followed in July 2026. Controlled staging tests isolated a polling performance problem.",
+    instruction: "Explore the illustrative agent-state table, then compare the original and optimized polling responses in a staging replay.",
+    standing: [{"label": "Status", "value": "In production since September 2025"}, {"label": "Scope", "value": "Two lines of business at one Fortune 100 bank"}, {"label": "Workflows", "value": "Card and auto-loan workflows. Business-performance results are private."}],
+  },
+  "voice-ai-platform": {
+    built: "An evaluation console, call-review workspace, Scout investigation engine and conversational analyst.",
+    value: "Covers the operator workflow from testing an agent to understanding what happened in its calls.",
+    evidence: "The tools span client test environments, merged UI work and internal staff use. Platform Chat v2 still awaits release acceptance.",
+    instruction: "Choose a tool to explore its reconstructed workflow. Each tab links to the engineering case study.",
+    standing: [{"label": "Evaluation", "value": "Parts deployed in a client’s test environments"}, {"label": "Call review", "value": "Shared redesign merged; enterprise re-port in review"}, {"label": "Investigation", "value": "Scout used internally; Platform Chat v2 not yet released"}],
+  },
+  "platform-chat": {
+    built: "A conversational interface combining scoped metrics, transcript search and call investigation.",
+    value: "Keeps the question, analysis steps and linked call evidence in one interaction.",
+    evidence: "Live-model evaluations caught a serving-schema mismatch and citation-contract bugs before release.",
+    instruction: "Choose a preset question and follow the scripted analysis through scope, search and answer.",
+    standing: [{"label": "Status", "value": "v2 merged to main; release awaits live acceptance"}, {"label": "Users", "value": "Staff preview; no customer adoption established"}, {"label": "Validation", "value": "Synthetic-data and live-model evaluations; no measured time savings"}],
+  },
+  "conversation-explorer": {
+    built: "A transcript-first review workspace and a call-flow map.",
+    value: "Lets a reviewer move between the recording, conversation and runtime actions without losing their place.",
+    evidence: "Both views merged to main. The enterprise re-port followed a rollback and remains in review.",
+    instruction: "Select a turn or timeline marker, inspect a tool result, or switch to the call-flow map.",
+    standing: [{"label": "Shared product", "value": "Call-flow map and call-details redesign merged"}, {"label": "Enterprise port", "value": "Fixed re-port in review after rollback"}, {"label": "Use", "value": "Adoption and review-time improvements not measured"}],
+  },
+  "agent-architecture": {
+    built: "A personal workspace for coding-agent plans, isolated workers, saved patches and review.",
+    value: "Makes interrupted work recoverable and binds integration approval to a specific saved patch.",
+    evidence: "534 recorded jobs and 83 automatic recoveries. Later plan-approval functionality had only one real plan run.",
+    instruction: "Step through a scripted plan, worker interruption, recovery and patch approval. No coding agents run in this demo.",
+    standing: [{"label": "Status", "value": "Personal project, used locally"}, {"label": "Users", "value": "One: me"}, {"label": "Limits", "value": "Use peaked in June 2026; no measured productivity gain"}],
+  },
+  "scout-evidence-engine": {
+    built: "A service that searches and groups calls, then reads examples to investigate recurring behavior.",
+    value: "Connects a candidate explanation to the conversation turns and runtime events behind it.",
+    evidence: "Research compared call representations and checked first-pass findings with a second model. Hosted search fixes were timed on the failing requests.",
+    instruction: "Play the investigation replay, then open a candidate finding and inspect its evidence and remaining checks.",
+    standing: [{"label": "Status", "value": "Deployed for internal staff; used by Platform Chat"}, {"label": "Research", "value": "Model cross-checks, not a human-labeled accuracy benchmark"}, {"label": "Limits", "value": "Prevalence counts still have known gaps; findings do not establish a customer fix"}],
+  },
+  "enterprise-voice-ai": {
+    built: "An evaluation console, comparison APIs, tool-result capture and test-case catalog.",
+    value: "Helps engineers inspect repeated attempts and compare releases using compatible test results.",
+    evidence: "Comparisons exclude incompatible cases by reason. Tool outputs support diagnosis alongside the transcript.",
+    instruction: "Select a result cell to inspect attempts, tool calls, returned values and the nearest older result.",
+    standing: [{"label": "Status", "value": "Parts deployed in a client’s test environments"}, {"label": "Source", "value": "Release and feature branches; main coverage not fully confirmed"}, {"label": "Use", "value": "Used for engineering test suites; usage impact not measured"}],
+  },
 };
 export function HeadlinerExperience({slug}:{slug:string}) {
   const demo = slug === "fortune-100-voice-ai" ? <LiveAgentsDemo/> : slug === "voice-ai-platform" ? <PlatformTourDemo/> : slug === "platform-chat" ? <PlatformChatDemo/> : slug === "conversation-explorer" ? <CallReviewDemo/> : slug === "agent-architecture" ? <AgentControlRoomDemo/> : slug === "scout-evidence-engine" ? <ScoutViewerDemo/> : slug === "enterprise-voice-ai" ? <EvalConsoleDemo/> : null;
   if(!demo) return null;
-  return <section id="product-demo" aria-label="Explore the product workflow" className="mx-auto max-w-7xl scroll-mt-6 px-4 pt-8 md:px-8"><div className="mb-4 flex flex-wrap items-end justify-between gap-3"><div><p className="text-xs font-bold uppercase tracking-widest text-blue-700 dark:text-blue-300">Explore the experience</p><p className="mt-2 max-w-3xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">{HEADLINER_SUMMARIES[slug].instruction}</p></div><span className="text-xs text-neutral-600 dark:text-neutral-400">Reconstruction · fictional data</span></div><div data-product-demo={slug}>{demo}</div></section>;
+  return <section id="product-demo" aria-label="Explore the product workflow" className="mx-auto max-w-7xl scroll-mt-6 px-4 pt-8 md:px-8"><div className="mb-4 flex flex-wrap items-end justify-between gap-3"><div><p className="text-xs font-bold uppercase tracking-widest text-blue-700 dark:text-blue-300">Explore the experience</p><p className="mt-2 max-w-3xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">{HEADLINER_SUMMARIES[slug].instruction}</p></div><span className="text-xs text-neutral-600 dark:text-neutral-400">Reconstruction · fictional data</span></div>{slug === "fortune-100-voice-ai" && <div className="mb-8 border-y border-neutral-200 py-6 dark:border-neutral-700">
+      <h2 className="mb-4 text-xl font-semibold dark:text-neutral-200">The workflow the integration supports</h2>
+      <ol className="grid gap-4 text-sm leading-relaxed sm:grid-cols-2 lg:grid-cols-4 dark:text-neutral-300">
+        <li><b className="block mb-1">1. Sign in and become ready</b>The virtual agent joins the contact-center platform before it can receive a call.</li>
+        <li><b className="block mb-1">2. Handle the conversation</b>The voice agent verifies identity, discusses the account and invokes the relevant tools.</li>
+        <li><b className="block mb-1">3. Transfer or disconnect</b>Call events must stay associated with the session they belong to.</li>
+        <li><b className="block mb-1">4. Complete wrap-up</b>Cleanup and readiness transitions determine when the agent can receive another call.</li>
+      </ol>
+      <p className="mt-4 text-xs text-neutral-600 dark:text-neutral-400">A simplified view of the intended workflow, not a claim of end-to-end validation. The case study separates startup/readiness checks, simulator tests and the staging performance comparison.</p>
+    </div>}<div data-product-demo={slug}>{demo}</div></section>;
 }
