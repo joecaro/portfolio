@@ -5,6 +5,7 @@ import { ScoutViewerDemo } from "./mdx/ScoutViewerDemo";
 import { EvalConsoleDemo } from "./mdx/EvalConsoleDemo";
 import { LiveAgentsDemo } from "./mdx/LiveAgentsDemo";
 import { PlatformTourDemo } from "./mdx/PlatformTourDemo";
+import { VoiceTurnDemo } from "./mdx/VoiceTurnDemo";
 
 type ProjectSummary = {
   built: string;
@@ -21,6 +22,13 @@ export const HEADLINER_SUMMARIES: Record<string, ProjectSummary> = {
     evidence: "Production launch in September 2025; a second line of business followed in July 2026. Controlled staging tests isolated a polling performance problem.",
     instruction: "Explore the illustrative agent-state table, then compare the original and optimized polling responses in a staging replay.",
     standing: [{"label": "Status", "value": "In production since September 2025"}, {"label": "Scope", "value": "Two lines of business at one Fortune 100 bank"}, {"label": "Workflows", "value": "Card and auto-loan workflows. Business-performance results are private."}],
+  },
+  "voice-runtime": {
+    built: "Fixes to the live call path: model-step setup and the speech stream, plus an investigation of lost audio on second calls.",
+    value: "A slow or failed step sounds like a dropped call, so each fix targets a silence the caller would hear.",
+    evidence: "One turn spent 1.413 s of 2.726 s in our own setup. Two speech bugs that silenced calls are fixed in staging.",
+    instruction: "Pick a turn, then apply the fix to see what changed. Conversation text is made up; slow-turn timings are real.",
+    standing: [{"label": "Status", "value": "Latency and speech fixes merged and running in staging"}, {"label": "Checked by", "value": "Real test calls, a scripted test caller and targeted tests"}, {"label": "Limits", "value": "Second-call audio bug not fixed yet; nothing confirmed in production"}],
   },
   "voice-ai-platform": {
     built: "An evaluation console, call-review workspace, Scout investigation engine and conversational analyst.",
@@ -66,7 +74,7 @@ export const HEADLINER_SUMMARIES: Record<string, ProjectSummary> = {
   },
 };
 export function HeadlinerExperience({slug}:{slug:string}) {
-  const demo = slug === "fortune-100-voice-ai" ? <LiveAgentsDemo/> : slug === "voice-ai-platform" ? <PlatformTourDemo/> : slug === "platform-chat" ? <PlatformChatDemo/> : slug === "conversation-explorer" ? <CallReviewDemo/> : slug === "agent-architecture" ? <AgentControlRoomDemo/> : slug === "scout-evidence-engine" ? <ScoutViewerDemo/> : slug === "enterprise-voice-ai" ? <EvalConsoleDemo/> : null;
+  const demo = slug === "fortune-100-voice-ai" ? <LiveAgentsDemo/> : slug === "voice-runtime" ? <VoiceTurnDemo/> : slug === "voice-ai-platform" ? <PlatformTourDemo/> : slug === "platform-chat" ? <PlatformChatDemo/> : slug === "conversation-explorer" ? <CallReviewDemo/> : slug === "agent-architecture" ? <AgentControlRoomDemo/> : slug === "scout-evidence-engine" ? <ScoutViewerDemo/> : slug === "enterprise-voice-ai" ? <EvalConsoleDemo/> : null;
   if(!demo) return null;
   return <section id="product-demo" aria-label="Explore the product workflow" className="mx-auto max-w-7xl scroll-mt-6 px-4 pt-8 md:px-8"><div className="mb-4 flex flex-wrap items-end justify-between gap-3"><div><p className="text-xs font-bold uppercase tracking-widest text-blue-700 dark:text-blue-300">Explore the experience</p><p className="mt-2 max-w-3xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">{HEADLINER_SUMMARIES[slug].instruction}</p></div><span className="text-xs text-neutral-600 dark:text-neutral-400">Reconstruction · fictional data</span></div>{slug === "fortune-100-voice-ai" && <div className="mb-8 border-y border-neutral-200 py-6 dark:border-neutral-700">
       <h2 className="mb-4 text-xl font-semibold dark:text-neutral-200">The workflow the integration supports</h2>
