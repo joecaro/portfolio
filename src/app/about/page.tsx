@@ -71,7 +71,6 @@ const teamwork = [
         title: "Pushing back",
         points: [
             "Four rounds of review on a teammate's model-risk document, pushing back in the last two where it described after-call evaluation as live gating.",
-            "Holding a merge for a teammate's changes-requested review, even with every check green.",
             "Turning down a change too big to review, and a deploy pointed at the wrong cluster.",
         ],
     },

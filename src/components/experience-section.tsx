@@ -17,7 +17,7 @@ export function ExperienceSection() {
       period: "01/2025 - Present",
       achievements: [
         "Build and own customer-facing platform surfaces — user management, reporting, analytics, and human-in-the-loop compliance review — for 20+ enterprise clients. The platform handles millions of AI phone calls a month.",
-        "Developed core AI voice-agent infrastructure — conversational memory, interruption handling, speech timing, and text normalization — running tens of thousands of live calls a day.",
+        "Developed core AI voice-agent infrastructure — conversational memory, interruption handling, speech timing, and text normalization — running live calls at that scale.",
         "Led engineering for a Fortune 100 bank: adapted the full platform (frontend, APIs, agent orchestration, SIP, databases) to run inside its locked-down environment and took it from pilot to production in September 2025. It now handles over a million calls a month.",
         "Set the release and evaluation standards for the enterprise deployment: exact versioned releases with digest-matched deploys, frozen evaluation campaigns, and independent review of agent-written changes.",
         "Now leading self-serve product work: a visual conversation-flow builder for designing and managing AI agents, and an AI-powered reporting builder that generates custom reporting UIs on demand.",

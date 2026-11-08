@@ -7,7 +7,6 @@ author: Joe
 description: A full-stack operations tool that replaced spreadsheet tracking for a support team managing client reporting workflows.
 role: Product-minded full-stack developer
 focus: Client status tracking, authenticated CRUD workflows, reporting exports, and support-team visibility.
-impact: Reduced manual spreadsheet coordination and gave the team a single source of truth for client progress.
 stack:
     - MongoDB
     - Express
