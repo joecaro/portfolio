@@ -85,7 +85,7 @@ export default async function ProjectPage({
                         ← All projects
                     </ButtonLink>
                 </div>
-                {kind && (
+                {kind && !summary && (
                     <p className='text-sm font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400'>
                         {kind}
                     </p>
@@ -96,8 +96,7 @@ export default async function ProjectPage({
                 <p className='max-w-[58ch] text-lg leading-relaxed text-neutral-700 md:text-xl dark:text-neutral-300'>
                     {project.description}
                 </p>
-                <div className='flex flex-wrap items-center gap-4'>
-                    {summary && <><ButtonLink href='#product-demo'>Explore the product ↓</ButtonLink><a href='#case-study' className='inline-flex min-h-11 items-center rounded px-2 text-sm font-semibold underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600'>Read the case study</a></>}
+                {(!summary || project.demo || project.github) && <div className='flex flex-wrap items-center gap-4'>
                     {project.demo && (
                         <ButtonLink href={project.demo}>Live demo ↗</ButtonLink>
                     )}
@@ -106,14 +105,16 @@ export default async function ProjectPage({
                             GitHub ↗
                         </ButtonLink>
                     )}
-                    <span className='text-sm text-neutral-600 dark:text-neutral-400'>
+                    {!summary && <span className='text-sm text-neutral-600 dark:text-neutral-400'>
                         {new Date(project.date).toLocaleDateString("en-US", { month: "long", year: "numeric" })} · {readMinutes(project.content)} min
                         read
-                    </span>
-                </div>
+                    </span>}
+                </div>}
+                {summary && <div className='border-t border-neutral-200 pt-4 dark:border-neutral-700'>
+                    {summary.standing && <dl className='grid gap-x-8 gap-y-3 sm:grid-cols-3'>{summary.standing.map(item => <div key={item.label}><dt className='text-xs font-semibold text-neutral-600 dark:text-neutral-400'>{item.label}</dt><dd className='text-sm leading-relaxed'>{item.value}</dd></div>)}</dl>}
+                    <p className='mt-3 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400'>{project.role} · {project.stack.join(' / ')}</p>
+                </div>}
             </section>
-
-            {summary && <section aria-label='Project overview' className='mx-auto max-w-6xl px-4 pt-8 md:px-8'><dl className='grid gap-5 border-y border-neutral-200 py-6 md:grid-cols-3 dark:border-neutral-700'>{[{label:'What I built',text:summary.built},{label:'Why it matters',text:summary.value},{label:'Evidence',text:summary.evidence}].map(item=><div key={item.label}><dt className='mb-2 text-xs font-bold uppercase tracking-widest text-blue-700 dark:text-blue-300'>{item.label}</dt><dd className='text-sm leading-relaxed'>{item.text}</dd></div>)}</dl>{summary.standing && <div className='mt-4 rounded-lg border border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-700 dark:bg-neutral-800/50'><h2 className='mb-2 text-xs font-bold uppercase tracking-widest text-neutral-700 dark:text-neutral-300'>Where it stands</h2><dl className='grid gap-3 md:grid-cols-3'>{summary.standing.map(item=><div key={item.label}><dt className='text-xs font-semibold text-neutral-600 dark:text-neutral-400'>{item.label}</dt><dd className='text-sm leading-relaxed'>{item.value}</dd></div>)}</dl></div>}<p className='mt-3 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400'>{project.role} · {project.stack.join(' / ')}</p></section>}
 
             {summary && <HeadlinerExperience slug={project.slug}/>}
 
