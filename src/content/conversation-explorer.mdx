@@ -7,7 +7,7 @@ author: Joe
 description: Tools for reviewing AI voice-agent calls. One call at a time, see what the agent said next to what it actually did. Across many calls, see where they go.
 role: Product design and frontend engineering; directed coding agents for much of the implementation
 focus: Speech versus recorded action, one selection across views, unknowns shown as unknown
-impact: Call-flow map merged; transcript-first call-details redesign is in review behind an internal opt-in.
+impact: Call-flow map and the transcript-first call-details redesign are both merged to main.
 stack:
     - TypeScript
     - React
@@ -71,6 +71,6 @@ I also checked it against one masked real call, which caught a text-wrapping bug
 
 ## Where it stands
 
-The call-flow map is merged. The call-details redesign is unmerged and in review. It's behind an opt-in switch for internal users, on calls that have turn logs, and it hasn't been released. I don't have usage numbers for either.
+Both are merged to main: the call-flow map first, then the transcript-first call details and the waveform. Porting the redesign into one enterprise customer's separate build went badly the first time, so I reverted it, wrote baseline tests against the old screen, and the fixed port is in review. I don't have usage numbers for either.
 
 The demo above rebuilds both screens with a made-up call.

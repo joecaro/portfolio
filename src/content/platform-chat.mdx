@@ -7,7 +7,7 @@ author: Joe
 description: An AI analyst inside a voice-AI platform. Ask about your calls in plain English and it counts, searches and reads them, then answers with links to the calls it used.
 role: Product and architecture lead; designed, directed and shipped it, with coding agents doing much of the implementation
 focus: Answers that stay inside the scope you asked about, and say plainly when they are partial
-impact: Running as an internal staff preview, checked by about 1,250 automated tests and live-model evals.
+impact: "v2 runtime merged to main in November 2026 and waiting on release acceptance; evals caught three bugs before release."
 stack:
     - Python
     - TypeScript
@@ -69,8 +69,8 @@ A response can come back fine and still be incomplete, because the model ran out
 
 The evals run the real system against synthetic call data. The expected answers are hidden from the model, and a separate reviewer grades every answer. There are a few hundred cases. Sixty are adversarial, trying to break scope or get at data the user shouldn't see, and the latest run found nothing unsafe.
 
-Not everything passes. The latest focused run of 68 cases came out 39 pass, 24 partial, 5 fail. The partials are what I'm working on.
+Not everything passes. One focused run of 68 cases came out 39 pass, 24 partial, 5 fail. Scores moved around as I tightened the rubric and changed fixtures, so I don't read them as a trend. What the evals did do was catch real bugs before anyone else saw them: a schema-name mismatch in the serving path and two citation-contract bugs.
 
-It's running as a staff preview behind sign-in. No customers yet, so no adoption or time-saved numbers.
+It ran as a staff preview behind sign-in. In early November the v2 runtime merged to main. It isn't released yet, because live acceptance testing still fails, and it doesn't ship until that passes. No customers yet, so no adoption or time-saved numbers.
 
 The panel above is a rebuild of the real UI with made-up data.

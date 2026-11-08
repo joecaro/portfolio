@@ -16,9 +16,9 @@ export function ExperienceSection() {
       role: "Founding Engineer",
       period: "01/2025 - Present",
       achievements: [
-        "Build and own customer-facing platform surfaces — user management, reporting, analytics, and human-in-the-loop compliance review — for enterprise customers monitoring ~1M AI-driven phone interactions a month.",
-        "Developed core AI voice-agent infrastructure — conversational memory, interruption handling, speech timing, and text normalization — powering tens of thousands of live calls daily with sub-second response times.",
-        "Led engineering for a Fortune 100 financial institution, adapting the full platform (frontend, APIs, agent orchestration, SIP, databases) to run inside a highly restricted enterprise environment and taking it from pilot to production.",
+        "Build and own customer-facing platform surfaces — user management, reporting, analytics, and human-in-the-loop compliance review — for 20+ lenders whose AI agents handle millions of phone calls a month.",
+        "Developed core AI voice-agent infrastructure — conversational memory, interruption handling, speech timing, and text normalization — running tens of thousands of live calls a day.",
+        "Led engineering for a Fortune 100 bank: adapted the full platform (frontend, APIs, agent orchestration, SIP, databases) to run inside its locked-down environment and took it from pilot to production in September 2025. It now handles over a million calls a month.",
         "Now leading self-serve product work: a visual conversation-flow builder for designing and managing AI agents, and an AI-powered reporting builder that generates custom reporting UIs on demand.",
         "Expanding the platform into new communication channels like SMS to broaden how AI agents reach customers",
       ],
@@ -29,7 +29,7 @@ export function ExperienceSection() {
       role: "Software Engineer",
       period: "07/2022 - 10/2024",
       achievements: [
-        "Achieved multi-million in revenue by creating a reusable UI component library for consistent promotion rendering across platforms & properties",
+        "Built the shared UI component library for promotions, adopted across multiple products and properties, speeding feature delivery on revenue-generating experiences",
         "Built multiple internal tools for the operations team, streamlining promotional content planning & management",
         "Developed user-facing products focused on bet-tracking and user engagement enhancement",
         "Led cross-functional teams on projects from ideation to deployment, ensuring alignment with business goals",

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/Button";
 import { MDXRenderer } from "@/components/mdx/MDXRenderer";
-import { getAllProjects, getProjectBySlug } from "@/lib/getAllProjects";
+import { getAllProjects, getProjectBySlug, getProjectslugs } from "@/lib/getAllProjects";
 import { slugify } from "@/lib/utils";
 import type { Project } from "@/types";
 import { HeadlinerExperience, HEADLINER_SUMMARIES } from "@/components/HeadlinerExperience";
@@ -37,6 +38,7 @@ export async function generateMetadata({
 }: {
     params: { slug: string };
 }): Promise<Metadata> {
+    if (!getProjectslugs().includes(params.slug)) notFound();
     const project = await getProjectBySlug(params.slug);
     return {
         title: `${project.title} | Joseph Carothers`,
@@ -49,6 +51,7 @@ export default async function ProjectPage({
 }: {
     params: { slug: string };
 }) {
+    if (!getProjectslugs().includes(params.slug)) notFound();
     const [project, all] = await Promise.all([
         getProjectBySlug(params.slug),
         getAllProjects(),

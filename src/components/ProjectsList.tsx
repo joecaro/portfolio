@@ -1,88 +1,24 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
-import { CSSTransition } from "react-transition-group";
 import ProjectCard from "./ProjectCard";
 import MaxWidthContainer from "./styles/MaxWidthContainer";
-import { Button } from "./Button";
 import { Project } from "@/types";
 
 export default function ProjectsList({ projects }: { projects: Project[] }) {
-  const availableFilters = projects
-    .reduce((acc, project) => {
-      project.tags.forEach((tag) => {
-        if (!acc.includes(tag)) {
-          acc.push(tag);
-        }
-      });
-      return acc;
-    }, [] as string[])
-    .filter(Boolean);
-
-  const [filter, setFilter] = useState("featured");
+  const featured = projects.filter((project) => project.tags.includes("featured"));
+  if (!featured.length) return null;
 
   return (
     <MaxWidthContainer>
       <section className="pb-20 w-full z-10">
-        <h2 className="text-4xl dark:text-neutral-300 pb-2">
-          Projects
-        </h2>
-        <select
-          className="text-xl border border-neutral-200 rounded-md p-2 my-4 dark:bg-neutral-600 dark:text-neutral-300  md:hidden cursor-pointer"
-          title="Project Category Selector"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
-          {availableFilters.map((category) => (
-            <option key={category} value={category}>
-              {category.toUpperCase()}
-            </option>
-          ))}
-        </select>
-        <div className="hidden md:flex flex-wrap justify-between gap-8">
-          {[
-            "Featured",
-            "ReactJS",
-            "NextJS",
-            "SolidJS",
-            "Javascript",
-            "C#",
-            "ML",
-          ].map((category) => (
-            <Button
-              key={category}
-              variant={filter === category.toLowerCase() ? "fill" : "line"}
-              pressed={filter === category.toLowerCase()}
-              onClick={() => setFilter(category.toLowerCase())}
-            >
-              {category}
-            </Button>
-          ))}
-        </div>
+        <h2 className="text-4xl dark:text-neutral-300 pb-2">More projects</h2>
         <div className="list grid gap-20 py-8 overflow-hidden md:grid-cols-2 md:grid-rows-[repeat(auto-fit,minmax(200px,500px))]">
-          {projects.map((project) => {
-            return (
-              <CSSTransition
-                key={`${project.slug}-transition`}
-                in={project.tags.includes(filter)}
-                timeout={300}
-                classNames="project"
-                unmountOnExit
-                exit={false}
-              >
-                <ProjectCard
-                  filter={filter}
-                  setFilter={setFilter}
-                  project={project}
-                />
-              </CSSTransition>
-            );
-          })}
+          {featured.map((project) => (
+            <ProjectCard key={project.slug} filter="featured" project={project} />
+          ))}
         </div>
         <div>
-          <Link className="dark:text-neutral-300" href="/projects">
-            See All Projects...
+          <Link className="underline dark:text-neutral-300" href="/projects#archive">
+            Older work and experiments are in the archive
           </Link>
         </div>
       </section>
