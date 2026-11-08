@@ -1,0 +1,95 @@
+---
+slug: fortune-100-voice-ai
+title: "Voice AI at a Fortune 100 Bank"
+date: Nov 07 2026 12:00 PM
+kind: "AI & platform"
+author: Joe
+description: "AI voice agents calling a Fortune 100 bank's customers, running entirely inside the bank's network. About three months from kickoff to production, live since September 2025, over a million calls a month."
+role: "Engineering lead for the deployment: integration, infrastructure, releases and model governance, with coding agents doing much of the 2026 implementation"
+focus: "Running a cloud voice-AI platform where we couldn't see production, and proving to the bank's model reviewers that it behaves"
+impact: "About three months from kickoff to production. Live since September 2025, over a million calls a month, a second line of business added in July 2026."
+stack:
+    - Python
+    - TypeScript
+    - SIP
+    - Containers
+tags:
+    - featured
+    - voice AI
+    - enterprise systems
+tech:
+    - Python
+    - TypeScript
+    - React
+image: /img/headliners/fortune-100-voice-ai-product.jpg
+position: 0
+headliner: true
+---
+
+## What it is
+
+A Fortune 100 bank uses our AI voice agents to call customers who are a little behind on a payment. The agent confirms it's talking to the right person, explains what's owed, takes a payment or a promise to pay, and hands off to a person when it should.
+
+The catch is that all of it runs inside the bank. Our product was built for our own cloud. Here the agents, telephony, models, dashboards and databases all run on the bank's machines, behind the bank's rules.
+
+It went from kickoff to production in about three months, went live for card accounts in September 2025, added auto loans in July 2026, and now handles over a million calls a month. I lead engineering for it. That covers the integration, the infrastructure, every release into the bank, incidents, and the model-governance work with the bank's reviewers.
+
+## About three months to production
+
+Technical alignment started in May 2025. Production cutover finished at the end of August, and the first reviewed production calls came in early September. For a bank, that's fast.
+
+In that window we built the telephony path into the bank's phone system, the integration with its contact-center platform, the collections API, the model path through the bank's proxy, and container images for every piece. We built it in parallel against a system we couldn't fully see.
+
+That speed had a cost, which comes up below.
+
+## Learning the bank's infrastructure
+
+Most of the work was understanding someone else's infrastructure well enough to run on it blind:
+
+- No access to production. Everything we learn comes from the bank's engineers, the artifacts they send back, or what our own software reports about itself.
+- Network restrictions everywhere. Our cloud setup didn't fit: the voice traffic couldn't cross the firewall, so the agents run in the bank's own data center.
+- Every deploy goes through the bank's remote desktop, access controls and pipeline. Every image goes through its security scan.
+- Models are only reachable through the bank's internal proxy. Text-to-speech runs fully offline with a license file.
+
+I ended up holding a lot of that map: which team owns which system, how a call actually moves through their network, what each environment can and can't reach. When something breaks and you can't look at production, knowing exactly where to ask is most of the fix.
+
+## Telephony and the contact-center platform
+
+The hardest integration was the bank's contact-center platform. It's what logs each virtual agent in, puts it in a ready state, hands it calls, and tracks it through wrap-up, just like a human agent. The bank's side went through a vendor library we didn't write, and every state change had to line up with what their platform expected.
+
+We couldn't test against their real system whenever we wanted, so we built our own. Staging runs a high-fidelity mock of the contact-center platform that follows the same event contract: logins, ready and not-ready, calls arriving, transfers, disconnects. It has conformance tests that check it against the real contract. Our agents run full calls against it before a change goes anywhere near the bank.
+
+The Live Agents screen in the demo is where all of this shows up. It's the screen for watching every virtual agent's state in real time. When a production problem made that screen time out, the fix was to stop sending each agent's full event history on every poll. The demo replays it.
+
+## One codebase, not a fork
+
+Three months to production meant cutting corners in one place: the bank's version became a fork. By mid-2026 I measured it at about 200 bank-specific branches, 135 checks for "am I on the bank's machines?", and 99 modules copied into a separate folder. Fixes had to land in two places, and the two drifted apart.
+
+So we're moving the bank back onto one image built from main, with the differences handled as configuration instead of copied code. As part of that, the vendor library is being replaced with a client we own, so contact-center behavior is code we can read and test. It's still in progress.
+
+## Model governance
+
+A bank doesn't stop at "does it work?" It asks how you'd prove it to its model-risk reviewers, keep proving it as things change, and show you aren't locked into one model provider.
+
+I worked directly with the bank's reviewers. I demoed our review tooling to them, sent the recaps, and turned their asks into work. I also reviewed our own model-risk inventory through four revisions, pushing back where it described after-call evaluation as if it gated live output, because that kind of claim is exactly what a reviewer will check.
+
+What we built:
+
+- Evidence for every call. Turn-by-turn call exports and an automated evaluation result per call, so reviewers can audit any call they pick.
+- Human review that checks the machine. Reviewers pull samples from the real call population and judge them in a review tool, against a taxonomy of what can go wrong that came out of sessions with the bank's reviewers. Their verdicts are compared with the automated judge's, so the judge gets checked too.
+- Evaluations you can't quietly move. Every baseline, fix and regression run is a frozen campaign. Runs only get compared when the model and test cases match, and a targeted fix can't stand in for the full gate.
+- Evidence before production. AI changes headed for production need an evidence package generated in staging first.
+- Not tied to one model. We benchmarked four models side by side on the same frozen evaluations.
+- A gating evaluation for the bank: the seven input gates we'd already agreed with them, 300 cases, 600 runs, and a one-page writeup.
+
+## Shipping into a bank
+
+Releases go through the bank's scan and approval queue, so a sloppy release is expensive. I set some rules. Every customer image is tagged with one exact version from main. What gets deployed has to match, by digest, what was tested and approved. And we keep our own release ledger, because the bank's status pages weren't reliable enough to tell what was actually running.
+
+## Does it work?
+
+It's been in production since September 2025. It handles over a million calls a month, and the bank added a second line of business in July 2026. The bank also recognized our company at its annual technology innovation symposium.
+
+What I won't put here are the business results. The bank measures them against its own human agents, and those numbers are theirs. I'm also not claiming I did it alone. Teammates own real pieces, and coding agents wrote a lot of the 2026 code. My part was the decisions, the integration, the releases, the debugging and the relationship with the bank's engineers and reviewers.
+
+The demo above rebuilds the Live Agents screen with made-up agents and replays the timeout fix.
