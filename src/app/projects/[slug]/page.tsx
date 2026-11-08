@@ -70,7 +70,7 @@ export default async function ProjectPage({
     );
     const headings = headingsOf(project.content);
     const kind = kindLabel(project);
-    const summary = project.headliner ? HEADLINER_SUMMARIES[project.slug] : undefined;
+    const summary = HEADLINER_SUMMARIES[project.slug];
 
     const glance = [
         { label: "My role", value: project.role },
@@ -165,7 +165,7 @@ export default async function ProjectPage({
                 </div>
             </section>}
 
-            {project.image && !project.headliner && (
+            {project.image && !summary && (
                 <section className='mx-auto max-w-6xl px-4 pt-10 md:px-8'>
                     <figure className='overflow-hidden rounded-lg border-2 border-neutral-200 bg-slate-100 dark:border-neutral-700 dark:bg-neutral-800'>
                         <div

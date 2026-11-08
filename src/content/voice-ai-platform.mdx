@@ -1,0 +1,79 @@
+---
+slug: voice-ai-platform
+title: "Knowing What the Agents Did"
+date: Nov 08 2026 12:00 PM
+kind: "AI & platform"
+author: Joe
+description: "Four tools I built around a voice-AI platform that handles millions of calls a month: test agents before release, review one call, investigate patterns across many, and ask questions in plain English."
+role: "Designed all four and built most of them, directing coding agents for much of the implementation"
+focus: "Every answer points at evidence, counts stay honest, and partial results say they're partial"
+impact: "Connected tools from release testing to plain-English questions: in a client's test environments, merged to main, or deployed for staff."
+stack:
+    - TypeScript
+    - React
+    - Python
+    - AI agents
+tags:
+    - featured
+    - ai
+    - voice AI
+    - product design
+tech:
+    - TypeScript
+    - React
+    - Python
+image: /img/headliners/voice-ai-platform-product.jpg
+position: 1
+headliner: true
+---
+
+## What it is
+
+Our voice agents handle millions of phone calls a month for 20+ enterprise clients. A dashboard can tell you how many calls ended in a payment or a transfer. It can't tell you what the agent actually did on a call, whether a new version is better than the last one, or why transfers jumped on Tuesday.
+
+That's the job of these four tools. Each one covers a different moment:
+
+1. Before a release, test the agent against known cases and compare runs.
+2. When one call looks wrong, see exactly what the agent heard, did and said.
+3. When something keeps going wrong, investigate the pattern across many calls.
+4. When you just have a question, ask it in plain English.
+
+They share one set of rules, and I held all four to them: every answer points at the evidence behind it, counts stay separate instead of collapsing into one impressive number, and a partial result says it's partial. Coding agents wrote a lot of the code. The design, the contracts between the pieces and the verification were mine.
+
+Each section below is short and links to the full write-up.
+
+## 1. Test before release
+
+You can't tell whether a new agent version is better by listening to a few calls. The evaluation console runs the agent against a catalog of test cases, several attempts each, and puts the runs side by side.
+
+The hard part was making comparisons honest. A case that errored, never got graded, or was edited between runs gets left out of the comparison, with the reason shown. Otherwise one run looks better just because it skipped the hard cases. Each result also carries the tool call the agent made and what came back, so a pass is backed by what actually happened.
+
+It's deployed in a client's test environments. [Full write-up →](/projects/enterprise-voice-ai)
+
+## 2. Review one call
+
+When a call goes wrong, a transcript alone hides most of the story. The call-details view puts the transcript, the recording, every tool call and every safety check on one timeline, so you can see that the agent asked for the date three times because a tool kept rejecting it. A call-flow map shows where many calls go and where they drop off.
+
+My rule here was that the UI must never guess. Events with no timestamp go in their own list instead of being drawn at zero, and missing times say "Time not recorded."
+
+Both views are merged to main. [Full write-up →](/projects/conversation-explorer)
+
+## 3. Investigate patterns
+
+Scout is an AI investigator. You ask why something keeps happening, and it searches tens of thousands of calls, groups them, reads the important ones turn by turn, and reports only what it can back up with the exact turns it read.
+
+The research shaped all of it. In one benchmark, only 34 of 74 first-pass findings survived a check by a second, independent model, so Scout spends its effort on proving findings, not generating them. A finding that cites a call it never opened, or a quote that doesn't match the source, gets rejected before anyone sees it.
+
+It's deployed for internal staff and is the investigation engine behind Platform Chat. [Full write-up →](/projects/scout-evidence-engine)
+
+## 4. Ask in plain English
+
+Platform Chat is an AI analyst inside the product. It scopes the question first, then counts, searches and reads calls, and answers with links to each one. If it runs out of time or budget, it says the answer is partial instead of presenting it as complete.
+
+It's checked by about 1,250 automated tests and live-model evaluations. Sixty adversarial cases try to break its scope or reach data the user shouldn't see, and the latest run found nothing unsafe. The evaluations also caught three real bugs before release. The v2 runtime is merged to main, and release is waiting on live acceptance testing. [Full write-up →](/projects/platform-chat)
+
+## How they fit together
+
+They're connected tools that share one set of rules. Platform Chat uses Scout to investigate. And all four hold to the same idea of evidence: an answer isn't done until it points at something you can check. Each full write-up is also clear about where it falls short, like Scout's prevalence counts that can still come back as a wrong zero.
+
+The demo above has all four. Each tab is a rebuild of the real UI with made-up data.

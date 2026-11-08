@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/types";
 
-const disciplines = ["Production delivery", "Product & AI", "Design engineering", "Agent systems", "Research & retrieval", "Enterprise engineering"];
+const disciplines = ["Production delivery", "Product & AI", "Agent systems"];
 
 export default function HeadlinerProjects({ projects }: { projects: Project[] }) {
   const headliners = projects.filter(p => p.headliner).sort((a, b) => (a.position ?? 99) - (b.position ?? 99));
