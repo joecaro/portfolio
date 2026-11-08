@@ -89,6 +89,7 @@ export function LiveAgentsDemo() {
   const run = (series: "before" | "after") => {
     timers.current.forEach(t => window.clearTimeout(t));
     timers.current = [];
+    setStep(-1);
     const delay = reduce ? 0 : 900;
     setPhase(series === "before" ? "replay" : "fixing");
     VIEWERS.forEach((_, i) => {
@@ -101,6 +102,8 @@ export function LiveAgentsDemo() {
 
   const reset = () => {
     timers.current.forEach(t => window.clearTimeout(t));
+    timers.current = [];
+    setPolling(false);
     setAgents(START);
     setPhase("normal");
     setStep(-1);
@@ -113,9 +116,9 @@ export function LiveAgentsDemo() {
   const status = useMemo(() => {
     if (phase === "normal") return "Each poll returns every agent's row, full event history included. Fine while only a few people watch.";
     if (phase === "replay") return "More people open the page. Every poll carries each agent's full event history.";
-    if (phase === "down") return "Polls pile up and requests start timing out (504). The table can't load.";
+    if (phase === "down") return "In production, polls piled up and requests timed out (503s and 504s). The table couldn't load.";
     if (phase === "fixing") return "Same load, but the poll no longer sends event history.";
-    return "Fixed. History loads only when you open one agent.";
+    return "Fixed. Event history stays out of the poll; it's still there on each agent's detail page.";
   }, [phase]);
 
   return (
@@ -133,7 +136,7 @@ export function LiveAgentsDemo() {
             <div className="px-2 py-1.5">Call Review</div>
           </aside>
 
-          <main className="min-w-0 flex-1 bg-gray-50 p-4">
+          <div className="min-w-0 flex-1 bg-gray-50 p-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <h2 className="text-sm font-semibold text-gray-900">AI Agents</h2>
@@ -158,7 +161,7 @@ export function LiveAgentsDemo() {
 
             <div className="mt-3 overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
               {phase === "down" ? (
-                <div className="flex h-[300px] items-center justify-center text-sm text-gray-600" role="status">
+                <div className="flex h-[300px] items-center justify-center text-sm text-gray-600">
                   Failed to load agents. Please try again.
                 </div>
               ) : (
@@ -221,7 +224,7 @@ export function LiveAgentsDemo() {
                   )}
                 </div>
               </div>
-              <div className="mt-3 grid grid-cols-5 gap-2" aria-label="Slowest-5% poll time by number of people watching">
+              <div className="mt-3 grid grid-cols-5 gap-2" role="img" aria-label="Slowest-5% poll time by number of people watching">
                 {VIEWERS.map((v, i) => {
                   const shown = phase !== "normal" && i <= step;
                   const s = series[i];
@@ -240,7 +243,7 @@ export function LiveAgentsDemo() {
               </div>
               <p className="mt-2 text-[10px] text-gray-500">Bars: slowest 5% of polls, from the staging reproduction (2,514,826 bytes per poll before, 38,100 after).</p>
             </section>
-          </main>
+          </div>
         </div>
       </div>
     </div>
