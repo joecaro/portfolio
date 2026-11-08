@@ -71,6 +71,15 @@ Later, a privacy check that rejected one call escaped its handler and killed eve
 
 Same approach both times: find the cause before fixing anything, and keep failures small and visible.
 
+## My part, and the agents' part
+
+Agents wrote a lot of Scout's code. A few of the calls I made:
+
+- After an incident fix, the agent also wanted to roll out a broad settings change. I said no and shipped only the targeted fix, plus an eval for the exact request that failed.
+- I retired a research experiment when its best result moved top-1 matches from 2 of 8 to only 3 of 8, and had the code removed so it couldn't linger.
+- The agent built custom release machinery for Scout. I had it removed in favor of the deployment setup the team already uses.
+- I set the boundaries: source data through one read path only, team chat messages never count as evidence, and the rollout stays staff-only until it's ready.
+
 ## Does it work?
 
 Scout is strict about what counts, and the demo above shows it: the finding holds up on the evidence it has, but stays an observation. A finding is a "supported problem" only if it has the prior state, the trigger, the agent's response and the consequence, each tied to a verified turn, plus evidence that the behavior was avoidable and harmful. Anything less gets saved as an observation.

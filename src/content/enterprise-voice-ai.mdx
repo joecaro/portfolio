@@ -76,6 +76,15 @@ A few fixes on the live call side, all about events showing up at the wrong time
 - Tracing in the long-running worker process is now isolated per call, so one call's trace can't bleed into the next.
 - Delayed events from a finished transfer could change state on a later one. The adapter now remembers retired transfer IDs and ignores late events for them. I wrote three regression tests that fail on the old code and pass on the new. It's pushed, but I didn't confirm it deployed.
 
+## My part, and the agents' part
+
+Agents wrote much of the code. What I decided:
+
+- I picked the console's shape, a master-detail view, over restyling the old screen or building a run feed, and approved a full rewrite.
+- To repair bad runs, the agent proposed new database structure for attempt slots and revision chains. I ruled out schema changes and chose a fresh full-suite rerun instead, so old runs stay untouched in history.
+- I made scratch-versus-tracked runs the priority and confirmed the rule that a scratch run can never change a tracked verdict. With that settled, the agent caught that a three-case retry would have widened to 889 attempts.
+- For the model comparison, I had reasoning turned off for every model so the runs were actually comparable.
+
 ## Where it stands
 
 The console is used by engineers running the agent test suites. I don't have usage numbers. Most of this work landed on release and feature branches; I haven't confirmed which parts are on main.

@@ -70,6 +70,14 @@ All four were the UI guessing when the data didn't say. Untimed events now go in
 
 I also checked it against one masked real call, which caught a text-wrapping bug the fixtures missed. I also kept the colored reply-type pills against the design reviewer's advice, because people scanning dozens of calls need to spot scripted or sensitive replies fast.
 
+## My part, and the agents' part
+
+Agents wrote much of the code. Where I stepped in:
+
+- When the port into one customer's build broke, the order was my call: revert first, then tests for the old screen, then the re-port. I'm holding the fixed version until I've reviewed it.
+- I drove the redesign from screenshots of real use. That's how the transcript-first layout came about, and how I caught a bug after merge where hidden tool data was labeled "missing".
+- I merged the call-flow map only after reviewing it in the design lab and getting the review comments fixed.
+
 ## Where it stands
 
 Both are merged to main: the call-flow map first, then the transcript-first call details and the waveform. Porting the redesign into one enterprise customer's separate build went badly the first time, so I reverted it, wrote baseline tests against the old screen, and the fixed port is in review. I don't have usage numbers for either.
