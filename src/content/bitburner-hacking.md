@@ -4,7 +4,7 @@ title: "Bitburner Hacking Scripts"
 date: Sep 25 2024 12:00 AM
 kind: "Experiments"
 author: Joe
-description: The development journey of a Bitburner hacking script, starting from a basic version (hck-1) to a fully-featured final release.
+description: Iterations of a Bitburner script for automating server hacking and resource management.
 stack:
     - ReactJS
     - Javascript
@@ -22,7 +22,7 @@ image: https://res.cloudinary.com/joecarothers/image/upload/v1727381020/misc/Pro
 
 ## Introduction
 
-Bitburner is a unique game where players can automate tasks using scripts to hack servers, grow networks, and manage resources. This post explores the evolution of a Bitburner script, tracing the journey from its initial version, *hck-1*, to the final, fully-featured release. Along the way, we'll highlight improvements and key takeaways from each iteration.
+Bitburner lets players write scripts to hack servers and manage resources. I kept notes on how my script changed from hck-1 through the final version.
 
 ## Iteration 1: hck-1
 
@@ -67,7 +67,7 @@ Bitburner is a unique game where players can automate tasks using scripts to hac
 
 - **Objective**: Strengthen error handling and improve security.
 - **Features**:
-  - Robust error handling for edge cases.
+  - Added error handling.
   - Security checks for access permissions before executing operations.
 - **Changes**:
   - Introduced validation steps and enhanced logging for better debugging.
@@ -79,7 +79,7 @@ Bitburner is a unique game where players can automate tasks using scripts to hac
   - Real-time performance monitoring to detect bottlenecks.
   - More efficient resource allocation for better overall performance.
 - **Changes**:
-  - Refactored code for streamlined operations and lower system load.
+  - Refactored code to reduce system load.
 
 ## Iteration 7: hck-7
 
@@ -94,11 +94,11 @@ Bitburner is a unique game where players can automate tasks using scripts to hac
 
 - **Objective**: Deploy the polished script.
 - **Features**:
-  - Comprehensive automation with real-time UI.
-  - Robust error handling and extensive documentation.
+  - Added a live status display to the automation.
+  - Added error handling and documentation.
 - **Changes**:
   - Final optimizations for smooth execution and easy setup.
 
 ## Conclusion
 
-The evolution of the Bitburner script, from *hck-1* to its final version, showcases continuous iteration, optimization, and refinement. Key lessons learned included the importance of thread management, error handling, and maintaining a clean, modular codebase. Future improvements could focus on advanced security and performance metrics, as well as further UI enhancements.
+Across the versions, I changed how the script allocates threads and handles errors, and added a live UI.

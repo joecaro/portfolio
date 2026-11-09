@@ -66,7 +66,7 @@ const Hero = () => {
           </div>
           <div>
             <h1 className="text-4xl font-bold dark:text-neutral-300">
-              I build voice-AI products, from the interface to the live call.
+              I build voice agents and the tools teams use to run them.
             </h1>
           </div>
           <div>

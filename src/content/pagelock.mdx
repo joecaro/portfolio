@@ -32,7 +32,7 @@ Page Lock is a React ownership UI library. It provides a context provider, a `us
 
 ## Updates and enforcement boundary
 
-The library polls the adapter for ownership changes. With the default three-second interval, another user's change appears on the next poll. This is polling, not an immediate push update.
+The library polls the adapter for ownership changes. With the default three-second interval, another user's change appears on the next poll.
 
 The React UI can display ownership and send lock or unlock requests through an adapter. It does not by itself guarantee mutual exclusion or prevent conflicting writes. For that, the backing service must enforce ownership atomically and reject writes from callers that do not hold the lock. The example and adapter interface show the client integration point; server enforcement depends on the application using the library.
 

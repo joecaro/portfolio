@@ -40,9 +40,7 @@ export default async function ProjectsPage() {
                     Projects
                 </h1>
                 <p className='max-w-[60ch] text-lg leading-relaxed text-neutral-700 dark:text-neutral-300'>
-                    Enterprise voice AI, tools for operating it, and selected
-                    personal projects. Each case study names my contribution
-                    and where the work stands.
+                    A bank deployment, tools for testing and reviewing voice agents, and projects I built on my own.
                 </p>
             </section>
 
@@ -57,10 +55,10 @@ export default async function ProjectsPage() {
                         <Link
                             key={project.slug}
                             href={`/projects/${project.slug}`}
-                            className='group grid overflow-hidden rounded-lg border-2 border-neutral-200 bg-white transition hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[6px_6px_0_#1e3a8a] motion-reduce:transition-none motion-reduce:hover:translate-x-0 motion-reduce:hover:translate-y-0 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] dark:border-neutral-700 dark:bg-neutral-900'
+                            className={`group grid overflow-hidden rounded-lg border-2 border-neutral-200 bg-white transition hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[6px_6px_0_#1e3a8a] motion-reduce:transition-none motion-reduce:hover:translate-x-0 motion-reduce:hover:translate-y-0 dark:border-neutral-700 dark:bg-neutral-900 ${project.image ? "sm:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]" : ""}`}
                         >
-                            <div className='relative min-h-[200px] border-b-2 border-neutral-200 bg-slate-100 sm:border-b-0 sm:border-r-2 dark:border-neutral-700 dark:bg-neutral-800'>
-                                {project.image && (
+                            {project.image && (
+                                <div className='relative min-h-[200px] border-b-2 border-neutral-200 bg-slate-100 sm:border-b-0 sm:border-r-2 dark:border-neutral-700 dark:bg-neutral-800'>
                                     <Image
                                         src={project.image}
                                         alt=''
@@ -68,8 +66,8 @@ export default async function ProjectsPage() {
                                         sizes='(min-width: 1024px) 280px, (min-width: 640px) 45vw, 100vw'
                                         className='object-contain p-4'
                                     />
-                                )}
-                            </div>
+                                </div>
+                            )}
                             <div className='flex flex-col gap-2.5 p-5'>
                                 <span className='text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400'>
                                     {project.kind} ·{" "}

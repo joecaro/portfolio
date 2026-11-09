@@ -32,13 +32,13 @@ A Fortune 100 bank uses our voice agents to call customers about overdue payment
 
 The integration had to support the bank's contact-center lifecycle as well as its network and security controls: sign in, become ready, handle a call, and complete wrap-up before becoming available again. Transfer and disconnect events must stay associated with the right session. These are the workflow requirements; each implementation needs separate validation.
 
-That lifecycle crosses software we own and a contact-center interface we integrate with. Staging verified the CTI client's login and readiness transitions. We also built a contact-center simulator around the event contract so the agent can be exercised before changes enter the bank's release process.
+That lifecycle crosses software we own and a contact-center interface we integrate with. We built a contact-center simulator around the event contract so changes can be exercised before entering the bank's release process.
 
 ## A state transition that mattered
 
 Call arrival, disconnect and readiness are related events, but they are not interchangeable. A simulator fix addressed a cleanup edge case: a call remains in progress until the matching ready event arrives. The simulator keeps that agent blocked from new calls until its readiness event is delivered, and preserves agent-specific events during deduplication. A synthetic flow checked delayed readiness, call disposal, in-progress blocking and duplicate-ready handling.
 
-The staging CTI integration separately verified ten agents progressing through initialization, login, not-ready and ready. Those checks establish startup and readiness behavior; they do not establish a production transfer outcome. Transfers remain part of the integration boundary and must be validated against the contact-center behavior they invoke.
+A later connector replacement kept the existing integration as a fallback and introduced the new path behind a feature flag. In August 2026, staging checks verified ten agents progressing through initialization, login, not-ready and ready. Full call-flow and transfer acceptance for that replacement remained follow-up work at that checkpoint; this was not a revalidation of the original production deployment.
 
 ## What the environment required
 
@@ -68,4 +68,4 @@ Releases pass through the bank's security scan and approval process. I used exac
 
 Business-performance results are measured by the bank and remain private.
 
-The demo above reconstructs the Live Agents screen with fictional data and replays the staging timeout comparison. It is not a view into the bank's production environment.
+The optional walkthrough uses a fictional call to show how conversation turns, contact-center events and agent state fit together.

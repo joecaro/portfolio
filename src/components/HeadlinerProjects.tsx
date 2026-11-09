@@ -11,13 +11,13 @@ export default function HeadlinerProjects({ projects }: { projects: Project[] })
   return <section aria-labelledby="selected-work-title" className="mx-auto max-w-6xl px-4 pb-16 pt-12 md:px-8">
     <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b border-neutral-200 pb-6 dark:border-neutral-700">
       <div><p className="mb-3 text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400">Selected work / 01—{String(headliners.length).padStart(2, "0")}</p><h2 id="selected-work-title" className="scroll-mt-8 text-3xl font-bold tracking-tight md:text-5xl">Selected work</h2></div>
-      <p className="max-w-sm text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">An enterprise deployment, the real-time voice path, the tools around the calls, and a personal experiment in running coding agents.</p>
+      <p className="max-w-sm text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">Voice AI at a bank, real-time voice infrastructure, tools for reviewing calls, and my own coding-agent workspace.</p>
     </div>
     <div className="flex flex-col gap-10">
       {headliners.map((project, index) => <article key={project.slug} className="project grid overflow-hidden rounded-lg border border-neutral-200 bg-white md:grid-cols-2 dark:border-neutral-700 dark:bg-neutral-900">
-        <Link href={`/projects/${project.slug}`} aria-label={`Explore ${project.title}`} className={`group relative block aspect-[16/10] overflow-hidden bg-slate-100 focus-visible:z-10 focus-visible:outline focus-visible:outline-4 focus-visible:outline-blue-600 dark:bg-neutral-800 ${index % 2 ? 'md:order-2' : ''}`}>
-          <Image src={project.image} alt="" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transform-none motion-reduce:transition-none" />
-          <span className="absolute bottom-4 left-5 text-xs font-medium text-slate-600">Product preview · illustrative data</span>
+        <Link href={`/projects/${project.slug}`} aria-label={`Explore ${project.title}`} className={`flex min-w-0 flex-col justify-center gap-3 p-4 bg-slate-100 focus-visible:z-10 focus-visible:outline focus-visible:outline-4 focus-visible:outline-blue-600 dark:bg-neutral-800 ${index % 2 ? 'md:order-2' : ''}`}>
+          <Image src={project.image} alt="" width={1600} height={project.slug === "fortune-100-voice-ai" ? 894 : project.slug === "voice-runtime" ? 868 : 1000} sizes="(min-width: 768px) 50vw, 100vw" className="h-auto w-full rounded border border-neutral-200 dark:border-neutral-700" />
+          <span className="text-xs text-slate-600 dark:text-neutral-400">Preview with sample data</span>
         </Link>
         <div className="flex flex-col justify-center gap-5 p-6 md:p-10">
           <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400"><span className="text-base tabular-nums">0{index + 1}</span><span aria-hidden="true">/</span>{disciplines[index]}</p>
@@ -27,7 +27,7 @@ export default function HeadlinerProjects({ projects }: { projects: Project[] })
             {operationsProjects.map(item => <Link key={item.slug} href={`/projects/${item.slug}`} className="inline-flex min-h-11 items-center rounded text-sm font-medium text-blue-700 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600 dark:text-blue-300">{item.label}</Link>)}
           </nav>}
           <div className="flex flex-wrap gap-2 text-xs text-neutral-600 dark:text-neutral-400">{project.stack.map(tech => <span key={tech} className="rounded border border-neutral-200 px-2 py-1 dark:border-neutral-700">{tech}</span>)}</div>
-          <div><Link href={`/projects/${project.slug}`} className="inline-flex min-h-12 items-center gap-4 rounded bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">Explore case study <span aria-hidden="true">↗</span></Link></div>
+          <div><Link href={`/projects/${project.slug}`} className="inline-flex min-h-12 items-center gap-4 rounded bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">Read case study <span aria-hidden="true">↗</span></Link></div>
         </div>
       </article>)}
     </div>

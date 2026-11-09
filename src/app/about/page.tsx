@@ -7,7 +7,7 @@ import Portrait from "@/components/Portrait";
 export const metadata: Metadata = {
     title: "About | Joseph Carothers",
     description:
-        "Joseph Carothers is a founding engineer building production AI systems, voice agents and enterprise product surfaces.",
+        "Joseph Carothers is a founding engineer building production AI systems, voice agents and software for enterprise teams.",
 };
 
 const pillars = [
@@ -145,8 +145,7 @@ const About = () => {
                 <div className='flex flex-col gap-2'>
                     <h2 id='teamwork-title' className='text-3xl font-semibold'>Working with a team</h2>
                     <p className='max-w-[60ch] text-neutral-600 dark:text-neutral-400'>
-                        I work across product, engineering and customer teams. Two
-                        parts of that work show up throughout the projects here.
+                        I work with product teams, engineers and customers.
                     </p>
                 </div>
                 <div className='grid gap-5 md:grid-cols-2'>
@@ -163,11 +162,9 @@ const About = () => {
 
             <section className='mx-auto flex max-w-6xl flex-col gap-7 px-4 pb-6 pt-24 md:px-8 dark:text-neutral-200'>
                 <div className='flex flex-col gap-2'>
-                    <h2 className='text-3xl font-semibold'>The path</h2>
+                    <h2 className='text-3xl font-semibold'>Work history</h2>
                     <p className='max-w-[60ch] text-neutral-600 dark:text-neutral-400'>
-                        From the phones to the platform. Starting in customer
-                        support shaped how I build tools for the people who use
-                        them.
+                        I started in customer support before moving into software engineering.
                     </p>
                 </div>
                 <ol className='grid gap-5 sm:grid-cols-2 lg:grid-cols-4'>

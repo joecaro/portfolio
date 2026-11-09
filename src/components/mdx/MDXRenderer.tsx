@@ -63,7 +63,7 @@ const mdxComponents = {
   ),
   a: ({ children, ...props }: any) => (
     <a
-      className="text-blue-500 hover:underline text-left"
+      className="text-blue-700 underline underline-offset-4 hover:no-underline dark:text-blue-300 text-left"
       target="_blank"
       rel="noopener noreferrer"
       {...props}

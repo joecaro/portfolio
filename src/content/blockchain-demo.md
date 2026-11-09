@@ -22,17 +22,13 @@ image: https://res.cloudinary.com/joecarothers/image/upload/v1652918002/misc/Pro
 
 ## Blockchain Demo
 
-Welcome to my **Blockchain Demo** project! This educational tool provides a hands-on way to learn the core concepts behind blockchain technologies. Whether you’re new to the blockchain world or brushing up on your knowledge, this demo walks you through the foundational ideas: **hash functions**, **blocks**, and **distributed ledgers**.
-
-I've built this site using ReactJS and created a pseudo-blockchain engine to drive the interactive elements. You can see and interact with blockchain mechanics in real-time, such as **mining blocks**, **validating hashes**, and **adding new blocks**.
+I built a React demo with a small blockchain engine so you can mine a block and see how the hashes change.
 
 Inspired by the great work and videos done by [Anders Brownworth](https://andersbrownworth.com/)
 
 ## How it Works
 
-At its core, this project implements a simplified version of a blockchain, demonstrating basic methods you'd find in real-world blockchains: validating hashes, mining blocks, and adding new ones to the chain. The goal is to make complex blockchain ideas more tangible and easy to understand.
-
-Here’s a quick breakdown of the blockchain class:
+The engine validates hashes, mines blocks, and adds them to the chain.
 
 ### Key Features of the Blockchain Class
 
@@ -41,8 +37,6 @@ Here’s a quick breakdown of the blockchain class:
 - **Block Validation**: It ensures the difficulty level is met by checking that the calculated hash has a sufficient number of leading zeros.
 - **Mining Blocks**: This feature involves repeatedly calculating a hash until the desired difficulty is achieved, demonstrating the proof-of-work concept.
 - **Dynamic Block Updates**: Users can interact with blocks, modify their data, and see how this affects the blockchain's integrity.
-
-Below is the source code that powers the blockchain functionality:
 
 ```javascript
 export class Blockchain {
