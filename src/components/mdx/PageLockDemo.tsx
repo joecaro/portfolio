@@ -19,21 +19,21 @@ const users = [
 const records = [
   {
     id: "1",
-    title: "Important Document",
+    title: "Shared document",
     content:
-      "This is a very important document that needs careful coordination when editing. It contains sensitive information that should be managed carefully to avoid conflicts.",
+      "This document contains sensitive information. Coordinate edits to avoid conflicts.",
   },
   {
     id: "2",
     title: "Project Roadmap",
     content:
-      "Our project roadmap details the upcoming features and milestones. The next quarter focuses on improving user experience and adding real-time collaboration features.",
+      "The roadmap lists upcoming features and milestones. Next quarter, the team plans to improve the user experience and add real-time collaboration.",
   },
   {
     id: "3",
     title: "Meeting Notes",
     content:
-      "Notes from our last team meeting discussing the new features. We covered the implementation timeline, resource allocation, and potential challenges we need to address.",
+      "Notes from the last team meeting. Topics included the implementation timeline, resource allocation, and open challenges.",
   },
 ];
 

@@ -1,3 +1,4 @@
+import { HeadlinerExperience, VOICE_RUNTIME_SUMMARY } from "@/components/HeadlinerExperience";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +8,8 @@ import { MDXRenderer } from "@/components/mdx/MDXRenderer";
 import { getAllProjects, getProjectBySlug, getProjectslugs } from "@/lib/getAllProjects";
 import { slugify } from "@/lib/utils";
 import type { Project } from "@/types";
-import { HeadlinerExperience, HEADLINER_SUMMARIES } from "@/components/HeadlinerExperience";
+import { CASE_STUDIES } from "@/lib/caseStudies";
+import { CaseStudyPage } from "@/components/CaseStudyPage";
 
 const IGNORED_TAGS = ["featured"];
 
@@ -70,7 +72,9 @@ export default async function ProjectPage({
     );
     const headings = headingsOf(project.content);
     const kind = kindLabel(project);
-    const summary = HEADLINER_SUMMARIES[project.slug];
+    const summary = project.slug === "voice-runtime" ? VOICE_RUNTIME_SUMMARY : undefined;
+    const study = CASE_STUDIES[project.slug];
+    if (study) return <CaseStudyPage project={project} study={study} next={next} related={related} headings={headings} />;
 
     const glance = [
         { label: "My role", value: project.role },
@@ -166,7 +170,7 @@ export default async function ProjectPage({
                 </div>
             </section>}
 
-            {project.image && !summary && (
+            {project.image && (
                 <section className='mx-auto max-w-6xl px-4 pt-10 md:px-8'>
                     <figure className='overflow-hidden rounded-lg border-2 border-neutral-200 bg-slate-100 dark:border-neutral-700 dark:bg-neutral-800'>
                         <div

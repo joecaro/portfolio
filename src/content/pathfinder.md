@@ -4,7 +4,7 @@ title: "Pathfinder App"
 date: Nov 11 2021 12:00 AM
 kind: "Experiments"
 author: Joe
-description: An application visually demonstrating various pathfinding algorithms, including Dijkstra's algorithm.
+description: A React and TypeScript grid visualizer for Dijkstra's pathfinding algorithm.
 stack:
     - ReactJS
     - Typescript
@@ -27,15 +27,15 @@ image: https://res.cloudinary.com/joecarothers/image/upload/v1652918002/misc/Pro
 
 ## Pathfinder App
 
-The **Pathfinder App** is an interactive visualization of **Dijkstra’s Algorithm**, demonstrating how it finds the shortest path between two nodes. Built with **ReactJS** and **TypeScript**, this project allows users to create their own grids, place obstacles, and watch the algorithm work around them to find the optimal path from start to finish.
+Draw a grid, place obstacles, and watch Dijkstra's algorithm find the shortest route. I built the visualizer with React and TypeScript.
 
 ## Why I Built It
 
-Pathfinding algorithms are foundational to computer science, often used in scenarios like GPS navigation, game development, and AI decision-making. I built this app to deepen my understanding of these algorithms, particularly how they work in practice and how they can be visually represented. It also provides a great way for others to explore the inner workings of pathfinding algorithms interactively.
+I built it to learn how Dijkstra's algorithm works by watching it update a grid one step at a time.
 
 ## Key Features
 
-- **Interactive Grid**: Users can click and drag to place walls, which the algorithm must navigate around. This adds a dynamic element to the visual demonstration.
+- **Interactive Grid**: Users can click and drag to place walls for the algorithm to route around.
 - **Real-Time Visualization**: The app provides a step-by-step visual of the algorithm as it progresses through the grid, updating with each step to show which nodes are visited and how the shortest path is calculated.
 - **Dijkstra's Algorithm**: The core algorithm demonstrated in this app is Dijkstra’s, a well-known algorithm for finding the shortest path between two points in a weighted graph.
 
@@ -55,11 +55,11 @@ Dijkstra’s algorithm is designed to find the shortest path between a start and
 ## Tech Stack
 
 - **ReactJS**: The app is built using **ReactJS** for its interactive components and real-time updates.
-- **TypeScript**: The project leverages **TypeScript** for type safety, ensuring cleaner and more maintainable code.
+- **TypeScript** defines the grid and node types.
 - **HTML & CSS**: The visual grid and interaction elements are styled with vanilla **HTML** and **CSS**, providing a responsive and easy-to-use interface.
 
 ## What I Learned
 
-This project gave me a deeper understanding of both pathfinding algorithms and the challenges of building interactive visualizations. By working through the implementation of **Dijkstra’s Algorithm**, I gained practical insights into how graph traversal algorithms operate, and I also learned how to efficiently update the DOM to reflect real-time changes in React.
+The React view updates as the algorithm visits nodes so you can follow the search before seeing the final route.
 
-Feel free to explore the [GitHub repository](https://github.com/joecaro/pathfinder-react-app) or check out the [live demo](https://pathfinder.josephcarothers.com/) to try the Pathfinder App yourself!
+See the [source code](https://github.com/joecaro/pathfinder-react-app) or [try the visualizer](https://pathfinder.josephcarothers.com/).

@@ -24,23 +24,19 @@ image: https://res.cloudinary.com/joecarothers/image/upload/v1652918002/misc/Pro
 
 ## CSS Color Palette Picker
 
-Color selection and hierarchy are critical aspects of any design, and a well-defined color palette can make all the difference in creating a polished, cohesive look for your project. Inspired by the **Tailwind CSS** color principles, I developed the **CSS Palette Picker**, a tool that allows developers and designers to easily generate color palettes and corresponding CSS variables for use in their projects.
+I liked how Tailwind gives each color a range of shades. I built this picker to make similar scales for my own projects.
 
-This tool provides a simple, intuitive interface to create color palettes based on **hue**, while also allowing you to adjust **lightness** values to achieve the perfect range of shades and tints for your design. Once you've crafted your palette, the tool generates the CSS variables, making it easy to integrate the palette into your stylesheets.
-
-## Why I Built It
-
-As I started using design systems like Tailwind CSS more frequently, I found the predefined color scales incredibly helpful. Having access to various shades of the same hue made it easier to establish visual hierarchy, accessibility, and contrast in my designs. I wanted to replicate that flexibility for my own projects and provide an easy way for others to do the same.
+Pick a hue and set the lightness range. Preview the shades, then copy the CSS variables into your stylesheet.
 
 ## Key Features
 
-1. **Custom Palette Creation**: You can select a base hue and define the maximum and minimum lightness values to generate a full spectrum of colors for that hue.
+1. **Custom Palette Creation**: Select a base hue and set the minimum and maximum lightness values to generate its shades.
 
-2. **CSS Variables Export**: Once you've generated your color palette, the tool provides you with the corresponding CSS variables. You can quickly copy them and paste directly into your stylesheet, making it easy to apply consistent color schemes across your project.
+2. **CSS Variables Export**: Copy the generated CSS variables into your stylesheet.
 
-3. **Real-Time Preview**: The tool offers a live preview of each color in the palette, so you can see exactly how each shade will look in a real-world setting before exporting the CSS.
+3. **Preview**: Preview each shade before exporting the CSS.
 
-4. **Responsive and Accessible Design**: The CSS Palette Picker is built with **ReactJS** and designed to be responsive across devices. It's also built with accessibility in mind, allowing users to create palettes that ensure sufficient contrast and visual clarity.
+4. **Responsive Design**: The React app adapts to different screen sizes. The palette controls let users adjust lightness when choosing shades.
 
 ## Example Workflow
 
@@ -53,10 +49,6 @@ As I started using design systems like Tailwind CSS more frequently, I found the
 - **ReactJS**: The interactive elements and live previews are powered by **ReactJS**, ensuring a fast, responsive user experience.
 - **HTML & CSS**: The tool itself is lightweight, using vanilla **HTML** and **CSS** for the core functionality and styles.
 
-## Final Thoughts
-
-The **CSS Palette Picker** is designed to simplify the process of creating cohesive color palettes that can be easily integrated into any project. Whether you're working on a large-scale design system or just need a quick way to generate color variables, this tool provides a straightforward, flexible solution.
-
-Feel free to explore the [GitHub repository](https://github.com/joecaro/color-palette-tool) for the source code or try out the [live demo](https://css-palette-picker.netlify.app/) to start creating your own color palettes!
+See the [source code](https://github.com/joecaro/color-palette-tool) or [try the picker](https://css-palette-picker.netlify.app/).
 
 Happy designing!

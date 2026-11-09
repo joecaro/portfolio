@@ -1,251 +1,99 @@
 "use client";
 
-import { Bot, Info, LayoutList, RefreshCw, Table2 } from "lucide-react";
-import { useReducedMotion } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-// Invented agents, hosts and campaigns. Columns, state colors and copy follow the real
-// Live Agents screen (compact view). Incident numbers come from the staging reproduction
-// in the September 1 root-cause report.
-
-type Cti = "READY" | "TALKING" | "WRAP" | "NOT_READY" | "IDLE";
-type Agent = {
-  id: string;
-  name: string;
-  campaign: string;
-  cti: Cti;
-  since: number; // seconds since last telephony event
-  health: "healthy" | "warning";
-  startup: "done" | "sip_failed";
-};
-
-const CTI_TONE: Record<Cti, string> = {
-  READY: "text-green-700",
-  TALKING: "text-purple-700",
-  WRAP: "text-orange-600",
-  NOT_READY: "text-red-600",
-  IDLE: "text-blue-600",
-};
-const EVENT_FOR: Record<Cti, string> = {
-  READY: "AGENT_READY",
-  TALKING: "CALL_ESTABLISHED",
-  WRAP: "CALL_CLEARED",
-  NOT_READY: "AGENT_NOT_READY",
-  IDLE: "AGENT_IDLE",
-};
-const NEXT: Record<Cti, Cti> = { READY: "TALKING", TALKING: "WRAP", WRAP: "READY", IDLE: "READY", NOT_READY: "NOT_READY" };
-
-const START: Agent[] = [
-  { id: "1101", name: "card-ob-01", campaign: "card-early-stage", cti: "TALKING", since: 41, health: "healthy", startup: "done" },
-  { id: "1102", name: "card-ob-02", campaign: "card-early-stage", cti: "READY", since: 6, health: "healthy", startup: "done" },
-  { id: "1103", name: "card-ob-03", campaign: "card-early-stage", cti: "WRAP", since: 12, health: "healthy", startup: "done" },
-  { id: "1104", name: "card-ob-04", campaign: "card-early-stage", cti: "TALKING", since: 73, health: "healthy", startup: "done" },
-  { id: "1105", name: "card-ob-05", campaign: "card-early-stage", cti: "READY", since: 2, health: "healthy", startup: "done" },
-  { id: "2101", name: "auto-ob-01", campaign: "auto-early-stage", cti: "TALKING", since: 19, health: "healthy", startup: "done" },
-  { id: "2102", name: "auto-ob-02", campaign: "auto-early-stage", cti: "IDLE", since: 33, health: "healthy", startup: "done" },
-  { id: "2103", name: "auto-ob-03", campaign: "auto-early-stage", cti: "NOT_READY", since: 512, health: "warning", startup: "sip_failed" },
+const steps = [
+  { state: "Ready", event: "Contact center marked the agent ready" },
+  { state: "On call", event: "Call connected", speaker: "Agent", line: "Hi. Is now a good time to talk about your account?" },
+  { state: "On call", event: "Customer turn received", speaker: "Customer", line: "Yes. Can I schedule a payment for Friday?" },
+  { state: "On call", event: "Payment date checked", speaker: "Agent", line: "Friday is available. Would you like me to schedule it?" },
+  { state: "On call", event: "Customer requested a transfer", speaker: "Customer", line: "Actually, I'd like to speak to someone first." },
+  { state: "Transferring", event: "Transfer requested", speaker: "Agent", line: "Of course. I'll connect you with someone who can help." },
+  { state: "Wrap-up", event: "Transfer completed. Agent unavailable during cleanup." },
+  { state: "Ready", event: "Matching ready event received. Agent can take another call." },
 ];
 
-// Staging reproduction: p95 per poll burst at 5/10/20/30/50 concurrent viewers.
-const BEFORE = [1.288, 1.738, 3.032, 3.108, 4.402];
-const AFTER = [0.16, 0.21, 0.269, 0.222, 0.291];
-const VIEWERS = [5, 10, 20, 30, 50];
-
-type Phase = "normal" | "replay" | "down" | "fixing" | "fixed";
-
-const fmt = (s: number) => (s < 3600 ? `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}` : `${Math.floor(s / 3600)} hours ago`);
-
 export function LiveAgentsDemo() {
-  const reduce = useReducedMotion();
-  const [agents, setAgents] = useState(START);
-  const [phase, setPhase] = useState<Phase>("normal");
-  const [step, setStep] = useState(-1);
-  const [polling, setPolling] = useState(false);
-  const timers = useRef<number[]>([]);
+  const [step, setStep] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [selected, setSelected] = useState<"01" | "02">("01");
+  const finished = step === steps.length - 1;
+  const current = steps[step];
+  const visibleSteps = steps.slice(0, step + 1);
 
-  // Live fleet: clocks tick and agents move through calls, unless the page is down.
   useEffect(() => {
-    if (reduce || phase === "down") return;
-    let n = 0;
-    const id = window.setInterval(() => {
-      n++;
-      setAgents(prev =>
-        prev.map((a, i) => {
-          if (a.health === "warning") return { ...a, since: a.since + 1 };
-          const due = (n + i * 3) % 9 === 0;
-          return due ? { ...a, cti: NEXT[a.cti], since: 0 } : { ...a, since: a.since + 1 };
-        }),
-      );
-      if (n % 5 === 0) {
-        setPolling(true);
-        window.setTimeout(() => setPolling(false), 600);
-      }
-    }, 1000);
-    return () => window.clearInterval(id);
-  }, [reduce, phase]);
+    if (!playing || finished) return;
+    const timer = window.setTimeout(() => setStep(step + 1), 2400);
+    return () => window.clearTimeout(timer);
+  }, [playing, finished, step]);
 
-  useEffect(() => () => timers.current.forEach(t => window.clearTimeout(t)), []);
-
-  const run = (series: "before" | "after") => {
-    timers.current.forEach(t => window.clearTimeout(t));
-    timers.current = [];
-    setStep(-1);
-    const delay = reduce ? 0 : 900;
-    setPhase(series === "before" ? "replay" : "fixing");
-    VIEWERS.forEach((_, i) => {
-      timers.current.push(window.setTimeout(() => setStep(i), delay * (i + 1)));
-    });
-    timers.current.push(
-      window.setTimeout(() => setPhase(series === "before" ? "down" : "fixed"), delay * (VIEWERS.length + 1)),
-    );
-  };
-
-  const reset = () => {
-    timers.current.forEach(t => window.clearTimeout(t));
-    timers.current = [];
-    setPolling(false);
-    setAgents(START);
-    setPhase("normal");
-    setStep(-1);
-  };
-
-  const series = phase === "fixing" || phase === "fixed" ? AFTER : BEFORE;
-  const payload = phase === "fixing" || phase === "fixed" ? "38 KB" : "2.5 MB";
-  const needsHelp = agents.filter(a => a.health === "warning").length;
-
-  const status = useMemo(() => {
-    if (phase === "normal") return "Each poll returns every agent's row, full event history included. The replay compares the same synthetic rows before and after query optimization.";
-    if (phase === "replay") return "Staging burst test: viewer concurrency increases while every response carries event history.";
-    if (phase === "down") return "A year into production, polls piled up and requests timed out (503s and 504s). The table couldn't load.";
-    if (phase === "fixing") return "Same staging fixture and burst load, with event history excluded from the response.";
-    return "Optimized staging response. Stored event history is unchanged; the polling query no longer returns it.";
-  }, [phase]);
+  function togglePlayback() {
+    if (finished) {
+      setStep(0);
+      setPlaying(true);
+    } else {
+      setPlaying(!playing);
+    }
+  }
 
   return (
-    <div className="font-sans text-gray-900">
-      <div className="relative overflow-hidden rounded-xl border border-gray-300 bg-gray-100 shadow-xl">
-        <div className="flex min-h-[520px]">
-          <aside className="hidden w-40 shrink-0 border-r border-gray-200 bg-white p-3 text-xs text-gray-600 md:block">
-            <div className="mb-4 h-6 w-20 rounded bg-gray-200" aria-hidden />
-            <p className="mb-1 px-2 text-[10px] font-semibold uppercase tracking-wide text-gray-400">AI Agent</p>
-            <div className="flex items-center gap-2 rounded-md bg-blue-50 px-2 py-1.5 font-medium text-blue-700">
-              <Bot className="h-3.5 w-3.5" aria-hidden /> Live Agents
-            </div>
-            <div className="mt-1 px-2 py-1.5">Campaigns</div>
-            <div className="px-2 py-1.5">Model Evaluations</div>
-            <div className="px-2 py-1.5">Call Review</div>
-          </aside>
-
-          <div className="min-w-0 flex-1 bg-gray-50 p-4">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <h2 className="text-sm font-semibold text-gray-900">AI Agents</h2>
-                <p className="text-xs text-gray-500">Manage and monitor your AI agents</p>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-gray-600">
-                <RefreshCw className={`h-4 w-4 ${polling && phase !== "down" && !reduce ? "animate-spin" : ""}`} aria-hidden />
-                <span>Auto-refresh:</span>
-                <span className="rounded-md border border-gray-300 bg-white px-2 py-1">5 seconds</span>
-                <span className="ml-1 inline-flex overflow-hidden rounded-md border border-gray-300 bg-white" aria-hidden>
-                  <span className="px-1.5 py-1 text-gray-400"><Table2 className="h-3.5 w-3.5" /></span>
-                  <span className="bg-gray-100 px-1.5 py-1"><LayoutList className="h-3.5 w-3.5" /></span>
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-gray-600">
-              <span>{agents.length} of {agents.length} agents</span>
-              <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-red-500" />0 manually stopped</span>
-              <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-amber-500" />{needsHelp} needs manual intervention</span>
-            </div>
-
-            <div className="mt-3 overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
-              {phase === "down" ? (
-                <div className="flex h-[300px] items-center justify-center text-sm text-gray-600">
-                  Failed to load agents. Please try again.
-                </div>
-              ) : (
-                <table className="w-full min-w-[720px] text-left text-xs">
-                  <thead className="border-b border-gray-200 bg-gray-50 text-gray-700">
-                    <tr>
-                      {["Agent ID", "Vanity Name", "Campaign ID", "Telephony Event", "CTI Agent State", "Time Since Event", "Agent Startup"].map(h => (
-                        <th key={h} className="whitespace-nowrap px-2 py-2 font-medium">
-                          <span className="inline-flex items-center gap-1">{h}<Info className="h-3 w-3 text-gray-400" aria-hidden /></span>
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {agents.map(a => (
-                      <tr key={a.id} className="border-b border-gray-100 last:border-0">
-                        <td className="px-2 py-2">
-                          <span className={`inline-flex rounded-full border px-2 py-0.5 font-mono font-semibold ${a.health === "healthy" ? "border-green-300 bg-green-50 text-green-700" : "border-amber-300 bg-amber-50 text-amber-700"}`}>{a.id}</span>
-                        </td>
-                        <td className="px-2 py-2">{a.name}</td>
-                        <td className="whitespace-nowrap px-2 py-2 font-mono text-blue-600">{a.campaign}</td>
-                        <td className="px-2 py-2 font-mono text-[11px] text-gray-600">{EVENT_FOR[a.cti]}</td>
-                        <td className={`px-2 py-2 font-mono font-semibold ${CTI_TONE[a.cti]}`}>{a.cti}</td>
-                        <td className="px-2 py-2"><span className="rounded bg-gray-100 px-1.5 py-0.5 font-mono tabular-nums text-gray-700">{fmt(a.since)}</span></td>
-                        <td className="px-2 py-2">
-                          {a.startup === "done" ? (
-                            <span className="inline-flex gap-1 whitespace-nowrap" aria-label="Phone system and dialer login complete">
-                              <span className="rounded bg-green-100 px-1.5 py-0.5 text-[10px] text-green-700">Phone/SIP</span>
-                              <span className="rounded bg-green-100 px-1.5 py-0.5 text-[10px] text-green-700">Dialer Login</span>
-                            </span>
-                          ) : (
-                            <span className="flex flex-col gap-0.5">
-                              <span className="inline-flex items-center gap-1.5 text-red-600"><span className="h-2 w-2 rounded-full bg-red-500" />SIP Registration Failed</span>
-                              <span className="text-[10px] text-amber-700">Needs manual intervention</span>
-                            </span>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-            </div>
-
-            <section aria-label="Staging polling comparison" className="mt-4 rounded-lg border border-gray-200 bg-white p-3 shadow-sm">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <div>
-                  <p className="text-xs font-semibold text-gray-900">Each poll: <span className="font-mono">{payload}</span></p>
-                  <p className="text-xs text-gray-600" aria-live="polite">{status}</p>
-                </div>
-                <div className="flex gap-2">
-                  {(phase === "normal") && (
-                    <button type="button" onClick={() => run("before")} className="rounded-md bg-gray-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Replay original query</button>
-                  )}
-                  {phase === "down" && (
-                    <button type="button" onClick={() => run("after")} className="rounded-md bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Show optimized query</button>
-                  )}
-                  {(phase === "fixed" || phase === "down") && (
-                    <button type="button" onClick={reset} className="rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Reset</button>
-                  )}
-                </div>
-              </div>
-              <div className="mt-3 grid grid-cols-5 gap-2" role="img" aria-label="95th-percentile poll latency by concurrent viewers">
-                {VIEWERS.map((v, i) => {
-                  const shown = phase !== "normal" && i <= step;
-                  const s = series[i];
-                  const pct = Math.min(100, (s / 4.5) * 100);
-                  const bad = s > 2;
-                  return (
-                    <div key={v} className="flex flex-col items-center gap-1">
-                      <div className="flex h-16 w-full items-end rounded bg-gray-100">
-                        <div className={`w-full rounded ${bad ? "bg-red-400" : "bg-green-400"} ${reduce ? "" : "transition-all duration-500"}`} style={{ height: shown ? `${Math.max(pct, 4)}%` : "0%" }} />
-                      </div>
-                      <span className="font-mono text-[11px] tabular-nums text-gray-700">{shown ? `${s.toFixed(2)} s` : "—"}</span>
-                      <span className="text-[10px] text-gray-500">{v} watching</span>
-                    </div>
-                  );
-                })}
-              </div>
-              <p className="mt-2 text-[10px] text-gray-500">Bars: p95 poll latency from the staging burst test (2,514,826 bytes per poll before, 38,100 after).</p>
-            </section>
-          </div>
+    <section aria-label="Fictional live agents console" className="rounded-lg border border-neutral-200 bg-slate-50 p-4 dark:border-neutral-700 dark:bg-neutral-800/50 md:p-6">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h3 className="text-lg font-semibold">Live agents</h3>
+          <p className="text-sm text-neutral-600 dark:text-neutral-300">Fictional call replay · transcript only</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button type="button" onClick={togglePlayback} className="min-h-11 rounded-md bg-blue-700 px-4 text-sm font-semibold text-white">
+            {finished ? "Replay call" : playing ? "Pause call" : step === 0 ? "Play call" : "Resume call"}
+          </button>
+          <button type="button" disabled={finished} onClick={() => { setPlaying(false); setStep(step + 1); }} className="min-h-11 rounded-md border border-neutral-400 px-4 text-sm font-semibold disabled:opacity-50">
+            Next event
+          </button>
         </div>
       </div>
-    </div>
+
+      <div className="mt-5 grid gap-4 md:grid-cols-[minmax(10rem,1fr)_minmax(0,2.5fr)]">
+        <div aria-label="Choose an agent" className="grid content-start gap-2">
+          {(["01", "02"] as const).map(id => (
+            <button key={id} type="button" aria-pressed={selected === id} onClick={() => setSelected(id)} className="min-h-14 rounded-md border border-neutral-300 bg-white px-3 py-2 text-left text-sm aria-pressed:border-blue-600 aria-pressed:ring-1 aria-pressed:ring-blue-600 dark:border-neutral-600 dark:bg-neutral-900">
+              <span className="block font-semibold">Agent {id}</span>
+              <span className="text-neutral-600 dark:text-neutral-300">{id === "01" ? current.state : "Ready"}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="min-w-0 rounded-md border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-900">
+          <h4 className="font-semibold">Agent {selected} details</h4>
+          <dl className="mt-2 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            <div><dt className="text-neutral-600 dark:text-neutral-400">Contact center</dt><dd>Signed in</dd></div>
+            <div><dt className="text-neutral-600 dark:text-neutral-400">State</dt><dd aria-live="polite">{selected === "01" ? current.state : "Ready"}</dd></div>
+            <div><dt className="text-neutral-600 dark:text-neutral-400">Call</dt><dd>{selected === "01" && step > 0 ? "Demo call 01" : "None"}</dd></div>
+          </dl>
+
+          {selected === "01" ? (
+            <div className="mt-5 grid gap-5 border-t border-neutral-200 pt-4 dark:border-neutral-700 lg:grid-cols-2">
+              <div>
+                <h5 className="text-sm font-semibold">Transcript</h5>
+                <ol aria-live="polite" className="mt-2 space-y-2 text-sm">
+                  {visibleSteps.filter(item => item.line).map(item => (
+                    <li key={item.event} className="rounded-md bg-slate-100 p-2 dark:bg-neutral-800">
+                      <span className="block text-xs font-semibold">{item.speaker}</span>{item.line}
+                    </li>
+                  ))}
+                </ol>
+                {step === 0 && <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">Start the replay to follow the call.</p>}
+              </div>
+              <div>
+                <h5 className="text-sm font-semibold">Contact-center events</h5>
+                <ol className="mt-2 list-decimal space-y-2 pl-5 text-sm">
+                  {visibleSteps.map(item => <li key={item.event} className={item === current ? "font-semibold" : undefined}>{item.event}</li>)}
+                </ol>
+              </div>
+            </div>
+          ) : <p className="mt-4 text-sm text-neutral-600 dark:text-neutral-400">Available for a call. No current activity.</p>}
+        </div>
+      </div>
+    </section>
   );
 }

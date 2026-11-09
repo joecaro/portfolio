@@ -33,13 +33,13 @@ Our voice platform handles customer calls for financial institutions. Dashboards
 
 The suite covers four distinct jobs:
 
-1. **Evaluate a release:** run test cases and compare agent versions in a client's test environments. [Evaluation console →](/projects/enterprise-voice-ai)
+1. **Evaluate a release:** run test cases and compare agent versions in an engineering console. [Evaluation console →](/projects/enterprise-voice-ai)
 2. **Review a call:** align transcript, recording, tool activity and safety checks for one interaction. The call-flow map and call-details view are merged to main. [Call Review Workspace →](/projects/conversation-explorer)
-3. **Investigate a pattern:** search and group calls, then verify candidate explanations against the turns the system actually read. Scout is deployed for internal staff and also powers investigations for Platform Chat. Prevalence measurement still has known gaps. [Scout →](/projects/scout-evidence-engine)
+3. **Investigate a pattern:** search and group calls, then verify candidate explanations against the turns the system read. Scout is deployed for internal staff and also powers investigations for Platform Chat. Prevalence measurement still has known gaps. [Scout →](/projects/scout-evidence-engine)
 4. **Explore call data:** ask questions across metrics and calls, with the source calls linked in the answer. Platform Chat's v2 runtime is merged to main; release is waiting on live acceptance testing. [Platform Chat →](/projects/platform-chat)
 
 My contribution varied by project, from evaluation and comparison contracts to investigation workflows and call-review interactions; each page describes that work and its current state.
 
 The shared challenge is making the tool's answer inspectable: a comparison explains what was excluded, a call view distinguishes speech from recorded actions, an investigation cites verified turns, and a chat response shows which calls informed it. Those are related design concerns, implemented differently for each workflow.
 
-The demo above is an interactive reconstruction of the four product interfaces with fictional data. It does not connect to the services.
+The walkthrough uses fictional data to show the four interfaces.

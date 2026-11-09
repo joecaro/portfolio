@@ -19,15 +19,15 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   return (
     <Card className={cn(`grid grid-areas gap-4 rounded-md p-8 dark:bg-neutral-800`)}>
-      <div className="grid md:grid-rows-2 gap-4">
-        <div className="relative hidden h-full w-full overflow-hidden md:block">
+      <div className={cn("grid gap-4", project.image && "md:grid-rows-2")}>
+        {project.image && <div className="relative hidden h-full w-full overflow-hidden md:block">
           <Image
             src={project.image}
             layout="fill"
             objectFit="contain"
             alt={`${project.title} preview`}
           />
-        </div>
+        </div>}
         <div className="grid p-2">
           <div className="header flex items-start gap-4">
             <Link href={`/projects/${project.slug}`} passHref>

@@ -21,17 +21,17 @@ image: https://res.cloudinary.com/joecarothers/image/upload/v1652918001/misc/Pro
 
 ## Neural Network Iris Test
 
-This project was my first hands-on experience building a neural network from scratch using the **Keras** library in Python. The goal was to classify the well-known **Iris dataset**, which is commonly used for testing machine learning algorithms.
+I used Keras to train my first neural network in Python. It classifies iris flowers from four measurements.
 
 ## Why I Built It
 
-In school, I primarily worked with tools like **Orange Data Mining** to apply machine learning models on sample datasets. However, I wanted to deepen my understanding by working directly with a machine learning library and building my own models. This project gave me the opportunity to do that, starting with one of the most common datasets in the field—the Iris dataset.
+In school I had used Orange Data Mining to run models on sample datasets. I wanted to write and train the model myself.
 
 ## Key Features
 
-- **Keras Neural Network**: I built a simple neural network model using **Keras**, which is known for its ease of use and integration with TensorFlow. The model classifies the Iris dataset into one of three species (Setosa, Versicolor, and Virginica).
-- **Training and Testing**: The project includes scripts for training the neural network and evaluating its accuracy on the test set. I experimented with different parameters like the number of layers, activation functions, and optimizers to find the most effective model.
-- **From Scratch**: In addition to using Keras, I’ve also worked on building neural networks from scratch as a learning exercise, allowing me to better understand the inner workings of these models.
+- **Keras Neural Network**: The model classifies the Iris dataset into Setosa, Versicolor, or Virginica.
+- **Training and Testing**: The project includes scripts to train the network and evaluate it on a test set. I tried different layer counts, activation functions, and optimizers.
+- **From Scratch**: I also built neural networks from scratch as a learning exercise.
 
 ## The Iris Dataset
 
@@ -39,11 +39,7 @@ The **Iris dataset** is a classic dataset in machine learning, containing 150 re
 
 ## Tech Stack
 
-- **Python**: The entire project was implemented in Python, leveraging its powerful libraries for machine learning and data analysis.
-- **Keras**: I used **Keras** for building the neural network, taking advantage of its high-level API for fast experimentation.
+- **Python**: The project is implemented in Python.
+- **Keras**: I used **Keras** to build the network.
 
-## What I Learned
-
-This project was a fantastic introduction to working with neural networks beyond the classroom setting. It helped me understand the practical steps involved in building, training, and optimizing machine learning models. I also gained a deeper understanding of how to fine-tune model parameters for better performance.
-
-Feel free to explore the [GitHub repository](https://github.com/joecaro/ML-Keras-Iris-Test) to dive deeper into the code!
+[See the source code](https://github.com/joecaro/ML-Keras-Iris-Test).
