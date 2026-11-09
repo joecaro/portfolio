@@ -51,10 +51,10 @@ function BankWorkflow() {
 
 function SuiteWorkflow() {
   const tools = [
-    { title: "Test agents", detail: "Compare graded attempts on matching case versions", state: "Used by engineers", icon: FlaskConical },
+    { title: "Test agents", detail: "Compare graded attempts on matching case versions", state: "Used by bank teams", icon: FlaskConical },
     { title: "Review a call", detail: "Compare the recording with tool results", state: "Shared views merged", icon: AudioLines },
-    { title: "Find patterns", detail: "Check a finding against exact source turns", state: "Internal staff use", icon: Search },
-    { title: "Ask a question", detail: "See the query scope and supporting calls", state: "v2 release pending", icon: MessageSquare },
+    { title: "Find patterns", detail: "Check a finding against exact source turns", state: "Internal production", icon: Search },
+    { title: "Ask a question", detail: "See the query scope and supporting calls", state: "Main production", icon: MessageSquare },
   ];
   return <ol className="grid grid-cols-2 gap-3 lg:grid-cols-4">{tools.map((tool, i) => <li key={tool.title}>
     <Link href={`/projects/${operationsProjects[i].slug}`} className={`${surface} flex h-full flex-col gap-3 transition-colors hover:border-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600`}>

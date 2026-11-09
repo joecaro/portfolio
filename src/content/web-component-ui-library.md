@@ -4,7 +4,7 @@ title: "Web Component UI Library"
 date: Sep 25 2024 12:00 AM
 kind: "Experiments"
 author: Joe
-description: An experiment with native Web Components, custom elements, and Shadow DOM for reusable interface pieces.
+description: "I built a small set of browser-native components to see what it takes to share interface code across frameworks."
 role: Component library author
 focus: Custom element APIs, encapsulated styles, and framework integration.
 stack:

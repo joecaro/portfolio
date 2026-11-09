@@ -4,7 +4,7 @@ title: "Unity Boid Simulation"
 date: Nov 18 2021 12:00 AM
 kind: "Experiments"
 author: Joe
-description: A Boid Simulation using Unity's game engine to model realistic flocking behaviors.
+description: "I used Unity to see how a flock moves when each bird follows three simple rules."
 stack:
     - Unity
     - C#

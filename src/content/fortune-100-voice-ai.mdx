@@ -4,8 +4,8 @@ title: "Voice AI at a Fortune 100 Bank"
 date: Nov 07 2026 12:00 PM
 kind: "AI & platform"
 author: Joe
-description: "I led the integration and release of a voice-AI platform for a Fortune 100 bank, connecting virtual-agent call handling to its contact-center environment and operating within its network and model-governance controls."
-role: "Engineering lead across integration, infrastructure, releases and model governance, with teammates; coding agents wrote much of the 2026 implementation"
+description: "Voice agents call bank customers about overdue payments and can transfer them to bank staff. The system runs inside the bank’s network."
+role: "Sole engineer on the bank project at the start, then engineering lead as the team grew. Coding agents wrote much of the 2026 implementation."
 focus: "Connecting a cloud voice-AI product to a bank's contact-center lifecycle and validating changes under constrained access"
 impact: "Production launch about three months after kickoff; live since September 2025, with a second line of business added in July 2026."
 stack:
@@ -32,15 +32,15 @@ A Fortune 100 bank uses our voice agents to call customers about overdue payment
 
 The integration had to support the bank's contact-center lifecycle as well as its network and security controls: sign in, become ready, handle a call, and complete wrap-up before becoming available again. Transfer and disconnect events must stay associated with the right session. These are the workflow requirements; each implementation needs separate validation.
 
-That lifecycle crosses software we own and a contact-center interface we integrate with. We built a contact-center simulator around the event contract so changes can be exercised before entering the bank's release process.
+I recreated several of the bank's services in our environment, including its UIP and CTI interfaces. I used those stand-ins to run our stack in a setup close to the bank's production environment and test how calls and agent state moved between services before releases.
 
-## A state transition that mattered
+## When an agent can take the next call
 
 Call arrival, disconnect and readiness are related events, but they are not interchangeable. A simulator fix addressed a cleanup edge case: a call remains in progress until the matching ready event arrives. The simulator keeps that agent blocked from new calls until its readiness event is delivered, and preserves agent-specific events during deduplication. A synthetic flow checked delayed readiness, call disposal, in-progress blocking and duplicate-ready handling.
 
 A later connector replacement kept the existing integration as a fallback and introduced the new path behind a feature flag. In August 2026, staging checks verified ten agents progressing through initialization, login, not-ready and ready. Full call-flow and transfer acceptance for that replacement remained follow-up work at that checkpoint; this was not a revalidation of the original production deployment.
 
-## What the environment required
+## Running inside the bank
 
 The product was designed for our cloud, while this deployment runs inside the bank's environment. The bank controls access to production, networking, deployment approvals and model access. That meant we built and debugged against staging, feedback from the bank's engineers, and artifacts returned through its release process. Models were accessed through the bank's approved route, and speech synthesis ran offline.
 
@@ -48,7 +48,7 @@ Technical alignment began in May 2025, with production cutover at the end of Aug
 
 ## Making a timeout reproducible
 
-In September 2026, the Live Agents screen began timing out. The no-event polling response still included growing event history for each agent. I tested whether that oversized response could add pressure to the reader and API by reproducing the large rows in staging, then comparing the previous and optimized projections with the same data and load.
+In September 2026, the Live Agents screen began timing out. The no-event polling response still included growing event history for each agent. I set up a staging test to see whether the oversized response was putting pressure on the reader and API. I reproduced the large rows and ran both versions of the query against the same data and load. The optimized query left out the unused history.
 
 The response fell from 2,514,826 bytes to 38,100 bytes. With 50 concurrent viewers making a burst of requests, p95 latency fell from 4.402 seconds to 0.291 seconds. With 50 viewers polling eight times each, p95 fell from 3.142 seconds to 0.502 seconds; successful responses changed from 399 of 400 to 400 of 400.
 

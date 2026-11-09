@@ -4,7 +4,7 @@ title: "NNJS: A JS Neural Network Library"
 date: Jun 17 2022 12:00 AM
 kind: "AI & platform"
 author: Joe
-description: A JavaScript library for building and training neural networks in the browser.
+description: "I wrote a JavaScript library to see how a neural network learns in the browser. You can change the network and watch its training progress."
 stack:
     - Javascript
 github: https://github.com/joecaro/nnjs

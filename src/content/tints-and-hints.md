@@ -4,7 +4,7 @@ title: "A SolidJS Party Game"
 date: Jul 25 2024 12:00 AM
 kind: "Experiments"
 author: Joe
-description: A local color-clue party game built with SolidJS, with a separate multiplayer server experiment.
+description: "A browser party game. One player gives a clue, and the others try to pick the matching color."
 stack:
     - SolidJS
     - NodeJS

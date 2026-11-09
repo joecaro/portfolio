@@ -4,7 +4,7 @@ title: "Bitburner Custom UI"
 date: Sep 26 2024 12:00 AM
 kind: "Libraries"
 author: Joe
-description: A game HUD for Bitburner built with React-style components and a small custom DOM renderer.
+description: "I built an in-game display for Bitburner that shows which servers the scripts are targeting and what each script is doing."
 role: Developer
 focus: Game stats, target and node displays, and DOM updates.
 stack:

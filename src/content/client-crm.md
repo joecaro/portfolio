@@ -4,7 +4,7 @@ title: "Client CRM"
 date: Nov 11 2021 12:00 AM
 kind: "Tools"
 author: Joe
-description: An internal app for tracking client reporting progress, contacts, and exports.
+description: "I built a shared app for a support team that had been tracking client reporting deadlines and contacts in spreadsheets."
 role: Full-stack developer
 focus: Client status tracking, authenticated CRUD workflows, and reporting exports.
 stack:

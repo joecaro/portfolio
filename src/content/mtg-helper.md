@@ -4,7 +4,7 @@ title: "MTG Help Me"
 date: Sep 27 2024 12:00 AM
 kind: "AI & platform"
 author: Joe
-description: "A Magic: The Gathering companion with an AI chat, card lookup, and image generation."
+description: "A Magic: The Gathering app for looking up cards and rules, asking game questions, and generating art for custom card ideas."
 stack:
     - NextJS
     - ReactJS

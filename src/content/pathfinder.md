@@ -4,7 +4,7 @@ title: "Pathfinder App"
 date: Nov 11 2021 12:00 AM
 kind: "Experiments"
 author: Joe
-description: A React and TypeScript grid visualizer for Dijkstra's pathfinding algorithm.
+description: "Draw a grid, add obstacles, and watch Dijkstra’s algorithm find the shortest route."
 stack:
     - ReactJS
     - Typescript

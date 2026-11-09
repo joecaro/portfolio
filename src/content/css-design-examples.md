@@ -4,7 +4,7 @@ title: "CSS Design Examples"
 date: Nov 18 2021 12:00 AM
 kind: "Experiments"
 author: Joe
-description: A collection of useful CSS layout examples with interactive code for learning and experimentation.
+description: "A reference I built for grid and flexbox layouts I kept looking up. Edit the code and see the layout change."
 stack:
   - ReactJS
 github: https://github.com/joecaro/HTML-CSS-Patterns
