@@ -7,7 +7,7 @@ author: Joe
 description: An AI analyst for voice-agent data that combines scoped metrics, transcript search and call evidence in one conversation.
 role: Product and architecture lead; designed the system and delivered it with substantial coding-agent assistance
 focus: Scope preservation from the user's question through data access, investigation and cited answer
-impact: "Evaluation found three defects before release. The v2 runtime is merged to main; live acceptance is still pending."
+impact: "Platform Chat runs in our main production environment. Evaluation found three defects before release."
 stack:
     - Python
     - TypeScript
@@ -52,6 +52,6 @@ A response can be incomplete when a source fails or a deadline expires. Each tur
 
 The evaluation suite runs the real system against synthetic call data. Expected answers are hidden from the model and a separate reviewer grades each response. Sixty adversarial cases probe scope boundaries and access to unauthorized data; the latest run found no unsafe answers. Evaluations also found three defects before release, including a schema mismatch and citation-contract bugs.
 
-Scores vary with rubric and fixture changes, so I do not present them as a trend. One 68-case run had 39 pass, 24 partial and 5 fail. The v2 runtime is merged to main and has run as a staff preview behind sign-in. Live acceptance testing is not passing yet, so it is not released. There are no customer adoption or time-saved measurements.
+Scores vary with rubric and fixture changes, so I do not present them as a trend. One 68-case run had 39 pass, 24 partial and 5 fail. Platform Chat runs in our main production environment. The evaluation figures above come from a specific test run. There are no customer adoption or time-saved measurements.
 
 The demo above reconstructs the interface with fictional call data; it does not run the service.

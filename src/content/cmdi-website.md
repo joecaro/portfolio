@@ -4,7 +4,7 @@ title: "CMDI Website"
 date: Nov 11 2021 12:00 AM
 kind: "Tools"
 author: Joe
-description: Website for a SaaS CRM platform with a blog and HubSpot integration, rebuilt with Next.js static site generation.
+description: "I rebuilt a slow WordPress site in Next.js. The marketing team could still publish and edit content without changing the code."
 stack:
   - NextJS
   - Contentful

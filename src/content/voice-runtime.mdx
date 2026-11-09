@@ -25,7 +25,7 @@ position: 1
 headliner: true
 ---
 
-## What it is
+## What happens between a question and a reply
 
 Each turn of a call is a relay: the caller stops talking, speech-to-text sends a transcript, the model replies, and text-to-speech streams it back. If any step stalls, the caller hears silence, and on a phone call silence sounds like a dropped line.
 
@@ -39,7 +39,7 @@ Now the policy is resolved once when the call arrives and pinned for the call. W
 
 Setup is off the reply path. A clear end-to-end speedup isn't proven yet, so I'm not claiming one.
 
-## The silence that was a 400
+## Why the agent went quiet
 
 An agent went quiet on a staging call. When a reply chunk was only whitespace, we still sent the speech provider an empty "end of text". It answered 400, and our retry reused a closed tokenizer.
 
@@ -51,6 +51,6 @@ It then went silent after the introduction, for a second reason: an old model cl
 
 Agents there keep one phone line open across calls. Call one worked, and call two got near-silent audio. A harness that runs two calls through the real audio component reproduced an earlier form of the failure. Narrowing down merges then pointed to a likely cause: a cleanup change from main that closes the session after every call. That cause is still being confirmed, and there's no fix yet.
 
-## Does it work?
+## What we checked in staging
 
 For the latency and speech fixes, yes: they run in staging and pass real test calls. The second-call bug isn't fixed yet, and I don't have production confirmation or numbers across many calls.

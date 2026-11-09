@@ -4,7 +4,7 @@ title: "Neural Network Iris Test"
 date: May 15 2021 12:00 AM
 kind: "AI & platform"
 author: Joe
-description: A neural network built in Python using the Keras library to classify the Iris dataset.
+description: "I trained my first neural network in Python with Keras. It predicts the species of an iris from four measurements."
 stack:
     - Python
 github: https://github.com/joecaro/ML-Keras-Iris-Test

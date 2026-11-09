@@ -30,7 +30,7 @@ position: 5
 
 ## Comparing agent runs
 
-Enterprise voice agents verify callers, take payments and transfer calls. Before changing an agent, engineers need to compare its behavior across test cases and repeated attempts. I worked across the evaluation console, comparison APIs, tool-result capture, case catalog and selected call-state fixes.
+Enterprise voice agents verify callers, take payments and transfer calls. The bank’s business and governance teams use the evaluation console alongside engineering. Each group brought different requirements to the same workflow. Before changing an agent, engineers need to compare its behavior across test cases and repeated attempts. I worked across the evaluation console, comparison APIs, tool-result capture, case catalog and selected call-state fixes.
 
 The console presents test cases as rows and runs as columns. Each cell shows the attempts and opens a detail view with expected behavior, grader explanation, tool activity and transcript. Results such as not run, ungraded, incomplete and failed remain distinct, so infrastructure or evaluation gaps do not silently become agent failures.
 
@@ -52,4 +52,4 @@ I fixed late disconnect cleanup, isolated tracing between calls in a long-runnin
 
 ## Status
 
-Engineers use the console to run test suites; I do not have usage counts. The work spans release and feature branches, and I have not verified which components are on main. The demo above reconstructs the console with fictional cases and runs.
+Business and governance teams at the bank use the console. Engineers use it to run test suites. I do not have usage counts. The work spans release and feature branches, and I have not verified which components are on main. The demo above reconstructs the console with fictional cases and runs.

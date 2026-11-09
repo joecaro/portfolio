@@ -4,7 +4,7 @@ title: "Service Landing Page"
 date: Nov 11 2021 12:00 AM
 kind: "Tools"
 author: Joe
-description: A one-page Next.js template for a service business.
+description: "I built a one-page site template for a service business using Next.js and CSS."
 stack:
     - NextJS
 github: https://github.com/joecaro/service-provider-landing-page

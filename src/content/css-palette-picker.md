@@ -4,7 +4,7 @@ title: "CSS Palette Picker"
 date: May 17 2022 12:00 AM
 kind: "Tools"
 author: Joe
-description: A tool for creating custom color palettes and generating their corresponding CSS variables.
+description: "Pick a color, preview a range of shades, and copy them into your stylesheet as CSS variables."
 stack:
     - ReactJS
     - HTML

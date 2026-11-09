@@ -4,7 +4,7 @@ title: "Web Swinging Demo"
 date: Nov 25 2021 12:00 AM
 kind: "Experiments"
 author: Joe
-description: Web swinging mechanics implemented in C# using the Unity Game Engine.
+description: "A Unity experiment in swinging from a web. Attach it to a surface and let the physics engine determine the swing."
 stack:
     - Unity
     - C#

@@ -4,7 +4,7 @@ title: "Bitburner Hacking Scripts"
 date: Sep 25 2024 12:00 AM
 kind: "Experiments"
 author: Joe
-description: Iterations of a Bitburner script for automating server hacking and resource management.
+description: "I wrote scripts to automate attacks in Bitburner, a game where you manage a network of servers. These notes show how the scripts changed as I added scheduling and a status display."
 stack:
     - ReactJS
     - Javascript

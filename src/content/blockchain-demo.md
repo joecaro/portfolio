@@ -4,7 +4,7 @@ title: "Blockchain Demo"
 date: Nov 18 2021 12:00 AM
 kind: "Experiments"
 author: Joe
-description: A visual walkthrough of blockchain technologies. Learn about key concepts like hash functions, blocks, blockchains, and distributed ledger technologies.
+description: "Mine a block in the browser and watch how changing its contents affects the chain."
 stack:
     - ReactJS
     - Javascript

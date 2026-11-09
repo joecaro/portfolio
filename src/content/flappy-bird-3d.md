@@ -4,7 +4,7 @@ title: "3D Flappy Bird Clone"
 date: Nov 18 2021 12:00 AM
 kind: "Experiments"
 author: Joe
-description: A reimagined version of Flappy Bird in 3D, built in Unity with assets and materials created in Blender.
+description: "My first Unity game. I wrote a 3D version of Flappy Bird in C# and modeled the assets in Blender."
 stack:
     - Unity
     - C#

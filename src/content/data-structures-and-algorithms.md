@@ -4,7 +4,7 @@ title: "Data Structures and Algorithms"
 date: Nov 11 2021 12:00 AM
 kind: "Experiments"
 author: Joe
-description: My solutions to problems from AlgoExpert, complete with unit tests for each solution.
+description: "I saved my JavaScript solutions to AlgoExpert problems and wrote unit tests so I could revisit and check them."
 stack:
     - Javascript
 github: https://github.com/joecaro/Data-Structures-and-Algorithms

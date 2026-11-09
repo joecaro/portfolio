@@ -7,7 +7,7 @@ author: Joe
 description: An investigation engine for voice-agent calls that searches, groups and reads conversations before presenting evidence-backed candidate findings.
 role: "Product and systems lead across research, service and viewer; built it with substantial coding-agent assistance"
 focus: Findings tied to verified turns, with candidate observations separated from supported conclusions
-impact: "Deployed for internal staff and used by Platform Chat; prevalence measurement and human-validated accuracy remain incomplete."
+impact: "Runs in our main production environment for internal staff and powers investigations in Platform Chat; prevalence measurement and human-validated accuracy remain incomplete."
 stack:
     - Python
     - Embeddings
@@ -49,6 +49,6 @@ I also fixed a failure-isolation bug: one call rejected by a privacy check could
 
 ## Status and limits
 
-Scout is deployed for internal staff through its CLI and powers investigations inside Platform Chat. The viewer above replays a fictional investigation in the report interface. It does not connect to the service.
+Scout runs in our main production environment and is available to internal staff through its CLI and powers investigations inside Platform Chat. The viewer above replays a fictional investigation in the report interface. It does not connect to the service.
 
 Citation checks establish that evidence exists and was available to the investigator; they do not establish that an interpretation is correct. The research comparison used a second model rather than human reviewers, so accuracy against people is unmeasured. Prevalence measurement is still being improved, and a citation-backed observation should not be read as a confirmed cause or supported problem unless the required checks are present.
